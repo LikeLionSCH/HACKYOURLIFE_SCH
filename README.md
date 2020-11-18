@@ -6,7 +6,7 @@
 - 🌈 멋쟁이사자처럼 at 순천향대학교 WEB PAGE SERVICE  
 
 
-## 👨‍👨‍👨‍👧‍👧Team member
+## 👨‍👨‍👨‍👧‍👧Creater Member
 
 ### 🔙Back-end
 - [이남준](https://github.com/ningpop)
