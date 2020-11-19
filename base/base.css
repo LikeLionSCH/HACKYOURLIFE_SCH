@@ -5,6 +5,11 @@
     font-style: normal;
 }
 
+:root {
+    --main-width: 1100px;
+    --SCH-skyblue: #1BBCF0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -14,20 +19,21 @@
 }
 
 body {
-    min-width: 800px;
+    min-width: 1000px;
 }
 
 .__header_wrap {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid lightgray;
+    box-shadow: 1px 0px 3px lightgrey;
+    margin-bottom: 2px;
 }
 
 .__header {
     display: flex;
     justify-content: space-between;
     height: 70px;
-    width: 70%;
+    width: var(--main-width);
     /* background-color: aliceblue; */
 }
 
@@ -37,8 +43,8 @@ body {
 }
 
 .__logo img {
-    width: 140px;
-    height: 50px;
+    width: 112px;
+    height: 40px;
     margin: 10px;
 }
 
@@ -67,7 +73,7 @@ body {
     top: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #1BBCF0;
+    background-color: var(--SCH-skyblue);
     transition: .5s;
 }
 
@@ -76,14 +82,15 @@ body {
 }
 
 .__login {
-    margin: 0px 30px 0px 20px;
-    border: 2px solid rgba(0, 0, 0, 100%);
+    margin: 0px 10px 0px 10px;
+    border: 1px solid rgba(0, 0, 0, 0%);
     padding: 5px 10px;
     border-radius: 20px;
+    transition: .4s;
 }
 
 .__login:hover {
-    border: 2px solid #1BBCF0;
+    border: 1px solid #1BBCF0;
     border-radius: 20px;
 }
 
@@ -92,13 +99,14 @@ body {
     display: none;
     position: absolute;
     text-align: center;
-    margin-top: 20px;
+    padding-top: 20px;
     /* background-color: white; */
 }
 
-.__menu_list:hover .__depth2 {
+.__menu_list:hover>.__depth2 {
     display: block;
 }
+
 
 .__depth2 li {
     padding: 2px 0px;
@@ -116,7 +124,7 @@ footer {
 
 .__footer {
     display: flex;
-    width: 70%;
+    width: var(--main-width);
     justify-content: space-between;
     height: 170px;
 }
@@ -125,14 +133,13 @@ footer {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-left: 40px;
 }
 
 .__text {
     width: 300px;
     text-align: center;
     font-weight: 900;
-    font-size: 40px;
+    font-size: 33px;
     color: #1BBCF0;
 }
 
@@ -162,12 +169,13 @@ footer {
 .__copyright {
     display: flex;
     align-items: center;
-    font-size: 22px;
+    font-size: 18px;
     margin-left: 20px;
 }
 
 .__copyright span {
     font-weight: 600;
+    font-size: 20px;
     margin-right: 10px;
 }
 
@@ -182,7 +190,7 @@ footer {
 }
 
 .__content {
-    width: 70%;
+    width: var(--main-width);
     height: 500px;
     background-color: aliceblue;
 }
