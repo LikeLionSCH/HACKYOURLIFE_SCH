@@ -22,7 +22,7 @@ body {
     min-width: 1000px;
 }
 
-.__header_wrap {
+header {
     display: flex;
     justify-content: center;
     box-shadow: 1px 0px 3px lightgrey;
@@ -100,7 +100,6 @@ body {
     position: absolute;
     text-align: center;
     padding-top: 20px;
-    /* background-color: white; */
 }
 
 .__menu_list:hover>.__depth2 {
@@ -112,8 +111,14 @@ body {
     padding: 2px 0px;
 }
 
+
 .__depth2>li>a {
     display: block;
+    transition: .3s;
+}
+
+.__depth2>li>a:hover {
+    color: var(--SCH-skyblue);
 }
 
 footer {
@@ -140,7 +145,7 @@ footer {
     text-align: center;
     font-weight: 900;
     font-size: 33px;
-    color: #1BBCF0;
+    color: var(--SCH-skyblue);
 }
 
 .__icons {
