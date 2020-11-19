@@ -165,22 +165,28 @@ footer {
     display: flex;
 }
 
-.__contents_wrap {
-    width: 100%;
-}
 
 /* ------------ BASE CUTTING ---------------- */
 
-.__content:nth-child(1) {
+.contents_wrap {
+    width: 100%;
+}
+
+
+.content{
     margin: 0 auto;
     min-width: 1080px;
     height: 500px;
-    background-color: aliceblue;
 }
 
-.__content{
-
+.content:nth-child(1) {
+    background-color: white;
 }
+
+.content:nth-child(2) {
+    background-color:wheat;
+}
+
 
 
 /* rolling banner */
