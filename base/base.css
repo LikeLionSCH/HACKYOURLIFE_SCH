@@ -17,11 +17,17 @@ body {
     min-width: 800px;
 }
 
-header {
+.__header_wrap {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid lightgray;
+}
+
+.__header {
     display: flex;
     justify-content: space-between;
     height: 70px;
-    width: 100%;
+    width: 70%;
     /* background-color: aliceblue; */
 }
 
@@ -66,13 +72,18 @@ header {
 }
 
 .__menu_list:hover::after {
-    width: 40%;
+    width: 30%;
 }
 
 .__login {
     margin: 0px 30px 0px 20px;
-    border: 2px solid #1BBCF0;
+    border: 2px solid rgba(0, 0, 0, 100%);
     padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.__login:hover {
+    border: 2px solid #1BBCF0;
     border-radius: 20px;
 }
 
@@ -82,6 +93,7 @@ header {
     position: absolute;
     text-align: center;
     margin-top: 20px;
+    /* background-color: white; */
 }
 
 .__menu_list:hover .__depth2 {
@@ -98,10 +110,15 @@ header {
 
 footer {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 170px;
+    justify-content: center;
     background-color: #f8f8f8;
+}
+
+.__footer {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    height: 170px;
 }
 
 .__contact {
@@ -156,4 +173,16 @@ footer {
 
 .__box_left {
     display: flex;
+}
+
+.__contents_wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.__content {
+    width: 70%;
+    height: 500px;
+    background-color: aliceblue;
 }
