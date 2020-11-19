@@ -33,7 +33,7 @@
     - Point
       - 시멘틱 Web 구성 신경 쓰기. (center, main, header, footer)
       - Flex 남발 금지. (적재적소에만 사용하기. 반응형에 알맞는 곳)
-      - class name 작성 시, 띄어쓰기 '-'로 사용. ₩<div class='logo-item'></div>₩
+      - class name 작성 시, 띄어쓰기 '-'로 사용. `<div class='logo-item'></div>`
     
     - templates
       - VS Code - settings - format on save 켜서 코드 정리 자동화
