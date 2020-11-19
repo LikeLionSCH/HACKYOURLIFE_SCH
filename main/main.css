@@ -173,10 +173,12 @@ footer {
 }
 
 
-.content{
+.content{ 
+    position: relative;
     margin: 0 auto;
     min-width: 1080px;
     height: 500px;
+    border-top: 1px solid #eee;
 }
 
 .content:nth-child(1) {
@@ -190,7 +192,10 @@ footer {
 
 
 /* rolling banner */
-.rolling_banner {position: relative; width: 1080px; height: 500px;  margin:0 auto; padding:0; overflow: hidden;}
+.rolling_banner {
+    position: relative; width: 1080px; height: 500px;  margin:0 auto; padding:0; overflow: hidden;
+    
+}
 .rolling_banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
 .rolling_banner ul li {float: left; width: 1080px; height: 500px; margin:0; padding:0;}
-.rolling_banner ul li img{ width: 1080px; height: 500px;}
+.rolling_banner ul li img{ width: 1080px; height: 500px; }
