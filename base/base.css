@@ -1,3 +1,5 @@
+/* 폰트 정의 - Light, Text, Bold */
+
 @font-face {
     font-family: 'IBMPlexSansKR-Text';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
@@ -5,31 +7,40 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'IBMPlexSansKR-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ----------------------------- */
+
 :root {
     --main-width: 1100px;
     --SCH-skyblue: #1BBCF0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
-    color: black;
 }
 
 body {
     min-width: 1000px;
 }
 
+/* 헤더 */
+
 header {
     display: flex;
     justify-content: center;
-    box-shadow: 1px 0px 3px lightgrey;
     margin-bottom: 2px;
 }
 
-.__header {
+.header-box {
     display: flex;
     justify-content: space-between;
     height: 70px;
@@ -37,35 +48,26 @@ header {
     /* background-color: aliceblue; */
 }
 
-.__logo {
-    display: flex;
-    align-items: center;
-}
-
-.__logo img {
+.header-box img {
     width: 112px;
     height: 40px;
     margin: 10px;
+    padding: 5px 0 0 0;
 }
 
-.__menu_box {
-    display: flex;
-    align-items: center;
+nav {
+    padding: 10px 0 0 0;
 }
 
-.__menu {
+nav ul li {
+    font-family: 'IBMPlexSansKR-Light';
     display: inline-block;
-}
-
-.__menu>li {
-    display: inline-block;
-    /* position: absolute; */
     padding: 10px 5px;
     font-size: 18px;
     position: relative;
 }
 
-.__menu_list::after {
+nav ul li::after {
     content: '';
     position: absolute;
     width: 0%;
@@ -77,125 +79,124 @@ header {
     transition: .5s;
 }
 
-.__menu_list:hover::after {
+nav ul li:hover::after {
     width: 30%;
 }
 
-.__login {
-    margin: 0px 10px 0px 10px;
+nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.login-box {
+    font-family: 'IBMPlexSansKR-Light';
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
     border: 1px solid rgba(0, 0, 0, 0%);
     padding: 5px 10px;
     border-radius: 20px;
     transition: .4s;
 }
 
-.__login:hover {
+.login-box:hover {
     border: 1px solid #1BBCF0;
     border-radius: 20px;
 }
 
-
-.__depth2 {
+.dropbox-nav {
     display: none;
     position: absolute;
     text-align: center;
     padding-top: 20px;
 }
 
-.__menu_list:hover>.__depth2 {
+nav ul li:hover>.dropbox-nav {
     display: block;
 }
 
-
-.__depth2 li {
+.dropbox-nav li {
     padding: 2px 0px;
 }
 
-
-.__depth2>li>a {
+.dropbox-nav>li>a {
     display: block;
     transition: .3s;
 }
 
-.__depth2>li>a:hover {
+.dropbox-nav>li>a:hover {
     color: var(--SCH-skyblue);
 }
 
+/* ----------------------------- */
+/* 푸터 */
+
 footer {
+    position: relative;
+    left: 0%;
+    bottom: 0%;
     display: flex;
     justify-content: center;
     background-color: #f8f8f8;
 }
 
-.__footer {
+.footer-box {
     display: flex;
     width: var(--main-width);
-    justify-content: space-between;
-    height: 170px;
+    height: 120px;
 }
 
-.__contact {
+.contact-box {
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
-.__text {
-    width: 300px;
+.contact-box label {
+    font-family: 'IBMPlexSansKR-Bold';
     text-align: center;
-    font-weight: 900;
     font-size: 33px;
     color: var(--SCH-skyblue);
 }
 
-.__icons {
+.icons {
     display: flex;
     justify-content: center;
     width: 300px;
 }
 
-.__icons a i {
+.icons a i {
     margin: 10px 5px;
     font-size: 20px;
     color: lightgray;
 }
 
-.__logo2 {
-    display: flex;
-    align-items: center;
-    margin-right: 50px;
-}
-
-.__logo2>img {
-    width: 80px;
-    height: 80px;
-}
-
-.__copyright {
+.copyright-text {
     display: flex;
     align-items: center;
     font-size: 18px;
-    margin-left: 20px;
+    margin-right: 38%;
 }
 
-.__copyright span {
+.copyright-text span {
     font-weight: 600;
     font-size: 20px;
     margin-right: 10px;
 }
 
-.__box_left {
-    display: flex;
+footer img {
+    width: 80px;
+    height: 80px;
+    margin-top: 15px;
 }
 
-.__contents_wrap {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
 
-.__content {
+/* ----------------------------- */
+/* 컨텐츠 */
+
+.content {
+    margin: 0 auto;
     width: var(--main-width);
-    height: 500px;
+    height: 400px;
     background-color: aliceblue;
 }
