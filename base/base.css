@@ -172,10 +172,11 @@ footer {
 }
 
 .copyright-text {
+    font-family: 'IBMPlexSansKR-Light';
     display: flex;
     align-items: center;
     font-size: 18px;
-    margin-right: 38%;
+    margin-right: 40%;
 }
 
 .copyright-text span {
