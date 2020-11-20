@@ -1,6 +1,6 @@
 
 	$(document).ready(function() {
-		var $banner = $(".rolling_banner").find("ul");
+		var $banner = $(".rolling-banner").find("ul");
 
 		var $bannerWidth = $banner.children().outerWidth();//이미지의 폭
 		var $bannerHeight = $banner.children().outerHeight(); // 높이

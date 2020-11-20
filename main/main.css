@@ -193,7 +193,7 @@ footer img {
 
 /* ------------ BASE CUTTING ---------------- */
 
-.contents_wrap {
+.content-wrap {
     width: 100%;
 }
 
@@ -201,26 +201,78 @@ footer img {
 .content{ 
     position: relative;
     margin: 0 auto;
-    min-width: 1100px;
-    height: 500px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #e4e4e4;
 }
 
+.content-title{
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 38px;
+}
+
+
+
+/* Rolling banner */
 .content:nth-child(1) {
     background-color: white;
+    height: 500px;
 }
-
-.content:nth-child(2) {
-    background-color:wheat;
-}
-
-
-
-/* rolling banner */
-.rolling_banner {
+.rolling-banner {
     position: relative; width: 1100px; height: 500px;  margin:0 auto; padding:0; overflow: hidden;
     
 }
-.rolling_banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
-.rolling_banner ul li {float: left; width: 1100px; height: 500px; margin:0; padding:0;}
-.rolling_banner ul li img{ width: 1100px; height: 500px; }
+.rolling-banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
+.rolling-banner ul li {float: left; width: 1100px; height: 500px; margin:0; padding:0;}
+.rolling-banner ul li img{ width: 1100px; height: 500px; }
+
+
+/* about */
+
+.content:nth-child(2) {
+    background-color: white;
+}
+
+.content:nth-child(2) .content-about{
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 450px;
+    border: 1px solid red;
+}
+
+/* curriculum */
+
+.content:nth-child(3) {
+    background-color: #FFD5A0;
+}
+.content:nth-child(3) .content-curriculum{
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 450px;
+    border: 1px solid red;
+}
+
+
+/* headcount */
+
+.content:nth-child(4) {
+    background-color: #e4e4e4;
+}
+
+.content:nth-child(4) .content-headcount{
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 450px;
+    border: 1px solid red;
+}
+
+/* project */
+
+.content:nth-child(5) {
+    background-color: white;
+}
+
+.content:nth-child(5) .content-project{
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 600px;
+    border: 1px solid red;
+}
