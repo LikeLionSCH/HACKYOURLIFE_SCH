@@ -21,6 +21,22 @@
     font-style: normal;
 }
 
+/* 드롭다운 메뉴 자연스럽게 해주는 속성 */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translate(0%, -30%);
+        background-color: rgba(256, 256, 256, 0%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0%, 0%);
+        background-color: rgba(256, 256, 256, 95%);
+    }
+}
+
 /* ----------------------------- */
 
 :root {
@@ -37,7 +53,7 @@ body {
 header {
     display: flex;
     justify-content: center;
-    margin-bottom: 2px;
+    margin-bottom: 15px;
 }
 
 .header-box {
@@ -109,6 +125,8 @@ nav ul li a {
     position: absolute;
     text-align: center;
     padding-top: 20px;
+    background-color: rgba(256, 256, 256, 95%);
+    animation: fade-in .9s;
 }
 
 nav ul li:hover>.dropbox-nav {
@@ -144,6 +162,7 @@ footer {
     display: flex;
     width: var(--main-width);
     height: 120px;
+    margin-top: 20px;
 }
 
 .contact-box {
@@ -195,9 +214,31 @@ footer img {
 /* ----------------------------- */
 /* 컨텐츠 */
 
-.content {
-    margin: 0 auto;
-    width: var(--main-width);
-    height: 400px;
-    background-color: aliceblue;
+a {
+    text-decoration: none;
+    outline: none
+}
+
+a:hover,
+a:active,
+a:visited {
+    text-decoration: none;
+    color: #000;
+}
+
+.title-wrap {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.page-sub-title {
+    display: inline-block;
+    font-size: 26px;
+    border-bottom: 2px solid var(--SCH-skyblue);
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+
+main {
+    width: 100%;
 }
