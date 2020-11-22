@@ -27,6 +27,8 @@
 
 ## Commit Rule
 
+- 커밋 메세지 작성시 '[nickname] : message' 의 형식으로 작성 
+
 - 네이밍은 다음과 같이 작성함.
 
   - Front-end
