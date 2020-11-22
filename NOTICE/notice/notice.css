@@ -28,7 +28,9 @@
     --SCH-skyblue: #1BBCF0;
 }
 
-
+body {
+    min-width: 1000px;
+}
 
 /* 헤더 */
 
@@ -190,89 +192,86 @@ footer img {
 }
 
 
+/* ----------------------------- */
+/* 컨텐츠 */
 
-/* ------------ BASE CUTTING ---------------- */
+a {text-decoration: none; outline: none}
 
-.main {
+a:hover, a:active, a:visited {text-decoration: none; color: #000;}
+
+
+
+
+main {
     width: 100%;
 }
 
-
-.content{ 
-    position: relative;
+/* ------------- 게시글 wrap -------------*/
+.content-wrap{ 
+    width: var(--main-width);
+    height: 250px;
     margin: 0 auto;
-    border-top: 1px solid #e4e4e4;
-}
-
-.content-title{
-    font-family: 'IBMPlexSansKR-Bold';
-    font-size: 38px;
-}
-
-
-
-/* Rolling banner */
-.content:nth-child(1) {
-    background-color: white;
-    height: 500px;
-}
-.rolling-banner {
-    position: relative; width: 1100px; height: 500px;  margin:0 auto; padding:0; overflow: hidden;
+    padding: 30px 0;
     
-}
-.rolling-banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
-.rolling-banner ul li {float: left; width: 1100px; height: 500px; margin:0; padding:0;}
-.rolling-banner ul li img{ width: 1100px; height: 500px; }
-
-
-/* about */
-
-.content:nth-child(2) {
-    background-color: white;
+    border-bottom: 1px solid #f4f4f4;
 }
 
-.content:nth-child(2) .content-about{
-    margin: 0 auto;
-    width: var(--main-width);
-    height: 450px;
-    border: 1px solid red;
+/* 썸네일 사진 */
+.img-box{
+    width: 25%;
+    height: 250px;
+    margin-right: 50px;
+    float: left;
 }
 
-/* curriculum */
-
-.content:nth-child(3) {
-    background-color: #FFD5A0;
-}
-.content:nth-child(3) .content-curriculum{
-    margin: 0 auto;
-    width: var(--main-width);
-    height: 450px;
-    border: 1px solid red;
+.img-box img{
+    width: 100%;
+    height: 100%;
 }
 
+/* 공지사항 글 */
 
-/* headcount */
-
-.content:nth-child(4) {
-    background-color: #e4e4e4;
+.content-box{
+    width: 70%;
+    height: 100%;
+    float:left;
 }
 
-.content:nth-child(4) .content-headcount{
-    margin: 0 auto;
-    width: var(--main-width);
-    height: 450px;
-    border: 1px solid red;
+.content-box a:hover{
+    color: #F39926;
 }
 
-/* project */
-
-.content:nth-child(5) {
-    background-color: white;
+.content-box .sub-title{
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 30px;
+    color: #F39926;
+    margin-bottom: 3vh;
+    height: 20%;
 }
 
-.content:nth-child(5) .content-project{
-    margin: 0 auto;
-    width: var(--main-width);
-    height: 600px;
-    border: 1px solid red;
+.content-box .content{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 20px;
+    height: 55%;
+
+    /* 말줄임 */
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+
+}
+
+.post-meta{
+    /* height: %; */
+}
+
+.post-meta-item{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 11px;
+    color:#999999;
+    background: #f4f4f4;
+    
+    padding:7px 10px 7px 10px;
 }
