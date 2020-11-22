@@ -199,8 +199,17 @@ a {text-decoration: none; outline: none}
 
 a:hover, a:active, a:visited {text-decoration: none; color: #000;}
 
+.title-wrap{
+    text-align: center;
+}
 
-
+.page-sub-title{
+    /* width: 100%; */
+    /* margin: 0 auto; */
+    font-size: 32px;
+    font-family: 'IBMPlexSansKR-Text';
+    border-bottom: 1px solid var(--SCH-skyblue);
+}
 
 main {
     width: 100%;
