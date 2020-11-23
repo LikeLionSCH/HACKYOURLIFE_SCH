@@ -24,6 +24,14 @@
 
 - [HACKYOURLIFE_SCH - Google Docs](https://docs.google.com/document/d/1a0cSXchb96LsK2EMrAxo3-F6dukYH6EYYl73jfSPJ3I/edit)
 
+## ⏱Installation
+- Django==3.1.3
+- Python3
+- HTML5
+- CSS3
+- JS
+- JQuery
+
 
 ## Commit Rule
 
