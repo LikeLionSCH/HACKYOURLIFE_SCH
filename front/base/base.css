@@ -155,6 +155,7 @@ footer {
     bottom: 0%;
     display: flex;
     justify-content: center;
+    margin-top: 60px;
     background-color: #f8f8f8;
 }
 
