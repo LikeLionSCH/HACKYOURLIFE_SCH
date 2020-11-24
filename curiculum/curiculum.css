@@ -1,0 +1,89 @@
+/* 배경 설정 */
+.curiculum-content {
+    position: relative;
+    width: 1280px;
+    height: 400px;
+    background-image: url('background.jpg');
+    background-size: 1280px 400px;
+    text-align: center;
+}
+
+/* 배경 어두운 필터  */
+.curiculum-content::before {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    content: "";
+    opacity: 0.82;
+    position: absolute;
+    background-color: black;
+}
+/* 커리큘럼 제목 span */
+#curiculum-title {
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 30px;
+    color: #F39926;
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* 원 속성 */
+.circles {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row; 
+}
+.circle-green {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 122, 133, 0.6);
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+}
+
+.circle-orange {
+    display: flex;
+    align-items: center;
+    background-color: rgba(243, 153, 38, 0.6);
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+}
+
+.circle-text {
+    margin: 0 auto;
+    font-size: 20px;
+    font-family: 'IBMPlexSansKR-Text';
+    color: white;
+}
+
+.circle-div {
+    width: 150px;
+    margin: 15px;
+}
+
+/* 설명 텍스트  */
+
+.curi-info{
+    margin-top: 30px;
+}
+
+.curi-info-text-title{
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgba(170, 208, 71, 0.5);
+    font-size: 15px;
+    font-family: 'IBMPlexSansKR-Text';
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.curi-info-text{
+    margin-top: 10px;
+    font-family: 'IBMPlexSansKR-Light';
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+}
