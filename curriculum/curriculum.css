@@ -1,5 +1,5 @@
 /* 배경 설정 */
-.curiculum-content {
+.curriculum-content {
     position: relative;
     width: 1280px;
     height: 400px;
@@ -9,7 +9,7 @@
 }
 
 /* 배경 어두운 필터  */
-.curiculum-content::before {
+.curriculum-content::before {
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -20,7 +20,7 @@
     background-color: black;
 }
 /* 커리큘럼 제목 span */
-#curiculum-title {
+#curriculum-title {
     font-family: 'IBMPlexSansKR-Text';
     font-size: 30px;
     color: #F39926;
@@ -69,11 +69,11 @@
 
 /* 설명 텍스트  */
 
-.curi-info{
+.curri-info{
     margin-top: 30px;
 }
 
-.curi-info-text-title{
+.curri-info-text-title{
     padding-bottom: 5px;
     border-bottom: 2px solid rgba(170, 208, 71, 0.5);
     font-size: 15px;
@@ -81,7 +81,7 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
-.curi-info-text{
+.curri-info-text{
     margin-top: 10px;
     font-family: 'IBMPlexSansKR-Light';
     color: rgba(255, 255, 255, 0.6);
