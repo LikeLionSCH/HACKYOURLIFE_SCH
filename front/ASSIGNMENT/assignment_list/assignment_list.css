@@ -46,14 +46,14 @@
     margin-top: 30px;
 }
 
-/* flex 마법 죄송합니다 ,,, 제 능력으로는 flex 없이 오른쪽으로 못보내겠어요 ,, */
-.register {
+.top-box {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
     margin-bottom: 15px;
 }
 
-.register a {
+
+.top-box a {
     color: var(--SCH-skyblue);
 }
 
@@ -111,7 +111,7 @@ p {
 .pagination {
     margin-top: 50px;
     font-size: 17px;
-    color: var(--SCH-skyblue);
+    color: black;
 }
 
 .pagination div {
