@@ -96,12 +96,14 @@ p {
 
 /* state 할 때 필요한 color class */
 
-.font-green {
-    color: #61C554;
+.font-black {
+    font-family: 'IBMPlexSansKR-Text';
+    color: black;
 }
 
 .font-red {
-    color: #ED6A5E;
+    font-family: 'IBMPlexSansKR-Text';
+    color: red;
 }
 
 /* ************************************* */
