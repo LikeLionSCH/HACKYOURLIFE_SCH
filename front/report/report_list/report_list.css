@@ -94,19 +94,6 @@ p {
 
 /* ************************************* */
 
-/* state 할 때 필요한 color class */
-
-.font-black {
-    font-family: 'IBMPlexSansKR-Text';
-    color: black;
-}
-
-.font-red {
-    font-family: 'IBMPlexSansKR-Text';
-    color: red;
-}
-
-/* ************************************* */
 
 /* pagination */
 
