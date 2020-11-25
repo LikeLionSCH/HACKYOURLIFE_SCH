@@ -1,6 +1,8 @@
 
 
 
+
+
 /* ------------ BASE CUTTING ---------------- */
 
 .main {
@@ -21,6 +23,7 @@
     text-align: center;
     margin: 5vh 0;
 }
+
 
 
 
@@ -56,7 +59,7 @@
 .content-about{
     /* 컨텐츠 내용 가로/세로값 및 비율 설정*/
     width: 1000px;
-    height: 60%;
+    height: 80%;
     margin: 0 auto;
     /* background-color: #e4e4e4; */
 }
@@ -115,9 +118,29 @@
 
 /* 본문 가운데 컨테이너 */
 #content-about-center{
+    /* 가로/세로, 위치 */
     position: relative;
     width: 100%;
+    text-align: center;
+    
+    /* float 탈출 */
+    clear:both;
+
 }
+
+#content-about-center .link-button{
+    /* 버튼 글씨 및 폰트 */
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 26px;
+
+    /* border, background */
+    border: 1px solid rgba(243, 153, 38, 0.6);
+    background-color: white;
+
+    /* width, height, margin, padding */
+    padding: 5px 15px;
+}
+
 
 
 
@@ -225,6 +248,7 @@
     font-family: 'IBMPlexSansKR-Light';
     color: rgba(255, 255, 255, 0.6);
     font-size: 13px;
+    height: 18vh;
 }
 
 
