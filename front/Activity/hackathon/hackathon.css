@@ -1,0 +1,81 @@
+#hackathon-content {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 400px;
+    background-image: url('../../image/curri-background.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 400px;
+    /* background-attachment:fixed; */
+}
+
+/* 배경 어두운 필터  */
+#hackathon-content::before {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    content: "";
+    opacity: 0.82;
+    position: absolute;
+    background-color: black;
+}
+
+#hackathon-title {
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 30px;
+    color: #F39926;
+    position: relative;
+    display: inline-block;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+/* 해커톤 설명부분 div */
+.hackathon-info-div {
+    display: inline-block;
+}
+
+/* 해커톤 설명부분 p */
+.hackathon-info-p {
+    padding: 2vh;
+    position: relative;
+    background-color: rgb(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+/* 해커톤 설명부분 text */
+.hackathon-info {
+    position: relative;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 16px;
+    color: white;
+    display: inline-block;
+    text-align: left;
+}
+
+/* 해커톤 설명 두 번째 거  */
+
+.hackathon-info2 {
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 16px;
+    color: #BDDA72;
+    position: relative;
+    margin-top: 2vh;
+    display: inline-block;
+    text-align: left;   
+}
+
+/* 이미지 설정 */
+.hackathon-image-group {
+    padding-top: 2vh;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.hackathon-image{
+    margin-left: 5vh;
+    height: 100px;
+    width: 200px;
+    position: relative;
+}
