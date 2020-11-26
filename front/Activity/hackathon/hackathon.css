@@ -1,3 +1,11 @@
+/* body {
+    overflow: hidden;
+} */
+
+main {
+    overflow: scroll;
+}
+
 #hackathon-content {
     position: relative;
     text-align: center;
@@ -6,7 +14,7 @@
     background-image: url('../../image/curri-background.jpg');
     background-repeat: no-repeat;
     background-size: 100% 400px;
-    /* background-attachment:fixed; */
+    background-attachment:fixed;
 }
 
 /* 배경 어두운 필터  */
@@ -19,6 +27,7 @@
     opacity: 0.82;
     position: absolute;
     background-color: black;
+    background-attachment:fixed;
 }
 
 #hackathon-title {
@@ -68,14 +77,78 @@
 
 /* 이미지 설정 */
 .hackathon-image-group {
-    padding-top: 2vh;
-    /* display: flex;
-    justify-content: center; */
+    display: flex;
+    justify-content: center;
 }
 
 .hackathon-image{
-    margin-left: 5vh;
+    padding: 4vh 2vh 0.3vh 2vh;
     height: 100px;
     width: 200px;
     position: relative;
+}
+
+.hackathon-image-box{
+    text-align: center;
+}
+
+.img-info{
+    position: relative;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 14px;
+    color:rgb(255, 255, 255, 0.8);
+}
+
+#hackathon-activity{
+    margin-top: 10vh;
+    position: relative;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(253, 153, 38, 0);
+}
+
+/* 기수 속성 */
+.mem-num{
+    padding: 0 1vh 0 1vh;
+    margin-right: 3vh;
+    height: 5.5vh;
+    border-radius: 4px;
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 30px;
+    color: black;
+    background-color: rgb(253, 153, 38, 0.8);
+}
+
+.hackathon-detail-image{
+    margin: 0 3vh 0 3vh;
+}
+.hackathon-detail-name{
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 40px;
+    /* color: white; */
+}
+
+.hackathon-detail-date{
+    font-size: 20px;
+    display: block;
+    color:#BDDA72;
+    border-top: 2px solid #BDDA72;
+}
+
+.hackathon-detail-image{
+    height: 200px;
+    width: 300px;
+}
+
+.hackathon-detail-box{
+    margin: 0 0 0 15vh;
+}
+
+.hackathon-detail-info{
+    margin-top: 2vh;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 17px;
 }
