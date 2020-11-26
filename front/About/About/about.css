@@ -1,0 +1,38 @@
+/* ----------------------------- */
+/* 컨텐츠 */
+
+#main-bg {
+    width: 1100px;
+    height: 600px;
+    background: url('../../image/about_img.png') no-repeat;
+    margin: 0 auto;
+}
+
+.text-box {
+    padding: 350px 0 0 30px;
+    color: white;
+    text-shadow: 1px 2px 3px #000;
+}
+
+.text-box h1 {
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 43px;
+}
+
+.text-box span {
+    font-family: 'IBMPlexSansKR-Light';
+}
+
+.text-box b {
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+.text-box span:first-of-type,
+.text-box b:first-of-type {
+    font-size: 22px;
+}
+
+.text-box span,
+.text-box b {
+    font-size: 19px;
+}
