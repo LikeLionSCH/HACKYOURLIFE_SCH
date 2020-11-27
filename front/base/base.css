@@ -240,14 +240,15 @@ a:visited {
     font-family: 'IBMPlexSansKR-Text';
 }
 
-
 main {
     width: 100%;
 }
 
+/* ----------------------------- */
+/* 스몰 헤더 */
 
 /* 스몰 헤더 전체 사이즈 */
-#small-header-wrap{
+#small-header-wrap {
     width: 100%;
     margin: 0 auto;
     /* 테두리 */
@@ -256,7 +257,7 @@ main {
 }
 
 /* 스몰 헤더 - 아이템 적용 사이즈 */
-#small-header-box{
+#small-header-box {
     /* width 및 position 설정 */
     display: flex;
     width: 50%;
@@ -266,17 +267,18 @@ main {
     justify-content: space-around;
 }
 
-
 /* 스몰 헤더 - 링크 글자 크기 */
-#small-header-box a .small-header-nav{
+#small-header-box a .small-header-nav {
     font-size: 18px;
-    font-family: 'IBMPlexSansKR-Text';
+    font-family: 'IBMPlexSansKR-Light';
 }
 
-
-
 /* 스몰 헤더 - 링크 글자 크기 */
-#small-header-box a:hover{
-    /* bold가 되고, */
+#small-header-box a:hover {
     color: var(--SCH-skyblue);
+}
+
+/* 스몰 헤더 - 현재 페이지 표시 (글자 bold) */
+.now-page {
+    font-family: 'IBMPlexSansKR-Text' !important;
 }
