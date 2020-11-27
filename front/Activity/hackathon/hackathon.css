@@ -13,8 +13,8 @@ main {
     height: 400px;
     background-image: url('../../image/curri-background.jpg');
     background-repeat: no-repeat;
-    background-size: 100% 400px;
-    background-attachment:fixed;
+    background-size: cover;
+    background-position: center;
 }
 
 /* 배경 어두운 필터  */
