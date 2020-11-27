@@ -151,9 +151,8 @@
     position: relative;
     width: 100%;
     height: 500px;
-    background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 500px;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
     text-align: center;
 }
 
