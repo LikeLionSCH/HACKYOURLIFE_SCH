@@ -356,7 +356,7 @@
     background-color: white;
 }
 
-.content:nth-child(6) .content-recuit{
+.content:nth-child(6) .content-recruit{
     margin: 0 auto;
     width: var(--main-width);
     height: 400px;
