@@ -248,7 +248,7 @@ main {
 
 /* 스몰 헤더 전체 사이즈 */
 #small-header-wrap{
-    width: var(--main-width);
+    width: 100%;
     margin: 0 auto;
     /* 테두리 */
     border-top: 1px solid #e4e4e4;
@@ -259,7 +259,7 @@ main {
 #small-header-box{
     /* width 및 position 설정 */
     display: flex;
-    width: 65%;
+    width: 50%;
     margin: 0 auto;
     padding: 8px 0;
     /* container item 속성 */
