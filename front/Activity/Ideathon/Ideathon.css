@@ -9,26 +9,10 @@ main {
 #hackathon-content {
     position: relative;
     text-align: center;
-    width: 100%;
-    height: 400px;
-    background-image: url('../../image/curri-background.jpg');
-    background-repeat: no-repeat;
+    background: url('../../image/curri-background.png') no-repeat center center fixed;
     background-size: cover;
-    background-position: center;
 }
 
-/* 배경 어두운 필터  */
-#hackathon-content::before {
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    content: "";
-    opacity: 0.82;
-    position: absolute;
-    background-color: black;
-    background-attachment:fixed;
-}
 
 #ideathon-title {
     font-family: 'IBMPlexSansKR-Text';
@@ -79,12 +63,14 @@ main {
 .hackathon-image-group {
     display: flex;
     justify-content: center;
+    padding-bottom: 6vh;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
 }
 
 .hackathon-image{
     padding: 4vh 2vh 0.3vh 2vh;
-    height: 100px;
-    width: 200px;
+    height: 180px;
+    width: 280px;
     position: relative;
 }
 
@@ -99,6 +85,7 @@ main {
     color:rgb(255, 255, 255, 0.8);
 }
 
+/* 기수별 해커톤 활동  속성*/
 #hackathon-activity{
     margin-top: 10vh;
     position: relative;
@@ -108,11 +95,17 @@ main {
     background-color: rgb(253, 153, 38, 0);
 }
 
+/* 기수별 구분선 설정 */
+#hackathon-activity:nth-child(2n){
+    padding-bottom: 10vh;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+}
+
 /* 기수 속성 */
 .mem-num{
     padding: 0 1vh 0 1vh;
     margin-right: 3vh;
-    height: 5.5vh;
+    height: 8vh;
     border-radius: 4px;
     display: inline-block;
     font-family: 'IBMPlexSansKR-Light';
@@ -121,16 +114,22 @@ main {
     background-color: rgb(253, 153, 38, 0.8);
 }
 
+/* 각 해커톤 이미지  */
 .hackathon-detail-image{
+    width: 65vh;
+    height: 35vh;
     margin: 0 3vh 0 3vh;
 }
+
+/* 각 해커톤 타이틀 */
 .hackathon-detail-name{
     display: inline-block;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
-    /* color: white; */
+    color: white;
 }
 
+/* 각 해커톤 날짜 */
 .hackathon-detail-date{
     font-size: 20px;
     display: block;
@@ -138,10 +137,6 @@ main {
     border-top: 2px solid #BDDA72;
 }
 
-.hackathon-detail-image{
-    height: 200px;
-    width: 300px;
-}
 
 .hackathon-detail-box{
     margin: 0 0 0 15vh;
@@ -151,4 +146,5 @@ main {
     margin-top: 2vh;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
+    color: rgba(255, 255, 255, 0.6);
 }
