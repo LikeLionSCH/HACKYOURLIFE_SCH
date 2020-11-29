@@ -5,10 +5,10 @@ main {
 }
 
 /* 배경 */
-#hackathon-content {
+#full-page {
     position: relative;
     text-align: center;
-    background: url('../../image/curri-background.png') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.9);
     background-size: cover;
 }
 
@@ -85,7 +85,7 @@ main {
 
 /* 기수별 해커톤 활동  속성*/
 #hackathon-activity{
-    margin-top: 10vh;
+    margin-top: 3vh;
     position: relative;
     text-align: left;
     display: flex;
