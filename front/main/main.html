@@ -91,7 +91,7 @@
 
                     <div id="content-about-center">
                         <!-- 클릭 시, ABOUT의 멋쟁이 사자란? 페이지로 이동하기. -->
-                        <button type="button" class="link-button" onclick="location.href='#';">상세 활동</button>
+                        <button type="button" class="about-btn" onclick="location.href='#';">상세 활동</button>
                     </div>
                </div>
             </div>
@@ -187,7 +187,7 @@
                     </div>
                     <div class="content-headcount-item">
                         <h3 class="content-headcount-item-title">2020년도 경쟁률</h3>
-                        <span>1 : 9</span>
+                        <span>1:9</span>
                     </div>
                 </div>
             </div>
@@ -237,6 +237,38 @@
         <div class="content">
             <div class="content-recruit">
                 <h2 class="content-title">RECRUIT</h2>
+                <h3 class="content-recruit-deadline">
+                    9기 모집 마감 일자 - 
+                    <!-- deadline-time HTML 입력 시, JS 자동적용 -->
+                    <!-- yyyy/mm/dd 00:00:00 -->
+                    <span id='deadline-time'>2020/12/30 12:00:00</span>
+                </h3>
+                <!-- count-down form -->
+                <div class="content-recruit-countdown-wrap">
+                    <ul id="countdown">
+                        <li id="days">
+                          <div class="number">00</div>
+                          <div class="label">Days</div>
+                        </li>
+                        <li id="hours">
+                          <div class="number">00</div>
+                          <div class="label">Hours</div>
+                        </li>
+                        <li id="minutes">
+                          <div class="number">00</div>
+                          <div class="label">Minutes</div>
+                        </li>
+                        <li id="seconds">
+                          <div class="number">00</div>
+                          <div class="label">Seconds</div>
+                        </li>
+                      </ul>
+                </div>
+                <div class="recruit-btn-wrap">
+                    <!-- 클릭 시 멋사 중앙 지원 페이지로 이동 -->
+                    <button type="button" class='recruit-btn' onclick="location.href='#';">지원하기</button>
+                </div>
+
             </div>
         </div>
 
@@ -264,7 +296,8 @@
     </footer>
     <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <script src="script/jquery-1.12.3.js"></script> -->
+    <!-- UIUX jquery (main.js) -->
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="main.js"></script>
 </body>
 
