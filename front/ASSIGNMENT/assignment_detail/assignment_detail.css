@@ -30,74 +30,81 @@
 
 /********************************************************/
 
-
-/* form box */
-
 .main-wrap {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.form-box {
-    width: 900px;
     height: auto;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center;
 }
 
-.title-box p,
-.dueto-box p,
-.ckeditor-box p {
+.detail-box {
+    width: var(--main-width);
+    height: auto;
+    margin-top: 50px;
+}
+
+.update-delete-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.update-delete-wrap a {
+    padding: 0px 5px;
+    color: var(--SCH-skyblue);
+}
+
+.info-title,
+.detail-title {
+    width: 100%;
+    padding-bottom: 1px;
+    margin-top: 40px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.info-title span,
+.detail-title span {
+    border-bottom: 2px solid lightgray;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 24px;
+}
+
+.info-box>span {
     font-size: 20px;
-    font-family: "IBMPlexSansKR-Text";
+    width: 70px;
+    line-height: 70px;
 }
 
-.title-box input,
-.dueto-box input {
-    width: 100%;
-    height: 35px;
-    padding-left: 20px;
-    margin-top: 15px;
-    outline: none;
-    border: 1px solid rgb(228, 228, 228);
-    border-radius: 10px;
+.detail-contents {
+    margin: 25px 0px 100px 0px;
+    font-size: 20px;
 }
 
-input::placeholder {
-    color: #E6E6E6;
-}
-
-.dueto-box,
-.ckeditor-box {
-    margin-top: 50px;
-}
-
-.dueto-box input {
-    width: 200px;
-}
-
-.ckeditor-box div {
-    width: 100%;
-    height: 400px;
-    margin-top: 15px;
-    border: 1px solid rgb(228, 228, 228);
-    border-radius: 10px;
-}
-
-.form-box>input {
-    width: 100%;
+.button {
+    width: 1100px;
+    line-height: 50px;
     height: 50px;
+    text-align: center;
     margin-top: 50px;
+    margin-bottom: 60px;
     background-color: white;
     border: 2px solid var(--SCH-skyblue);
     color: var(--SCH-skyblue);
     border-radius: 15px;
     transition: .4s;
-    margin-bottom: 60px;
 }
 
-.form-box>input:hover {
+.button:hover {
     background-color: var(--SCH-skyblue);
-    color: white;
+    color: rgb(138, 126, 126);
+}
+
+
+/* **************************** */
+.text-bold {
+    display: inline;
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+.mg-top-60 {
+    margin-top: 60px;
 }
