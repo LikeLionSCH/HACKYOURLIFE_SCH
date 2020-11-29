@@ -88,6 +88,7 @@ input::placeholder {
     color: var(--SCH-skyblue);
     border-radius: 15px;
     transition: .4s;
+    margin-bottom: 60px;
 }
 
 .form-box>input:hover {
