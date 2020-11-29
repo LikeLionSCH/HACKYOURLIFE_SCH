@@ -415,7 +415,7 @@
 .content:nth-child(6) .content-recruit{
     margin: 0 auto;
     width: var(--main-width);
-    height: 500px;
+    height: 400px;
 }
 
 .content-recruit-deadline{
