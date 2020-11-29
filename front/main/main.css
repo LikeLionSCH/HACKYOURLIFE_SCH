@@ -1,8 +1,6 @@
 
 
 
-
-
 /* ------------ BASE CUTTING ---------------- */
 
 .main {
@@ -18,7 +16,7 @@
 
 .content-title{
     font-family: 'IBMPlexSansKR-Bold';
-    font-size: 26px;
+    font-size: 30px;
     color: #F39926;
     text-align: center;
     margin: 5vh 0;
@@ -36,7 +34,7 @@
 .content:nth-child(1) .content-main-wrap{
     /* width, height 영역  */
     width: 100%;
-    height: 600px;
+
 
     /* 백그라운드 배경 */
     background: url('lionlike-bg.png') no-repeat center center fixed;
@@ -63,6 +61,7 @@
     border-bottom: 1px solid white;
 }
 
+
 /* 멋쟁이사자 */
 #content-main-title::after{
     position: absolute;
@@ -76,6 +75,14 @@
 #content-main-title span{
     font-family: 'IBMPlexSansKR-Light';
 }
+
+/* 메인 홍보 영상 */
+#main-video{
+    display: block;
+    margin: 30px auto 0;
+    width: 1100px;
+}
+
 
 
 
@@ -91,7 +98,6 @@
     height: 450px;
 }
 
-/* about */
 
 /* ABOUT 콘텐츠의 내용 값을 감싼 WRAP (img/ */
 .content-about{
@@ -166,22 +172,21 @@
 }
 /* about 배너 링크 버튼 */
 .about-btn{
-    height: 45px;
-    color: white;
+    color: black;
     padding: 5px 30px;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #adafb2;
     border-radius: 18px;
-    background-color: #F39926;
+    background-color: white;
     font-size: 26px;
     -webkit-transition-duration: 0.5s; 
     cursor: pointer;  
 }
 /* 링크 버튼 호버시 적용 애니메이션 */
 .about-btn:hover{
-    color:  #F39926;
+    color: white;
     box-shadow: 
-    0 80px 0 0 rgba(255,255,255,0.5) inset, 
-    0 -80px 0 0 rgba(255,255,255,0.5) inset; 
+    0 80px 0 0 #F39926 inset, 
+    0 -80px 0 0  #F39926 inset; 
 }
 
 
@@ -343,7 +348,7 @@
 
 /* project */
 .content:nth-child(5) {
-    background: url(project-bg1.jpeg) center center fixed;
+    background: url(project-bg.jpeg) center center fixed;
     background-size: cover;
 }
 
@@ -367,6 +372,7 @@
 .content-card{
     /* 크기 및 보더, 그림자*/
     width:250px;
+    height:100%;
     box-shadow: 0px 0px 10px rgba(0,0,0,1);
     -webkit-transition-duration: 0.5s; 
     border-radius: 18px;
@@ -374,6 +380,8 @@
     /* background-image */
     background: url('lionlike-bg.png') center center;
     background-size: cover;
+
+    cursor: pointer;
 }
 .content-card:hover{
     width:265px;
@@ -404,7 +412,7 @@
 .content:nth-child(6) .content-recruit{
     margin: 0 auto;
     width: var(--main-width);
-    height: 400px;
+    height: 500px;
 }
 
 .content-recruit-deadline{
@@ -458,20 +466,19 @@ ul#countdown li .number{
 }
 
 .recruit-btn{
-    height: 45px;
-    color: white;
+    color: black;
     padding: 5px 30px;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #adafb2;
     border-radius: 18px;
-    background-color: #F39926;
+    background-color: white;
     font-size: 26px;
     -webkit-transition-duration: 0.5s; 
     cursor: pointer;  
 }
 .recruit-btn:hover{
-     color:  #F39926;
+     color: white;
      box-shadow: 
-     0 80px 0 0 rgba(255,255,255,0.5) inset, 
-     0 -80px 0 0 rgba(255,255,255,0.5) inset; 
+     0 80px 0 0 #F39926 inset, 
+     0 -80px 0 0  #F39926 inset; 
 }
 
