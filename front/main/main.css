@@ -1,193 +1,5 @@
-/* 폰트 정의 - Light, Text, Bold */
-
-@font-face {
-    font-family: 'IBMPlexSansKR-Text';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'IBMPlexSansKR-Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'IBMPlexSansKR-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-/* ----------------------------- */
-
-:root {
-    --main-width: 1100px;
-    --SCH-skyblue: #1BBCF0;
-}
 
 
-
-/* 헤더 */
-
-header {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2px;
-}
-
-.header-box {
-    display: flex;
-    justify-content: space-between;
-    height: 70px;
-    width: var(--main-width);
-    /* background-color: aliceblue; */
-}
-
-.header-box img {
-    width: 112px;
-    height: 40px;
-    margin: 10px;
-    padding: 5px 0 0 0;
-}
-
-nav {
-    padding: 10px 0 0 0;
-}
-
-nav ul li {
-    font-family: 'IBMPlexSansKR-Light';
-    display: inline-block;
-    padding: 10px 5px;
-    font-size: 18px;
-    position: relative;
-}
-
-nav ul li::after {
-    content: '';
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--SCH-skyblue);
-    transition: .5s;
-}
-
-nav ul li:hover::after {
-    width: 30%;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: black;
-}
-
-.login-box {
-    font-family: 'IBMPlexSansKR-Light';
-    color: black;
-    text-decoration: none;
-    font-size: 18px;
-    border: 1px solid rgba(0, 0, 0, 0%);
-    padding: 5px 10px;
-    border-radius: 20px;
-    transition: .4s;
-}
-
-.login-box:hover {
-    border: 1px solid #1BBCF0;
-    border-radius: 20px;
-}
-
-.dropbox-nav {
-    display: none;
-    position: absolute;
-    text-align: center;
-    padding-top: 20px;
-}
-
-nav ul li:hover>.dropbox-nav {
-    display: block;
-}
-
-.dropbox-nav li {
-    padding: 2px 0px;
-}
-
-.dropbox-nav>li>a {
-    display: block;
-    transition: .3s;
-}
-
-.dropbox-nav>li>a:hover {
-    color: var(--SCH-skyblue);
-}
-
-/* ----------------------------- */
-/* 푸터 */
-
-footer {
-    position: relative;
-    left: 0%;
-    bottom: 0%;
-    display: flex;
-    justify-content: center;
-    background-color: #f8f8f8;
-}
-
-.footer-box {
-    display: flex;
-    width: var(--main-width);
-    height: 120px;
-}
-
-.contact-box {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.contact-box label {
-    font-family: 'IBMPlexSansKR-Bold';
-    text-align: center;
-    font-size: 33px;
-    color: var(--SCH-skyblue);
-}
-
-.icons {
-    display: flex;
-    justify-content: center;
-    width: 300px;
-}
-
-.icons a i {
-    margin: 10px 5px;
-    font-size: 20px;
-    color: lightgray;
-}
-
-.copyright-text {
-    font-family: 'IBMPlexSansKR-Light';
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    margin-right: 40%;
-}
-
-.copyright-text span {
-    font-weight: 600;
-    font-size: 20px;
-    margin-right: 10px;
-}
-
-footer img {
-    width: 80px;
-    height: 80px;
-    margin-top: 15px;
-}
 
 
 
@@ -206,23 +18,65 @@ footer img {
 
 .content-title{
     font-family: 'IBMPlexSansKR-Bold';
-    font-size: 38px;
+    font-size: 26px;
+    color: #F39926;
+    text-align: center;
+    margin: 5vh 0;
 }
 
 
 
-/* Rolling banner */
+
+/* main - 홈페이지 소개 배너*/
 .content:nth-child(1) {
     background-color: white;
-    height: 500px;
 }
-.rolling-banner {
-    position: relative; width: 1100px; height: 500px;  margin:0 auto; padding:0; overflow: hidden;
-    
+
+/* 홈페이지 소개 배너 */
+.content:nth-child(1) .content-main-wrap{
+    /* width, height 영역  */
+    width: 100%;
+    height: 600px;
+
+    /* 백그라운드 배경 */
+    background: url('lionlike-bg.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position: top;
 }
-.rolling-banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
-.rolling-banner ul li {float: left; width: 1100px; height: 500px; margin:0; padding:0;}
-.rolling-banner ul li img{ width: 1100px; height: 500px; }
+
+/* 소개 배너 텍스트 내용 Wrap */
+.content-main-text-wrap{
+    width: var(--main-width);
+    margin: 0 auto;
+    padding-top: 7vh;
+    text-align: center;
+    /* 기본 글씨 색 */
+    color: white;
+}
+
+/* 멋쟁이사자처럼 at 순천향대학교 제목 */
+#content-main-title{
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 26px;
+    padding: 10px 20px 10px 0px;
+    border-bottom: 1px solid white;
+}
+
+/* 멋쟁이사자 */
+#content-main-title::after{
+    position: absolute;
+    height:35px;
+    width: 35px;
+    content: '';
+    background:url(sch-logo.png) no-repeat center center / contain;
+}
+
+/* at 글자 부분 */
+#content-main-title span{
+    font-family: 'IBMPlexSansKR-Light';
+}
+
 
 
 /* about */
@@ -231,48 +85,393 @@ footer img {
     background-color: white;
 }
 
-.content:nth-child(2) .content-about{
+.content:nth-child(2) .content-about-wrap{
     margin: 0 auto;
     width: var(--main-width);
     height: 450px;
-    border: 1px solid red;
 }
+
+/* about */
+
+/* ABOUT 콘텐츠의 내용 값을 감싼 WRAP (img/ */
+.content-about{
+    /* 컨텐츠 내용 가로/세로값 및 비율 설정*/
+    width: 1000px;
+    height: 80%;
+    margin: 0 auto;
+    /* background-color: #e4e4e4; */
+}
+
+/* ABOUT 콘텐츠의 왼쪽 부분 */
+
+/* 소제목 */
+#content-about-guide-title{
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 30px;
+    color: #F39926;
+    margin-bottom: 30px;
+}
+
+/* 본문 왼쪽 컨테이너 */
+#content-about-left{
+    width: 60%; 
+    height: 250px;
+    float: left;
+}
+
+/* 본문 내용 강조 표시 */
+.point-letter{
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+/* 본문 왼쪽 요소 - 첫 번째 글귀 */
+#content-about-guide-txt{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+/* 본문 왼쪽 요소 - 두 번째 글귀 */
+#content-about-guide-txt2{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 15px;
+}
+
+/* 본문 오른쪽 컨테이너 */
+
+#content-about-right{
+    width: 40%; 
+    float: left;
+}
+
+#content-about-img {
+    width: 100%;
+}
+/* ABOUT 사진 */
+#content-about-img img{
+    width: 100%;
+    height: 250px;
+}
+
+/* 본문 가운데 컨테이너 */
+#content-about-center{
+    /* 가로/세로, 위치 */
+    position: relative;
+    width: 100%;
+    text-align: center;
+    
+    /* float 탈출 */
+    clear:both;
+
+}
+/* about 배너 링크 버튼 */
+.about-btn{
+    height: 45px;
+    color: white;
+    padding: 5px 30px;
+    border: 1px solid #e4e4e4;
+    border-radius: 18px;
+    background-color: #F39926;
+    font-size: 26px;
+    -webkit-transition-duration: 0.5s; 
+    cursor: pointer;  
+}
+/* 링크 버튼 호버시 적용 애니메이션 */
+.about-btn:hover{
+    color:  #F39926;
+    box-shadow: 
+    0 80px 0 0 rgba(255,255,255,0.5) inset, 
+    0 -80px 0 0 rgba(255,255,255,0.5) inset; 
+}
+
 
 /* curriculum */
-
-.content:nth-child(3) {
-    background-color: #FFD5A0;
+/* 배경 설정 */
+.curriculum-content {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
 }
-.content:nth-child(3) .content-curriculum{
+
+/* 배경 어두운 필터  */
+.curriculum-content::before {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    content: "";
+    opacity: 0.82;
+    position: absolute;
+    background-color: black;
+}
+
+#curriculum-title-wrap{
     margin: 0 auto;
     width: var(--main-width);
-    height: 450px;
-    border: 1px solid red;
+    text-align: center;
+}
+
+/* 커리큘럼 제목 span */
+#curriculum-title {
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 26px;
+    color: #F39926;
+    position: relative;
+    display: inline-block;
+    margin-top: 5vh;
+}
+
+/* 원 속성 */
+.circles {
+    margin-top : 5vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row; 
+    
+}
+.circle-green {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 122, 133, 0.6);
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+}
+
+.circle-orange {
+    display: flex;
+    align-items: center;
+    background-color: rgba(243, 153, 38, 0.6);
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+}
+
+.circle-text {
+    margin: 0 auto;
+    font-size: 20px;
+    font-family: 'IBMPlexSansKR-Text';
+    color: white;
+}
+
+
+.circle-text:hover{
+    cursor: pointer;
+}
+
+.circle-div {
+    width: 150px;
+    margin: 15px;
+}
+
+/* 설명 텍스트  */
+
+.curri-info{
+    margin-top: 30px;
+}
+
+.curri-info-text-title{
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgba(170, 208, 71, 0.5);
+    font-size: 15px;
+    font-family: 'IBMPlexSansKR-Text';
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.curri-info-text{
+    margin-top: 10px;
+    font-family: 'IBMPlexSansKR-Light';
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    height: 18vh;
 }
 
 
 /* headcount */
-
 .content:nth-child(4) {
-    background-color: #e4e4e4;
+    background-color: white;
 }
-
 .content:nth-child(4) .content-headcount{
     margin: 0 auto;
     width: var(--main-width);
-    height: 450px;
-    border: 1px solid red;
+    height: 350px;
 }
 
-/* project */
+/* 리스트 카운트 컨테이너 */
+.content-headcount-box{
+    display: flex;
+    justify-content: space-around;
 
+    height: 65%;
+}
+
+/* 리스트 카운트 아이템 속성 */
+.content-headcount-item{
+    text-align: center;
+    /* 모든 아이템 값 1:1:1 비율 */
+    flex:1; 
+    border-right: 1px solid #e4e4e4;
+}
+
+.content-headcount-item:nth-last-child(1){
+    border-right: 0;
+}
+
+
+/* 카운트 제목 */
+.content-headcount-item-title{
+    color: grey;
+    font-size: 26px;
+    font-family: 'IBMPlexSansKR-Light';
+    margin-bottom: 4vh;
+}
+
+.content-headcount-item span{
+    color: #F39926;
+    font-size: 75px;
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+
+
+
+
+/* project */
 .content:nth-child(5) {
-    background-color: white;
+    background: url(project-bg1.jpeg) center center fixed;
+    background-size: cover;
 }
 
 .content:nth-child(5) .content-project{
     margin: 0 auto;
     width: var(--main-width);
-    height: 600px;
-    border: 1px solid red;
+    height: 450px;
+
 }
+
+/* card wrap */
+.content-card-wrap{
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
+    height: 300px;
+    justify-content: space-between;
+}
+
+/* card 아이템 */
+.content-card{
+    /* 크기 및 보더, 그림자*/
+    width:250px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,1);
+    -webkit-transition-duration: 0.5s; 
+    border-radius: 18px;
+    
+    /* background-image */
+    background: url('lionlike-bg.png') center center;
+    background-size: cover;
+}
+.content-card:hover{
+    width:265px;
+}
+
+.content-card-text{
+    position: relative;
+    width: 100%;
+    height: 25px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    background-color: white;
+    text-align: center;
+    bottom: -275px;
+
+    /* font */
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+
+
+/* recuit */
+
+.content:nth-child(6) {
+    background-color: white;
+}
+
+.content:nth-child(6) .content-recruit{
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 400px;
+}
+
+.content-recruit-deadline{
+    text-align: center;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 20px;
+    color: grey;
+}
+
+#deadline-time{
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+ul#countdown {
+    /* position: ; */
+    margin: 1vh auto 3vh;
+    padding: 15px 0 20px 0;
+    height: 50%;
+    width: 70%;
+    color: #fff;
+    border-top: 1px solid #adafb2;
+    border-bottom: 1px solid #adafb2;
+   
+    font-family: 'IBMPlexSansKR-Text';
+}
+ul#countdown li {    
+      margin: 0 -3px 0 0;
+      padding: 0;
+      display: inline-block;
+      width: 25%;
+      font-size: 72px;
+      font-size: 6vw;
+      text-align: center;
+      
+}
+
+/* 숫자 색깔 */
+ul#countdown li .number{
+    color: #F39926;
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+.label {
+    color: #adafb2;
+    font-size: 20px;
+    /* 영문자 전부 대문자 변경 */
+    text-transform: uppercase;
+}
+.recruit-btn-wrap{
+    text-align: center;
+}
+
+.recruit-btn{
+    height: 45px;
+    color: white;
+    padding: 5px 30px;
+    border: 1px solid #e4e4e4;
+    border-radius: 18px;
+    background-color: #F39926;
+    font-size: 26px;
+    -webkit-transition-duration: 0.5s; 
+    cursor: pointer;  
+}
+.recruit-btn:hover{
+     color:  #F39926;
+     box-shadow: 
+     0 80px 0 0 rgba(255,255,255,0.5) inset, 
+     0 -80px 0 0 rgba(255,255,255,0.5) inset; 
+}
+
