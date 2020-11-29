@@ -9,7 +9,7 @@ main {
 #hackathon-content {
     position: relative;
     text-align: center;
-    background: url('../../image/curri-background.png') no-repeat center center fixed;
+    background-color: rgba(0, 0, 0, 0.9);
     background-size: cover;
 }
 
