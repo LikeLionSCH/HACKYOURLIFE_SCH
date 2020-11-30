@@ -1,7 +1,7 @@
 
 
 main {
-    overflow: scroll;
+    overflow-y: hidden;
 }
 
 /* 배경 */
@@ -47,6 +47,10 @@ main {
 
 /* 해커톤 설명 두 번째 거  */
 
+.hackathon-info-p2{
+    height: 10vh;
+}
+
 .hackathon-info2 {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
@@ -85,7 +89,7 @@ main {
 
 /* 기수별 해커톤 활동  속성*/
 #hackathon-activity{
-    margin: 3vh 0 3vh 0;
+    margin: 3vh 0 0 0;
     position: relative;
     text-align: left;
     display: flex;
@@ -128,8 +132,8 @@ main {
 
 /* 각 해커톤 이미지  */
 .hackathon-detail-image{
-    width: 55vh;
-    height: 35vh;
+    width: 300px;
+    height: 200px;
     margin: 0 3vh 3vh 3vh;
 }
 
@@ -158,7 +162,7 @@ main {
 }
 
 .hackathon-detail-box{
-    margin: 0 0 0 15vh;
+    margin: 0 0 0 18vh;
 }
 
 .hackathon-detail-info{
@@ -176,6 +180,7 @@ main {
 }
 
 .to-gallery-7th:hover{
+    transition: .3s;
     display: inline-block;
     color: rgba(27, 188, 240, 0.8);
 }
@@ -188,6 +193,7 @@ main {
 }
 
 .to-gallery-8th:hover{
+    transition: .3s;
     display: inline-block;
     color: #BDDA72;
 }
