@@ -1,0 +1,164 @@
+/* 전체 섹션 */
+#timeline {
+    width: var(--main-width);
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* 가운데 선 */
+#timeline::before {
+    position: absolute;
+    top: 230px;
+    left: 50%;
+    width: 10px;
+    content: '';
+    border-radius: 20px;
+    background: #FCE7CB;
+    /* 100%에 대충 길이 맞게 곱해조야댐...
+    카드 추가할 때마다 높이 수정 필요 */
+    height: calc(100% * 4.2);
+    transform: translateX(-50%);
+}
+
+/* 가운데 선에 동그라미 */
+.timeline-circle {
+    width: 30px;
+    height: 30px;
+    background: #F39926;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    margin-top: 25px;
+    margin-left: -15px;
+}
+
+/* 년도 표기하는 텍스트 클래스 */
+.year-text {
+    margin: 20px 0;
+    z-index: 5;
+}
+
+.year-text h1 {
+    position: relative;
+    text-align: center;
+    font-size: 40px;
+    font-family: 'IBMPlexSansKR-Bold';
+    text-shadow: 0px 0px 8px #f3c88f;
+}
+
+/* ------------------- */
+
+.timeline-item {
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+/* 밑에 카드들 다 지워주고 띄워주는 클래스 */
+.timeline-item::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 모든 카드의 날짜 설정 (기본 위치:왼쪽) */
+.date {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    padding: 10px;
+    background: var(--SCH-skyblue);
+    color: #fff;
+    font-family: 'IBMPlexSansKR-Light';
+    opacity: 0.8;
+}
+
+/* 오른쪽 카드 날짜 설정 */
+.right .timeline-content .date {
+    right: auto;
+    left: 0;
+}
+
+/* ------------------- */
+/* 이미지 들어가는 모든 카드 공통 설정 */
+.timeline-img-card {
+    padding: 0 0 10px 0 !important;
+}
+
+/* 모든 오른쪽 카드 공통 클래스 */
+.right .timeline-content {
+    float: right;
+}
+
+/* ------------------- */
+/* 이미지 없는 오른쪽 카드 관련 클래스 */
+.timeline-item .right {
+    padding: 10px 20px;
+}
+
+.right .timeline-content h2 {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.right .timeline-content p {
+    text-align: right;
+}
+
+/* ------------------- */
+/* 모든 카드의 컨텐츠 div 관련 클래스 */
+.timeline-content {
+    position: relative;
+    width: 45%;
+    padding: 10px 5px 10px 0px;
+    border-radius: 4px;
+    background: #f5f5f5;
+    box-shadow: 0 20px 25px -15px rgba(0, 0, 0, .3);
+}
+
+/* 말풍선 효과내는 디자인 요소 (오른쪽 카드) */
+.right .timeline-content::after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    width: 0;
+    height: 0;
+    top: 30px;
+    left: -15px;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #f5f5f5 transparent transparent;
+}
+
+/* 말풍선 효과내는 디자인 요소 (왼쪽 카드) */
+.left .timeline-content::after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    width: 0;
+    height: 0;
+    top: 30px;
+    right: -15px;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent #f5f5f5;
+}
+
+/* 이미지 있는 카드 공통 클래스 */
+
+.timeline-item img {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+/* ------------------- */
+
+p {
+    font-family: 'IBMPlexSansKR-Light';
+    padding: 10px 22px;
+}
+
+h2 {
+    font-size: 32px;
+    padding-left: 15px;
+    font-family: 'IBMPlexSansKR-Bold';
+}
