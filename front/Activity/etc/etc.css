@@ -12,76 +12,7 @@ main {
     background-size: cover;
 }
 
-#hackathon-title {
-    font-family: 'IBMPlexSansKR-Text';
-    font-size: 40px;
-    color: #F39926;
-    position: relative;
-    display: inline-block;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-}
 
-/* 해커톤 설명부분 div */
-.hackathon-info-div {
-    display: inline-block;
-}
-
-/* 해커톤 설명부분 p */
-.hackathon-info-p {
-    padding: 2vh;
-    position: relative;
-    background-color: rgb(255, 255, 255, 0.2);
-    border-radius: 5px;
-}
-
-/* 해커톤 설명부분 text */
-.hackathon-info {
-    position: relative;
-    font-family: 'IBMPlexSansKR-Light';
-    font-size: 18px;
-    color: white;
-    display: inline-block;
-    text-align: center;
-}
-
-/* 해커톤 설명 두 번째 거  */
-
-.hackathon-info2 {
-    font-family: 'IBMPlexSansKR-Light';
-    font-size: 17px;
-    color: #BDDA72;
-    position: relative;
-    margin-top: 2vh;
-    display: inline-block;
-    text-align: center; 
-}
-
-/* 이미지 설정 */
-.hackathon-image-group {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 6vh;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
-}
-
-.hackathon-image{
-    padding: 4vh 2vh 0.3vh 2vh;
-    height: 180px;
-    width: 280px;
-    position: relative;
-}
-
-.hackathon-image-box{
-    text-align: center;
-}
-
-.img-info{
-    position: relative;
-    font-family: 'IBMPlexSansKR-Light';
-    font-size: 16px;
-    color:rgb(255, 255, 255, 0.8);
-}
 
 /* 기수별 해커톤 활동  속성*/
 #hackathon-activity{
