@@ -1,0 +1,13 @@
+.content-wrap{
+    width: 900px;
+    margin: 0 auto;
+    padding-top: 7vh;
+    text-align: left;
+    /* 기본 글씨 색 */
+    color: black;
+}
+
+#board-title{
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 35px;
+}
