@@ -4,20 +4,23 @@
     height: 100%;
     margin: 0 auto;
     padding: 20px 0;
+
+    /*세션 영역을 정상적으로 갖게함*/
+    position: relative;
 }
 
 /* 가운데 선 */
 #timeline::before {
     position: absolute;
-    top: 230px;
+    top: 115px;
     left: 50%;
     width: 10px;
     content: '';
     border-radius: 20px;
     background: #FCE7CB;
+    bottom:1%;
     /* 100%에 대충 길이 맞게 곱해조야댐...
     카드 추가할 때마다 높이 수정 필요 */
-    height: calc(100% * 4.2);
     transform: translateX(-50%);
 }
 
