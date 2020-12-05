@@ -8,11 +8,6 @@ a {text-decoration: none; outline: none}
 
 a:hover, a:active, a:visited {text-decoration: none; color: #000;}
 
-.title-wrap{
-    text-align: center;
-    margin: 3vh 0 1vh;
-}
-
 .page-sub-title{
     /* width: 100%; */
     /* margin: 0 auto; */
