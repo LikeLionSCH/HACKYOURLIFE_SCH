@@ -62,7 +62,7 @@ a:nth-child(1) .board-nav-item{
 .board-content-wrap{
     width: 80%;
     height: 100%;
-    margin: 0 auto; 
+    margin: 0 auto 5vh; 
 }
 
 .board-content-wrap::after{
@@ -85,14 +85,15 @@ a:nth-child(1) .board-nav-item{
 
 .board-header{
     display: flex;
-
     justify-content: space-between;
+
+    margin-bottom: 5vh;
 }
 
 #board-sub-title{
     /* font */
     font-family: 'IBMPlexSansKR-Text';
-    font-size: 20px;
+    font-size: 25px;
 
 }
 #download-link{
@@ -113,4 +114,10 @@ a:nth-child(1) .board-nav-item{
     background-color: #F39926;
     color: white;
     border: 1px solid white;
+}
+
+.content{
+   /* font */
+   font-family: 'IBMPlexSansKR-Light';
+   font-size: 18px;
 }
