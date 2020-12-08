@@ -28,6 +28,7 @@
 - Django==3.1.3
 - Python3
 - HTML5
+- Firebase
 - CSS3
 - JS
 - JQuery
