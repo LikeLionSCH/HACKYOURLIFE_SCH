@@ -1,0 +1,43 @@
+
+  #calendar {
+    max-width: 900px;
+    margin: 40px auto;
+
+    font-family: 'IBMPlexSansKR-Light';
+  }
+  
+  #calendar a.fc-event {
+    color: #fff; /* bootstrap default styles make it black. undo */
+  }
+
+  #calendar .fc-left h2{
+    font-family: 'IBMPlexSansKR-Bold';
+  }
+
+
+  .fc-event{
+    font-size: 13px;
+    border: 0;
+    background: none;
+    padding-left:3px;
+  }
+  .fc-content-skeleton tr .fc-event-container .fc-content{
+    background-color: #1BBCF0;
+    border-radius: 3px;
+    padding-left: 3px;
+}
+
+.fc-day-header{
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+
+.fc-state-default{
+    background: none !important;
+    border: 3px solid #1bbcf0;
+    font-family: 'IBMPlexSansKR-Bold';
+    text-transform: uppercase;
+}
+.fc-state-hover{
+    border: 3px solid #1bbcf0;
+}
