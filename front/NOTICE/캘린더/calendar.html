@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="../../base/reset.css">
     <link rel="stylesheet" href="../../base/base.css">
-    <link rel="stylesheet" href="calender.css">
+    <link rel="stylesheet" href="calendar.css">
     <!-- CSS only -->
     <title>멋쟁이사자처럼 at 순천향대학교</title>
 </head>
@@ -49,23 +49,26 @@
     <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
     <!-- small-header - span값에 값넣기. -->
     <div id="small-header-wrap">
-        <div id="small-header-box">
+        <div id="small-header-box">      
             <a href="#"><span class="small-header-nav">공지사항</span></a>
             <a href="#"><span class="small-header-nav">세션</span></a>
-            <a href="#"><span class="small-header-nav now-page">주요 일정</span></a>
-        
+            <a href="#"><span class="small-header-nav now-page">주요 일정</span></a> 
         </div>
     </div>
 
     <div class='title-wrap'>
         <span class='page-sub-title'>
-            Calender
+            Calendar
         </span>
     </div>
 
     <!-- 내용 -->
     <div class="main-content"> 
-        <div id='calendar'></div>
+        <div id="calendar"></div>
+        <input type="hidden" id="input_title" value="Lunch"></div>
+        <input type="hidden" id="input_desc" value="오늘의 점심은?"></div> 
+        <input type="hidden" id="input_start" value="2020-12-17"></div>
+        <input type="hidden" id="input_end" value="2020-12-19"></div>   
     </div>  
     
     <footer>
@@ -97,7 +100,7 @@
     <script src="https://fullcalendar.io/releases/fullcalendar/3.10.0/fullcalendar.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     
-    <script src="calender.js"></script>
+    <script src="calendar.js"></script>
 </body>
 
 </html>
