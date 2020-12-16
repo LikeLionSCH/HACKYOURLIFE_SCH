@@ -18,9 +18,7 @@
     content: '';
     border-radius: 20px;
     background: #FCE7CB;
-    bottom:1%;
-    /* 100%에 대충 길이 맞게 곱해조야댐...
-    카드 추가할 때마다 높이 수정 필요 */
+    bottom: 1%;
     transform: translateX(-50%);
 }
 
