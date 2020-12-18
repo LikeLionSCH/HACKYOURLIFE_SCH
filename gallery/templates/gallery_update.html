@@ -55,14 +55,13 @@
                 <div class="explanation-box">
                     <p>설명</p>
                     <div>
-                        <img id="myimg" style="width: 300px; height: 300px;"> <label id="UpProgress"></label> <br><br>
-                        <button type="button" id="select" style="font-size:18px; background-color: white; border: 0px;">이미지 고르기</button><br><br>
-                        <button type="button" id="upload" style="font-size:18px; background-color: white; border: 0px;">선택 완료</button>
+                        첨부이미지 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
+                                <input name="image_url" id="file" style="display:none">
+                                <a href="#" class="js-fileSelect">Select some files</a><br>
                     </div>
 
                     <textarea name="contents" cols="40" rows="100"></textarea>
                 </div>
-                <input id="myimg-url" name="image_url" type="hidden">
                 <input type="submit" value="SUBMIT">
             </form>
 
@@ -75,77 +74,65 @@
     </main>
 {% endblock %}
 
+
 {% block script %}
 <script id="MainScript">
-    var ImgName, ImgUrl;
-    var files = [];
-    var reader;
+    (() => {
+        if (!firebase.apps.length) {
+            const firebaseConfig = {
+                apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
+                authDomain: "likelion-sch.firebaseapp.com",
+                databaseURL: "https://likelion-sch.firebaseio.com/",
+                projectId: "likelion-sch",
+                storageBucket: "likelion-sch.appspot.com",
+                messagingSenderId: "654141769540",
+                appId: "1:654141769540:web:c744ef4d2df58003093911",
+                measurementId: "G-PXNX9ZZCEN"
+            };
 
-    // Firebase 초기화
-    if (!firebase.apps.length) {
-        const firebaseConfig = {
-            apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
-            authDomain: "likelion-sch.firebaseapp.com",
-            databaseURL: "https://likelion-sch.firebaseio.com/",
-            projectId: "likelion-sch",
-            storageBucket: "likelion-sch.appspot.com",
-            messagingSenderId: "654141769540",
-            appId: "1:654141769540:web:c744ef4d2df58003093911",
-            measurementId: "G-PXNX9ZZCEN"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-    }
-
-    document.getElementById("select").onclick = function(e){
-        var input = document.createElement('input');
-        input.type='file';
-
-        input.onchange = e => {
-            files = e.target.files;
-            reader = new FileReader();
-            reader.onload = function(){
-                document.getElementById("myimg").src = reader.result;
-            }
-            reader.readAsDataURL(files[0]);
+            firebase.initializeApp(firebaseConfig);
         }
-        input.click();
 
+        const storage = firebase.storage();
 
-    }
+        const storageRef = storage.ref();
 
-    document.getElementById('upload').onclick = function(){
-        ImgName = document.getElementById('namebox').value;
-        var uploadTask = firebase.storage().ref('Images/'+ImgName+".png").put(files[0]);
+        const imagesRef = storageRef.child('Notice');
 
-        uploadTask.on('state_changed',function(snapshot){
-            var progress = (snapshot.bytesTranferred / snapshot.totalBytes) * 100
-            document.getElementById('UpProgress').innerHTML = 'Upload';
-        },
+        const spaceRef = imagesRef.child('space.jpg');
 
-        function(error){
-            alert('error in saving the image');
-        },
+        const fileSelect = document.querySelector('.js-fileSelect');
+        const fileElem = document.querySelector('.js-fileElem');
 
-        function(){
-            uploadTask.snapshot.ref.getDownloadURL().then(function(url){
-                ImgUrl = url;
-                document.getElementById('myimg-url').value = url;
+        fileSelect.addEventListener('click', (e) => {
+            e.preventDefault();
 
-                firebase.database().ref('Pictures/'+ImgName).set({
-                    Name: ImgName,
-                    Link: ImgUrl
-                });
-                alert("image upload success!");
+            if (fileElem) {
+                fileElem.click();
             }
-            );
-    });
-
-    document.getElementById('retrieve').onclick = function(){
-        firebase.database().ref('Pictures/'+ImgName).on('value', function(snapshot){
-            document.getElementById('myimg').src = snapshot.val.Link;
         });
-    }
-}
+
+        fileElem.addEventListener('change', (e) => {
+            console.log(e.target.files);
+
+            const fileUploads = Array.from(e.target.files).map((currFile) => {
+                const fileRef = imagesRef.child(currFile.name);
+                fileRef.put(currFile).then(function(snapshot) {
+                    console.log(snapshot);
+                    snapshot.ref.getDownloadURL().then(function(url){
+                        console.log(url);
+                        document.getElementById('file').value = url;
+                    });
+                });
+            });
+
+            Promise.all(fileUploads).then((items) => {
+                console.log(items);
+            });
+
+        });
+
+      })();
+
 </script>
 {% endblock %}
