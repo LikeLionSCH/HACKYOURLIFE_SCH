@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/notice_create.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Gallery</title>
+{% endblock %}
+
+{% block content %}
+
+    <main>
+
+        <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+        <div class='title-wrap'>
+            <span class='page-sub-title'>
+                NOTICE
+            </span>
+        </div>
+
+        <!-- form -->
+
+        <div class="main-wrap">
+            <form class="form-box" action="{% url 'notice_update' notice.notice_id %}" method="post">
+                {% csrf_token %}
+                <div class="title-box">
+                    <p>제목</p>
+                    <input type="text" id="namebox" name="title" placeholder="공지사항 제목">
+                </div>
+                <div class="date-box">
+                    <p>공지사항 일시</p>
+                    <input type="date" name="date">
+                </div>
+                <div class="explanation-box">
+                    <p>공지사항 상세내용</p>
+                    <textarea name="contents" cols="30" rows="10"></textarea>
+                </div>
+
+                <div>
+                    첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
+                            <input name="file" id="file" style="display:none">
+                            <a href="#" class="js-fileSelect">Select some files</a><br>
+                            <sub>파일을 여러개 선택하려면 드래그하세요.</sub><br>
+                </div>
+                <br>
+                <div>
+                    첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
+                             <input name="image" id="image" style="display:none">
+                            <a href="#" class="js-imageSelect">Select some images</a><br>
+                </div>
+
+                <input type="submit" value="공지사항 올리기">
+            </form>
+        </div>
+
+        <!-- ------- -->
+
+    </main>
+
+{% endblock %}
+
+{% block script %}
+<script id="MainScript">
+    (() => {
+        if (!firebase.apps.length) {
+            const firebaseConfig = {
+                apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
+                authDomain: "likelion-sch.firebaseapp.com",
+                databaseURL: "https://likelion-sch.firebaseio.com/",
+                projectId: "likelion-sch",
+                storageBucket: "likelion-sch.appspot.com",
+                messagingSenderId: "654141769540",
+                appId: "1:654141769540:web:c744ef4d2df58003093911",
+                measurementId: "G-PXNX9ZZCEN"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        const storage = firebase.storage();
+
+        const storageRef = storage.ref();
+
+        const imagesRef = storageRef.child('Notice');
+
+        const spaceRef = imagesRef.child('space.jpg');
+
+        const fileSelect = document.querySelector('.js-fileSelect');
+        const fileElem = document.querySelector('.js-fileElem');
+
+        fileSelect.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (fileElem) {
+                fileElem.click();
+            }
+        });
+
+        fileElem.addEventListener('change', (e) => {
+            console.log(e.target.files);
+
+            const fileUploads = Array.from(e.target.files).map((currFile) => {
+                const fileRef = imagesRef.child(currFile.name);
+                fileRef.put(currFile).then(function(snapshot) {
+                    console.log(snapshot);
+                    snapshot.ref.getDownloadURL().then(function(url){
+                        console.log(url);
+                        document.getElementById('file').value = url;
+                    });
+                });
+            });
+
+            Promise.all(fileUploads).then((items) => {
+                console.log(items);
+            });
+
+        });
+
+
+        const imageSelect = document.querySelector('.js-imageSelect');
+        const imageElem = document.querySelector('.js-imageElem');
+
+        imageSelect.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (imageElem) {
+                imageElem.click();
+            }
+        });
+
+        imageElem.addEventListener('change', (e) => {
+            console.log(e.target.files);
+            const imageUploads = Array.from(e.target.files).map((currFile) => {
+                const imageRef = imagesRef.child(currFile.name);
+                imageRef.put(currFile).then(function(snapshot) {
+                    console.log(snapshot);
+                    snapshot.ref.getDownloadURL().then(function(url){
+                        console.log(url);
+                        document.getElementById('image').value = url;
+                    });
+                });
+            });
+
+            Promise.all(imageUploads).then((items) => {
+                console.log(items);
+            });
+        });
+
+      })();
+
+</script>
+{% endblock %}

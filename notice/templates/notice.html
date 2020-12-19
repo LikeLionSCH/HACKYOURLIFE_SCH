@@ -30,6 +30,13 @@
 
 <!-- NOTICE PAGE -->
 <main>
+    <div class="notice-create">
+        <a href="{% url 'notice_create' %}">
+            <i class="fas fa-plus-circle"></i>
+            <span> 공지사항 생성</span>
+        </a>
+    </div>
+
     <!-- 내용 -->
     {% for notice in notices %}
     <div class='content-wrap'>
