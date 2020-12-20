@@ -37,7 +37,7 @@ body {
     overflow: hidden;
 }
 
-.background-img{
+.background-img {
     width: 100%;
 }
 
@@ -58,6 +58,7 @@ body {
     border-radius: 100%;
     background-color: white;
     transition: .4s;
+    box-shadow: 0px 2px 4px #e4e4e4;
 }
 
 .profile-photo:hover {
@@ -72,7 +73,7 @@ body {
 .text-name {
     font-family: 'IBMPlexSansKR-Bold';
     font-size: 25px;
-    border-bottom: 2px solid #F39926;
+    border-bottom: 2px solid var(--SCH-skyblue);
     height: 43px;
     margin-bottom: 30px;
 }
@@ -95,15 +96,15 @@ body {
 }
 
 .link-btn a {
-    border: 1.3px solid var(--SCH-skyblue);
+    border: 1.3px solid #F39926;
     padding: 8px;
     border-radius: 20px;
     margin: 0px 5px;
-    color: var(--SCH-skyblue);
+    color: #F39926;
     transition: .3s;
 }
 
 .link-btn a:hover {
-    border: 1.3px solid #F39926;
-    color: #F39926;
+    background-color: #F39926;
+    color: white;
 }
