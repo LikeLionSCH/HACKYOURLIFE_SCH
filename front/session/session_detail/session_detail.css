@@ -78,11 +78,14 @@
     font-size: 24px;
 }
 
-.info-box>span,
-.link-box>a {
+.info-box>span {
     font-size: 20px;
     width: 50px;
     line-height: 50px;
+}
+
+.info-box>span>a {
+    text-decoration: underline;
 }
 
 .link-box>a {
