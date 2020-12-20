@@ -12,6 +12,7 @@ main {
 }
 
 #hackathon-title {
+    border-bottom: 1px solid #F39926;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
     color: #F39926;
@@ -30,7 +31,7 @@ main {
 .hackathon-info-p {
     padding: 2vh;
     position: relative;
-    background-color: rgb(255, 255, 255, 0.2);
+    /* background-color: rgb(255, 255, 255, 0.2); */
     border-radius: 5px;
 }
 
@@ -66,7 +67,7 @@ main {
     display: flex;
     justify-content: center;
     padding-bottom: 6vh;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+    /* border-bottom: solid 1px rgba(255, 255, 255, 0.2); */
 }
 
 .hackathon-image{
@@ -98,10 +99,10 @@ main {
 }
 
 /* 기수별 구분선 설정 */
-#hackathon-activity:nth-child(2n){
+/* #hackathon-activity:nth-child(2n){
     padding-bottom: 10vh;
     border-bottom: solid 1px rgba(255, 255, 255, 0.2);
-}
+} */
 
 
 /* 기수 속성 -7th*/

@@ -9,7 +9,7 @@ main {
     position: relative;
     text-align: center;
     background-size: cover;
-    /* background-color: rgba(241, 241, 241, 0.9); */
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 
@@ -25,10 +25,10 @@ main {
 }
 
 /* 기수별 구분선 설정 */
-#hackathon-activity:nth-child(2n){
+/* #hackathon-activity:nth-child(2n){
     padding-bottom: 10vh;
     border-bottom: solid 1px rgba(255, 255, 255, 0.2);
-}
+} */
 
 
 /* 기수 속성 -7th*/
@@ -40,7 +40,7 @@ main {
     display: inline-block;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 40px;
-    color: balck;
+    color: white;
     border-right: solid 10px rgba(27, 188, 240, 0.8);
 }
 
@@ -53,7 +53,7 @@ main {
     display: inline-block;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 40px;
-    color: black;
+    color: white;
     border-right: solid 10px #BDDA72;
 }
 
@@ -69,7 +69,7 @@ main {
     display: inline-block;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 35px;
-    color: black;
+    color: white;
 }
 
 /* 각 해커톤 날짜 7th */
@@ -96,14 +96,14 @@ main {
     margin-top: 2vh;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
-    color: black;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* 갤러리 연결 7th*/
 .to-gallery-7th{
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
-    color: black;
+    color: white;
 }
 
 .to-gallery-7th:hover{
@@ -116,7 +116,7 @@ main {
 .to-gallery-8th{
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
-    color: black;
+    color: white;
 }
 
 .to-gallery-8th:hover{
