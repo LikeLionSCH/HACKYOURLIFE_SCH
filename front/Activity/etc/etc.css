@@ -27,7 +27,7 @@ main {
 /* 기수별 구분선 설정 */
 #hackathon-activity:nth-child(2n){
     padding-bottom: 10vh;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+    /* border-bottom: solid 1px rgba(255, 255, 255, 0.2); */
 }
 
 
