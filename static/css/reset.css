@@ -1,0 +1,141 @@
+@charset "utf-8";
+
+/* CSS 초기화 */
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+button,
+abbr,
+acronym,
+address,
+code,
+del,
+dfn,
+em,
+img,
+strong,
+sub,
+sup,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+hr {
+    margin: 0;
+    padding: 0;
+}
+
+/* h1, h2, h3, h4, h5, h6 {} */
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+form,
+fieldset,
+iframe {
+    display: block;
+    border: 0;
+}
+
+img,
+button {
+    border: 0 none;
+}
+
+hr {
+    height: 0;
+    display: none;
+}
+
+i,
+em,
+address {
+    font-style: normal;
+}
+
+button {
+    cursor: pointer;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+caption,
+legend {
+    overflow: hidden;
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    text-indent: -100%;
+    white-space: nowrap;
+    z-index: -1
+}
+
+header,
+footer,
+section,
+article,
+aside,
+nav,
+hgroup,
+details,
+menu,
+figure,
+figcaption {
+    display: block;
+    box-sizing: border-box;
+}
+
+input,
+textarea {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
