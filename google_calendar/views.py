@@ -1,8 +1,9 @@
+import datetime
+
 # django modules
 from django.shortcuts import render
 from django.http import HttpResponse
-
-import datetime
+from hackyourlife_sch import settings
 
 # google auth modules
 from googleapiclient.discovery import build
@@ -10,9 +11,10 @@ from googleapiclient.discovery import build
 # shared calendar id
 CALENDAR_ID = 'schlikelion2020@gmail.com'
 # google calendar api key
-API_KEY = 'AIzaSyCTqmmO5-26iFUs0RWgGvaKjMSpvXqrv08'
+API_KEY = settings.get_secret('CALENDAR_API_KEY')
 # google calendar permission: read only
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+
 
 # calendar view
 def calendar(request):
@@ -28,7 +30,8 @@ def calendar(request):
     data = []
     for event in events:
         start_time = event['start'].get('dateTime', event['start'].get('date'))
+        end_time = event['end'].get('dateTime', event['end'].get('date'))
         summary = event['summary']
-        data.append((start_time, summary))
+        data.append((start_time, end_time, summary))
 
     return render(request, 'calendar.html', {'data': data})
