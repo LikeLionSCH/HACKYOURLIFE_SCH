@@ -1,4 +1,3 @@
-
 /* main.html deadline에 [yyyy/mm/dd 00:00:00] 형식으로 입력 시 자동 적용*/
 var choice_datetime = $('#deadline-time').text();
 var targetDate = new Date(choice_datetime);   
@@ -138,3 +137,49 @@ function numberTransition(id, endPoint, transitionDuration, transitionEase){
       }
    }); 
 };
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    let cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+async function googleSignIn(){
+  const firebaseConfig = {
+    apiKey: "",
+    authDomain: "likelion-sch.firebaseapp.com",
+    databaseURL: "https://likelion-sch.firebaseio.com/",
+    projectId: "likelion-sch",
+    storageBucket: "likelion-sch.appspot.com",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  let provider = new firebase.auth.GoogleAuthProvider();
+  await firebase.auth().signInWithPopup(provider).then(function(result) {
+    // let accessToken = result.credential.accessToken;
+    // let idToken = result.credential.idToken;
+    let uid = result.user.uid;
+    $.ajax({
+      type: "POST",
+      url:"/",
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken')
+      },
+      data: {uid: uid},
+      dataType: "json"
+    });
+  });
+}

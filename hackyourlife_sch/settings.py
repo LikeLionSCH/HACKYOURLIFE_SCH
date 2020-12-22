@@ -23,17 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-secret_file = Path.joinpath(BASE_DIR, 'secret.json')
+def get_secret(setting):
+    secret_file = Path.joinpath(BASE_DIR, 'secret.json')
 
-with open(secret_file) as file:
-    secret = json.loads(file.read())
-
-def get_secret(setting, secret=secret):
-    try:
-        return secret[setting]
-    except KeyError:
-        error_msg = 'Set the {} environment variable'.format(setting)
-        raise ImproperlyConfigured(error_msg)
+    with open(secret_file) as file:
+        secret = json.loads(file.read())
+        
+        try:
+            return secret[setting]
+        except KeyError:
+            error_msg = 'Set the {} environment variable'.format(setting)
+            raise ImproperlyConfigured(error_msg)
 
 SECRET_KEY = get_secret('SECRET_KEY')
 
