@@ -25,7 +25,7 @@
 /* main - 홈페이지 소개 배너*/
 .content:nth-child(1) {
     background-color: white;
-    height: 800px;
+    height: 900px;
 }
 
 /* 홈페이지 소개 배너 */
@@ -418,7 +418,7 @@
 .content:nth-child(6) .content-recruit {
     margin: 0 auto;
     width: var(--main-width);
-    height: 400px;
+    height: 450px;
 }
 
 .content-recruit-deadline {
