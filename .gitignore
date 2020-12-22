@@ -400,3 +400,5 @@ $RECYCLE.BIN/
 
 # Secret key
 secret.json
+serviceAccountKey.json
+firebaseConfig.json

@@ -42,7 +42,8 @@
                     <li><a href="#">GALLARY</a></li>
                     <li><a href="#">ASSIGNMENT</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <a class="login-box" href="#">LOGIN</a>
+                    {% csrf_token %}
+                    <button class="login-box" onclick="googleSignIn()">LOGIN</button>
                 </ul>
             </nav>
         </div>
