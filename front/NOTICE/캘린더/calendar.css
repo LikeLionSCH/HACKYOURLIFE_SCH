@@ -7,7 +7,8 @@
   }
   
   #calendar a.fc-event {
-    color: #fff; /* bootstrap default styles make it black. undo */
+    color: #fff;
+    font-family: 'IBMPlexSansKR-Light'; /* bootstrap default styles make it black. undo */
   }
 
   #calendar .fc-left h2{
@@ -22,7 +23,7 @@
     padding-left:3px;
   }
   .fc-content-skeleton tr .fc-event-container .fc-content{
-    background-color: #1BBCF0;
+    background-color: var(--SCH-skyblue);
     border-radius: 3px;
     padding-left: 3px;
 }
@@ -31,13 +32,12 @@
     font-family: 'IBMPlexSansKR-Bold';
 }
 
-
 .fc-state-default{
     background: none !important;
-    border: 3px solid #1bbcf0;
+    border: 2px solid darkgrey;
     font-family: 'IBMPlexSansKR-Bold';
     text-transform: uppercase;
 }
 .fc-state-hover{
-    border: 3px solid #1bbcf0;
+    border: 2px solid darkgrey;
 }
