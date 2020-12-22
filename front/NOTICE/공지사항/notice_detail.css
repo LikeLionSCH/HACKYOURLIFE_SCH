@@ -1,0 +1,123 @@
+.content-wrap{
+    width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    /* 기본 글씨 색 */
+    color: black;
+}
+
+#board-title{
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 35px;
+    margin-bottom: 4vh;
+
+    /* 밑줄 긋기 */
+    border-bottom: 2px solid grey;
+}
+
+.board-nav-box{
+    width: 100%;
+    margin-bottom: 5vh;
+}
+
+/* float 해제 - float 요소의 부모태그에 걸어준다. */
+.board-nav-box::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.post-meta{
+    width: 50%;
+    float:left;
+}
+
+.post-meta-item{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 14px;
+    color:#999999;
+    background: #f4f4f4;
+    padding:7px 10px 7px 10px;
+}
+
+.board-nav{
+    width: 50%;
+    float:left;
+    text-align: right;
+}
+
+.board-nav-item{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 18px;
+    color:#999999;
+}
+.board-nav-item:hover{
+    color:  #F39926;
+}
+/*  
+a:nth-child(1) .board-nav-item{
+    border-right: 1px solid #e4e4e4;
+} */
+
+.board-content-wrap{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto 5vh; 
+}
+
+.board-content-wrap::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+#board-img{
+    width:100%;
+    height:100%;
+
+    /* 액자 효과 넣어주기 */    
+    border-top: 2px solid #CDCDCD;
+    border-bottom: 2px solid #CDCDCD;
+    padding: 2px; 
+
+    margin-bottom: 2vh;
+}
+
+.board-header{
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 5vh;
+}
+
+#board-sub-title{
+    /* font */
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 25px;
+
+}
+#download-link{
+    text-align: right;
+    float:left;
+
+    /* font */
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 15px;
+
+    /* padding, border */
+    padding: 5px 10px;
+    border: 1px solid #999999;
+    transition: .4s;   
+}
+
+#download-link:hover{    
+    background-color: #F39926;
+    color: white;
+    border: 1px solid white;
+}
+
+.content{
+   /* font */
+   font-family: 'IBMPlexSansKR-Light';
+   font-size: 18px;
+}

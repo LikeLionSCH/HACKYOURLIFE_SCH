@@ -1,8 +1,6 @@
 
 
 
-
-
 /* ------------ BASE CUTTING ---------------- */
 
 .main {
@@ -18,7 +16,7 @@
 
 .content-title{
     font-family: 'IBMPlexSansKR-Bold';
-    font-size: 26px;
+    font-size: 30px;
     color: #F39926;
     text-align: center;
     margin: 5vh 0;
@@ -30,13 +28,14 @@
 /* main - 홈페이지 소개 배너*/
 .content:nth-child(1) {
     background-color: white;
+    height: 800px;
 }
 
 /* 홈페이지 소개 배너 */
 .content:nth-child(1) .content-main-wrap{
     /* width, height 영역  */
     width: 100%;
-    height: 600px;
+    height: 100%;
 
     /* 백그라운드 배경 */
     background: url('lionlike-bg.png') no-repeat center center fixed;
@@ -58,16 +57,17 @@
 #content-main-title{
     display: inline-block;
     font-family: 'IBMPlexSansKR-Bold';
-    font-size: 26px;
+    font-size: 35px;
     padding: 10px 20px 10px 0px;
     border-bottom: 1px solid white;
 }
 
+
 /* 멋쟁이사자 */
 #content-main-title::after{
     position: absolute;
-    height:35px;
-    width: 35px;
+    height:50px;
+    width: 45px;
     content: '';
     background:url(sch-logo.png) no-repeat center center / contain;
 }
@@ -76,6 +76,14 @@
 #content-main-title span{
     font-family: 'IBMPlexSansKR-Light';
 }
+
+/* 메인 홍보 영상 */
+#main-video{
+    display: block;
+    margin: 30px auto 0;
+    width: 1100px;
+}
+
 
 
 
@@ -91,7 +99,6 @@
     height: 450px;
 }
 
-/* about */
 
 /* ABOUT 콘텐츠의 내용 값을 감싼 WRAP (img/ */
 .content-about{
@@ -106,10 +113,12 @@
 
 /* 소제목 */
 #content-about-guide-title{
+    display: inline-block;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 30px;
-    color: #F39926;
+    color: black;
     margin-bottom: 30px;
+    border-bottom: 1px solid #F39926;
 }
 
 /* 본문 왼쪽 컨테이너 */
@@ -158,7 +167,7 @@
     /* 가로/세로, 위치 */
     position: relative;
     width: 100%;
-    text-align: center;
+    text-align: left;
     
     /* float 탈출 */
     clear:both;
@@ -166,22 +175,21 @@
 }
 /* about 배너 링크 버튼 */
 .about-btn{
-    height: 45px;
-    color: white;
-    padding: 5px 30px;
-    border: 1px solid #e4e4e4;
-    border-radius: 18px;
-    background-color: #F39926;
+    color: black;
+    padding: 10px 30px;
+    border: 1px solid #adafb2;
+    border-radius: 30px;
+    background-color: white;
     font-size: 26px;
     -webkit-transition-duration: 0.5s; 
     cursor: pointer;  
 }
 /* 링크 버튼 호버시 적용 애니메이션 */
 .about-btn:hover{
-    color:  #F39926;
+    color: white;
     box-shadow: 
-    0 80px 0 0 rgba(255,255,255,0.5) inset, 
-    0 -80px 0 0 rgba(255,255,255,0.5) inset; 
+    0 80px 0 0 var(--SCH-skyblue) inset, 
+    0 -80px 0 0 var(--SCH-skyblue)  inset; 
 }
 
 
@@ -217,7 +225,7 @@
 /* 커리큘럼 제목 span */
 #curriculum-title {
     font-family: 'IBMPlexSansKR-Bold';
-    font-size: 26px;
+    font-size: 35px;
     color: #F39926;
     position: relative;
     display: inline-block;
@@ -332,7 +340,7 @@
 }
 
 .content-headcount-item span{
-    color: #F39926;
+    color: var(--SCH-skyblue);
     font-size: 75px;
     font-family: 'IBMPlexSansKR-Bold';
 }
@@ -343,7 +351,7 @@
 
 /* project */
 .content:nth-child(5) {
-    background: url(project-bg1.jpeg) center center fixed;
+    background: url(project-bg.jpeg) center center fixed;
     background-size: cover;
 }
 
@@ -367,6 +375,7 @@
 .content-card{
     /* 크기 및 보더, 그림자*/
     width:250px;
+    height:100%;
     box-shadow: 0px 0px 10px rgba(0,0,0,1);
     -webkit-transition-duration: 0.5s; 
     border-radius: 18px;
@@ -374,6 +383,8 @@
     /* background-image */
     background: url('lionlike-bg.png') center center;
     background-size: cover;
+
+    cursor: pointer;
 }
 .content-card:hover{
     width:265px;
@@ -409,13 +420,13 @@
 
 .content-recruit-deadline{
     text-align: center;
-    font-family: 'IBMPlexSansKR-Text';
+    font-family: 'IBMPlexSansKR-Light';
     font-size: 20px;
-    color: grey;
+    color: black;
 }
 
 #deadline-time{
-    font-family: 'IBMPlexSansKR-Bold';
+    font-family: 'IBMPlexSansKR-Light';
 }
 
 ul#countdown {
@@ -436,14 +447,12 @@ ul#countdown li {
       display: inline-block;
       width: 25%;
       font-size: 72px;
-      font-size: 6vw;
       text-align: center;
-      
 }
 
 /* 숫자 색깔 */
 ul#countdown li .number{
-    color: #F39926;
+    color: var(--SCH-skyblue);
     font-family: 'IBMPlexSansKR-Bold';
 }
 
@@ -458,20 +467,19 @@ ul#countdown li .number{
 }
 
 .recruit-btn{
-    height: 45px;
-    color: white;
-    padding: 5px 30px;
-    border: 1px solid #e4e4e4;
-    border-radius: 18px;
-    background-color: #F39926;
+    color: black;
+    padding: 10px 30px;
+    border: 1px solid #adafb2;
+    border-radius: 30px;
+    background-color: white;
     font-size: 26px;
     -webkit-transition-duration: 0.5s; 
     cursor: pointer;  
 }
 .recruit-btn:hover{
-     color:  #F39926;
+     color: white;
      box-shadow: 
-     0 80px 0 0 rgba(255,255,255,0.5) inset, 
-     0 -80px 0 0 rgba(255,255,255,0.5) inset; 
+     0 80px 0 0 var(--SCH-skyblue) inset, 
+     0 -80px 0 0  var(--SCH-skyblue) inset; 
 }
 

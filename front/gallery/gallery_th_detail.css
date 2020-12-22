@@ -1,0 +1,274 @@
+/* 폰트 정의 - Light, Text, Bold */
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Text';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ----------------------------- */
+
+:root {
+    --main-width: 1100px;
+    --SCH-skyblue: #1BBCF0;
+}
+
+body {
+    min-width: 1000px;
+}
+
+/* 헤더 */
+
+header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    width: var(--main-width);
+    /* background-color: aliceblue; */
+}
+
+.header-box img {
+    width: 112px;
+    height: 40px;
+    margin: 10px;
+    padding: 5px 0 0 0;
+}
+
+nav {
+    padding: 10px 0 0 0;
+}
+
+nav ul li {
+    font-family: 'IBMPlexSansKR-Light';
+    display: inline-block;
+    padding: 10px 5px;
+    font-size: 18px;
+    position: relative;
+}
+
+nav ul li::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--SCH-skyblue);
+    transition: .5s;
+}
+
+nav ul li:hover::after {
+    width: 30%;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.login-box {
+    font-family: 'IBMPlexSansKR-Light';
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0%);
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: .4s;
+}
+
+.login-box:hover {
+    border: 1px solid #1BBCF0;
+    border-radius: 20px;
+}
+
+.dropbox-nav {
+    display: none;
+    position: absolute;
+    text-align: center;
+    padding-top: 20px;
+}
+
+nav ul li:hover>.dropbox-nav {
+    display: block;
+}
+
+.dropbox-nav li {
+    padding: 2px 0px;
+}
+
+.dropbox-nav>li>a {
+    display: block;
+    transition: .3s;
+}
+
+.dropbox-nav>li>a:hover {
+    color: var(--SCH-skyblue);
+}
+
+/* ----------------------------- */
+/* 푸터 */
+
+footer {
+    position: relative;
+    left: 0%;
+    bottom: 0%;
+    display: flex;
+    justify-content: center;
+    background-color: #f8f8f8;
+}
+
+.footer-box {
+    display: flex;
+    width: var(--main-width);
+    height: 120px;
+}
+
+.contact-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.contact-box label {
+    font-family: 'IBMPlexSansKR-Bold';
+    text-align: center;
+    font-size: 33px;
+    color: var(--SCH-skyblue);
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+}
+
+.icons a i {
+    margin: 10px 5px;
+    font-size: 20px;
+    color: lightgray;
+}
+
+.copyright-text {
+    font-family: 'IBMPlexSansKR-Light';
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 40%;
+}
+
+.copyright-text span {
+    font-weight: 600;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+footer img {
+    width: 80px;
+    height: 80px;
+    margin-top: 15px;
+}
+
+
+/* ----------------------------- */
+/* 컨텐츠 */
+
+.content {
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 400px;
+    background-color: aliceblue;
+}
+
+/* 여기서 부터 gallery_th_detail----------------------------- */
+
+/* 모든 내용을 포함하는 */
+.th_content{
+    width: 1200px;
+    height: 800px; 
+    padding: 30px;
+    margin-left: 185px;
+    margin-right: 185px;
+    margin-bottom: 50px;
+}
+
+/* post 제목+사진 */
+.postcard {
+    height: 358px;
+    width: 320px;
+    display: inline-block;
+    border-radius:20px 5px 20px 5px;
+    margin: 30px;
+}
+
+/*post 제목+사진 그림자*/
+.postcard:hover {
+    box-shadow: 3px 3px 2px #aaa;
+    
+}
+
+/* post 제목+사진 링크*/
+.postcard a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+/* post 제목+사진 마진값을 줘서 그림자와 postcard의 간격을 좁힘*/
+.postdetail{
+    margin: 9px;
+}
+
+.post_title{
+    font-size: 26px;
+    font-family: 'IBMPlexSansKR-Text';
+    text-decoration: none;
+}
+
+.th_title{
+    font-size: 30px;
+    color: #007A85;
+    font-family: 'IBMPlexSansKR-Bold';
+    text-decoration: none;
+    margin-left: 35px;
+}
+
+/* 게시물 추가하는 버튼 */
+.circle{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color:#F39926;
+    font-size: 30px;
+    text-align: center;
+    line-height: 40px;
+    font-family: 'IBMPlexSansKR-Text';
+    color: white;
+    display: inline-block; /* th_title 옆에 위치하기 위함 */
+    margin-left: 990px;
+
+}
+.circle:hover{
+    background-color:#db8b23;
+}

@@ -1,0 +1,91 @@
+
+
+
+/* ----------------------------- */
+/* 컨텐츠 */
+
+a {text-decoration: none; outline: none}
+
+a:hover, a:active, a:visited {text-decoration: none; color: #000;}
+
+.page-sub-title{
+    /* width: 100%; */
+    /* margin: 0 auto; */
+    font-size: 26px;
+    font-family: 'IBMPlexSansKR-Text';
+    border-bottom: 1px solid var(--SCH-skyblue);
+}
+
+main {
+    width: 100%;
+}
+
+/* ------------- 게시글 wrap -------------*/
+.content-wrap{ 
+    width: var(--main-width);
+    height: 250px;
+    margin: 0 auto;
+    padding: 30px 0;
+    
+    border-bottom: 1px solid #f4f4f4;
+}
+
+/* 썸네일 사진 */
+.img-box{
+    width: 25%;
+    height: 250px;
+    margin-right: 50px;
+    float: left;
+}
+
+.img-box img{
+    width: 100%;
+    height: 100%;
+}
+
+/* 공지사항 글 */
+
+.content-box{
+    width: 70%;
+    height: 100%;
+    float:left;
+}
+
+.content-box a:hover{
+    color: #F39926;
+}
+
+.content-box .sub-title{
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 26px;
+    color: #F39926;
+    margin-bottom: 3vh;
+    height: 20%;
+}
+
+.content-box .content{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 20px;
+    height: 55%;
+
+    /* 말줄임 */
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+
+}
+
+.post-meta{
+    /* height: %; */
+}
+
+.post-meta-item{
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 11px;
+    color:#999999;
+    background: #f4f4f4;
+    
+    padding:7px 10px 7px 10px;
+}

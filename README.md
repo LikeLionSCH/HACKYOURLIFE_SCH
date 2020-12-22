@@ -9,12 +9,12 @@
 ## 👨‍👨‍👨‍👧‍👧Creater Member
 
 ### 🔙Back-end
+- [김율희](https://github.com/yulhee741) 🚩Team Leader
 - [이남준](https://github.com/ningpop)
 - [황상범](https://github.com/HwangSB)
-- [김율희](https://github.com/yulhee741)
 ### 🔜Front-end
+- [장하얀](https://github.com/white-jang) 🚩Team Leader
 - [최민석](https://github.com/minsgy)
-- [장하얀](https://github.com/white-jang)
 - [하유민](https://github.com/qhahd78)
 - [김태완](https://github.com/wwan13)
 - [강민서](https://github.com/mseo39)
@@ -28,6 +28,7 @@
 - Django==3.1.3
 - Python3
 - HTML5
+- Firebase
 - CSS3
 - JS
 - JQuery

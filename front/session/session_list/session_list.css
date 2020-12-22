@@ -52,6 +52,37 @@
     margin-bottom: 15px;
 }
 
+.search-box>button {
+    border: 1px solid rgba(0, 0, 0, 0%);
+    border-radius: 30px;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    background: none;
+    transition: .4s;
+    display: flex;
+    padding: 5px;
+}
+
+
+.search-box>button:focus {
+    border: 1px solid rgba(0, 0, 0, 100%);
+    width: 300px;
+}
+
+.search-box>button>i {
+    margin: 3px 7px 0px 2px;
+}
+
+.search {
+    display: none;
+}
+
+.search-box>button:focus .search {
+    display: block;
+    width: 270px;
+}
+
 
 .top-box a {
     color: var(--SCH-skyblue);
@@ -99,6 +130,7 @@ p {
 
 .pagination {
     margin-top: 50px;
+    margin-bottom: 60px;
     font-size: 17px;
     color: black;
 }
