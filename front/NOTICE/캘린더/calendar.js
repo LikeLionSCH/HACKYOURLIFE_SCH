@@ -1,9 +1,6 @@
 
 
 $(function() {
-
-
-
     $('#calendar').fullCalendar({
       defaultView: 'month',
       defaultDate: '2020-12-01',
