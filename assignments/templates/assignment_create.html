@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="{% url 'assignment_create' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="author" placeholder="author"><br>
+        <input type="text" name="contents" placeholder="contents"><br>
+        <input type="date" name="deadline" placeholder="deadline"><br>
+        <input type="text" name="title" placeholder="title"><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
