@@ -104,7 +104,60 @@ firebase에 저장된 특정 세션을 수정하는 함수
 @return : session_detail로 redirect
 """
 def session_update(request, session_id):
-    pass
+    # firebase 초기화
+    session_db = initialize_firebase()
+
+    # POST 요청일 경우에만 session data create
+    if request.method == 'POST':
+        # 매개변수의 session_id를 통해 firebase의 세션 불러옴
+        try:
+            data = session_db.collection('Session').document(session_id).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+        
+        # 불러온 세션을 객체로 변경
+        session = Session.from_dict(data.to_dict(), data.id)
+
+        # input form의 datas를 객체에 update
+        session.title = request.POST['title']
+        session.host = request.POST['host']
+        print(session.host) # current user input test code
+
+        session_date = request.POST['session_date']
+        
+        # 입력받은 세션 날짜 슬라이싱, KST에 맞게 변환 후 객체에 저장
+        # session_date의 시간 입력 시 수정 필요
+        date = session_date.split('-')
+        date_year = int(date[0])
+        date_month = int(date[1])
+        date_day = int(date[2])
+        session_date = datetime.datetime(date_year, date_month, date_day, 0, 0, tzinfo=KST)
+        session.session_date = session_date
+
+        session.google_link = request.POST['google_link']
+        session.content = request.POST['content']
+
+        # test code
+        print(session.title, session.host, session.session_date, session.google_link, session.content)
+
+        # firebase의 해당 id에 맞는 문서에 수정된 객체 저장
+        session_db.collection('Session').document(session.session_id).set(session.to_dict())
+
+        return redirect('session_detail', session_id)
+    
+    else: # GET 요청일 때(update 페이지 진입 시)
+        # 매개변수의 session_id를 통해 firebase의 세션 불러옴
+        try:
+            data = session_db.collection('Session').document(session_id).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+
+        # 불러온 세션을 객체로 변경
+        session = Session.from_dict(data.to_dict(), data.id)
+        session.session_date = str(session.session_date).split(" ")[0]
+
+        # 해당 객체의 데이터와 함께 update 페이지로 이동
+        return render(request, 'session_update.html', {'session':session})
 
 """ DELETE
 firebase에 저장된 특정 세션을 삭제하는 함수
