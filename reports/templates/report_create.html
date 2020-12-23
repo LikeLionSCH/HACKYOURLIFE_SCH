@@ -19,7 +19,7 @@
 
     <!-- form -->
     <div class="main-wrap">
-        <form method="POST" class="form-box" action="{% url 'report_create' %}">
+        <form method="POST" class="form-box" action="{% url 'report_create' assignment_id %}">
             {% csrf_token %}
             <div class="repository-box">
                 <p>레포지토리 주소</p>
