@@ -106,8 +106,37 @@ def delete_Assignment(requset,assignment_id):
     return redirect('assignment_list')
 
 
-def update_Assignment_view(request):
-    pass
+def update_Assignment_view(request,assignment_id):
+
+    db = initialize_firebase()
+
+    try:
+        data = db.collection('Assignment').document(assignment_id).get()
+    except google.cloud.exeption.NotFound:
+        print('Not Found')
+    
+    assignment = Assignment.from_dict(data.to_dict(),data.id)
+
+    if( request.method == 'POST' ):
+
+        author = request.POST['author']
+        contents = request.POST['contents']
+        deadline = request.POST['deadline']
+        title = request.POST['title']
+
+        db.collection('Assignment').document(assignment_id).update({
+            'author' : author,
+            'contents' : contents,
+            'deadline' : deadline,
+            'title' : title,
+        })
+
+        return redirect('assignment_detail',assignment_id)
+    
+    return render(request,'assignment_update.html',{'assignment':assignment})
+
+
+
 
 
 
