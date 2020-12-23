@@ -3,21 +3,9 @@ from django.shortcuts import render,redirect
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from hackyourlife_sch.firebase import initialize_firebase
 
 from random import *
-
-"""
-파이어베이스 초기화 해주는 함수
-@return : firestore.client
-"""
-def initialize_firebase():
-
-    # 파이어베이스 Initialize
-    if not firebase_admin._apps:
-        cred = credentials.Certificate('serviceAccountKey.json')
-        firebase_admin.initialize_app(cred)
-    
-    return firestore.client()
 
 """
 과제를 등록해주는 함수 (테스트코드)

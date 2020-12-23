@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'assignments.apps.AssignmentsConfig',
+    'session.apps.SessionConfig',
 ]
 
 MIDDLEWARE = [

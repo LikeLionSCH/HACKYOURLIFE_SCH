@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/session_list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            SESSION
+        </span>
+    </div>
+
+    <!-- 새션 목록 보여주는 부분 -->
+
+    <div class="main-wrap">
+        <div class="list-box">
+            <!-- assignment-create 로 이동하는 링크 -->
+
+            <div class="top-box">
+                <div class="search-box">
+                    <button type="button"> <i class="fas fa-search"></i><input class="search" type="text"></button>
+                </div>
+                <a href="#">등록</a>
+            </div>
+
+            <!-- list 제목이 들어가는 공강 -->
+
+            <div class="list-title">
+                <p>세션 일시</p>
+                <p>제목</p>
+                <p>작성자</p>
+            </div>
+
+            <!-- 리스트 내용이 들어가는공간 -->
+
+            {% for session_id, session_value in session_list.items %}
+            <div class="list-body">
+                <p>{{ session_value.session_date }}</p>
+                <a href="#">{{ session_value.content }}</a>
+                <p>{{ session_value.host }}</p>
+            </div>
+            {% endfor %}
+
+            <!-- ---------------------- -->
+
+        </div>
+
+        <!-- pagination -->
+
+        <div class="pagination">
+            <div><i class="fas fa-long-arrow-alt-left"></i>prev</div>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <div>next<i class="fas fa-long-arrow-alt-right"></i></div>
+        </div>
+
+    </div>
+
+
+</main>
+
+{% endblock %}
