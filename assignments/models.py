@@ -6,8 +6,6 @@ from django.db import models
 """
 class Assignment:
 
-    assignment_id = None
-
     """
     생성자
     @param : self, 작성자 문자열, 컨탠츠 문자열, 마감일자 문자열, 제목 문자열
@@ -17,6 +15,7 @@ class Assignment:
         self.contents = contents
         self.deadline = deadline
         self.title = title
+        self.assignment_id = None
 
     """
     Assignment 클래스를 딕셔너리 자료구조로 바꿔주는 메소드
@@ -44,7 +43,8 @@ class Assignment:
     def from_dict(data,assignment_id):
 
         # 객체 생성
-        assignment = Assignment(data['author'],data['contents'],data['deadline'],data['title'],assignment_id)
+        assignment = Assignment(data['author'],data['contents'],data['deadline'],data['title'])
+        assignment.assignment_id = assignment_id
 
         # 생성된 객체 반환
         return assignment
