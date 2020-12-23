@@ -26,13 +26,13 @@ def create_Report_view(request,assignment_id):
         print(time)
 
         # 새로운 레포트 객체 생성
-        report = Report(assignment_id,'author',contents,repository_address,time,"체점중")
+        report = Report(assignment_id,'author',contents,repository_address,time,'체점중')
 
         # 파이어베이스와 연결 후 레포트 데이터 생성
         db.collection('Report').document().set(report.to_dict())
 
         # 리다이렉트
-        return redirect('report_create')
+        return redirect('/')
 
     # 포스트가 아닐경우 report_create 페이지 렌더
-    return render(request,'report_create.html')
+    return render(request,'report_create.html', {'assignment_id':assignment_id})
