@@ -1,0 +1,114 @@
+@font-face {
+    font-family: 'IBMPlexSansKR-Text';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --main-width: 1100px;
+    --SCH-skyblue: #1BBCF0;
+}
+
+* {
+    text-decoration: none;
+}
+
+/********************************************************/
+
+.main-wrap {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.detail-box {
+    width: var(--main-width);
+    height: auto;
+    margin-top: 50px;
+}
+
+.update-delete-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.update-delete-wrap a {
+    padding: 0px 5px;
+    color: var(--SCH-skyblue);
+}
+
+.info-title,
+.detail-title {
+    width: 100%;
+    padding-bottom: 1px;
+    margin-top: 40px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.info-title span,
+.detail-title span {
+    border-bottom: 2px solid lightgray;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 24px;
+}
+
+.info-title {
+    margin-bottom: 15px;
+}
+
+.info-box>span {
+    font-size: 20px;
+    width: 30px;
+    line-height: 40px;
+}
+
+.detail-contents {
+    margin: 25px 0px 100px 0px;
+    font-size: 20px;
+}
+
+.button {
+    width: 1100px;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    background-color: white;
+    border: 2px solid var(--SCH-skyblue);
+    color: var(--SCH-skyblue);
+    border-radius: 15px;
+    transition: .4s;
+}
+
+.button:hover {
+    background-color: var(--SCH-skyblue);
+    color: rgb(138, 126, 126);
+}
+
+
+/* **************************** */
+.text-bold {
+    display: inline;
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+.mg-top-60 {
+    margin-top: 60px;
+}

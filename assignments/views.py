@@ -23,13 +23,13 @@ def create_Assignment_view(request):
         db = initialize_firebase()
 
         # form의 값 받아오는 코드
-        author = request.POST['author']
+        # author = request.POST['author']
         contents = request.POST['contents']
         deadline = request.POST['deadline']
         title = request.POST['title']
 
         # 과제 객체 생성
-        new_assignment = Assignment(author,contents,deadline,title)
+        new_assignment = Assignment("author",contents,deadline,title)
 
         # firebase 에 데이터 생성
         db.collection('Assignment').document().set(new_assignment.to_dict())
@@ -129,14 +129,14 @@ def update_Assignment_view(request,assignment_id):
     if( request.method == 'POST' ):
 
         # from 으로 부터 입력받은 값 불러오는 코드
-        author = request.POST['author']
+        # author = request.POST['author']
         contents = request.POST['contents']
         deadline = request.POST['deadline']
         title = request.POST['title']
 
         # 파이어베이스에 접속하여 입력된 값으로 수정
         db.collection('Assignment').document(assignment_id).update({
-            'author' : author,
+            'author' : "author",
             'contents' : contents,
             'deadline' : deadline,
             'title' : title,

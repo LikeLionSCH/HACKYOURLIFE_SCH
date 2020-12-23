@@ -1,16 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% load static %}
 
-<body>
-    {{ assignment.title }}<br>
-    <a href="{% url 'assignment_delete' assignment.assignment_id %}">삭제</a>
-    <a href="{% url 'assignment_update' assignment.assignment_id %}">수정</a>
-</body>
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/assignment_detail.css' %}">
+{% endblock %}
 
-</html>
+{% block content %}
+
+<main>
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            ASSIGNMENT
+        </span>
+    </div>
+
+    <!-- 과제 디테일을 보여주는 부분 -->
+
+    <div class="main-wrap">
+        <div class="detail-box">
+            <!-- detail 요소가 보여지는 내용 -->
+            <div class="update-delete-wrap">
+                <a href="{% url 'assignment_delete' assignment.assignment_id %}">삭제</a>
+                <a href="{% url 'assignment_update' assignment.assignment_id %}">수정</a>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">
+                    <span>INFO</span>
+                </div>
+                <span>TITLE : <div class="text-bold">{{ assignment.title }}</div>
+                </span></br>
+                <span>DUE TO : <div class="text-bold">{{ assignment.deadline }}</div>
+                </span>
+            </div>
+
+            <div class="detail-box mg-top-60">
+                <div class="detail-title">
+                    <span>DETAIL</span>
+                </div>
+                <!-- detail contents 가 들어가는 부분 -->
+                <div class="detail-contents">
+                    {{ assignment.contents }}
+                </div>
+            </div>
+
+            <!-- 일반 -->
+            <a href="#">
+                <div class="button">제출하러 가기</div>
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock %}

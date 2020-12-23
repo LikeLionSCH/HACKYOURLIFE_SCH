@@ -1,16 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% load static %}
 
-<body>
-    {% for assignment in assignments %}
-    <a href="{% url 'assignment_detail' assignment.assignment_id %}">{{ assignment.assignment_id }}</a><br>
-    {% endfor %}
-</body>
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/assignment_list.css' %}">
+{% endblock %}
 
-</html>
+{% block content %}
+
+<main>
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            ASSIGNMENT
+        </span>
+    </div>
+
+    <!-- 과제 목록 보여주는 부분 -->
+
+    <div class="main-wrap">
+        <div class="list-box">
+            <!-- assignment-create 로 이동하는 링크 -->
+            <div class="top-box">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                </div>
+                <a href="{% url 'assignment_create' %}">등록</a>
+            </div>
+            <!-- list 제목이 들어가는 공강 -->
+            <div class="list-title">
+                <p>DUE TO</p>
+                <p>TITLE</p>
+                <p>STATE</p>
+            </div>
+            <!-- 리스트 내용이 들어가는공간 -->
+            {% for assignment in assignments %}
+            <div class="list-body">
+                <p>{{ assignment.deadline }}</p>
+                <a href="{% url 'assignment_detail' assignment.assignment_id %}">{{ assignment.title }}</a>
+                <p class="font-black">제출완료</p>
+            </div>
+            {% endfor %}
+            <!-- ---------------------- -->
+        </div>
+
+        <!-- pagination -->
+
+        <div class="pagination">
+            <div><i class="fas fa-long-arrow-alt-left"></i>prev</div>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <div>next<i class="fas fa-long-arrow-alt-right"></i></div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'IBMPlexSansKR-Text';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --main-width: 1100px;
+    --SCH-skyblue: #1BBCF0;
+}
+
+* {
+    text-decoration: none;
+}
+
+/********************************************************/
+
+
+/* list box */
+
+.main-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-box {
+    height: auto;
+    width: var(--main-width);
+    margin-top: 30px;
+}
+
+.top-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+
+.top-box a {
+    color: var(--SCH-skyblue);
+}
+
+.list-title {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 20px;
+    margin: 0px auto;
+    border-top: 2px solid #707070;
+    border-bottom: 1px solid #9d9d9d;
+    background-color: #f9f9f9;
+}
+
+p {
+    width: 200px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.list-body {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 16px;
+    border-bottom: 1px solid #9d9d9d;
+}
+
+.list-body>a {
+    text-align: center;
+    line-height: 50px;
+    overflow: hidden;
+    color: black;
+    cursor: pointer;
+}
+
+/* ************************************* */
+
+/* state 할 때 필요한 color class */
+
+.font-black {
+    font-family: 'IBMPlexSansKR-Text';
+    color: black;
+}
+
+.font-red {
+    font-family: 'IBMPlexSansKR-Text';
+    color: red;
+}
+
+/* ************************************* */
+
+/* pagination */
+
+.pagination {
+    margin-top: 50px;
+    margin-bottom: 60px;
+    font-size: 17px;
+    color: black;
+}
+
+.pagination div {
+    display: inline-block;
+    padding: 15px;
+}
+
+.pagination div i {
+    padding: 10px;
+}
+
+.pagination span {
+    font-size: 19px;
+    padding: 0px 7px;
+}
+
+/* ************************************* */
