@@ -59,8 +59,7 @@ def read_Assignment_view(request):
 
     # 값을 읽어와 하나씩 assignment_list 에 담는다
     for data in datas:
-        assignment = Assignment.from_dict(data.to_dict())
-        assignment.assignment_id = data.id
+        assignment = Assignment.from_dict(data.to_dict(),data.id)
         assignments.append(assignment)
 
     # assignment_list 페이지 띄우고 과제 데이터 전달
