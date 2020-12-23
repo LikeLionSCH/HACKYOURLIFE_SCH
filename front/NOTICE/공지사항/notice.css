@@ -89,3 +89,27 @@ main {
     padding:7px 10px 7px 10px;
 }
 
+
+
+/* content footer 페이지네이션 */
+.content-footer{
+    width: 350px;  
+    margin: 5vh auto;
+
+}
+.content-footer-nav{
+    width: 100%;  
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-footer-link{
+    font-size: 22px;
+    font-family: 'IBMPlexSansKR-Light';
+}
+
+.content-footer-link:hover{
+    color: #F39926;
+}
+
+
