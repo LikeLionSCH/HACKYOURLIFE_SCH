@@ -1,0 +1,152 @@
+@font-face {
+    font-family: 'IBMPlexSansKR-Text';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Text.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --main-width: 1100px;
+    --SCH-skyblue: #1BBCF0;
+}
+
+* {
+    text-decoration: none;
+}
+
+/********************************************************/
+
+
+/* list box */
+
+.main-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-box {
+    height: auto;
+    width: var(--main-width);
+    margin-top: 30px;
+}
+
+.top-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.search-box>button {
+    border: 1px solid rgba(0, 0, 0, 0%);
+    border-radius: 30px;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    background: none;
+    transition: .4s;
+    display: flex;
+    padding: 5px;
+}
+
+
+.search-box>button:focus {
+    border: 1px solid rgba(0, 0, 0, 100%);
+    width: 300px;
+}
+
+.search-box>button>i {
+    margin: 3px 7px 0px 2px;
+}
+
+.search {
+    display: none;
+}
+
+.search-box>button:focus .search {
+    display: block;
+    width: 270px;
+}
+
+
+.top-box a {
+    color: var(--SCH-skyblue);
+}
+
+.list-title {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 20px;
+    margin: 0px auto;
+    border-top: 2px solid #707070;
+    border-bottom: 1px solid #9d9d9d;
+    background-color: #f9f9f9;
+}
+
+p {
+    width: 200px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.list-body {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 16px;
+    border-bottom: 1px solid #9d9d9d;
+}
+
+.list-body>a {
+    text-align: center;
+    line-height: 50px;
+    overflow: hidden;
+    color: black;
+    cursor: pointer;
+}
+
+/* ************************************* */
+
+
+/* pagination */
+
+.pagination {
+    margin-top: 50px;
+    margin-bottom: 60px;
+    font-size: 17px;
+    color: black;
+}
+
+.pagination div {
+    display: inline-block;
+    padding: 15px;
+}
+
+.pagination div i {
+    padding: 10px;
+}
+
+.pagination span {
+    font-size: 19px;
+    padding: 0px 7px;
+}
+
+/* ************************************* */
