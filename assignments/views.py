@@ -5,43 +5,36 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from hackyourlife_sch.firebase import initialize_firebase
 
-from random import *
-
 """
-과제를 등록해주는 함수 (테스트코드)
+과제 클래스
 """
-def create_Assignment():
+class Assignment():
 
-    # 파이어베이스 초기화
-    assignment_db = initialize_firebase()
-    
-    doc_ref = assignment_db.collection('Assignment').document('AssignmentDoc')
-    # documet 에 random 값 집어 넣어 사용 해야 함
+    """
+    생성자
+    @param : self, 작성자 문자열, 컨탠츠 문자열, 마감일자 문자열, 제목 문자열
+    """
+    def __init__(self,author,contents,deadline,title):
+        self.author = author
+        self.contents = contents
+        self.deadline = deadline
+        self.title = title
 
-    # 작성할 데이터 => dict
-    data = doc_ref.set({
-        'author':'이남준',
-        'content':'테스트용 데이터베이스 asd입ㅁㄴㅇㅁㄴㅇㅁ니다',
-        #'deadline':'2020년 1월 1일 오전 12시 0분 0초 UTC+9',
-        #'deadline':'2020-12-18',
-        'title':'테스트ㅁㅇㅁㅇ용 제asd목 입니다.',
-    })
+    """
+    Assignment 클래스를 딕셔너리 자료구조로 바꿔주는 메소드
+    @param : self
+    @return : 딕셔너리로 변환된 클래스의 데이터
+    """
+    def to_dict(self):
+        data = {
+            'author':self.author,
+            'contents':self.contents,
+            'deadline':self.deadline,
+            'title':self.title,
+        }
+        
+        return data
 
-    print(data)
-
-"""
-파이어베이스에서 데이터값을 읽어오는 함수 (테스트 코드)
-"""
-def read_AssignmentList():
-
-    # 파이어베이스 초기화
-    assignment_db = initialize_firebase()
-
-    assignment_ref = assignment_db.collection('Assignment')
-    assignments = assignment_ref.stream()
-
-    for assignment in assignments:
-        print(assignment)
 
 """
 파이어베이스로 과제 데이터를 생성하는 함수
@@ -50,29 +43,23 @@ def read_AssignmentList():
 """
 def create_Assignment_view(request):
 
-    # requset 메소드가 POST 일 경우만
+    # request 메소드가 POST 일 경우만
     if( request.method=='POST' ):
 
-        # 파이어베이스 초기화
+        # firebase initialize
         db = initialize_firebase()
 
-        # form의 값 받아옴
+        # form의 값 받아오는 코드
         author = request.POST['author']
         contents = request.POST['contents']
         deadline = request.POST['deadline']
         title = request.POST['title']
 
-        #print(author,contents,deadline,title)
+        # 과제 객체 생성
+        new_assignment = Assignment(author,contents,deadline,title)
 
-        # 파이어베이스 Assignment 컬렉션 접근
-        doc_ref = db.collection('Assignment').document()
-        # 파이어베이스에 값 저장
-        doc_ref.set({
-            'author':author,
-            'content':contents,
-            'deadline':deadline,
-            'title':title,
-        })
+        # firebase 에 데이터 생성
+        db.collection('Assignment').document().set(new_assignment.to_dict())
 
         # redirect
         return redirect('assignment_create')
@@ -88,7 +75,7 @@ def create_Assignment_view(request):
 """
 def read_Assignment_view(request):
 
-    # 파이어 베이스 초기화
+    # firebase initialize
     db = initialize_firebase()
 
     # template 으로 전달해줄 리스트 생성
