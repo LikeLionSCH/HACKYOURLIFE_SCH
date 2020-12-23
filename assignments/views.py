@@ -73,16 +73,20 @@ def read_Assignment_view(request):
 """
 def get_Assignment_detail_view(request,assignment_id):
 
+    # firemase initialize
     db = initialize_firebase()
 
+    # 매개변수의 assignment_id 를 통해 파이어베이스의 과제 불러옴
     try:
         data = db.collection('Assignment').document(assignment_id).get()
     except google.cloud.exeption.NotFound:
         print('Not Found')
     
+    # 불러온 과제를 객체로 변경
     assignment = data.to_dict()
     print(assignment)
 
+    # 위에서 생성된 과제 모델 반환
     return render(request,'assignment_detail.html',{'assignment':assignment})
 
 
