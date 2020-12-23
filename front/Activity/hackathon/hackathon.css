@@ -11,7 +11,17 @@ main {
     background-size: cover;
 }
 
-#hackathon-title {
+/* 전체 컨텐츠 섹션
+.hackathon-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+} */
+
+/* 해커톤 타이틀 */
+.title {
     border-bottom: 1px solid #F39926;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
@@ -23,9 +33,7 @@ main {
 }
 
 /* 해커톤 설명부분 div */
-
-/* 해커톤 설명부분 p */
-.hackathon-info-div {
+.hackathon-info1 {
     padding: 2vh;
     position: relative;
     width: 650px;
@@ -35,7 +43,7 @@ main {
 }
 
 /* 해커톤 설명부분 text */
-.hackathon-info {
+.hackathon-info1 p {
     position: relative;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 18px;
@@ -44,15 +52,14 @@ main {
 }
 
 /* 해커톤 설명 두 번째 거  */
-
-.hackathon-info-p2{
+.hackathon-info2 {
     margin: 0 auto;
     display: block;
     width: 600px;
     height: 10vh;
 }
 
-.hackathon-info2 {
+.hackathon-info2 p {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
     color: #BDDA72;
@@ -69,26 +76,28 @@ main {
     /* border-bottom: solid 1px rgba(255, 255, 255, 0.2); */
 }
 
-.hackathon-image{
+.hackathon-image {
     padding: 4vh 2vh 0.3vh 2vh;
     height: 180px;
     width: 280px;
     position: relative;
 }
 
-.hackathon-image-box{
+.hackathon-image-box {
     text-align: center;
 }
 
-.img-info{
+.img-info {
     position: relative;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 16px;
-    color:rgb(255, 255, 255, 0.8);
+    color: rgb(255, 255, 255, 0.8);
 }
 
+/* --------------------- */
+
 /* 기수별 해커톤 활동  속성*/
-#hackathon-activity{
+#hackathon-activity {
     margin: 3vh 0 0 0;
     position: relative;
     text-align: left;
@@ -105,7 +114,7 @@ main {
 
 
 /* 기수 속성 -7th*/
-.mem-num-7th{
+.mem-num-7th {
     padding: 0 2vh 5vh 0;
     height: 30px;
     min-width: 3vh;
@@ -118,7 +127,7 @@ main {
 }
 
 /* 기수 속성 -7th*/
-.mem-num-8th{
+.mem-num-8th {
     padding: 0 2vh 5vh 0;
     height: 30px;
     min-width: 3vh;
@@ -131,14 +140,14 @@ main {
 }
 
 /* 각 해커톤 이미지  */
-.hackathon-detail-image{
+.hackathon-detail-image {
     width: 300px;
     height: 200px;
     margin: 0 3vh 3vh 3vh;
 }
 
 /* 각 해커톤 타이틀 */
-.hackathon-detail-name{
+.hackathon-detail-name {
     display: inline-block;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 35px;
@@ -146,26 +155,26 @@ main {
 }
 
 /* 각 해커톤 날짜 7th */
-.hackathon-detail-date-7th{
+.hackathon-detail-date-7th {
     font-size: 20px;
     display: block;
-    color:rgba(27, 188, 240, 0.8);
+    color: rgba(27, 188, 240, 0.8);
     border-top: 2px solid rgba(27, 188, 240, 0.8);
 }
 
 /* 각 해커톤 날짜 8th */
-.hackathon-detail-date-8th{
+.hackathon-detail-date-8th {
     font-size: 20px;
     display: block;
-    color:#BDDA72;
+    color: #BDDA72;
     border-top: 2px solid #BDDA72;
 }
 
-.hackathon-detail-box{
+.hackathon-detail-box {
     margin: 0 0 0 18vh;
 }
 
-.hackathon-detail-info{
+.hackathon-detail-info {
     margin-top: 2vh;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
@@ -174,26 +183,26 @@ main {
 }
 
 /* 갤러리 연결 7th*/
-.to-gallery-7th{
+.to-gallery-7th {
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
     color: white;
 }
 
-.to-gallery-7th:hover{
+.to-gallery-7th:hover {
     transition: .3s;
     display: inline-block;
     color: rgba(27, 188, 240, 0.8);
 }
 
 /* 갤러리 연결 8th*/
-.to-gallery-8th{
+.to-gallery-8th {
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
     color: white;
 }
 
-.to-gallery-8th:hover{
+.to-gallery-8th:hover {
     transition: .3s;
     display: inline-block;
     color: #BDDA72;

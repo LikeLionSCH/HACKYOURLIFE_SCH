@@ -218,67 +218,6 @@ footer img {
 
 .title-wrap {
     text-align: center;
-    margin: 3vh 0;
-}
-
-.page-sub-title {
-    display: inline-block;
-    font-size: 26px;
-    border-bottom: 2px solid var(--SCH-skyblue);
-    font-family: 'IBMPlexSansKR-Text';
-}
-
-main {
-    width: 100%;
-}
-
-/* ----------------------------- */
-/* 스몰 헤더 */
-
-/* 스몰 헤더 전체 사이즈 */
-#small-header-wrap {
-    width: 100%;
-    margin: 0 auto;
-    /* 테두리 */
-    border-top: 1px solid #e4e4e4;
-    border-bottom: 1px solid #e4e4e4;
-}
-
-/* 스몰 헤더 - 아이템 적용 사이즈 */
-#small-header-box {
-    /* width 및 position 설정 */
-    display: flex;
-    width: 50%;
-    margin: 0 auto;
-    padding: 8px 0;
-    /* container item 속성 */
-    justify-content: space-around;
-}
-
-/* 스몰 헤더 - 링크 글자 크기 */
-#small-header-box a .small-header-nav {
-    font-size: 18px;
-    font-family: 'IBMPlexSansKR-Light';
-}
-
-/* 스몰 헤더 - 링크 글자 크기 */
-#small-header-box a:hover {
-    color: var(--SCH-skyblue);
-}
-
-/* 스몰 헤더 - 현재 페이지 표시 (글자 bold) */
-.now-page {
-    font-family: 'IBMPlexSansKR-Text' !important;
-}
-
-
-/* --------------------------------------- */
-/* 기수 갤러리 여기서부터 시작 */
-
-
-/* 소제목 */
-.title-wrap {
-    text-align: center;
     margin-bottom: 10px;
 }
 
@@ -288,95 +227,87 @@ main {
     border-bottom: 2px solid var(--SCH-skyblue);
     font-family: 'IBMPlexSansKR-Text';
 }
-
-/* 컨텐츠 */
 .content {
     margin: 0 auto;
     width: var(--main-width);
-    height: auto;
-
+    background-color: aliceblue;
 }
 
-/* 기수 이미지 그리드 */
-img {
-    width: 100%; /* need to overwrite inline dimensions */
-    height: auto;
-  }
+/* 여기서 부터 gallery_main----------------------------- */
 
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 1em;
-  }
-  
-  
-  /* 기본 스타일 */
-  .th_detail {
+/* 모든 내용을 포함하는, 가운데로 정렬하려고 */
+.main_content{
+    margin: 0 auto;
+    width: 900px;
+    height: 100%;
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+/* th_card간의 간격이 너무 넓어서, 좁혀주는 역할 */
+.th_card {
+    width: 100%;
+    height: 330px;
+    margin: 5vh auto;
     position: relative;
-    line-height: 290px;
+    /* display: inline-block;  */
+}
+
+/* .more_square(static), 옆에 두기 위함 */
+.img_square{
+   width: 80%;
+   height: 100%;
+   float: right;
+
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+}
+
+.img_square img{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* th가 적힌 사각형 */
+.th_square{
+    width: 20%;
+    height: 50%;
     text-align: center;
-  }
-  
-  .th_image {
-    line-height: 0;
-    overflow: hidden;
-  }
-  
-  .th_image img {
-    filter: blur(0px);
-    transition: filter 0.9s ease-in;
-    transform: scale(1.1);
-  }
-  
-  /* hover 전 text */
-  .th_title {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-decoration: none;
-    font-family: 'IBMPlexSansKR-Bold';
-    z-index: 1;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    transition: opacity .5s;
-    background: rgba(95, 95, 95, 0.4);
+    line-height: 165px;
+ 
+    font-size: 30px;
+    background-color: var(--SCH-skyblue);
     color: white;
-  }
+}
 
-  /* hover 후 text */
-  .more_title {
-    font-size: 1.5em;
-    font-weight: bold;
+.th_card:nth-child(2n+1) .th_square{
+   background-color: #aad047;
+}
+
+/* more이 적힌 사각형 */
+.more_square{
+    width: 20%;
+    height: 50%;
+    text-align: center;
+    line-height: 165px;
+}
+
+.more_square:hover{
+    background-color: rgba(228,228,228, 0.3);
+    transition: 0.3s;
+}
+
+/* more 폰트 */
+.more_square a{
     text-decoration: none;
-    font-family: 'IBMPlexSansKR-Bold';
-    z-index: 1;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity .5s;
-    background: rgba(48, 47, 47, 0.4);
-    color: white;
-  }
-  
-   /* hover 후 more_title 보이기 */
-  .th_detail:hover .more_title {
-    opacity: 1;
-    transition: opacity .5s;
-  }
-  
-  /* hover 후 th_title 숨기기 */
-  .th_detail:hover .th_title {
-    opacity: 0;
-    transition: opacity .5s;
-  }
+    color: #007A85;
+    font-size: 30px;
+    font-family: 'IBMPlexSansKR-Text';
+}
 
-  /* hover 후 이미지 블러 처리하기 */
-  .th_detail:hover .th_image img {
-    filter: blur(2px);
-  }
+.more_square a:hover{
+    color: #F39926;
+}
+
+

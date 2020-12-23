@@ -13,7 +13,7 @@
 
     <!-- 링크 아이콘 링크-->
     <link rel="shortcut icon" href="{% static 'image/logo-favicon.ico' %}" type="image/x-icon">
-    <title>멋쟁이사자처럼 at 순천향대학교</title>
+    {% block title %}{% endblock %}
 
 
 </head>
@@ -22,15 +22,15 @@
 
     <header>
         <div class="header-box">
-            <img src="{% static 'image/mainLogo.png' %}" alt="mainLogo.png">
+            <a href="{% url 'main' %}"><img src="{% static 'image/mainLogo.png' %}" alt="mainLogo.png"></a>
             <nav>
                 <ul>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="#">NOTICE</a></li>
+                    <li><a href="{% url 'about' %}">ABOUT</a></li>
+                    <li><a href="{% url 'notice_list' %}">NOTICE</a></li>
                     <li><a href="#">ACTIVITY</a></li>
                     <li><a href="#">GALLARY</a></li>
-                    <li><a href="#">ASSIGNMENT</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="{% url 'assignment_list' %}">ASSIGNMENT</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
                     {% csrf_token %}
                     <button class="login-box" onclick="googleSignIn()">Login</button>
                 </ul>
@@ -57,13 +57,15 @@
             </div>
             <img src="{% static 'image/slogan2.png' %}" alt="slogan2.png">
         </div>
-        
+
     </footer>
 
     <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- UIUX jquery (main.js) -->
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+    <script src="script/jquery-1.12.3.js"></script>
     {% block script %}{% endblock %}
 </body>
+
 </html>
