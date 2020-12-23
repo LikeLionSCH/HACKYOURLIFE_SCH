@@ -8,7 +8,7 @@ from hackyourlife_sch.firebase import initialize_firebase
 """
 과제 클래스
 """
-class Assignment():
+class Assignment:
 
     """
     생성자
