@@ -11,7 +11,17 @@ main {
     background-size: cover;
 }
 
-#hackathon-title {
+/* 전체 컨텐츠 섹션
+.hackathon-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+} */
+
+/* 해커톤 타이틀 */
+.title {
     border-bottom: 1px solid #F39926;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 40px;
@@ -22,22 +32,8 @@ main {
     margin-bottom: 2vh;
 }
 
-.hackathon-content {
-    height: 100vh;
-
-    display: flex;
-
-
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-
-}
-
 /* 해커톤 설명부분 div */
-
-/* 해커톤 설명부분 p */
-.hackathon-info-div {
+.hackathon-info1 {
     padding: 2vh;
     position: relative;
     width: 650px;
@@ -47,7 +43,7 @@ main {
 }
 
 /* 해커톤 설명부분 text */
-.hackathon-info {
+.hackathon-info1 p {
     position: relative;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 18px;
@@ -56,15 +52,14 @@ main {
 }
 
 /* 해커톤 설명 두 번째 거  */
-
-.hackathon-info-p2 {
+.hackathon-info2 {
     margin: 0 auto;
     display: block;
     width: 600px;
     height: 10vh;
 }
 
-.hackathon-info2 {
+.hackathon-info2 p {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
     color: #BDDA72;
@@ -98,6 +93,8 @@ main {
     font-size: 16px;
     color: rgb(255, 255, 255, 0.8);
 }
+
+/* --------------------- */
 
 /* 기수별 해커톤 활동  속성*/
 #hackathon-activity {
