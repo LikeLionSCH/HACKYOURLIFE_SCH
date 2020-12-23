@@ -25,6 +25,9 @@
             <div class="title-box">
                 <p>제목</p>
                 <input type="text" name="title" placeholder="ex. html / css 를 이용한 네이버 실시간 검색어 클론코딩">
+
+                <!-- 세션 진행자 input 태그 -->
+                <input type="hidden" id="host" name="host" value="">
             </div>
             <div class="date-box">
                 <p>세션 일시</p>
@@ -46,4 +49,8 @@
 
 
 </main>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/session.js' %}"></script>
 {% endblock %}
