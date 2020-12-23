@@ -66,7 +66,11 @@ def read_Assignment_view(request):
     # assignment_list 페이지 띄우고 과제 데이터 전달
     return render(request,'assignment_list.html',{'assignments':assignments})
 
-
+"""
+과제 모델 디테일 뷰
+@param : request, 과제 아이디 (str)
+@return : assignment_deta.html 반환 , assignment 객체 전달
+"""
 def get_Assignment_detail_view(request,assignment_id):
 
     db = initialize_firebase()
