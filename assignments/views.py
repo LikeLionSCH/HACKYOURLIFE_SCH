@@ -65,8 +65,7 @@ def create_Assignment_view(request):
         #print(author,contents,deadline,title)
 
         # 파이어베이스 Assignment 컬렉션 접근
-        # documet 랜덤 문자열로 바꿔줘야함
-        doc_ref = db.collection('Assignment').document('random_id')
+        doc_ref = db.collection('Assignment').document()
         # 파이어베이스에 값 저장
         doc_ref.set({
             'author':author,
