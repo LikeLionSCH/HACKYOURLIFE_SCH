@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'about.apps.AboutConfig',
     'assignments.apps.AssignmentsConfig',
+    'reports.apps.ReportsConfig',
     'session.apps.SessionConfig',
 ]
 
