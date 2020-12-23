@@ -40,11 +40,11 @@
 
             <!-- 리스트 내용이 들어가는공간 -->
 
-            {% for session_id, session_value in session_list.items %}
+            {% for session in session_list %}
             <div class="list-body">
-                <p>{{ session_value.session_date }}</p>
-                <a href="#">{{ session_value.content }}</a>
-                <p>{{ session_value.host }}</p>
+                <p>{{ session.session_date }}</p>
+                <a href="{% url 'session_detail' session.session_id %}">{{ session.title }}</a>
+                <p>{{ session.host }}</p>
             </div>
             {% endfor %}
 
