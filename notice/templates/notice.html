@@ -30,6 +30,7 @@
 <main>
     <!-- 내용 -->
     <div class='content-wrap'>
+        {% for notice in notices %}
         <!-- 이미지 박스 -->
         <div class='img-box'>
             <img src="{% static 'image/LOGO.png' %}" alt="SN" />
@@ -38,67 +39,19 @@
         <div class='content-box'>
             <!-- 제목 -->
             <a href="{% url 'notice_detail' %}">
-                <h3 class='sub-title'>멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표</h3>
+                <h3 class='sub-title'>{{ notice.title }}</h3>
                 <p class='content'>
-                    안녕하세요. 멋쟁이 사자처럼 at 순천향대학교 대표 최민석 입니다.
-                    9기 최종 합격 발표를 안내드립니다. 모두들 수고하셨습니다!
-                    첨부 파일을 확인하시면 되겠습니다. 지원해주신 모든 분들에게 감사드립니다.
+                    {{ notice.contents }}
                 </p>
             </a>
             <div class='post-meta'>
-                <span class='post-meta-item'>2020. 11. 22</span>
+                <span class='post-meta-item'>{{ notice.date }}</span>
                 <span class='post-meta-item'>대표</span>
             </div>
         </div>
     </div>
+    {% endfor %}
 
-    <!-- 내용 -->
-    <div class='content-wrap'>
-        <!-- 이미지 박스 -->
-        <div class='img-box'>
-            <img src="{% static 'image/LOGO.png' %}" alt="SN" />
-        </div>
-        <!-- 내용 박스 -->
-        <div class='content-box'>
-            <!-- 제목 -->
-            <a href="{% url 'notice_detail' %}">
-                <h3 class='sub-title'>멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표</h3>
-                <p class='content'>
-                    안녕하세요. 멋쟁이 사자처럼 at 순천향대학교 대표 최민석 입니다.
-                    9기 최종 합격 발표를 안내드립니다. 모두들 수고하셨습니다!
-                    첨부 파일을 확인하시면 되겠습니다. 지원해주신 모든 분들에게 감사드립니다.
-                </p>
-            </a>
-            <div class='post-meta'>
-                <span class='post-meta-item'>2020. 11. 22</span>
-                <span class='post-meta-item'>대표</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 내용 -->
-    <div class='content-wrap'>
-        <!-- 이미지 박스 -->
-        <div class='img-box'>
-            <img src="{% static 'image/LOGO.png' %}" alt="SN" />
-        </div>
-        <!-- 내용 박스 -->
-        <div class='content-box'>
-            <!-- 제목 -->
-            <a href="{% url 'notice_detail' %}">
-                <h3 class='sub-title'>멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표</h3>
-                <p class='content'>
-                    안녕하세요. 멋쟁이 사자처럼 at 순천향대학교 대표 최민석 입니다.
-                    9기 최종 합격 발표를 안내드립니다. 모두들 수고하셨습니다!
-                    첨부 파일을 확인하시면 되겠습니다. 지원해주신 모든 분들에게 감사드립니다.
-                </p>
-            </a>
-            <div class='post-meta'>
-                <span class='post-meta-item'>2020. 11. 22</span>
-                <span class='post-meta-item'>대표</span>
-            </div>
-        </div>
-    </div>
 
     <div class="content-footer">
         <ul class="content-footer-nav">
