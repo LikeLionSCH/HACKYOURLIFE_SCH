@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/history.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- small-header - span값에 값넣기. -->
+<div id="small-header-wrap">
+    <div id="small-header-box">
+        <a href="{% url 'about' %}"><span class="small-header-nav">멋쟁이사자처럼이란?</span></a>
+        <a href="{% url 'staff' %}"><span class="small-header-nav">멋쟁이사자처럼 at 순천향대학교 운영진</span></a>
+        <a href="{% url 'history' %}"><span class="small-header-nav now-page">주요 연혁</span></a>
+    </div>
+</div>
+<!--------------------------------->
+
+<main>
+    <section id="timeline">
+
+        <!-- 년도 텍스트 -->
+        <div class="year-text">
+            <h1>2016</h1>
+        </div>
+
+        <!-- 왼쪽 카드 넣을 때는 가장 바깥 div에 left 클래스 추가하셈 -->
+        <!-- 안쪽에 img 태그 넣으면 이미지 카드로 만들 수 있는데 그 바깥 div에 timeline-img-card 클래스도 있어야됨 -->
+        <!-- 걍 left, right 클래스 보고 복붙하세용 ^_^ -->
+        <div class="timeline-item left">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content timeline-img-card js--fadeInRight">
+                <img src="{% static 'image/2019_hackathon.jpg' %}" alt="">
+                <h2>2016 멋사 연합 해커톤</h2>
+                <div class="date">2016.05.25</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias
+                    cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum
+                    excepturi amet in dolores. Alias, ullam.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content js--fadeInLeft">
+                <div class="date">2016.06.25</div>
+                <h2>2016 멋사 스터디팀 결성</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo debitis
+                    omnis dolor iste fugit totam quasi inventore!</p>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content js--fadeInRight">
+                <h2>Title</h2>
+                <div class="date">22 JUN 2016</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias
+                    cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum
+                    excepturi amet in dolores. Alias, ullam.</p>
+            </div>
+        </div>
+
+        <div class="year-text">
+            <h1>2017</h1>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content timeline-img-card js--fadeInLeft">
+                <img src="{% static 'image/2019_hackathon.jpg' %}" alt="">
+                <h2>Card Title</h2>
+                <div class="date">10 JULY 2016</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias
+                    cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum
+                    excepturi amet in dolores. Alias, ullam.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content timeline-img-card js--fadeInRight">
+                <img src="{% static 'image/2019_hackathon.jpg' %}" alt="">
+                <h2>Card Title</h2>
+                <div class="date">30 JULY 2016</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias
+                    cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum
+                    excepturi amet in dolores. Alias, ullam.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content js--fadeInLeft">
+                <div class="date">5 AUG 2016</div>
+                <h2>Quote</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta explicabo debitis
+                    omnis dolor iste fugit totam quasi inventore!</p>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content timeline-img-card js--fadeInRight">
+                <img src="{% static 'image/2019_hackathon.jpg' %}" alt="">
+                <h2>Card Title</h2>
+                <div class="date">19 AUG 2016</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias
+                    cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum
+                    excepturi amet in dolores. Alias, ullam.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-circle"></div>
+            <div class="timeline-content js--fadeInLeft">
+                <div class="date">1 SEP 2016</div>
+                <h2>Title</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias
+                    cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae dolor, nostrum
+                    excepturi amet in dolores. Alias, ullam.</p>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block script %}
+<!-- 카드 날라올 때 쓰는 js 라이브러리입니당 지우면 안됨!! -->
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="{% static 'js/history.js' %}"></script>
+{% endblock %}

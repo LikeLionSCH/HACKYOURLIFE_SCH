@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- small-header - span값에 값넣기. -->
+<div id="small-header-wrap">
+    <div id="small-header-box">
+        <a href="{% url 'about' %}"><span class="small-header-nav now-page">멋쟁이사자처럼이란?</span></a>
+        <a href="{% url 'staff' %}"><span class="small-header-nav">멋쟁이사자처럼 at 순천향대학교 운영진</span></a>
+        <a href="{% url 'history' %}"><span class="small-header-nav">주요 연혁</span></a>
+    </div>
+</div>
+<!--------------------------------->
+
+<main>
+    <section id="main-bg">
+        <div class="text-box">
+            <h1>멋쟁이사자처럼은,</h1>
+            <span>온라인 강의와 오프라인 활동을 통한 체계적인 </span><b>프로그래밍 교육 동아리</b><br><br>
+            <b>자체 개발된 온라인 플랫폼 '코드 라이언'</b><span>을 통해 강의를 듣고 과제를 수행합니다.</span><br>
+            <span>다양한 오프라인 활동과 병행하여 뜻을 같이하는 동료를 찾고,</span><br>
+            <b>자신이 만들고자 하는 서비스를 직접 프로그래밍</b><span>하도록 돕습니다.</span>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
