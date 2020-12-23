@@ -9,7 +9,7 @@
 
 <body>
     {% for assignment in assignments %}
-    {{ assignment }}<br>
+    <a href="{% url 'assignment_detail' assignment.assignment_id %}">{{ assignment.assignment_id }}</a><br>
     {% endfor %}
 </body>
 
