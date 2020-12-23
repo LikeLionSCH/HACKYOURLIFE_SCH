@@ -59,26 +59,33 @@ def read_Assignment_view(request):
 
     # 값을 읽어와 하나씩 assignment_list 에 담는다
     for data in datas:
-        assignment = Assignment.from_dict(data.to_dict())
-        assignment.assignment_id = data.id
+        assignment = Assignment.from_dict(data.to_dict(),data.id)
         assignments.append(assignment)
 
     # assignment_list 페이지 띄우고 과제 데이터 전달
     return render(request,'assignment_list.html',{'assignments':assignments})
 
-
+"""
+과제 모델 디테일 뷰
+@param : request, 과제 아이디 (str)
+@return : assignment_deta.html 반환 , assignment 객체 전달
+"""
 def get_Assignment_detail_view(request,assignment_id):
 
+    # firemase initialize
     db = initialize_firebase()
 
+    # 매개변수의 assignment_id 를 통해 파이어베이스의 과제 불러옴
     try:
         data = db.collection('Assignment').document(assignment_id).get()
     except google.cloud.exeption.NotFound:
         print('Not Found')
     
+    # 불러온 과제를 객체로 변경
     assignment = data.to_dict()
     print(assignment)
 
+    # 위에서 생성된 과제 모델 반환
     return render(request,'assignment_detail.html',{'assignment':assignment})
 
 

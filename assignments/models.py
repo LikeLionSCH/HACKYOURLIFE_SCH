@@ -38,13 +38,13 @@ class Assignment:
 
     """
     딕셔너리를 불러와 Assignment 객체로 바꿔주는 메소드
-    @pram : 파이어베이스로부터 불러온 dictionary 데이터
+    @pram : 파이어베이스로부터 불러온 dictionary 데이터, 과제 아이디값
     @return : 딕셔너리 데이터를 통해 만들어진 Assignment 객체
     """
-    def from_dict(data):
+    def from_dict(data,assignment_id):
 
         # 객체 생성
-        assignment = Assignment(data['author'],data['contents'],data['deadline'],data['title'])
+        assignment = Assignment(data['author'],data['contents'],data['deadline'],data['title'],assignment_id)
 
         # 생성된 객체 반환
         return assignment
