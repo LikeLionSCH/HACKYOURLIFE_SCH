@@ -38,6 +38,7 @@ main {
 
 /* 해커톤 설명부분 text */
 .hackathon-info {
+    width: 650px;
     position: relative;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 18px;
@@ -54,6 +55,7 @@ main {
 
 .hackathon-info2 {
     font-family: 'IBMPlexSansKR-Light';
+    width: 650px;
     font-size: 17px;
     color: #F39926;
     position: relative;
@@ -171,6 +173,7 @@ main {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
     color: rgba(255, 255, 255, 0.6);
+    width: 400px;
 }
 
 /* 갤러리 연결 7th*/

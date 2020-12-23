@@ -96,6 +96,7 @@ main {
     margin-top: 2vh;
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
+    width: 400px;
     color: rgba(255, 255, 255, 0.6);
 }
 
