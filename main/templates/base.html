@@ -13,7 +13,7 @@
 
     <!-- 링크 아이콘 링크-->
     <link rel="shortcut icon" href="{% static 'image/logo-favicon.ico' %}" type="image/x-icon">
-    <title>멋쟁이사자처럼 at 순천향대학교</title>
+    {% block title %}{% endblock %}
 
 
 </head>
@@ -25,7 +25,7 @@
             <img src="{% static 'image/mainLogo.png' %}" alt="mainLogo.png">
             <nav>
                 <ul>
-                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="{% url 'about' %}">ABOUT</a></li>
                     <li><a href="#">NOTICE</a></li>
                     <li><a href="#">ACTIVITY</a></li>
                     <li><a href="#">GALLARY</a></li>
