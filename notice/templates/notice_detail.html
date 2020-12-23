@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/notice_detail.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Notice</title>
+{% endblock %}
+
+{% block content %}
+
+<!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+<!-- small-header - span값에 값넣기. -->
+<div id="small-header-wrap">
+    <div id="small-header-box">
+        <a href="{% url 'notice_list' %}"><span class="small-header-nav now-page">공지사항</span></a>
+        <a href="{% url 'session_list' %}"><span class="small-header-nav">세션</span></a>
+    </div>
+</div>
+
+<div class='title-wrap'>
+    <span class='page-sub-title'>
+        NOTICE
+    </span>
+</div>
+
+<!-- 내용 -->
+<div class='content-wrap'>
+    <h2 id='board-title'>멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표</h2>
+    <div class='board-nav-box'>
+        <div class='post-meta'>
+            <span class='post-meta-item'>2020. 11. 22</span>
+            <span class='post-meta-item'>대표</span>
+        </div>
+        <div class='board-nav'>
+            <a href='#'><span class="board-nav-item">수정</span></a>
+            <a href='#'><span class="board-nav-item">삭제</span></a>
+        </div>
+    </div>
+
+    <div class='board-content-wrap'>
+        <img id="board-img" src="{% static 'image/2019_hackathon.jpg' %}" alt="테스트사진" />
+        <div class="board-content">
+            <!-- 제목이랑 같음. -->
+            <div class='board-header'>
+                <span id='board-sub-title'>멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표</span>
+                <a href='test.pdf' download><span id='download-link'>첨부 파일 다운로드</span></a>
+            </div>
+            <p class="content">
+                안녕하세요. 멋쟁이 사자처럼 at 순천향대학교 대표 최민석 입니다. </br>
+                9기 최종 합격 발표를 안내드립니다. 모두들 수고하셨습니다! </br>
+                첨부 파일을 확인하시면 되겠습니다. 지원해주신 모든 분들에게 감사드립니다. </br>
+            </p>
+        </div>
+    </div>
+
+    <div class="board-footer">
+        <ul class="footer-nav">
+            <a href='#'>
+                <li class="footer-nav-link">
+                    <span class="footer-nav-btn"><i class="fas fa-caret-left"></i></span>
+                    <!-- 여기 게시글 title 들어가야함!  -->
+                    멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표
+                </li>
+            </a>
+            <a href='#'>
+                <li class="footer-nav-link">
+                    <!-- 여기 게시글 title 들어가야함!  -->
+                    멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표
+                    <span class="footer-nav-btn"><i class="fas fa-caret-right"></i></span>
+                </li>
+            </a>
+        </ul>
+    </div>
+
+</div>
+
+{% endblock %}

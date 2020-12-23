@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'about.apps.AboutConfig',
+    'notice.apps.NoticeConfig',
     'assignments.apps.AssignmentsConfig',
     'session.apps.SessionConfig',
 ]
