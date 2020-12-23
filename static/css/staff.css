@@ -1,0 +1,134 @@
+/* ----------------------------- */
+/* 운영진 단체 이미지 */
+
+#staff-group {
+    width: 100%;
+    height: 280px;
+    margin: 0 auto;
+    background: url('/static/image/about_img.png') no-repeat center fixed;
+    background-size: cover;
+}
+
+#staff-group span {
+    display: block;
+    width: var(--main-width);
+    margin: 0 auto;
+    padding-top: 220px;
+    color: white;
+    text-align: center;
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 30px;
+    text-shadow: 1px 2px 3px #000;
+}
+
+/* ----------------------------- */
+/* 운영진 개인 프로필 section */
+
+#staff-info-section {
+    display: grid;
+    width: var(--main-width);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 70px 10px;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.staff-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 18px;
+}
+
+/* 대표 000 부분 div */
+.staff-profile div:nth-last-of-type(2) {
+    font-size: 22px;
+    margin-bottom: 13px;
+}
+
+/* 대표 000 글씨 밑에 줄 */
+.staff-profile div:nth-last-of-type(2):after {
+    content: "";
+    display: block;
+    margin-top: 4px;
+    margin-left: 145px;
+    width: 80px;
+    border-bottom: #8C8C8C 1px solid;
+}
+
+/* 연락 파비콘 부분 div */
+.staff-contacts {
+    margin-top: 10px;
+}
+
+.staff-contacts i {
+    font-size: 21px;
+    color: var(--SCH-skyblue);
+    margin-right: 5px;
+    opacity: 0.5;
+}
+
+.staff-contacts i:hover {
+    opacity: 1;
+}
+
+/* ----------------------------- */
+/* 프로필 이미지 호버 이펙트 관련 클래스 */
+
+.staff-img {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    transition: 0.3s;
+}
+
+.staff-img img {
+    transition: 0.3s;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.staff-img .staff-description {
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.staff-img .staff-description p {
+    max-width: 80%;
+    font-family: 'IBMPlexSansKR-Text';
+    color: white;
+    display: block;
+    margin: 0 auto;
+    padding: 30% 0 0 0;
+}
+
+.staff-img .staff-description p {
+    font-size: 24px;
+    transform: translateY(25px);
+    transition: 0.3s;
+}
+
+.staff-img:hover img {
+    transform: scale(1.1);
+}
+
+.staff-img:hover .staff-description {
+    opacity: 1;
+}
+
+/* ----------------------------- */
