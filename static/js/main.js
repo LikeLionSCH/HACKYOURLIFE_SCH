@@ -155,14 +155,14 @@ function getCookie(name) {
 
 async function googleSignIn(){
   const firebaseConfig = {
-    apiKey: "",
+    apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
     authDomain: "likelion-sch.firebaseapp.com",
-    databaseURL: "https://likelion-sch.firebaseio.com/",
+    databaseURL: "https://likelion-sch.firebaseio.com",
     projectId: "likelion-sch",
     storageBucket: "likelion-sch.appspot.com",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: ""
+    messagingSenderId: "654141769540",
+    appId: "1:654141769540:web:c744ef4d2df58003093911",
+    measurementId: "G-PXNX9ZZCEN"
   };
 
   firebase.initializeApp(firebaseConfig);
