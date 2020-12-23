@@ -1,39 +1,12 @@
 from django.shortcuts import render,redirect
 
 import firebase_admin
+import google
 from firebase_admin import credentials
 from firebase_admin import firestore
+
 from hackyourlife_sch.firebase import initialize_firebase
-
-"""
-과제 클래스
-"""
-class Assignment:
-
-    """
-    생성자
-    @param : self, 작성자 문자열, 컨탠츠 문자열, 마감일자 문자열, 제목 문자열
-    """
-    def __init__(self,author,contents,deadline,title):
-        self.author = author
-        self.contents = contents
-        self.deadline = deadline
-        self.title = title
-
-    """
-    Assignment 클래스를 딕셔너리 자료구조로 바꿔주는 메소드
-    @param : self
-    @return : 딕셔너리로 변환된 클래스의 데이터
-    """
-    def to_dict(self):
-        data = {
-            'author':self.author,
-            'contents':self.contents,
-            'deadline':self.deadline,
-            'title':self.title,
-        }
-        
-        return data
+from .models import Assignment
 
 
 """
@@ -79,22 +52,34 @@ def read_Assignment_view(request):
     db = initialize_firebase()
 
     # template 으로 전달해줄 리스트 생성
-    assignment_list = []
+    assignments = []
 
-    # 파이어 베이스 접근
-    assignment_ref = db.collection('Assignment')
-    assignments = assignment_ref.stream()
+    # firebase 에 접근해 과제 목록들 불러옴
+    datas = db.collection('Assignment').stream()
 
     # 값을 읽어와 하나씩 assignment_list 에 담는다
-    for assignment in assignments:
-        assignment_list.append(assignment)
-        print(assignment_list)
+    for data in datas:
+        assignment = Assignment.from_dict(data.to_dict())
+        assignment.assignment_id = data.id
+        assignments.append(assignment)
 
     # assignment_list 페이지 띄우고 과제 데이터 전달
-    return render(request,'assignment_list.html',{'assignments':assignment_list})
+    return render(request,'assignment_list.html',{'assignments':assignments})
 
 
-#read_AssignmentList()
-#create_Assignment()
+def get_Assignment_detail_view(request,assignment_id):
+
+    db = initialize_firebase()
+
+    try:
+        data = db.collection('Assignment').document(assignment_id).get()
+    except google.cloud.exeption.NotFound:
+        print('Not Found')
+    
+    assignment = data.to_dict()
+    print(assignment)
+
+    return render(request,'assignment_detail.html',{'assignment':assignment})
+
 
 

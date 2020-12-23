@@ -8,9 +8,7 @@
 </head>
 
 <body>
-    {% for assignment in assignments %}
-    <a href="{% url 'assignment_detail' assignment.assignment_id %}">{{ assignment.assignment_id }}</a><br>
-    {% endfor %}
+    {{ assignment.title }}
 </body>
 
 </html>
