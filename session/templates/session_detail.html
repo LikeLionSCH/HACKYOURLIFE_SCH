@@ -24,7 +24,7 @@
             <!-- detail 요소가 보여지는 내용 -->
             <div class="update-delete-wrap">
                 <a href="{% url 'session_delete' session.session_id %}">삭제</a>
-                <a href="{# url 'session_update' session.session_id #}">수정</a>
+                <a href="{% url 'session_update' session.session_id %}">수정</a>
             </div>
 
             <div class="info-box">

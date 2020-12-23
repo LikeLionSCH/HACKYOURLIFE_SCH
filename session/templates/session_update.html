@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/session_create.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            SESSION
+        </span>
+    </div>
+
+    <!-- form -->
+
+    <div class="main-wrap">
+        <form class="form-box" action="{% url 'session_update' session.session_id %}" method="POST">
+            {% csrf_token %}
+            <div class="title-box">
+                <p>제목</p>
+                <input type="text" name="title" placeholder="ex. html / css 를 이용한 네이버 실시간 검색어 클론코딩" value="{{ session.title }}">
+
+                <!-- 세션 진행자 input 태그 -->
+                <input type="hidden" id="host" name="host" value="">
+            </div>
+            <div class="date-box">
+                <p>세션 일시</p>
+                <input type="date" name="session_date" value="{{ session.session_date }}">
+            </div>
+            <div class="link-box">
+                <p>구글 문서 링크</p>
+                <input type="text" name="google_link" placeholder="ex. html / css 를 이용한 네이버 실시간 검색어 클론코딩" value="{{ session.google_link }}">
+            </div>
+            <div class="explanation-box">
+                <p>부가 설명</p>
+                <textarea name="content" cols="30" rows="10">{{ session.content }}</textarea>
+            </div>
+            <input type="submit" value="SUBMIT">
+        </form>
+    </div>
+
+    <!-- ------- -->
+
+
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/session.js' %}"></script>
+{% endblock %}
