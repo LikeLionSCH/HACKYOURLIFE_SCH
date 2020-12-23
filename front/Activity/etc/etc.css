@@ -97,6 +97,7 @@ main {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
     color: rgba(255, 255, 255, 0.6);
+    width: 400px;
 }
 
 /* 갤러리 연결 7th*/

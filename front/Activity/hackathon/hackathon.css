@@ -23,14 +23,13 @@ main {
 }
 
 /* 해커톤 설명부분 div */
-.hackathon-info-div {
-    display: inline-block;
-}
 
 /* 해커톤 설명부분 p */
-.hackathon-info-p {
+.hackathon-info-div {
     padding: 2vh;
     position: relative;
+    width: 650px;
+    margin: 0 auto;
     /* background-color: rgb(255, 255, 255, 0.2); */
     border-radius: 5px;
 }
@@ -42,13 +41,14 @@ main {
     font-size: 18px;
     color: white;
     display: inline-block;
-    text-align: center;
 }
 
 /* 해커톤 설명 두 번째 거  */
 
 .hackathon-info-p2{
-    /* position: relative; */
+    margin: 0 auto;
+    display: block;
+    width: 600px;
     height: 10vh;
 }
 
@@ -59,7 +59,6 @@ main {
     position: relative;
     margin-top: 2vh;
     display: inline-block;
-    text-align: center; 
 }
 
 /* 이미지 설정 */
@@ -171,6 +170,7 @@ main {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 17px;
     color: rgba(255, 255, 255, 0.6);
+    width: 400px;
 }
 
 /* 갤러리 연결 7th*/
