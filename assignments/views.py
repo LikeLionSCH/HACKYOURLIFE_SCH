@@ -65,9 +65,10 @@ def read_Assignment_view(request):
     # assignment_list 페이지 띄우고 과제 데이터 전달
     return render(request,'assignment_list.html',{'assignments':assignments})
 
+
 """
 과제 모델 디테일 뷰
-@param : request, 과제 아이디 (str)
+@param : request, 과제의 문자열 아이디값
 @return : assignment_deta.html 반환 , assignment 객체 전달
 """
 def get_Assignment_detail_view(request,assignment_id):
@@ -82,11 +83,31 @@ def get_Assignment_detail_view(request,assignment_id):
         print('Not Found')
     
     # 불러온 과제를 객체로 변경
-    assignment = data.to_dict()
-    print(assignment)
+    assignment = Assignment.from_dict(data.to_dict(),data.id)
 
     # 위에서 생성된 과제 모델 반환
     return render(request,'assignment_detail.html',{'assignment':assignment})
+
+
+"""
+과제 삭제 함수
+@param : request, 과제의 문자열 아이디값
+@return : assignment_list로 리다이렉트
+"""
+def delete_Assignment(requset,assignment_id):
+
+    # firebase initialize
+    db = initialize_firebase()
+
+    # 매개변수의 과제 id 로 데이터를 불러와 삭제
+    db.collection('Assignment').document(assignment_id).delete()
+
+    # 리스트 뷰로 리다이렉트
+    return redirect('assignment_list')
+
+
+def update_Assignment_view(request):
+    pass
 
 
 

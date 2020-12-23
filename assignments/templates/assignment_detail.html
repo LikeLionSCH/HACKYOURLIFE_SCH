@@ -8,7 +8,8 @@
 </head>
 
 <body>
-    {{ assignment.title }}
+    {{ assignment.title }}<br>
+    <a href="{% url 'assignment_delete' assignment.assignment_id %}">삭제</a>
 </body>
 
 </html>
