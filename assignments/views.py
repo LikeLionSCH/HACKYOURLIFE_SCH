@@ -23,13 +23,13 @@ def create_Assignment_view(request):
         db = initialize_firebase()
 
         # form의 값 받아오는 코드
-        author = request.POST['author']
+        # author = request.POST['author']
         contents = request.POST['contents']
         deadline = request.POST['deadline']
         title = request.POST['title']
 
         # 과제 객체 생성
-        new_assignment = Assignment(author,contents,deadline,title)
+        new_assignment = Assignment("author",contents,deadline,title)
 
         # firebase 에 데이터 생성
         db.collection('Assignment').document().set(new_assignment.to_dict())
@@ -106,33 +106,46 @@ def delete_Assignment(requset,assignment_id):
     return redirect('assignment_list')
 
 
+"""
+과제 모델 수정하는 함수
+@param : request, 등록된 과제의 아이디값
+@return : render, redirect
+"""
 def update_Assignment_view(request,assignment_id):
 
+    # firebase initialize
     db = initialize_firebase()
 
+    # 매개변수의 과제 아이디값으로 파이어베이스에서 과제 데이터 불러오는 코드
     try:
         data = db.collection('Assignment').document(assignment_id).get()
     except google.cloud.exeption.NotFound:
         print('Not Found')
     
+    # 불러온 데이터로 객체 생성
     assignment = Assignment.from_dict(data.to_dict(),data.id)
 
+    # 리퀘스트 method 가 POST 일 경우
     if( request.method == 'POST' ):
 
-        author = request.POST['author']
+        # from 으로 부터 입력받은 값 불러오는 코드
+        # author = request.POST['author']
         contents = request.POST['contents']
         deadline = request.POST['deadline']
         title = request.POST['title']
 
+        # 파이어베이스에 접속하여 입력된 값으로 수정
         db.collection('Assignment').document(assignment_id).update({
-            'author' : author,
+            'author' : "author",
             'contents' : contents,
             'deadline' : deadline,
             'title' : title,
         })
 
+        # 수정 된 과제 디테일 뷰로 리다이렉트
         return redirect('assignment_detail',assignment_id)
     
+    # POST 가 아닐 경우 update 창 띄워줌
     return render(request,'assignment_update.html',{'assignment':assignment})
 
 
