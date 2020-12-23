@@ -83,7 +83,6 @@ def get_Assignment_detail_view(request,assignment_id):
     
     # 불러온 과제를 객체로 변경
     assignment = data.to_dict()
-    print(assignment)
 
     # 위에서 생성된 과제 모델 반환
     return render(request,'assignment_detail.html',{'assignment':assignment})
