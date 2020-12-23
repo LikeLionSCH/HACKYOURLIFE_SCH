@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - FAQ</title>
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            FAQ
+        </span>
+    </div>
+
+    <section id="faq-content">
+        <!-- input 체크박스와 질문 label이 같은 값의 id,for를 갖고 있어야 제대로 동작 -->
+        <!-- 따라서 질문이 추가될 때마다 q1, q2, q3... 로 id,for 값을 바꿔서 맞춰줘야 함 -->
+        <div class="faq-question">
+            <input id="q1" type="checkbox" class="panel">
+            <div class="plus">+</div>
+            <label for="q1" class="question">오프라인 활동의 경우 교내에서만 이뤄지나요?</label>
+            <div class="answer">
+                대부분의 수업은 교내에서 이뤄지지만 연합 해커톤 등 외부 활동의 경우 그렇지만 아닐 수도 있습니다.<br>
+                외부 활동 장소에 대한 공지는 미리 올라가므로 자주 공지를 확인해주세요!
+            </div>
+        </div>
+        <!---------------------------------------------------->
+        <div class="faq-question">
+            <input id="q2" type="checkbox" class="panel">
+            <div class="plus">+</div>
+            <label for="q2" class="question">비전공자도 지원할 수 있나요?</label>
+            <div class="answer">
+                비전공자도 부담 없이 무료로 코딩 교육을 즐길 수 있는 동아리가 바로 멋쟁이사자처럼입니다!
+            </div>
+        </div>
+        <!---------------------------------------------------->
+        <div class="faq-question">
+            <input id="q3" type="checkbox" class="panel">
+            <div class="plus">+</div>
+            <label for="q3" class="question">How much wood would a woodchuck chuck?</label>
+            <div class="answer">A woodchuck would chuck all the wood he could chuck, if a woodchuck could
+                chuck wood!</div>
+        </div>
+        <!---------------------------------------------------->
+    </section>
+</main>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+/* ----------------------------- */
+/* 전체 섹션 */
+
+#faq-content {
+    width: var(--main-width);
+    margin: 0 auto;
+    padding: 50px 0 100px 0;
+    overflow: hidden;
+}
+
+/* ----------------------------- */
+/* 질문 하나에 해당하는 영역 class */
+
+.faq-question {
+    padding: 20px 0;
+    border-bottom: 1px dotted #8c8c8c;
+}
+
+.panel {
+    display: none;
+}
+
+/* 질문 */
+.question {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 10px 10px 0 50px;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.question:hover {
+    color: var(--SCH-skyblue);
+}
+
+/* 답변 */
+.answer {
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    margin: 0 40px;
+    padding: 0px 14px;
+    z-index: -1;
+    opacity: 0;
+    transition: .4s ease;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 20px;
+}
+
+.panel:checked~.answer {
+    height: auto;
+    opacity: 1;
+    padding: 14px;
+}
+
+.plus {
+    position: absolute;
+    line-height: 100%;
+    margin: 8px 0 0 20px;
+    z-index: 5;
+    user-select: none;
+    transition: .2s ease;
+    font-size: 38px;
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+.panel:checked~.plus {
+    transform: rotate(45deg);
+    color: var(--SCH-skyblue);
+}
