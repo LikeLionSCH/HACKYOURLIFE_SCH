@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/report_create.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            SUBMIT
+        </span>
+    </div>
+
+
+    <!-- form -->
+    <div class="main-wrap">
+        <form method="POST" class="form-box" action="{% url 'report_create' assignment_id %}">
+            {% csrf_token %}
+            <div class="repository-box">
+                <p>레포지토리 주소</p>
+                <input type="text" name="repository_address"
+                    placeholder="ex. https://github.com/LikeLionSCH/HACKYOURLIFE_SCH">
+            </div>
+            <div class="ckeditor-box">
+                <p>출력화면 & 부가설명</p>
+                <textarea name="contents" cols="30" rows="10"></textarea>
+            </div>
+            <input type="submit" value="SUBMIT">
+        </form>
+    </div>
+    <!-- ------- -->
+
+</main>
+{% endblock %}

@@ -22,9 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('', include('about.urls')),
-    path('assignments/', include('assignments.urls')),
+    path('assignment/', include('assignments.urls')),
     path('', include('notice.urls')),
     path('', include('session.urls')),
-    path('reports/',include('reports.urls')),
+    path('report/',include('reports.urls')),
 ]
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
