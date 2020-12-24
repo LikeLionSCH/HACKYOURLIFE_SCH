@@ -91,8 +91,62 @@ def get_Report_detail_view(request,report_id):
     # 레포트 데테일 페이지 렌더링, 레포트 데이터 전달
     return render(request,'report_detail.html',{'report',report})
 
+"""
+제출한 과제를 수정하는 함수
+@param : request, 수정할 레포트의 id
+@return : report_update.html 렌더링, 수정한 레포트의 디테일 페이지로 리다이렉트
+"""
 def update_Report_view(request,report_id):
-    pass
+    
+    # 파이어베이스 초기화
+    db = initialize_firebase()
 
+    # 매개변수의 레포트 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
+    try:
+        data = db.collection('Report').document(report_id).get()
+    except google.cloud.exeption.NotFound:
+        print('report not found')
+
+    # 파이어베이스에서 불러온 데이터로 객체 생성
+    report = Report.from_dict(data.to_dict(),data.id)
+
+    if (request.method == 'POST'):
+
+        # form 으로부터 값을 불러오는 코드
+        repository_address = request.POST['repository_address']
+        contents = request.POST['contents']
+
+        # 현제 시간을 불러와 지정 형식으로 포멧팅
+        now = datetime.now()
+        time = format(str(now.year) + '-' + str(now.month) + '-' + str(now.day) + ' ' + str(now.hour) + '시' + str(now.minute) + '분')
+
+        # 파이어베이스에 접속하여 입력된 값으로 수정
+        db.collection('Report').document(report_id).update({
+            'repository_address' : repository_address,
+            'contents' : contents,
+            # 수정 시간도 반영 할지 논의 필요
+            'submit_date' : time,
+        })
+
+        # 수정 한 레포트의 디테일 페이지로 리다이렉트
+        return redirect('report_detail',report_id)
+    
+    # report_update 렌더링, 레포트의 데이터 전달
+    return render(request,'report_update.html',{'report',report})
+
+
+"""
+레포트를 삭제하는 함수
+@param : request, 삭제할 레포트의 id
+@return : 리스트 페이지로 리다이렉트
+"""
 def delete_Report(request,report_id):
-    pass
+     
+    #파이어 베이스 초기화
+    db = initialize_firebase()
+
+    # 파이어베이스에서 삭제할 데이터를 불러와 삭제
+    db.collection('Report').document(report_id).delete()
+
+    # 리스트 페이지로 리다이렉트
+    return redirect('report_list')
