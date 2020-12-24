@@ -28,8 +28,7 @@ def create_Report_view(request,assignment_id):
 
         # 현제 시간을 구해 정해진 타입으로 포멧
         now = datetime.now()
-        time = format(str(now.year) + '-' + str(now.month) + '-' + str(now.day) + ' ' + str(now.hour) + '시' + str(now.minute) + '분')
-        print(time)
+        time = now.strftime('%Y-%m-%d %H:%M')
 
         # 새로운 레포트 객체 생성
         report = Report(assignment_id,'author',contents,repository_address,time,'체점중')
@@ -118,7 +117,7 @@ def update_Report_view(request,report_id):
 
         # 현제 시간을 불러와 지정 형식으로 포멧팅
         now = datetime.now()
-        time = format(str(now.year) + '-' + str(now.month) + '-' + str(now.day) + ' ' + str(now.hour) + '시' + str(now.minute) + '분')
+        time = now.strftime('%Y-%m-%d %H:%M')
 
         # 파이어베이스에 접속하여 입력된 값으로 수정
         db.collection('Report').document(report_id).update({
