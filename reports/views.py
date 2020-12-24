@@ -41,3 +41,38 @@ def create_Report_view(request,assignment_id):
 
     # 포스트가 아닐경우 report_create 페이지 렌더
     return render(request,'report_create.html', {'assignment_id':assignment_id})
+
+
+"""
+레포트의 목록을 과제별로 나눠서 띄워주는 함수
+@param : request, 해당하는 과제의 id
+@return : report_list.html 렌더링, 해당하는 과제 목록들 전달
+"""
+def read_Report_list_view(request, assignment_id): 
+    
+    # 파이어 베이스 초기화
+    db = initialize_firebase()
+
+    # 파이어베이스에서 assignment_id 값이 매개변수로 불로온 과제의 id값과 일치하는 것만 가져오는 쿼리문
+    datas = db.collection('Report').where('assignment_id','==',assignment_id).stream()
+
+    reports = []
+
+    # 템플릿으로 전달을 위해 불러온 데이터를 객체로 변환하여 전달할 리스트 생성
+    for data in datas:
+        report = Report.from_dict(data.to_dict(),data.id)
+        reports.append(report)
+
+    # report_list.html 페이지 렌더링, 과제 목록 전달
+    return render(request,"report_list.html",{'reports':reports})
+
+
+
+def get_Report_detail_view(request,report_id):
+    pass
+
+def update_Report_view(request,report_id):
+    pass
+
+def delete_Report(request,report_id):
+    pass
