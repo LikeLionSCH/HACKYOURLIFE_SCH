@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/report_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            과제의 제목이 들어가는 공간
+        </span>
+    </div>
+
+    <!-- 과제 디테일을 보여주는 부분 -->
+
+    <div class="main-wrap">
+        <div class="detail-box">
+            <!-- detail 요소가 보여지는 내용 -->
+            <div class="update-delete-wrap">
+                <a href="#">수정</a>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">
+                    <span>INFO</span>
+                </div>
+                <span class="give-margin font-size-20">제출일 : <div class="text-bold">2021.03.02</div>
+                </span><br>
+                <span class="font-size-20">작성자 : <div class="text-bold">김태완</div>
+                </span>
+            </div>
+
+            <div class="detail-box mg-top-60">
+                <div class="detail-title">
+                    <span>DETAIL</span>
+                </div>
+                <!-- detail contents 가 들어가는 부분 -->
+                <div class="detail-contents">
+                    제출한 과제의 자세한 내용들이 들어가는 공간 <br>
+                    ck 에디터로 작성된 아이들이 들어갈 공간 임니디.<br>
+                    어쩌구<br>
+                    저쩌구<br>
+                    씰룩<br>
+                    씰룩 ^~^<br>
+                </div>
+            </div>
+
+            <!-- ------------------------------- -->
+
+        </div>
+    </div>
+
+
+</main>
+
+{% endblock %}
