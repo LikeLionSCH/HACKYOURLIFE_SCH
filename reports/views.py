@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 
 from firebase_admin import credentials
 from firebase_admin import firestore
+import google
 
 from datetime import datetime
 
@@ -68,8 +69,27 @@ def read_Report_list_view(request, assignment_id):
 
 
 
+"""
+레포트의 디테일 뷰를 보여주는 함수
+@param : request, 보여줄 레포트의 id
+@return : report_detail.html 렌더링, 해당 레포트 데이터 전달
+"""
 def get_Report_detail_view(request,report_id):
-    pass
+    
+    # 파이어베이스 초기화
+    db = initialize_firebase()
+
+    # 매개변수의 레포트 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
+    try:
+        data = db.collection('Report').document(report_id).get()
+    except google.cloud.exeption.NotFound:
+        print('report not found')
+
+    # 불러온 데이터로 레포트 객체 생성
+    report = Report.from_dict(data.to_dict(),data.id)
+
+    # 레포트 데테일 페이지 렌더링, 레포트 데이터 전달
+    return render(request,'report_detail.html',{'report',report})
 
 def update_Report_view(request,report_id):
     pass
