@@ -8,6 +8,11 @@ from datetime import datetime
 from hackyourlife_sch.firebase import initialize_firebase
 from .models import Report
 
+"""
+레포트를 등록 해주는 함수
+@param : request, 등록할 레포트에 해당하는 과제의 id
+@return : 래포트 등록하는 페이지 (report_create.html) 페이지 렌더링
+"""
 def create_Report_view(request,assignment_id):
 
     # 리퀘스트의 메소드가 POST일 경우에만
