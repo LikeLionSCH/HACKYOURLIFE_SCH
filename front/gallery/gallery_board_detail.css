@@ -294,8 +294,10 @@ main {
     background-color: aliceblue;
 }
 
-/* 여기서 부터 gallery_post_detail----------------------------- */
+/****************************************************************/
+/* 여기서 부터 gallery_board_detail----------------------------- */
 
+/* 소제목------- */
 .title-wrap {
     text-align: center;
     margin-bottom: 10px;
@@ -307,81 +309,140 @@ main {
     border-bottom: 2px solid var(--SCH-skyblue);
     font-family: 'IBMPlexSansKR-Text';
 }
+/* ----------- */
 
 /* 모든 내용을 포함하는 */
 .main-wrap {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: flex;
     justify-content: center;
 }
 
+
 .detail-box {
     width: var(--main-width);
-    height: auto;
+    height: 100%;
     margin-top: 50px;
 }
 
-.update-delete-wrap {
+/* 삭제, 수정, 뒤로가기 버튼 */
+.menu{
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: var(--main-width);
+    margin: 0 auto;
 }
 
-.update-delete-wrap a {
-    padding: 0px 5px;
+/* 삭제, 수정 font */
+.update-delete-wrap{
+    text-align: right;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size:20px;
+}
+
+/* 삭제, 수정 */
+.update-delete-btn{
+    padding: 0px 5px 0px 0px;
+    color: var(--SCH-skyblue);
+}
+/* 삭제, 수정 버튼 경계 bar */
+a:nth-child(1) .update-delete-btn{
+    border-right: 1px solid #e4e4e4;
+}
+
+/* 삭제, 수정 hover시 */
+.update-delete-btn:hover{
+    color: black;
+    transition: 0.3s;
+}
+
+/* 뒤로가기 버튼을 삭제, 수정 버튼과 같은 줄에  */
+.back-wrap{
+    display: inline-block;
+}
+
+/* 뒤로가기 버튼 이미지 크기,색  */
+i{
+    font-size:30px;
     color: var(--SCH-skyblue);
 }
 
+/* 뒤로가기 버튼 hover시  */
+i:hover{
+    color: #168bb3;
+    transition: 0.3s;
+}
+
+/* 게시물 제목, IMAGE  */
 .info-title,
 .detail-title {
     width: 100%;
+    height: 100%;
     padding-bottom: 1px;
     margin-top: 40px;
     border-bottom: 1px solid rgb(228, 228, 228);
 }
 
-.info-title span,
+/* 게시물 제목  */
+.info-title span {
+    border-bottom: 2px solid lightgray;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 28px;
+}
+
+/* IMAGE  */
 .detail-title span {
     border-bottom: 2px solid lightgray;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 24px;
 }
 
-.info-box>span {
+/* DATE, PLACE */
+.info-contents>span {
     font-size: 20px;
-    width: 70px;
-    line-height: 70px;
+    font-family: 'IBMPlexSansKR-Text';
+    display: block;
 }
 
-.image-contents {
-    margin: 25px 0px 100px 0px;
-    font-size: 20px;
-}
-
-.button {
-    width: 1100px;
-    line-height: 50px;
-    height: 50px;
+/* 이미지 포함하는 내용과 나머지 간의 간격을 주기 위함*/
+.image-contents{
+    margin: 5vh auto;
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 60px;
-    background-color: white;
-    border: 2px solid var(--SCH-skyblue);
-    color: var(--SCH-skyblue);
-    border-radius: 15px;
-    transition: .4s;
+    width: 100%;
+    height: 100%;
+
+    font-size: 20px;
+    font-family: 'IBMPlexSansKR-Text';
 }
 
-.button:hover {
-    background-color: var(--SCH-skyblue);
-    color: rgb(138, 126, 126);
+/* 이미지 스타일 */
+.image{
+    background-color: #fff;
+    box-shadow: inset 0px 0px 6px 8px rgba(255,255,255,1);
+
+    /* 사진과 그림자 간의 간격 */
+    /* 가운데 정렬 */
+
+    margin: 0 auto 8vh;
+    padding: 3px;
+ 
+    border:3px solid #e4e4e4;
+    /* 사진 크기 */
+    width: 65%;
+    height: 450px;
+
+    /* background image 속성 */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 
 /* **************************** */
 .text-bold {
     display: inline;
-    font-family: 'IBMPlexSansKR-Text';
+    font-family: 'IBMPlexSansKR-Light';
 }
 
 .mg-top-60 {

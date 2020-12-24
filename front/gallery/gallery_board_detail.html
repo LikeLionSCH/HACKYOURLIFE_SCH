@@ -1,8 +1,6 @@
     <!-- 
 
-    2020. 11. 19. 
-    MINSEOK
-    메인 페이지
+    갤러리 게시물
     
  -->
     <!DOCTYPE html>
@@ -56,79 +54,82 @@
                 </span>
             </div>
 
-            <main>
+            <!-- 게시물 디테일을 보여주는 부분 -->
+            <div class="main-wrap">
+                <div class="detail-box">
+                    <!-- detail 요소가 보여지는 내용 -->
 
-                <!--게시판 제목-->
-                <div class='title-wrap'>
-                    <span class='page-sub-title'>
-                        사진 제목
-                    </span>
-                </div>
-
-                <!-- 게시물 디테일을 보여주는 부분 -->
-
-                <div class="main-wrap">
-                    <div class="detail-box">
-                        <!-- detail 요소가 보여지는 내용 -->
-                        <div class="update-delete-wrap">
-                            <a href="#">삭제</a>
-                            <a href="#">수정</a>
+                    <div class="menu">
+                        <div class="back-wrap">
+                            <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
+                            <a href="#"><i class="far fa-arrow-alt-circle-left"></i></a>
                         </div>
 
-                        <div class="info-box">
-                            <div class="info-title">
-                                <span>INFO</span>
-                            </div>
+                        <div class="update-delete-wrap">
+                            <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
+                            <a href="#"><span class="update-delete-btn">삭제</span></a>
+                            <a href="#"><span class="update-delete-btn">수정</span></a>
+                        </div>
+                    </div>
+
+                    <!-- 게시물 정보 -->
+                    <div class="info-box">
+                        <!-- 게시물 제목 -->
+                        <div class="info-title">
+                            <span>게시물 제목</span>
+                        </div>
+                        <div class="info-contents">
+                            <!-- 게시물 작성 날짜 -->
+                            <span>날짜 : <div class="text-bold">2020.04.10</div></span>
+                            <!-- 모임 장소 -->
+                            <span>장소 : <div class="text-bold">아산 온양온천역--</div></span>
+                            <br>
+                            <!-- 사진 설명 -->
                             <span>
-                                <div class="text-bold">처음 만난 날</div>
-                            </span><br>
-                            <span>DATE : <div class="text-bold">2021.03.02</div>
+                                <div class="text-bold">오늘은 처음으로 멋사 사람들을 만났어요 어쩌고 저쩌고~~~~~~~~~</div>
                             </span>
                         </div>
-
-                        <div class="detail-box mg-top-60">
-                            <div class="detail-title">
-                                <span>IMAGE</span>
-                            </div>
-                            <!-- detail contents 가 들어가는 부분 -->
-                            <div class="image-contents">
-                                <img width="100%" height="100%" src="test1.jpg" alt="test1"></a> <br>
-                                <img width="100%" height="100%" src="test1.jpg" alt="test1"></a><br>
-                            </div>
-                        </div>
-
-                        <!-- th_gallery_board로 이동 -->
-                        <a href="#">
-                            <div class="button">BACK</div>
-                        </a>
                     </div>
-                </div>
 
-
-            </main>
-
-            <!-- 퓨터 -->
-            <footer>
-                <div class="footer-box">
-                    <div class="contact-box">
-                        <label>CONTACT US</label>
-                        <!-- 인스타, 페북, 오픈카톡 연락처-->
-                        <div class="icons">
-                            <a href="#"><i class="fas fa-comment-dots"></i></a>
-                            <a href="#"><i class="fab fa-instagram-square"></i></a>
-                            <a href="#"><i class="fab fa-facebook-square"></i></a>
+                    <!-- 사진 -->
+                    <div class="detail-box">
+                        <div class="detail-title">
+                            <span>사진</span>
+                        </div>
+                        <!-- 사진이 들어가는 곳 -->
+                        <div class="image-contents">
+                                <!-- 사진(반복) -->
+                            <div class="image" style="background-image:url('test1.jpg')"></div>
+                            <div class="image" style="background-image:url('test1.jpg')"></div>
                         </div>
                     </div>
-                    <div class="copyright-text">
-                        <span>Copyright ©</span> likelion at SCH 8th
-                    </div>
-                    <img src="../image/slogan2.png" alt="slogan2.png">
                 </div>
-            </footer>
-            <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <!-- <script src="script/jquery-1.12.3.js"></script> -->
-            <script src="main.js"></script>
+            </div>
+        </main>
+
+        <!-- 퓨터 -->
+        <footer>
+            <div class="footer-box">
+                <div class="contact-box">
+                    <label>CONTACT US</label>
+                    <!-- 인스타, 페북, 오픈카톡 연락처-->
+                    <div class="icons">
+                        <a href="#"><i class="fas fa-comment-dots"></i></a>
+                        <a href="#"><i class="fab fa-instagram-square"></i></a>
+                        <a href="#"><i class="fab fa-facebook-square"></i></a>
+                    </div>
+                </div>
+                <div class="copyright-text">
+                    <span>Copyright ©</span> likelion at SCH 8th
+                </div>
+                <img src="../image/slogan2.png" alt="slogan2.png">
+            </div>
+        </footer>
+
+        <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- <script src="script/jquery-1.12.3.js"></script> -->
+        <script src="main.js"></script>
     </body>
 
     </html>
