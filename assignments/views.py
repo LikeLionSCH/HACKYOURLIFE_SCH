@@ -46,7 +46,7 @@ def create_Assignment_view(request):
 @param : request
 @return : assignment_list 페이지 반환, 과제 목록 전달
 """
-def read_Assignment_view(request):
+def read_Assignment_list_view(request):
 
     # firebase initialize
     db = initialize_firebase()
