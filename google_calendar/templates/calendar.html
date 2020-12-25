@@ -1,17 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar</title>
-</head>
-<body>
-    Success
-    <br>
+{% extends 'base.html' %}
 
-    {% for value in data %}
-        {{value.0}}~{{value.1}}에 할당된 일정: {{value.2}}
-        <br>
-    {% endfor %}
-</body>
-</html>
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="https://fullcalendar.io/releases/fullcalendar/3.10.0/fullcalendar.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Assignment</title>
+{% endblock %}
+
+{% block content %}
+<div class='title-wrap'>
+    <span class='page-sub-title'>
+        Calendar
+    </span>
+</div>
+
+<!-- 내용 -->
+<div class="main-content">
+    <div id="calendar"></div>
+
+    <input type="hidden" id="input_title" value="Lunch"></div>
+    <input type="hidden" id="input_desc" value="오늘의 점심은?"></div>
+    <input type="hidden" id="input_start" value="2020-12-17"></div>
+    <input type="hidden" id="input_end" value="2020-12-19"></div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- UIUX jquery (main.js) -->
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://fullcalendar.io/releases/fullcalendar/3.10.0/lib/moment.min.js"></script>
+<script src="https://fullcalendar.io/releases/fullcalendar/3.10.0/lib/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://fullcalendar.io/releases/fullcalendar/3.10.0/fullcalendar.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="{% static 'js/calendar.js' %}"></script>
+{% endblock %}
