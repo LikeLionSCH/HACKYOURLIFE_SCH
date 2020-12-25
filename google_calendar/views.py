@@ -30,8 +30,8 @@ def calendar(request):
         for event in events:
             start_time = event['start'].get('dateTime', event['start'].get('date'))
             end_time = event['end'].get('dateTime', event['end'].get('date'))
-            title = event['summary']
-            description = event['description'] if 'description' in event else ''
+            title = event['summary'] if 'summary' in event else '제목 없음'
+            description = event['description'] if 'description' in event else '설명 없음'
             data.append({
                 'title': title,
                 'description': description,
