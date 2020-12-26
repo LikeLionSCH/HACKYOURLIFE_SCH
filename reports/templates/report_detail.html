@@ -26,7 +26,7 @@
                 <a href="#">목록으로 가기</a>
                 <div>
                     <a href="{% url 'report_update' assignment_id report.report_id %}">수정</a>
-                    <a href="{% url 'report_delete' report.report_id %}">삭제</a>
+                    <a href="{% url 'report_delete' assignment_id report.report_id %}">삭제</a>
                 </div>
             </div>
 

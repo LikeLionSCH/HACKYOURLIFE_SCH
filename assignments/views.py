@@ -62,6 +62,23 @@ def read_Assignment_list_view(request):
         assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)
         assignments.append(assignment)
 
+    # 검색 버튼을 눌렀을 경우
+    if request.method == 'POST':
+
+        # 입력값 불러옴
+        keyword = request.POST['keyword']
+
+        filtered_assignments = []
+
+        for assignment in assignments:
+
+            # assignment의 title이 ketword를 포함하고 있을때만
+            if keyword in assignment.title:
+                filtered_assignments.append(assignment)
+        
+        # 걸러진 과제들만 전달
+        return render(request,'assignment_list.html',{'assignments':filtered_assignments})
+
     # assignment_list 페이지 띄우고 과제 데이터 전달
     return render(request,'assignment_list.html',{'assignments':assignments})
 
