@@ -35,7 +35,7 @@ def create_Assignment_view(request):
         db.collection('Assignment').document().set(new_assignment.to_dict())
 
         # redirect
-        return redirect('assignment_create')
+        return redirect('assignment_list')
     
     # POST가 아닐 경우 assignment create 페이지 띄움
     return render(request,'assignment_create.html')
@@ -55,11 +55,11 @@ def read_Assignment_list_view(request):
     assignments = []
 
     # firebase 에 접근해 과제 목록들 불러옴
-    datas = db.collection('Assignment').stream()
+    assignment_datas = db.collection('Assignment').stream()
 
     # 값을 읽어와 하나씩 assignment_list 에 담는다
-    for data in datas:
-        assignment = Assignment.from_dict(data.to_dict(),data.id)
+    for assignment_data in assignment_datas:
+        assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)
         assignments.append(assignment)
 
     # assignment_list 페이지 띄우고 과제 데이터 전달
@@ -78,12 +78,12 @@ def get_Assignment_detail_view(request,assignment_id):
 
     # 매개변수의 assignment_id 를 통해 파이어베이스의 과제 불러옴
     try:
-        data = db.collection('Assignment').document(assignment_id).get()
+        assignment_data = db.collection('Assignment').document(assignment_id).get()
     except google.cloud.exeption.NotFound:
         print('Not Found')
     
     # 불러온 과제를 객체로 변경
-    assignment = Assignment.from_dict(data.to_dict(),data.id)
+    assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)
 
     # 위에서 생성된 과제 모델 반환
     return render(request,'assignment_detail.html',{'assignment':assignment})
@@ -118,12 +118,12 @@ def update_Assignment_view(request,assignment_id):
 
     # 매개변수의 과제 아이디값으로 파이어베이스에서 과제 데이터 불러오는 코드
     try:
-        data = db.collection('Assignment').document(assignment_id).get()
+        assignment_data = db.collection('Assignment').document(assignment_id).get()
     except google.cloud.exeption.NotFound:
         print('Not Found')
     
     # 불러온 데이터로 객체 생성
-    assignment = Assignment.from_dict(data.to_dict(),data.id)
+    assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)
 
     # 리퀘스트 method 가 POST 일 경우
     if( request.method == 'POST' ):

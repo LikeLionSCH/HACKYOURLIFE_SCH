@@ -25,8 +25,8 @@
             <div class="update-delete-wrap">
                 <a href="#">목록으로 가기</a>
                 <div>
-                    <a href="#">삭제</a>
-                    <a href="#">수정</a>
+                    <a href="{% url 'report_update' assignment_id report.report_id %}">수정</a>
+                    <a href="{% url 'report_delete' report.report_id %}">삭제</a>
                 </div>
             </div>
 
@@ -34,11 +34,11 @@
                 <div class="info-title mg-btm-13">
                     <span>INFO</span>
                 </div>
-                <span class="give-margin font-size-20">제목 : <div class="text-bold">제목제목제목</div>
+                <span class="give-margin font-size-20">과제 제목 : <div class="text-bold">'{{ assignment_title }}'</div>
                 </span><br>
-                <span class="give-margin font-size-20">제출일 : <div class="text-bold">2021.03.02</div>
+                <span class="give-margin font-size-20">제출일 : <div class="text-bold">{{ report.submit_date }}</div>
                 </span><br>
-                <span class="give-margin font-size-20">작성자 : <div class="text-bold">김태완</div>
+                <span class="give-margin font-size-20">작성자 : <div class="text-bold">이름</div>
                 </span>
             </div>
 
@@ -46,7 +46,7 @@
                 <div class="repo-title mg-btm-20">
                     <span>REPOSITORY ADDRESS</span>
                 </div>
-                <a href="">www.github.io</a>
+                <a href="">{{ report.repository_address }}</a>
             </div>
 
             <div class="detail-box mg-top-60">
@@ -55,12 +55,7 @@
                 </div>
                 <!-- detail contents 가 들어가는 부분 -->
                 <div class="detail-contents">
-                    제출한 과제의 자세한 내용들이 들어가는 공간 <br>
-                    ck 에디터로 작성된 아이들이 들어갈 공간 임니디.<br>
-                    어쩌구<br>
-                    저쩌구<br>
-                    씰룩<br>
-                    씰룩 ^~^<br>
+                    {{ report.contents }}
                 </div>
             </div>
 

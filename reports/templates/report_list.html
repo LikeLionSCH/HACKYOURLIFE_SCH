@@ -15,7 +15,7 @@
         <span class='page-sub-title'>
             REPORT
         </span><br>
-        <span class="sub-title-detail">'해당하는 과제의 제목' 과제에 대한 레포트 목록 입니다.</span>
+        <span class="sub-title-detail">'{{ assignment_title }}' 과제에 대한 레포트 목록 입니다.</span>
     </div>
 
     <!-- 과제 목록 보여주는 부분 -->
@@ -40,12 +40,13 @@
             </div>
 
             <!-- 리스트 내용이 들어가는공간 -->
-
+            {% for report in reports %}
             <div class="list-body">
-                <p>2020.08.28</p>
-                <a href="#">20194059 김태완</a>
-                <p>제출 완료</p>
+                <p>{{ report.submit_date }}</p>
+                <a href="{% url 'report_detail' assignment_id report.report_id %}">20194059 김태완</a>
+                <p>{{ report.submit_status }}</p>
             </div>
+            {% endfor %}
 
             <!-- ------------------------------- -->
         </div>

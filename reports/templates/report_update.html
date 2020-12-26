@@ -13,13 +13,14 @@
     <div class='title-wrap'>
         <span class='page-sub-title'>
             SUBMIT
-        </span>
+        </span><br>
+        <span class="sub-title-detail">'{{ assignment_title }}' 과제에 대한 레포트 수정 입니다.</span>
     </div>
 
 
     <!-- form -->
     <div class="main-wrap">
-        <form method="POST" class="form-box" action="{% url 'report_create' assignment_id %}">
+        <form method="POST" class="form-box" action="{% url 'report_update' assignment_id report.report_id %}">
             {% csrf_token %}
             <div class="repository-box">
                 <p>레포지토리 주소</p>
