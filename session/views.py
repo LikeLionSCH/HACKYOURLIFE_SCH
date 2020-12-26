@@ -30,6 +30,23 @@ def session_list(request):
         session = Session.from_dict(data.to_dict(), data.id)
         session.session_id = data.id
         session_list.append(session)
+
+    # 검색 버튼을 눌렀을 경우
+    if request.method == 'POST':
+
+        # 입력값 불러옴
+        keyword = request.POST['keyword']
+
+        filtered_sessions = []
+
+        for session in session_list:
+
+            # assignment의 title이 keyword를 포함하고 있을때만
+            if keyword in session.title:
+                filtered_sessions.append(session)
+        
+        # 걸러진 세션들만 전달
+        return render(request,'session_list.html',{'session_list':filtered_sessions})
     
     # session_list 페이지와 함께 session_list 전달
     return render(request, "session_list.html", {'session_list':session_list})
