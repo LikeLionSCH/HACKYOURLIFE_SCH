@@ -78,20 +78,25 @@ def session_create(request):
         title = request.POST['title']
         host = request.POST['host']
         print(host) # current user input test code
-        session_date = request.POST['session_date']
+        session_day = request.POST['session_day'] # session_day : 세션 날짜
+        session_time = request.POST['session_time'] # session_time : 세션 시간
         google_link = request.POST['google_link']
         content = request.POST['content']
 
-        print(title, host, session_date, google_link, content) # test code
+        print(title, host, session_day, session_time, google_link, content) # test code
 
         # 입력받은 세션 날짜 슬라이싱
-        # session_date의 시간 입력 시 수정 필요
-        date = session_date.split('-')
+        date = session_day.split('-')
         date_year = int(date[0])
         date_month = int(date[1])
         date_day = int(date[2])
 
-        session_date = datetime.datetime(date_year, date_month, date_day, 0, 0, tzinfo=KST)
+        # 입력받은 세션 시간 슬라이싱
+        time = session_time.split(':')
+        time_hour = int(time[0])
+        time_min = int(time[1])
+
+        session_date = datetime.datetime(date_year, date_month, date_day, time_hour, time_min, tzinfo=KST)
 
         # input data를 클래스 사용으로 객체화
         new_session = Session(title, host, session_date, google_link, content)
@@ -123,6 +128,7 @@ def session_detail(request, session_id):
     
     # 불러온 세션을 객체로 변경
     session = Session.from_dict(data.to_dict(), data.id)
+    print(data.to_dict())
 
     # 생성된 세션 모델 반환
     return render(request,'session_detail.html',{'session':session})
@@ -152,15 +158,22 @@ def session_update(request, session_id):
         session.host = request.POST['host']
         print(session.host) # current user input test code
 
-        session_date = request.POST['session_date']
+        session_day = request.POST['session_day']
+        session_time = request.POST['session_time']
         
-        # 입력받은 세션 날짜 슬라이싱, KST에 맞게 변환 후 객체에 저장
-        # session_date의 시간 입력 시 수정 필요
-        date = session_date.split('-')
+        # 입력받은 세션 날짜 슬라이싱
+        date = session_day.split('-')
         date_year = int(date[0])
         date_month = int(date[1])
         date_day = int(date[2])
-        session_date = datetime.datetime(date_year, date_month, date_day, 0, 0, tzinfo=KST)
+
+        # 입력받은 세션 시간 슬라이싱
+        time = session_time.split(':')
+        time_hour = int(time[0])
+        time_min = int(time[1])
+
+        # KST에 맞게 변환 후 객체에 저장
+        session_date = datetime.datetime(date_year, date_month, date_day, time_hour, time_min, tzinfo=KST)
         session.session_date = session_date
 
         session.google_link = request.POST['google_link']
@@ -181,12 +194,24 @@ def session_update(request, session_id):
         except google.cloud.exceptions.NotFound:
             print('Not Found')
 
+        print(data.to_dict()) # test code
+
         # 불러온 세션을 객체로 변경
         session = Session.from_dict(data.to_dict(), data.id)
-        session.session_date = str(session.session_date).split(" ")[0]
+
+        # UTC -> KST로 변경(firebase에서 가져온 값은 UTC)
+        session.session_date = session.session_date + datetime.timedelta(hours=9)
+        
+        session_date = session.session_date.strftime('%Y-%m-%d %H:%M')
+        session_day = str(session_date).split(" ")[0]
+        session_time = str(session_date).split(" ")[1]
 
         # 해당 객체의 데이터와 함께 update 페이지로 이동
-        return render(request, 'session_update.html', {'session':session})
+        return render(request, 'session_update.html', {
+            'session':session,
+            'session_day':session_day,
+            'session_time':session_time
+            })
 
 """ DELETE
 firebase에 저장된 특정 세션을 삭제하는 함수
