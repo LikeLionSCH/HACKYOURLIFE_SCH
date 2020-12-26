@@ -10,13 +10,17 @@ async function googleSignIn() {
         measurementId: "G-PXNX9ZZCEN"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
 
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION) // 왜 안될까
     let provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithPopup(provider).then(function (result) {
         // let accessToken = result.credential.accessToken;
         // let idToken = result.credential.idToken;
         let uid = result.user.uid;
+        let userEmail = result.user.email;
         $.ajax({
             type: "POST",
             url: "/",
@@ -24,7 +28,8 @@ async function googleSignIn() {
                 "X-CSRFToken": getCookie('csrftoken')
             },
             data: {
-                uid: uid
+                uid: uid,
+                userEmail: userEmail
             },
             dataType: "json"
         });
