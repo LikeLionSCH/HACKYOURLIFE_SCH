@@ -63,7 +63,8 @@
     border-radius: 10px;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: #E6E6E6;
 }
 
@@ -75,6 +76,7 @@ input::placeholder {
 
 .date-box input {
     width: 200px;
+    margin-right: 5px;
 }
 
 .explanation-box textarea {
@@ -90,6 +92,7 @@ input::placeholder {
 }
 
 .form-box>input[type=submit] {
+    font-family: "IBMPlexSansKR-Text";
     width: 100%;
     height: 50px;
     margin-top: 50px;

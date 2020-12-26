@@ -92,6 +92,25 @@ p {
     cursor: pointer;
 }
 
+.search-box>input {
+    border: none;
+    border-bottom: 1px solid darkgray;
+    width: 200px;
+    outline: none;
+    /* margin-right: px; */
+}
+
+.search-box>input::placeholder {
+    color: #e6e6e6;
+}
+
+.search-box>button {
+    background-color: white;
+    color: black;
+    width: 20px;
+    height: 20px;
+}
+
 /* ************************************* */
 
 /* state 할 때 필요한 color class */

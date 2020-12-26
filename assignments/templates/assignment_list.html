@@ -17,7 +17,8 @@
     <div class='title-wrap'>
         <span class='page-sub-title'>
             ASSIGNMENT
-        </span>
+        </span><br>
+        <span class="sub-title-detail">제출 해야 할 과제 목록 입니다. 제한 기간 안에 제출 해주세요.</span>
     </div>
 
     <!-- 과제 목록 보여주는 부분 -->
@@ -26,9 +27,11 @@
         <div class="list-box">
             <!-- assignment-create 로 이동하는 링크 -->
             <div class="top-box">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                </div>
+                <form class="search-box" method="POST" action="#">
+                    {% csrf_token %}
+                    <input type="text" name="" placeholder="과제의 제목으로 검색해주세요">
+                    <button><i class="fas fa-search"></i></button>
+                </form>
                 <a href="{% url 'assignment_create' %}">등록</a>
             </div>
             <!-- list 제목이 들어가는 공강 -->

@@ -240,6 +240,12 @@ a:visited {
     font-family: 'IBMPlexSansKR-Text';
 }
 
+.sub-title-detail {
+    width: 60px;
+    line-height: 60px;
+    font-size: 18px;
+}
+
 main {
     width: 100%;
 }

@@ -26,17 +26,20 @@
         <div class="detail-box">
             <!-- detail 요소가 보여지는 내용 -->
             <div class="update-delete-wrap">
-                <a href="{% url 'assignment_delete' assignment.assignment_id %}">삭제</a>
-                <a href="{% url 'assignment_update' assignment.assignment_id %}">수정</a>
+                <a href="{% url 'assignment_list' %}">목록으로 가기</a>
+                <div>
+                    <a href="{% url 'assignment_delete' assignment.assignment_id %}">삭제</a>
+                    <a href="{% url 'assignment_update' assignment.assignment_id %}">수정</a>
+                </div>
             </div>
 
             <div class="info-box">
                 <div class="info-title">
                     <span>INFO</span>
                 </div>
-                <span>TITLE : <div class="text-bold">{{ assignment.title }}</div>
+                <span>제목 : <div class="text-bold">{{ assignment.title }}</div>
                 </span></br>
-                <span>DUE TO : <div class="text-bold">{{ assignment.deadline }}</div>
+                <span>마감기한 : <div class="text-bold">{{ assignment.deadline }}</div>
                 </span>
             </div>
 

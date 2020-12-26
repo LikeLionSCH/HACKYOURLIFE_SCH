@@ -27,15 +27,16 @@
             {% csrf_token %}
             <div class="title-box">
                 <p>제목</p>
-                <input type="text" name="title" placeholder="ex. html / css 를 이용한 네이버 실시간 검색어 클론코딩">
+                <input type="text" name="title" placeholder="과제의 제목을 입력해주세요.">
             </div>
             <div class="dueto-box">
                 <p>마감기한</p>
                 <input type="date" name="deadline">
+                <input type="time" name="">
             </div>
             <div class="ckeditor-box">
                 <p>예시 출력 & 부가 설명</p>
-                <textarea name="contents" cols="30" rows="10"></textarea>
+                <textarea name="contents" cols="30" rows="10" placeholder="과제의 세부 사항을 적어 주세요"></textarea>
                 <!-- <input type="text" name="contents"> -->
             </div>
             <input type="submit" value="SUBMIT">

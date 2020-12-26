@@ -45,12 +45,19 @@
 
 .update-delete-wrap {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .update-delete-wrap a {
-    padding: 0px 5px;
     color: var(--SCH-skyblue);
+}
+
+.update-delete-wrap>div>a {
+    margin-left: 5px;
+}
+
+.update-delete-wrap>a {
+    padding: 0px;
 }
 
 .info-title,
@@ -74,7 +81,7 @@
 
 .info-box>span {
     font-size: 20px;
-    width: 30px;
+    width: 40px;
     line-height: 40px;
 }
 
@@ -84,6 +91,7 @@
 }
 
 .button {
+    font-family: 'IBMPlexSansKR-Text';
     width: 1100px;
     line-height: 50px;
     height: 50px;
@@ -99,7 +107,7 @@
 
 .button:hover {
     background-color: var(--SCH-skyblue);
-    color: rgb(138, 126, 126);
+    color: white;
 }
 
 

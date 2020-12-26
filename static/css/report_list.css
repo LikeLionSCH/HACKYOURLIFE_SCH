@@ -48,13 +48,25 @@
 
 .top-box {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 15px;
 }
 
+.search-box>input {
+    border: none;
+    border-bottom: 1px solid darkgray;
+    width: 200px;
+    outline: none;
+}
 
-.top-box a {
-    color: var(--SCH-skyblue);
+.search-box>input::placeholder {
+    color: #e6e6e6;
+}
+
+.search-box>button {
+    background-color: white;
+    color: black;
+    width: 20px;
+    height: 20px;
 }
 
 .list-title {

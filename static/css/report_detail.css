@@ -41,20 +41,29 @@
     width: var(--main-width);
     height: auto;
     margin-top: 50px;
+    margin-bottom: 60px;
 }
 
 .update-delete-wrap {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .update-delete-wrap a {
-    padding: 0px 5px;
     color: var(--SCH-skyblue);
 }
 
+.update-delete-wrap>div>a {
+    margin-left: 5px;
+}
+
+.update-delete-wrap>a {
+    padding: 0px;
+}
+
 .info-title,
-.detail-title {
+.detail-title,
+.repo-title {
     width: 100%;
     padding-bottom: 1px;
     margin-top: 40px;
@@ -62,15 +71,20 @@
 }
 
 .info-title span,
-.detail-title span {
+.detail-title span,
+.repo-title span {
     border-bottom: 2px solid lightgray;
     font-family: 'IBMPlexSansKR-Text';
     font-size: 24px;
 }
 
+.repo-box a {
+    font-size: 20px;
+}
+
 .give-margin {
-    width: 70px;
-    line-height: 70px;
+    width: 40px;
+    line-height: 40px;
 }
 
 .font-size-20 {
@@ -92,4 +106,12 @@
 
 .mg-top-60 {
     margin-top: 60px;
+}
+
+.mg-btm-13 {
+    margin-bottom: 13px;
+}
+
+.mg-btm-20 {
+    margin-bottom: 20px;
 }

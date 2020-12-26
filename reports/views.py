@@ -88,7 +88,7 @@ def get_Report_detail_view(request,report_id):
     report = Report.from_dict(data.to_dict(),data.id)
 
     # 레포트 데테일 페이지 렌더링, 레포트 데이터 전달
-    return render(request,'report_detail.html',{'report',report})
+    return render(request,'report_detail.html',{'report':report})
 
 """
 제출한 과제를 수정하는 함수

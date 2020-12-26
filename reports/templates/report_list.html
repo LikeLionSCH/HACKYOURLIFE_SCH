@@ -13,8 +13,9 @@
     <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
     <div class='title-wrap'>
         <span class='page-sub-title'>
-            과제 타이틀 들어가는 공간
-        </span>
+            REPORT
+        </span><br>
+        <span class="sub-title-detail">'해당하는 과제의 제목' 과제에 대한 레포트 목록 입니다.</span>
     </div>
 
     <!-- 과제 목록 보여주는 부분 -->
@@ -22,20 +23,28 @@
     <div class="main-wrap">
         <div class="list-box">
 
+            <div class="top-box">
+                <form class="search-box" method="POST" action="#">
+                    {% csrf_token %}
+                    <input type="text" name="" placeholder="학생의 이름으로 검색해주세요">
+                    <button><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
             <!-- list 제목이 들어가는 공강 -->
 
             <div class="list-title">
                 <p>SUBMIT DATE</p>
-                <p>REPOSITORY</p>
                 <p>STU INFO</p>
+                <p>STATE</p>
             </div>
 
             <!-- 리스트 내용이 들어가는공간 -->
 
             <div class="list-body">
                 <p>2020.08.28</p>
-                <a href="#">https://github.com/LikeLionSCH/HACKYOURLIFE_SCH</a>
-                <p>20194059 김태완</p>
+                <a href="#">20194059 김태완</a>
+                <p>제출 완료</p>
             </div>
 
             <!-- ------------------------------- -->

@@ -18,7 +18,8 @@
     <div class='title-wrap'>
         <span class='page-sub-title'>
             SESSION
-        </span>
+        </span><br>
+        <span class="sub-title-detail">세션 공지 입니다. 반드시 공지를 확인 하시길 바랍니다</span>
     </div>
 
     <!-- 새션 목록 보여주는 부분 -->
@@ -28,9 +29,11 @@
             <!-- assignment-create 로 이동하는 링크 -->
 
             <div class="top-box">
-                <div class="search-box">
-                    <button type="button"> <i class="fas fa-search"></i><input class="search" type="text"></button>
-                </div>
+                <form class="search-box" method="POST" action="#">
+                    {% csrf_token %}
+                    <input type="text" name="" placeholder="세션의 제목으로 검색해주세요">
+                    <button><i class="fas fa-search"></i></button>
+                </form>
                 <a href="{% url 'session_create' %}">등록</a>
             </div>
 

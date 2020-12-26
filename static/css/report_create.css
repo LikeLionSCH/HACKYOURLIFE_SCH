@@ -63,7 +63,8 @@
     font-family: 'IBMPlexSansKR-Light';
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: #E6E6E6;
 }
 
@@ -84,7 +85,7 @@ input::placeholder {
     font-family: 'IBMPlexSansKR-Light';
 }
 
-.form-box>input {
+.form-box>input[type='submit'] {
     width: 100%;
     height: 50px;
     margin-top: 50px;
@@ -94,10 +95,10 @@ input::placeholder {
     border-radius: 15px;
     transition: .4s;
     margin-bottom: 60px;
-    font-family: 'IBMPlexSansKR-Light';
+    font-family: 'IBMPlexSansKR-Text';
 }
 
-.form-box>input:hover {
+.form-box>input[type='submit']:hover {
     background-color: var(--SCH-skyblue);
     color: white;
 }
