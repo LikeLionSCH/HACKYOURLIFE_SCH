@@ -27,9 +27,11 @@
         <div class="list-box">
             <!-- assignment-create 로 이동하는 링크 -->
             <div class="top-box">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                </div>
+                <form class="search-box" method="POST" action="#">
+                    {% csrf_token %}
+                    <input type="text" name="" placeholder="과제의 제목으로 검색해주세요">
+                    <button><i class="fas fa-search"></i></button>
+                </form>
                 <a href="{% url 'assignment_create' %}">등록</a>
             </div>
             <!-- list 제목이 들어가는 공강 -->

@@ -23,6 +23,14 @@
     <div class="main-wrap">
         <div class="list-box">
 
+            <div class="top-box">
+                <form class="search-box" method="POST" action="#">
+                    {% csrf_token %}
+                    <input type="text" name="" placeholder="학생의 이름으로 검색해주세요">
+                    <button><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
             <!-- list 제목이 들어가는 공강 -->
 
             <div class="list-title">
