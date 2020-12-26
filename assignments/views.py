@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 
+from django.core.paginator import Paginator
+
 import firebase_admin
 import google
 from firebase_admin import credentials
@@ -54,8 +56,8 @@ def read_Assignment_list_view(request):
     # firebase initialize
     db = initialize_firebase()
 
-    # template 으로 전달해줄 리스트 생성
-    assignments = []
+    # 과제 객체 목록
+    assignment_list = []
 
     # firebase 에 접근해 과제 목록들을 timestamp 기준 내림차순으로 정렬하여 불러옴
     assignment_datas = db.collection('Assignment').order_by('timestamp',direction=firestore.Query.DESCENDING).stream()
@@ -63,7 +65,12 @@ def read_Assignment_list_view(request):
     # 값을 읽어와 하나씩 assignment_list 에 담는다
     for assignment_data in assignment_datas:
         assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)
-        assignments.append(assignment)
+        assignment_list.append(assignment)
+
+    # 페이지 네이터
+    paginator = Paginator(assignment_list,5)
+    page = int(request.GET.get('page',1))
+    assignments = paginator.get_page(page)
 
     # 검색 버튼을 눌렀을 경우
     if request.method == 'POST':
@@ -71,13 +78,18 @@ def read_Assignment_list_view(request):
         # 입력값 불러옴
         keyword = request.POST['keyword']
 
-        filtered_assignments = []
+        filtered_assignment_list = []
 
-        for assignment in assignments:
+        for assignment in assignment_list:
 
             # assignment의 title이 ketword를 포함하고 있을때만
             if keyword in assignment.title:
-                filtered_assignments.append(assignment)
+                filtered_assignment_list.append(assignment)
+
+        # 페이지 네이터
+        paginator = Paginator(filtered_assignment_list,5)
+        page = int(request.GET.get('page',1))
+        filtered_assignments = paginator.get_page(page)
         
         # 걸러진 과제들만 전달
         return render(request,'assignment_list.html',{'assignments':filtered_assignments})
