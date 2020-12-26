@@ -6,8 +6,11 @@ from hackyourlife_sch.firebase import initialize_firebase
 
 def index(request):
     if request.method == 'POST':
-        cred = credentials.Certificate('serviceAccountKey.json')
-        firebase_admin.initialize_app(cred)
+        # cred = credentials.Certificate('serviceAccountKey.json')
+        # firebase_admin.initialize_app(cred)
+
+        # firebase initialize
+        db = initialize_firebase()
 
         user = auth.get_user(request.POST['uid'])
         data = {'name': user.display_name, 'photo': user.photo_url}
