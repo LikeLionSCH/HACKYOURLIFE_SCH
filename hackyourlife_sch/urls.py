@@ -27,5 +27,6 @@ urlpatterns = [
     path('', include('session.urls')),
     path('report/',include('reports.urls')),
     path('', include('google_calendar.urls')),
+    path('', include('gallery.urls')),
 ]
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
