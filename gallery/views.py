@@ -9,3 +9,6 @@ def gallery_board(request):
 
 def gallery_detail(request):
     return render(request, "gallery_board_detail.html")
+
+def gallery_create(request):
+    return render(request, "test.html")

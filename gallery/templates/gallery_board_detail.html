@@ -1,22 +1,21 @@
-    <!-- 
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/gallerymain.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Gallery</title>
+{% endblock %}
+
+{% block content %}
+
+    <!--
 
     갤러리 게시물
     
  -->
-    <!DOCTYPE html>
-    <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="gallery_board_detail.css">
-        <title>멋쟁이사자처럼 at 순천향대학교</title>
-        <style>
-
-        </style>
-    </head>
-
-    <body>
         <header>
             <div class="header-box">
                 <img src="../image/mainLogo.png" alt="mainLogo.png">
@@ -107,29 +106,10 @@
             </div>
         </main>
 
-        <!-- 퓨터 -->
-        <footer>
-            <div class="footer-box">
-                <div class="contact-box">
-                    <label>CONTACT US</label>
-                    <!-- 인스타, 페북, 오픈카톡 연락처-->
-                    <div class="icons">
-                        <a href="#"><i class="fas fa-comment-dots"></i></a>
-                        <a href="#"><i class="fab fa-instagram-square"></i></a>
-                        <a href="#"><i class="fab fa-facebook-square"></i></a>
-                    </div>
-                </div>
-                <div class="copyright-text">
-                    <span>Copyright ©</span> likelion at SCH 8th
-                </div>
-                <img src="../image/slogan2.png" alt="slogan2.png">
-            </div>
-        </footer>
 
         <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- <script src="script/jquery-1.12.3.js"></script> -->
         <script src="main.js"></script>
-    </body>
 
-    </html>
+{% endblock %}
