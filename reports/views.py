@@ -203,4 +203,4 @@ def delete_Report(request,assignment_id,report_id):
     db.collection('Report').document(report_id).delete()
 
     # 리스트 페이지로 리다이렉트
-    return redirect('report_list')
+    return redirect('report_list',assignment_id)
