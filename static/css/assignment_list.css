@@ -126,28 +126,3 @@ p {
 }
 
 /* ************************************* */
-
-/* pagination */
-
-.pagination {
-    margin-top: 50px;
-    margin-bottom: 60px;
-    font-size: 17px;
-    color: black;
-}
-
-.pagination div {
-    display: inline-block;
-    padding: 15px;
-}
-
-.pagination div i {
-    padding: 10px;
-}
-
-.pagination span {
-    font-size: 19px;
-    padding: 0px 7px;
-}
-
-/* ************************************* */
