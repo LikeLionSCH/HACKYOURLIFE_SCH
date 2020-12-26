@@ -25,11 +25,14 @@ def create_Assignment_view(request):
         # form의 값 받아오는 코드
         # author = request.POST['author']
         contents = request.POST['contents']
-        deadline = request.POST['deadline']
+        deadline_date = request.POST['deadline_date']
+        deadline_time = request.POST['deadline_time']
         title = request.POST['title']
 
+        deadline = format(deadline_date + ' ' + deadline_time)
+
         # 과제 객체 생성
-        new_assignment = Assignment("author",contents,deadline,title)
+        new_assignment = Assignment(firestore.SERVER_TIMESTAMP,"author",contents,deadline,title)
 
         # firebase 에 데이터 생성
         db.collection('Assignment').document().set(new_assignment.to_dict())
@@ -54,8 +57,8 @@ def read_Assignment_list_view(request):
     # template 으로 전달해줄 리스트 생성
     assignments = []
 
-    # firebase 에 접근해 과제 목록들 불러옴
-    assignment_datas = db.collection('Assignment').stream()
+    # firebase 에 접근해 과제 목록들을 timestamp 기준 내림차순으로 정렬하여 불러옴
+    assignment_datas = db.collection('Assignment').order_by('timestamp',direction=firestore.Query.DESCENDING).stream()
 
     # 값을 읽어와 하나씩 assignment_list 에 담는다
     for assignment_data in assignment_datas:
