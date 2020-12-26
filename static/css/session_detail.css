@@ -45,12 +45,19 @@
 
 .update-delete-wrap {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .update-delete-wrap a {
-    padding: 0px 5px;
     color: var(--SCH-skyblue);
+}
+
+.update-delete-wrap>div>a {
+    margin-left: 5px;
+}
+
+.update-delete-wrap>a {
+    padding: 0px;
 }
 
 .info-title,
@@ -73,16 +80,12 @@
 .info-box>span,
 .link-box>a {
     font-size: 20px;
-    width: 50px;
-    line-height: 50px;
-}
-
-.link-box>a {
-    text-decoration: underline;
+    width: 40px;
+    line-height: 40px;
 }
 
 .detail-contents {
-    margin: 25px 0px 60px 0px;
+    margin: 25px 0px 130px 0px;
     font-size: 20px;
 }
 
@@ -95,4 +98,8 @@
 
 .mg-top-60 {
     margin-top: 60px;
+}
+
+.mg-btm-13 {
+    margin-bottom: 13px;
 }

@@ -17,7 +17,7 @@
     <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
     <div class='title-wrap'>
         <span class='page-sub-title'>
-            {{ session.title }}
+            SESSION
         </span>
     </div>
 
@@ -27,17 +27,24 @@
         <div class="detail-box">
             <!-- detail 요소가 보여지는 내용 -->
             <div class="update-delete-wrap">
-                <a href="{% url 'session_delete' session.session_id %}">삭제</a>
-                <a href="{% url 'session_update' session.session_id %}">수정</a>
+                <a href="{% url 'session_list' %}">목록으로 가기</a>
+                <div>
+                    <a href="{% url 'session_delete' session.session_id %}">삭제</a>
+                    <a href="{% url 'session_update' session.session_id %}">수정</a>
+                </div>
             </div>
 
             <div class="info-box">
-                <div class="info-title">
+                <div class="info-title mg-btm-13">
                     <span>INFO</span>
                 </div>
-                <span>SESSION DATE : <div class="text-bold">{{ session.session_date }}</div><br>
+                <span>제목 : <div class="text-bold">{{ session.title }}</div><br>
                 </span>
-                <span><a href="{{ session.google_link }}" target="_blank">GOOGLE DOCUMENT LINK</a></span>
+                <span>세션 날자 : <div class="text-bold">{{ session.session_date }}</div><br>
+                </span>
+                <span>세션 장소 : <div class="text-bold">장소</div><br>
+                </span>
+                <span><a href="{{ session.google_link }}" target="_blank">구글 문서 링크</a></span>
             </div>
 
             <div class="detail-box mg-top-60">
