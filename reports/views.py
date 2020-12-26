@@ -5,6 +5,7 @@ from firebase_admin import firestore
 import google
 
 from datetime import datetime
+from django.core.paginator import Paginator
 
 from hackyourlife_sch.firebase import initialize_firebase
 from .models import Report
@@ -78,7 +79,7 @@ def read_Report_list_view(request, assignment_id):
     # 공식 문서에는 db.collection().where().order_by() 가 되는 것으로 나와 있지만 우리 프로젝트에선 불가 이유는 모름 ㅠ
     report_datas = db.collection('Report').order_by('submit_date', direction=firestore.Query.DESCENDING).stream()
 
-    reports = []
+    report_list = []
 
     # 템플릿으로 전달을 위해 불러온 데이터를 객체로 변환하여 전달할 리스트 생성
     for report_data in report_datas:
@@ -86,7 +87,12 @@ def read_Report_list_view(request, assignment_id):
 
         # 불러온 과제 아이디와 매개변수의 과제 아이디가 같을 경우만 append
         if report.assignment_id == assignment_id:
-            reports.append(report)
+            report_list.append(report)
+
+    # 페이지 네이터
+    paginator = Paginator(report_list,5)
+    page = int(request.GET.get('page',1))
+    reports = paginator.get_page(page)
 
     # 레포트 데이터들, 해당 과제의 Id, 해당 과제의 제목
     output_datas = {
