@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/gallerymain.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Notice</title>
+{% endblock %}
+
+{% block content %}
+<!--
+
+    2020. 11. 19. 
+    MINSEOK
+    메인 페이지
+    
+ -->
+
+    <!-- MAIN CONTENT-->
+    <!--소제목-->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            GALLERY
+        </span>
+    </div>
+    <br>
+    <main>
+        <div class="main_content">
+            
+             <!-- 카드 컨테이너 -->
+             <div class="th_card">
+                <div class="img_square" style="background-image:url('test1.jpg')"></div>
+                <div class="th_square">8기</div>
+                <div class="more_square"><a href="#">MORE</a></div>
+            </div>  
+
+            <!-- 카드 컨테이너 -->
+             <div class="th_card">
+                <div class="img_square" style="background-image:url('test1.jpg')"></div>
+                <div class="th_square">7기</div>
+                <div class="more_square"><a href="#">MORE</a></div>
+            </div>   
+
+
+        </div>
+    </main>
+
+    <!-- 퓨터 -->
+    <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="script/jquery-1.12.3.js"></script> -->
+    <script src="main.js"></script>
+
+
+{% endblock %}

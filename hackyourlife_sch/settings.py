@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'assignments.apps.AssignmentsConfig',
     'reports.apps.ReportsConfig',
     'session.apps.SessionConfig',
-    'google_calendar.apps.GoogleCalendarConfig'
+    'google_calendar.apps.GoogleCalendarConfig',
+    'gallery.apps.GalleryConfig',
 ]
 
 MIDDLEWARE = [

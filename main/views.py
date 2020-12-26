@@ -1,7 +1,8 @@
 from django.shortcuts import render
 import firebase_admin
 from firebase_admin import credentials, auth
-
+from firebase_admin import firestore
+from hackyourlife_sch.firebase import initialize_firebase
 
 def index(request):
     if request.method == 'POST':
@@ -16,3 +17,7 @@ def index(request):
     data = {'name': 'user', 'photo': 'url'}
     print(data)
     return render(request, 'main.html', data)
+
+
+def post_upload(request):
+    return render(request, 'test.html')
