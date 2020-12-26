@@ -4,6 +4,8 @@ from hackyourlife_sch.firebase import initialize_firebase
 from firebase_admin import firestore
 import google
 
+from django.core.paginator import Paginator
+
 from .models import Session
 
 from operator import attrgetter
@@ -31,25 +33,35 @@ def session_list(request):
         session.session_id = data.id
         session_list.append(session)
 
+    # 페이지 네이터
+    paginator = Paginator(session_list,5)
+    page = int(request.GET.get('page',1))
+    sessions = paginator.get_page(page)
+
     # 검색 버튼을 눌렀을 경우
     if request.method == 'POST':
 
         # 입력값 불러옴
         keyword = request.POST['keyword']
 
-        filtered_sessions = []
+        filtered_session_list = []
 
         for session in session_list:
 
             # assignment의 title이 keyword를 포함하고 있을때만
             if keyword in session.title:
-                filtered_sessions.append(session)
+                filtered_session_list.append(session)
+
+        # 페이지 네이터
+        paginator = Paginator(filtered_session_list,5)
+        page = int(request.GET.get('page',1))
+        filtered_sessions = paginator.get_page(page)
         
         # 걸러진 세션들만 전달
         return render(request,'session_list.html',{'session_list':filtered_sessions})
     
     # session_list 페이지와 함께 session_list 전달
-    return render(request, "session_list.html", {'session_list':session_list})
+    return render(request, "session_list.html", {'session_list':sessions})
 
 """ CREATE
 firebase에 세션을 등록하는 함수
