@@ -29,7 +29,7 @@ class Gallery:
 
     def from_dict(data, gallery_id):
         # 객체 생성
-        gallery = Gallery(data['image_url'], data['contents'], data['created_at'], data['title'], data['place'],)
+        gallery = Gallery(data['contents'], data['created_at'], data['title'], data['image_url'], data['place'],)
         gallery.gallery_id = gallery_id
 
         # 생성된 객체 반환
