@@ -20,7 +20,7 @@ def gallery_detail(request):
 
 
 @FirestoreControlView
-def gallery_create(request):
+def gallery_create(request,db):
     if request.method == 'POST':
         contents = request.POST['contents']
         created_at = request.POST['created_at']
