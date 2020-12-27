@@ -22,7 +22,7 @@
         <!-- form -->
 
         <div class="main-wrap">
-            <form class="form-box" method="post" action="{% url 'gallery_create' %}">
+            <form class="form-box" method="post" action="{% url 'gallery_update' gallery.gallery_id %}">
                 {% csrf_token %}
                 <div class="title-box">
                     <p>제목</p>
