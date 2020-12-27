@@ -3,22 +3,21 @@ import firebase_admin
 import google
 from firebase_admin import credentials
 from firebase_admin import firestore
-from hackyourlife_sch.firebase import initialize_firebase
+from hackyourlife_sch.firebase import FirestoreControlView
 from .models import Gallery
 
-# Create your views here.
+
 def gallery_main(request):
     return render(request, "gallerymain.html")
+
 
 def gallery_board(request):
     return render(request, "th_gallery_board.html")
 
 
-def gallery_create(request):
+@FirestoreControlView
+def gallery_create(request,db):
     if request.method == 'POST':
-        # firebase initialize
-        db = initialize_firebase()
-
         contents = request.POST['contents']
         created_at = request.POST['created_at']
         title = request.POST['title']

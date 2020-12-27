@@ -82,7 +82,7 @@
 }
 
 p {
-    width: 200px;
+    width: 250px;
     text-align: center;
     line-height: 50px;
 }
@@ -102,32 +102,6 @@ p {
     overflow: hidden;
     color: black;
     cursor: pointer;
-}
-
-/* ************************************* */
-
-
-/* pagination */
-
-.pagination {
-    margin-top: 50px;
-    font-size: 17px;
-    color: black;
-    margin-bottom: 60px;
-}
-
-.pagination div {
-    display: inline-block;
-    padding: 15px;
-}
-
-.pagination div i {
-    padding: 10px;
-}
-
-.pagination span {
-    font-size: 19px;
-    padding: 0px 7px;
 }
 
 /* ************************************* */

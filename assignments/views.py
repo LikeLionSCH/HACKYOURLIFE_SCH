@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect
 
+from django.core.paginator import Paginator
+
 import firebase_admin
 import google
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-from hackyourlife_sch.firebase import initialize_firebase
+from hackyourlife_sch.firebase import FirestoreControlView
 from .models import Assignment
 
 
@@ -14,22 +16,23 @@ from .models import Assignment
 @param : request
 @return : assignment_create 페이지 반환
 """
-def create_Assignment_view(request):
+@FirestoreControlView
+def create_Assignment_view(request, db):
 
     # request 메소드가 POST 일 경우만
     if( request.method=='POST' ):
 
-        # firebase initialize
-        db = initialize_firebase()
-
         # form의 값 받아오는 코드
         # author = request.POST['author']
         contents = request.POST['contents']
-        deadline = request.POST['deadline']
+        deadline_date = request.POST['deadline_date']
+        deadline_time = request.POST['deadline_time']
         title = request.POST['title']
 
+        deadline = format(deadline_date + ' ' + deadline_time)
+
         # 과제 객체 생성
-        new_assignment = Assignment("author",contents,deadline,title)
+        new_assignment = Assignment(firestore.SERVER_TIMESTAMP,"author",contents,deadline,title)
 
         # firebase 에 데이터 생성
         db.collection('Assignment').document().set(new_assignment.to_dict())
@@ -46,21 +49,46 @@ def create_Assignment_view(request):
 @param : request
 @return : assignment_list 페이지 반환, 과제 목록 전달
 """
-def read_Assignment_list_view(request):
+@FirestoreControlView
+def read_Assignment_list_view(request, db):
 
-    # firebase initialize
-    db = initialize_firebase()
+    # 과제 객체 목록
+    assignment_list = []
 
-    # template 으로 전달해줄 리스트 생성
-    assignments = []
-
-    # firebase 에 접근해 과제 목록들 불러옴
-    assignment_datas = db.collection('Assignment').stream()
+    # firebase 에 접근해 과제 목록들을 timestamp 기준 내림차순으로 정렬하여 불러옴
+    assignment_datas = db.collection('Assignment').order_by('timestamp',direction=firestore.Query.DESCENDING).stream()
 
     # 값을 읽어와 하나씩 assignment_list 에 담는다
     for assignment_data in assignment_datas:
         assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)
-        assignments.append(assignment)
+        assignment_list.append(assignment)
+
+    # 페이지 네이터
+    paginator = Paginator(assignment_list,5)
+    page = int(request.GET.get('page',1))
+    assignments = paginator.get_page(page)
+
+    # 검색 버튼을 눌렀을 경우
+    if request.method == 'POST':
+
+        # 입력값 불러옴
+        keyword = request.POST['keyword']
+
+        filtered_assignment_list = []
+
+        for assignment in assignment_list:
+
+            # assignment의 title이 ketword를 포함하고 있을때만
+            if keyword in assignment.title:
+                filtered_assignment_list.append(assignment)
+
+        # 페이지 네이터
+        paginator = Paginator(filtered_assignment_list,5)
+        page = int(request.GET.get('page',1))
+        filtered_assignments = paginator.get_page(page)
+        
+        # 걸러진 과제들만 전달
+        return render(request,'assignment_list.html',{'assignments':filtered_assignments})
 
     # assignment_list 페이지 띄우고 과제 데이터 전달
     return render(request,'assignment_list.html',{'assignments':assignments})
@@ -71,11 +99,8 @@ def read_Assignment_list_view(request):
 @param : request, 과제의 문자열 아이디값
 @return : assignment_deta.html 반환 , assignment 객체 전달
 """
-def get_Assignment_detail_view(request,assignment_id):
-
-    # firemase initialize
-    db = initialize_firebase()
-
+@FirestoreControlView
+def get_Assignment_detail_view(request, db, assignment_id):
     # 매개변수의 assignment_id 를 통해 파이어베이스의 과제 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
@@ -94,11 +119,8 @@ def get_Assignment_detail_view(request,assignment_id):
 @param : request, 과제의 문자열 아이디값
 @return : assignment_list로 리다이렉트
 """
-def delete_Assignment(requset,assignment_id):
-
-    # firebase initialize
-    db = initialize_firebase()
-
+@FirestoreControlView
+def delete_Assignment(requset, db, assignment_id):
     # 매개변수의 과제 id 로 데이터를 불러와 삭제
     db.collection('Assignment').document(assignment_id).delete()
 
@@ -111,11 +133,8 @@ def delete_Assignment(requset,assignment_id):
 @param : request, 등록된 과제의 아이디값
 @return : render, redirect
 """
-def update_Assignment_view(request,assignment_id):
-
-    # firebase initialize
-    db = initialize_firebase()
-
+@FirestoreControlView
+def update_Assignment_view(request, db, assignment_id):
     # 매개변수의 과제 아이디값으로 파이어베이스에서 과제 데이터 불러오는 코드
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
@@ -147,9 +166,3 @@ def update_Assignment_view(request,assignment_id):
     
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request,'assignment_update.html',{'assignment':assignment})
-
-
-
-
-
-

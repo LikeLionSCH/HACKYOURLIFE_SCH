@@ -1,3 +1,18 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 async function googleSignIn() {
     const firebaseConfig = {
         apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
@@ -10,23 +25,27 @@ async function googleSignIn() {
         measurementId: "G-PXNX9ZZCEN"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
 
-    let provider = new firebase.auth.GoogleAuthProvider();
-    await firebase.auth().signInWithPopup(provider).then(function (result) {
-        // let accessToken = result.credential.accessToken;
-        // let idToken = result.credential.idToken;
-        let uid = result.user.uid;
-        $.ajax({
-            type: "POST",
-            url: "/",
-            headers: {
-                "X-CSRFToken": getCookie('csrftoken')
-            },
-            data: {
-                uid: uid
-            },
-            dataType: "json"
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        
+        return firebase.auth().signInWithPopup(provider).then(function (result) {
+            // 로그인된 상태로 front DOM 변경
+            $.ajax({
+                type: "POST",
+                url: "/",
+                headers: {
+                    "X-CSRFToken": getCookie('csrftoken')
+                },
+                dataType: "json",
+                data: {
+                    uid: result.user.uid
+                }
+            });
         });
     });
+    
 }
