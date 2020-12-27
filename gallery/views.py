@@ -23,8 +23,10 @@ def gallery_create(request,db):
         title = request.POST['title']
         image_url = request.POST['image_url']
         place = request.POST['place']
+        ordinal_num = request.POST['ordinal_num']
+        event = request.POST['event']
 
-        new_gallery = Gallery(contents, created_at, title, image_url, place)
+        new_gallery = Gallery(contents, created_at, title, image_url, place, ordinal_num, event)
 
         db.collection('Gallery').document().set(new_gallery.to_dict())
 
@@ -34,7 +36,7 @@ def gallery_create(request,db):
 
 
 @FirestoreControlView
-def gallery_detail(request, db):
+def gallery_idea_detail(request, db):
     galleries = []
 
     gallery_datas = db.collection('Gallery').stream()
@@ -43,7 +45,46 @@ def gallery_detail(request, db):
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
         galleries.append(gallery)
 
-    return render(request,'gallery_board_detail.html',{'galleries':galleries})
+    return render(request,'gallery_idea_detail.html',{'galleries':galleries})
+
+
+@FirestoreControlView
+def gallery_hacka_detail(request, db):
+    galleries = []
+
+    gallery_datas = db.collection('Gallery').stream()
+
+    for gallery_data in gallery_datas:
+        gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
+        galleries.append(gallery)
+
+    return render(request,'gallery_hacka_detail.html',{'galleries':galleries})
+
+
+@FirestoreControlView
+def gallery_session_detail(request, db):
+    galleries = []
+
+    gallery_datas = db.collection('Gallery').stream()
+
+    for gallery_data in gallery_datas:
+        gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
+        galleries.append(gallery)
+
+    return render(request,'gallery_session_detail.html',{'galleries':galleries})
+
+
+@FirestoreControlView
+def gallery_other_detail(request, db):
+    galleries = []
+
+    gallery_datas = db.collection('Gallery').stream()
+
+    for gallery_data in gallery_datas:
+        gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
+        galleries.append(gallery)
+
+    return render(request,'gallery_other_detail.html',{'galleries':galleries})
 
 
 @FirestoreControlView
@@ -68,6 +109,8 @@ def gallery_update(request, db, gallery_id):
         title = request.POST['title']
         image_url = request.POST['image_url']
         place = request.POST['place']
+        ordinal_num = request.POST['ordinal_num']
+        event = request.POST['event']
 
         db.collection('Gallery').document(gallery_id).update({
             'contents': contents,
@@ -75,6 +118,8 @@ def gallery_update(request, db, gallery_id):
             'title': title,
             'image_url': image_url,
             'place': place,
+            'ordinal_num': ordinal_num,
+            'event': event,
         })
 
         return redirect('gallery_detail')
