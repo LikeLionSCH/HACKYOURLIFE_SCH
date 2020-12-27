@@ -417,27 +417,54 @@ i:hover{
 }
 
 /* 이미지 스타일 */
-.image{
+.post_img{
     background-color: #fff;
-    box-shadow: inset 0px 0px 6px 8px rgba(255,255,255,1);
 
-    /* 사진과 그림자 간의 간격 */
+    /* 사진과 보더 간의 간격 */
     /* 가운데 정렬 */
-
     margin: 0 auto 8vh;
     padding: 3px;
- 
+
     border:3px solid #e4e4e4;
+
     /* 사진 크기 */
     width: 65%;
     height: 450px;
-
-    /* background image 속성 */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 
+/* 이미지 감싸는 div */
+.post_img_div{
+
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+/* 이미지 위치 */
+.post_img_div img{
+
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+/* 이미지 위에 그림자 효과 */
+.shadow {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0px 0px 6px 8px rgba(255,255,255,1);
+    top: 0;
+    left: 0;
+}
 
 /* **************************** */
 .text-bold {

@@ -32,7 +32,7 @@
                     <div class="menu">
                         <div class="back-wrap">
                             <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
-                            <a href="#"><i class="far fa-arrow-alt-circle-left"></i></a>
+                            <a href="{% url 'gallery_board' %}"><i class="far fa-arrow-alt-circle-left"></i></a>
                         </div>
                     </div>
                     {% for gallery in galleries %}
@@ -66,7 +66,12 @@
                         <!-- 사진이 들어가는 곳 -->
                         <div class="image-contents">
                                 <!-- 사진(반복) -->
-                            <img class="image" src="{{gallery.image_url}}">
+                            <div class="post_img">
+                                <div class="post_img_div">
+                                    <img src="{{gallery.image_url}}" alt="test1.png">
+                                    <div class="shadow"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="update-delete-wrap">
