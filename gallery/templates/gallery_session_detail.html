@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/gallerymain.css' %}">
+<link rel="stylesheet" href="{% static 'css/gallery_board_detail.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -15,35 +15,6 @@
     갤러리 게시물
     
  -->
-
-        <header>
-            <div class="header-box">
-                <img src="../image/mainLogo.png" alt="mainLogo.png">
-                <nav>
-                    <ul>
-                        <li><a href="#">ABOUT</a></li>
-                        <li>
-                            <a href="#">NOTICE</a>
-                            <ul class="dropbox-nav">
-                                <li><a href="#">calendar</a></li>
-                                <li><a href="#">session</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">ACTIVITY</a>
-                            <ul class="dropbox-nav">
-                                <li><a href="#">curiculum</a></li>
-                                <li><a href="#">projects</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">GALLARY</a></li>
-                        <li><a href="#">ASSIGNMENT</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <a class="login-box" href="#">LOGIN</a>
-                    </ul>
-                </nav>
-            </div>
-        </header>
 
         <main>
             <!-- 소제목 -->
@@ -63,29 +34,26 @@
                             <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
                             <a href="#"><i class="far fa-arrow-alt-circle-left"></i></a>
                         </div>
-
-                        <div class="update-delete-wrap">
-                            <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
-                            <a href="#"><span class="update-delete-btn">삭제</span></a>
-                            <a href="#"><span class="update-delete-btn">수정</span></a>
-                        </div>
                     </div>
-
+                    {% for gallery in galleries %}
+                    {% if gallery.event == 'session' %}
                     <!-- 게시물 정보 -->
                     <div class="info-box">
                         <!-- 게시물 제목 -->
                         <div class="info-title">
-                            <span>게시물 제목</span>
+                            <span>{{gallery.title}}</span>
                         </div>
                         <div class="info-contents">
                             <!-- 게시물 작성 날짜 -->
-                            <span>날짜 : <div class="text-bold">2020.04.10</div></span>
+                            <span>날짜 : <div class="text-bold">{{gallery.created_at}}</div></span>
                             <!-- 모임 장소 -->
-                            <span>장소 : <div class="text-bold">아산 온양온천역--</div></span>
+                            <span>장소 : <div class="text-bold">{{gallery.place}}</div></span>
+                            <span>기수 : <div class="text-bold">{{gallery.ordinal_num}}</div></span>
+                            <span>행사 : <div class="text-bold">{{gallery.event}}</div></span>
                             <br>
                             <!-- 사진 설명 -->
                             <span>
-                                <div class="text-bold">오늘은 처음으로 멋사 사람들을 만났어요 어쩌고 저쩌고~~~~~~~~~</div>
+                                <div class="text-bold">{{gallery.contents}}</div>
                             </span>
                         </div>
                     </div>
@@ -98,10 +66,16 @@
                         <!-- 사진이 들어가는 곳 -->
                         <div class="image-contents">
                                 <!-- 사진(반복) -->
-                            <div class="image" style="background-image:url('test1.jpg')"></div>
-                            <div class="image" style="background-image:url('test1.jpg')"></div>
+                            <img class="image" src="{{gallery.image_url}}">
                         </div>
                     </div>
+                    <div class="update-delete-wrap">
+                            <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
+                            <a href="{% url 'gallery_delete' gallery.gallery_id %}"><span class="update-delete-btn">삭제</span></a>
+                            <a href="{% url 'gallery_update' gallery.gallery_id %}"><span class="update-delete-btn">수정</span></a>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </main>

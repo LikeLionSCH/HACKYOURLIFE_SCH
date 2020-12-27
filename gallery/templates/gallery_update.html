@@ -22,7 +22,7 @@
         <!-- form -->
 
         <div class="main-wrap">
-            <form class="form-box" method="post" action="{% url 'gallery_create' %}">
+            <form class="form-box" method="post" action="{% url 'gallery_update' gallery.gallery_id %}">
                 {% csrf_token %}
                 <div class="title-box">
                     <p>제목</p>
@@ -53,13 +53,13 @@
                     <input type="text" name="place" placeholder="ex. 순천향대학교 ML304 ( 미디어랩스 304호 )">
                 </div>
                 <div class="explanation-box">
-                    <div>
-                        <img id="myimg" style="width: 150px; height: 150px;"> <label id="UpProgress"></label> <br><br>
-                        <button type="button" id="select" style="font-size:18px; background-color: white; border: 0px;">이미지 고르기</button>
-                        <button type="button" id="upload" style="font-size:18px; background-color: white; border: 0px; margin-left:50px;">선택 완료</button>
-                    </div>
-                    <br>
                     <p>설명</p>
+                    <div>
+                        <img id="myimg" style="width: 300px; height: 300px;"> <label id="UpProgress"></label> <br><br>
+                        <button type="button" id="select" style="font-size:18px; background-color: white; border: 0px;">이미지 고르기</button><br><br>
+                        <button type="button" id="upload" style="font-size:18px; background-color: white; border: 0px;">선택 완료</button>
+                    </div>
+
                     <textarea name="contents" cols="40" rows="100"></textarea>
                 </div>
                 <input id="myimg-url" name="image_url" type="hidden">
@@ -81,6 +81,7 @@
     var files = [];
     var reader;
 
+    // Firebase 초기화
     if (!firebase.apps.length) {
         const firebaseConfig = {
             apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
@@ -99,7 +100,6 @@
     document.getElementById("select").onclick = function(e){
         var input = document.createElement('input');
         input.type='file';
-        input.multiple='multiple';
 
         input.onchange = e => {
             files = e.target.files;
