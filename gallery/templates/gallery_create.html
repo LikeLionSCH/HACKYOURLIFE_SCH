@@ -33,17 +33,33 @@
                     <input type="date" name="created_at">
                 </div>
                 <div class="link-box">
+                    <p>기수</p>
+                    <select name="ordinal_num">
+                        <option value="8th" selected="selected">8th</option>
+                        <option value="9th">9th</option>
+                    </select>
+                </div>
+                <div class="link-box">
+                    <p>행사</p>
+                    <select name="event">
+                        <option value="ideathon" selected="selected">Ideathon</option>
+                        <option value="hackathon">Hackathon</option>
+                        <option value="session">Session</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="link-box">
                     <p>장소</p>
                     <input type="text" name="place" placeholder="ex. 순천향대학교 ML304 ( 미디어랩스 304호 )">
                 </div>
                 <div class="explanation-box">
-                    <p>설명</p>
                     <div>
-                        <img id="myimg" style="width: 300px; height: 300px;"> <label id="UpProgress"></label> <br><br>
-                        <button type="button" id="select" style="font-size:18px; background-color: white; border: 0px;">이미지 고르기</button><br><br>
-                        <button type="button" id="upload" style="font-size:18px; background-color: white; border: 0px;">선택 완료</button>
+                        <img id="myimg" style="width: 150px; height: 150px;"> <label id="UpProgress"></label> <br><br>
+                        <button type="button" id="select" style="font-size:18px; background-color: white; border: 0px;">이미지 고르기</button>
+                        <button type="button" id="upload" style="font-size:18px; background-color: white; border: 0px; margin-left:50px;">선택 완료</button>
                     </div>
-
+                    <br>
+                    <p>설명</p>
                     <textarea name="contents" cols="40" rows="100"></textarea>
                 </div>
                 <input id="myimg-url" name="image_url" type="hidden">
@@ -65,7 +81,6 @@
     var files = [];
     var reader;
 
-    // Firebase 초기화
     if (!firebase.apps.length) {
         const firebaseConfig = {
             apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
@@ -84,6 +99,7 @@
     document.getElementById("select").onclick = function(e){
         var input = document.createElement('input');
         input.type='file';
+        input.multiple='multiple';
 
         input.onchange = e => {
             files = e.target.files;
