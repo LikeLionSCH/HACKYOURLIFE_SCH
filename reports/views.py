@@ -7,7 +7,7 @@ import google
 from datetime import datetime
 from django.core.paginator import Paginator
 
-from hackyourlife_sch.firebase import initialize_firebase
+from hackyourlife_sch.firebase import FirestoreControlView
 from .models import Report
 from assignments.models import Assignment
 
@@ -16,11 +16,8 @@ from assignments.models import Assignment
 @param : request, 등록할 레포트에 해당하는 과제의 id
 @return : 래포트 등록하는 페이지 (report_create.html) 페이지 렌더링
 """
-def create_Report_view(request,assignment_id):
-
-    # 파이어베이스 초기화
-    db = initialize_firebase()
-
+@FirestoreControlView
+def create_Report_view(request, db, assignment_id):
     # 파이어베이스에서 매개변수로 불러온 과제의 데이터 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
@@ -61,11 +58,8 @@ def create_Report_view(request,assignment_id):
 @param : request, 해당하는 과제의 id
 @return : report_list.html 렌더링, output datas
 """
-def read_Report_list_view(request, assignment_id): 
-    
-    # 파이어 베이스 초기화
-    db = initialize_firebase()
-
+@FirestoreControlView
+def read_Report_list_view(request, db, assignment_id):
     # 파이어베이스에서 매개변수로 불러온 과제의 데이터 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
@@ -105,17 +99,13 @@ def read_Report_list_view(request, assignment_id):
     return render(request,"report_list.html",output_datas)
 
 
-
 """
 레포트의 디테일 뷰를 보여주는 함수
 @param : request, 보여줄 레포트의 id
 @return : report_detail.html 렌더링, output datas
 """
-def get_Report_detail_view(request,assignment_id,report_id):
-    
-    # 파이어베이스 초기화
-    db = initialize_firebase()
-
+@FirestoreControlView
+def get_Report_detail_view(request, db, assignment_id, report_id):
     # 매개변수의 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
     try:
         report_data = db.collection('Report').document(report_id).get()
@@ -145,11 +135,8 @@ def get_Report_detail_view(request,assignment_id,report_id):
 @param : request, 수정할 레포트의 id
 @return : report_update.html 렌더링, 수정한 레포트의 디테일 페이지로 리다이렉트
 """
-def update_Report_view(request,assignment_id,report_id):
-    
-    # 파이어베이스 초기화
-    db = initialize_firebase()
-
+@FirestoreControlView
+def update_Report_view(request, db, assignment_id, report_id):
     # 매개변수의 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
     try:
         report_data = db.collection('Report').document(report_id).get()
@@ -200,11 +187,8 @@ def update_Report_view(request,assignment_id,report_id):
 @param : request, 삭제할 레포트의 id
 @return : 리스트 페이지로 리다이렉트
 """
-def delete_Report(request,assignment_id,report_id):
-     
-    #파이어 베이스 초기화
-    db = initialize_firebase()
-
+@FirestoreControlView
+def delete_Report(request, db, assignment_id, report_id):
     # 파이어베이스에서 삭제할 데이터를 불러와 삭제
     db.collection('Report').document(report_id).delete()
 

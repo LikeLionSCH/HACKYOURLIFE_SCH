@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from hackyourlife_sch.firebase import initialize_firebase
+from hackyourlife_sch.firebase import FirestoreControlView
 from firebase_admin import firestore
 import google
 
@@ -19,11 +19,10 @@ firebase에 저장된 세션 목록을 불러오는 함수
 @param : request
 @return : session_list 페이지 반환, 세션 목록 전달
 """
-def session_list(request):
-    session_db = initialize_firebase()  # firebase 초기화
-
+@FirestoreControlView
+def session_list(request, db):
     # firebase에 접근해 세션 날짜별로 정렬한 목록을 가져옴
-    datas = session_db.collection('Session').order_by('session_date', direction=firestore.Query.DESCENDING).stream()
+    datas = db.collection('Session').order_by('session_date', direction=firestore.Query.DESCENDING).stream()
     
     session_list = [] # 세션 목록들 저장할 빈 list 생성
 
@@ -68,12 +67,10 @@ firebase에 세션을 등록하는 함수
 @param : request
 @return : session_list 페이지 반환, 세션 목록 전달
 """
-def session_create(request):
+@FirestoreControlView
+def session_create(request, db):
     # POST 요청일 경우에만 session data create
     if request.method == 'POST':
-        # firebase 초기화
-        session_db = initialize_firebase()
-
         # get input form
         title = request.POST['title']
         host = request.POST['host']
@@ -103,7 +100,7 @@ def session_create(request):
 
         # firebase의 Session 컬렉션 접근 후 자동으로 새 문서 생성(문서 id는 자동 id값)
         # firebase에 새 객체 저장
-        session_db.collection('Session').document().set(new_session.to_dict())
+        db.collection('Session').document().set(new_session.to_dict())
 
         return redirect('session_list')
 
@@ -115,14 +112,11 @@ firebase에 저장된 특정 세션을 불러오는 함수
 @param : request, 세션의 ID 값
 @return : session_detail.html 반환 , session 객체 전달
 """
-def session_detail(request, session_id):
-
-    # firebase 초기화
-    session_db = initialize_firebase()
-
+@FirestoreControlView
+def session_detail(request, db, session_id):
     # 매개변수의 session_id를 통해 firebase의 세션 불러옴
     try:
-        data = session_db.collection('Session').document(session_id).get()
+        data = db.collection('Session').document(session_id).get()
     except google.cloud.exceptions.NotFound:
         print('Not Found')
     
@@ -138,15 +132,13 @@ firebase에 저장된 특정 세션을 수정하는 함수
 @param : request, 세션의 ID 값
 @return : session_detail로 redirect
 """
-def session_update(request, session_id):
-    # firebase 초기화
-    session_db = initialize_firebase()
-
+@FirestoreControlView
+def session_update(request, db, session_id):
     # POST 요청일 경우에만 session data create
     if request.method == 'POST':
         # 매개변수의 session_id를 통해 firebase의 세션 불러옴
         try:
-            data = session_db.collection('Session').document(session_id).get()
+            data = db.collection('Session').document(session_id).get()
         except google.cloud.exceptions.NotFound:
             print('Not Found')
         
@@ -183,14 +175,14 @@ def session_update(request, session_id):
         print(session.title, session.host, session.session_date, session.google_link, session.content)
 
         # firebase의 해당 id에 맞는 문서에 수정된 객체 저장
-        session_db.collection('Session').document(session.session_id).set(session.to_dict())
+        db.collection('Session').document(session.session_id).set(session.to_dict())
 
         return redirect('session_detail', session_id)
     
     else: # GET 요청일 때(update 페이지 진입 시)
         # 매개변수의 session_id를 통해 firebase의 세션 불러옴
         try:
-            data = session_db.collection('Session').document(session_id).get()
+            data = db.collection('Session').document(session_id).get()
         except google.cloud.exceptions.NotFound:
             print('Not Found')
 
@@ -218,12 +210,9 @@ firebase에 저장된 특정 세션을 삭제하는 함수
 @param : request, 세션의 ID 값
 @return : session_list로 redirect
 """
-def session_delete(request, session_id):
-
-    # firebase 초기화
-    session_db = initialize_firebase()
-
+@FirestoreControlView
+def session_delete(request, db, session_id):
     # 매개변수의 session_id를 통해 firebase의 세션 불러와 삭제
-    session_db.collection('Session').document(session_id).delete()
+    db.collection('Session').document(session_id).delete()
 
     return redirect('session_list')

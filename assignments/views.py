@@ -7,7 +7,7 @@ import google
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-from hackyourlife_sch.firebase import initialize_firebase
+from hackyourlife_sch.firebase import FirestoreControlView
 from .models import Assignment
 
 
@@ -16,13 +16,11 @@ from .models import Assignment
 @param : request
 @return : assignment_create 페이지 반환
 """
-def create_Assignment_view(request):
+@FirestoreControlView
+def create_Assignment_view(request, db):
 
     # request 메소드가 POST 일 경우만
     if( request.method=='POST' ):
-
-        # firebase initialize
-        db = initialize_firebase()
 
         # form의 값 받아오는 코드
         # author = request.POST['author']
@@ -51,10 +49,8 @@ def create_Assignment_view(request):
 @param : request
 @return : assignment_list 페이지 반환, 과제 목록 전달
 """
-def read_Assignment_list_view(request):
-
-    # firebase initialize
-    db = initialize_firebase()
+@FirestoreControlView
+def read_Assignment_list_view(request, db):
 
     # 과제 객체 목록
     assignment_list = []
@@ -103,11 +99,8 @@ def read_Assignment_list_view(request):
 @param : request, 과제의 문자열 아이디값
 @return : assignment_deta.html 반환 , assignment 객체 전달
 """
-def get_Assignment_detail_view(request,assignment_id):
-
-    # firemase initialize
-    db = initialize_firebase()
-
+@FirestoreControlView
+def get_Assignment_detail_view(request, db, assignment_id):
     # 매개변수의 assignment_id 를 통해 파이어베이스의 과제 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
@@ -126,11 +119,8 @@ def get_Assignment_detail_view(request,assignment_id):
 @param : request, 과제의 문자열 아이디값
 @return : assignment_list로 리다이렉트
 """
-def delete_Assignment(requset,assignment_id):
-
-    # firebase initialize
-    db = initialize_firebase()
-
+@FirestoreControlView
+def delete_Assignment(requset, db, assignment_id):
     # 매개변수의 과제 id 로 데이터를 불러와 삭제
     db.collection('Assignment').document(assignment_id).delete()
 
@@ -143,11 +133,8 @@ def delete_Assignment(requset,assignment_id):
 @param : request, 등록된 과제의 아이디값
 @return : render, redirect
 """
-def update_Assignment_view(request,assignment_id):
-
-    # firebase initialize
-    db = initialize_firebase()
-
+@FirestoreControlView
+def update_Assignment_view(request, db, assignment_id):
     # 매개변수의 과제 아이디값으로 파이어베이스에서 과제 데이터 불러오는 코드
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
@@ -179,9 +166,3 @@ def update_Assignment_view(request,assignment_id):
     
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request,'assignment_update.html',{'assignment':assignment})
-
-
-
-
-
-
