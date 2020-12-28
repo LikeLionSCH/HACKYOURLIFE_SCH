@@ -38,13 +38,13 @@
                 </div>
 
                 <div>
-                    첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
+                    첨부파일 : <input type="file" name="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                             <a href="#" class="js-fileSelect">Select some files</a><br>
                             <sub>파일을 여러개 선택하려면 드래그하세요.</sub><br>
                 </div>
                 <br>
                 <div>
-                    첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
+                    첨부이미지 : <input type="file" name="image" class="js-imageElem" multiple accept="notice/*" style="display:none">
                             <a href="#" class="js-imageSelect">Select some images</a><br>
                             <sub>이미지 파일 여러개 선택하려면 드래그하세요.</sub><br>
                 </div>
@@ -100,12 +100,17 @@
 
             const fileUploads = Array.from(e.target.files).map((currFile) => {
                 const fileRef = imagesRef.child(currFile.name);
+                fileRef.put(currFile);
+                fileRef.snapshot.ref.getDownloadURL().then(function(url){
+                    document.getElementsByName("file").value=url;
+                });
                 return fileRef.put(currFile);
             });
 
             Promise.all(fileUploads).then((items) => {
                 console.log(items);
             });
+
         });
 
 
