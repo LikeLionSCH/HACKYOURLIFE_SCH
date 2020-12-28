@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/report_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/report_scoring.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
     <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
     <div class='title-wrap'>
         <span class='page-sub-title'>
-            REPORT
+            SCORING
         </span>
     </div>
 
@@ -24,11 +24,6 @@
             <!-- detail 요소가 보여지는 내용 -->
             <div class="update-delete-wrap">
                 <a href="{% url 'report_list' assignment_id %}">목록으로 가기</a>
-                <div>
-                    <a href="{% url 'report_update' assignment_id report.report_id %}">수정</a>
-                    <a href="{% url 'report_delete' assignment_id report.report_id %}">삭제</a>
-                    <a href="{% url 'report_scoring' assignment_id report.report_id %}">채점</a>
-                </div>
             </div>
 
             <div class="info-box">
@@ -60,17 +55,18 @@
                 </div>
             </div>
 
-            {% if report.comment != '' %}
-            <div class="detail-box mg-top-60">
-                <div class="detail-title">
+            <div class="comment-box mg-top-60">
+                <div class="comment-title mg-btm-30">
                     <span>COMMENT</span>
                 </div>
-                <!-- detail contents 가 들어가는 부분 -->
-                <div class="detail-contents">
-                    {{ report.comment }}
-                </div>
+                <input type="checkbox" name="scored" value="scored" required> 채점 여부
+                <form action="{% url 'report_scoring' assignment_id report.report_id %}" method="POST">
+                    {% csrf_token %}
+                    <textarea name="comment" cols="30" rows="10"
+                        placeholder="과제에 대한 코멘트를 남겨 주세요">{{ report.comment }}</textarea>
+                    <input type="submit" value="채점 완료">
+                </form>
             </div>
-            {% endif %}
 
             <!-- ------------------------------- -->
 
