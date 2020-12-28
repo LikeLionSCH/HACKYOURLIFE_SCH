@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/error.css' %}">
+<link rel="stylesheet" href="{% static 'css/500.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Error 500</title>
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <section id="main-content">
+        <h2>500</h2>
+        <span>Internal server error :(</span>
+        <p>
+            죄송합니다. 연결하려는 페이지에 문제가 있어서 페이지를 표시할 수 없습니다.<br>
+            잠시 후 다시 이용 부탁드리며 이용에 불편을 드려 사과드립니다.
+        </p>
+        <!-- 링크 달아주세요우오우옹 -->
+        <a href="{% url 'main' %}"><button>홈으로 이동</button></a>
+    </section>
+</main>
+
+{% endblock %}
