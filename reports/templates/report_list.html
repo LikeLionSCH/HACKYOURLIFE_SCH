@@ -30,13 +30,19 @@
                     <input type="text" name="" placeholder="학생의 이름으로 검색해주세요">
                     <button><i class="fas fa-search"></i></button>
                 </form>
+                <div>
+                    <a href="?filter=all">전체</a>
+                    |<a href="?filter=not_scored">채점중</a>
+                    |<a href="?filter=scoring_complete">채점완료</a>
+                    |<a href="?filter=not_submitted">미제출</a>
+                </div>
             </div>
 
             <!-- list 제목이 들어가는 공강 -->
 
             <div class="list-title">
                 <p>SUBMIT DATE</p>
-                <p>STU INFO</p>
+                <p>STU NAME</p>
                 <p>STATE</p>
             </div>
 
@@ -44,7 +50,13 @@
             {% for report in reports %}
             <div class="list-body">
                 <p>{{ report.submit_date }}</p>
-                <a href="{% url 'report_detail' assignment_id report.report_id %}">20194059 김태완</a>
+
+                {% if report.submit_status == "미제출" %}
+                <a href="#">{{ report.author }}</a>
+                {% else %}
+                <a href="{% url 'report_detail' assignment_id report.report_id %}">{{ report.author }}</a>
+                {% endif %}
+
                 <p>{{ report.submit_status }}</p>
             </div>
             {% endfor %}

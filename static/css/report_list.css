@@ -49,7 +49,18 @@
 .top-box {
     display: flex;
     margin-bottom: 15px;
+    justify-content: space-between;
 }
+
+.top-box div {
+    color: darkgray;
+}
+
+.top-box a {
+    color: var(--SCH-skyblue);
+    margin-left: 5px;
+}
+
 
 .search-box>input {
     border: none;
