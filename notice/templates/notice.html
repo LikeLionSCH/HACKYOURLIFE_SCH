@@ -29,8 +29,8 @@
 <!-- NOTICE PAGE -->
 <main>
     <!-- 내용 -->
+    {% for notice in notices %}
     <div class='content-wrap'>
-        {% for notice in notices %}
         <!-- 이미지 박스 -->
         <div class='img-box'>
             <img src="{% static 'image/LOGO.png' %}" alt="SN" />
