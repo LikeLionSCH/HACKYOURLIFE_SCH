@@ -26,7 +26,7 @@
                 {% csrf_token %}
                 <div class="title-box">
                     <p>제목</p>
-                    <input type="text" name="title" placeholder="공지사항 제목">
+                    <input type="text" id="namebox" name="title" placeholder="공지사항 제목">
                 </div>
                 <div class="date-box">
                     <p>공지사항 일시</p>
@@ -36,12 +36,17 @@
                     <p>공지사항 상세내용</p>
                     <textarea name="contents" cols="30" rows="10"></textarea>
                 </div>
-                <div>
-                    첨부파일 : <input type="file" name="file">
-                </div>
 
                 <div>
-                    첨부이미지 : <input type="file" name="image">
+                    첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
+                            <a href="#" class="js-fileSelect">Select some files</a><br>
+                            <sub>파일을 여러개 선택하려면 드래그하세요.</sub><br>
+                </div>
+                <br>
+                <div>
+                    첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
+                            <a href="#" class="js-imageSelect">Select some images</a><br>
+                            <sub>이미지 파일 여러개 선택하려면 드래그하세요.</sub><br>
                 </div>
 
                 <input type="submit" value="공지사항 올리기">
@@ -56,75 +61,79 @@
 
 {% block script %}
 <script id="MainScript">
-    var ImgName, ImgUrl;
-    var files = [];
-    var reader;
+    (() => {
+        if (!firebase.apps.length) {
+            const firebaseConfig = {
+                apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
+                authDomain: "likelion-sch.firebaseapp.com",
+                databaseURL: "https://likelion-sch.firebaseio.com/",
+                projectId: "likelion-sch",
+                storageBucket: "likelion-sch.appspot.com",
+                messagingSenderId: "654141769540",
+                appId: "1:654141769540:web:c744ef4d2df58003093911",
+                measurementId: "G-PXNX9ZZCEN"
+            };
 
-    if (!firebase.apps.length) {
-        const firebaseConfig = {
-            apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
-            authDomain: "likelion-sch.firebaseapp.com",
-            databaseURL: "https://likelion-sch.firebaseio.com/",
-            projectId: "likelion-sch",
-            storageBucket: "likelion-sch.appspot.com",
-            messagingSenderId: "654141769540",
-            appId: "1:654141769540:web:c744ef4d2df58003093911",
-            measurementId: "G-PXNX9ZZCEN"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-    }
-
-    document.getElementById("select").onclick = function(e){
-        var input = document.createElement('input');
-        input.type='file';
-        input.multiple='multiple';
-
-        input.onchange = e => {
-            files = e.target.files;
-            reader = new FileReader();
-            reader.onload = function(){
-                document.getElementById("myimg").src = reader.result;
-            }
-            reader.readAsDataURL(files[0]);
+            firebase.initializeApp(firebaseConfig);
         }
-        input.click();
+        const storage = firebase.storage();
 
+        const storageRef = storage.ref();
 
-    }
+        const imagesRef = storageRef.child('Notice');
 
-    document.getElementById('upload').onclick = function(){
-        ImgName = document.getElementById('namebox').value;
-        var uploadTask = firebase.storage().ref('Images/'+ImgName+".png").put(files[0]);
+        const spaceRef = imagesRef.child('space.jpg');
 
-        uploadTask.on('state_changed',function(snapshot){
-            var progress = (snapshot.bytesTranferred / snapshot.totalBytes) * 100
-            document.getElementById('UpProgress').innerHTML = 'Upload';
-        },
+        const fileSelect = document.querySelector('.js-fileSelect');
+        const fileElem = document.querySelector('.js-fileElem');
 
-        function(error){
-            alert('error in saving the image');
-        },
+        fileSelect.addEventListener('click', (e) => {
+            e.preventDefault();
 
-        function(){
-            uploadTask.snapshot.ref.getDownloadURL().then(function(url){
-                ImgUrl = url;
-                document.getElementById('myimg-url').value = url;
-
-                firebase.database().ref('Pictures/'+ImgName).set({
-                    Name: ImgName,
-                    Link: ImgUrl
-                });
-                alert("image upload success!");
+            if (fileElem) {
+                fileElem.click();
             }
-            );
-    });
-
-    document.getElementById('retrieve').onclick = function(){
-        firebase.database().ref('Pictures/'+ImgName).on('value', function(snapshot){
-            document.getElementById('myimg').src = snapshot.val.Link;
         });
-    }
-}
+
+        fileElem.addEventListener('change', (e) => {
+            console.log(e.target.files);
+
+            const fileUploads = Array.from(e.target.files).map((currFile) => {
+                const fileRef = imagesRef.child(currFile.name);
+                return fileRef.put(currFile);
+            });
+
+            Promise.all(fileUploads).then((items) => {
+                console.log(items);
+            });
+        });
+
+
+        const imageSelect = document.querySelector('.js-imageSelect');
+        const imageElem = document.querySelector('.js-imageElem');
+
+        imageSelect.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (imageElem) {
+                imageElem.click();
+            }
+        });
+
+        imageElem.addEventListener('change', (e) => {
+            console.log(e.target.files);
+
+            const imageUploads = Array.from(e.target.files).map((currFile) => {
+                const imageRef = imagesRef.child(currFile.name);
+                return imageRef.put(currFile);
+            });
+
+            Promise.all(imageUploads).then((items) => {
+                console.log(items);
+            });
+        });
+
+      })();
+
 </script>
 {% endblock %}
