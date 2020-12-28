@@ -24,9 +24,10 @@ import main
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    path('', include('about.urls')),
+    path('about/', include('about.urls')),
     path('assignment/', include('assignments.urls')),
     path('', include('notice.urls')),
+    path('activity/', include('activity.urls')),
     path('', include('session.urls')),
     path('report/',include('reports.urls')),
     path('', include('google_calendar.urls')),
@@ -34,5 +35,6 @@ urlpatterns = [
 ]
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+# Handler for Custom Error Page Config
 handler404 = "main.views.error_404"
 handler500 = "main.views.error_500"

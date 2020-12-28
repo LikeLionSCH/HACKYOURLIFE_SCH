@@ -40,8 +40,7 @@ SECRET_KEY = get_secret('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # 배포 시 False로 바꿔주기
 
-ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['127.0.0.1'] # 에러 페이지 확인용
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] # 에러 페이지 확인용
 
 
 # Application definition
@@ -61,6 +60,7 @@ INSTALLED_APPS = [
     'session.apps.SessionConfig',
     'google_calendar.apps.GoogleCalendarConfig',
     'gallery.apps.GalleryConfig',
+    'activity.apps.ActivityConfig',
 ]
 
 MIDDLEWARE = [
