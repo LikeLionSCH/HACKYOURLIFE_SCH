@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 정보</title>
     <link rel="stylesheet" href="../base/reset.css">
     <link rel="stylesheet" href="../base/base.css">
-    <link rel="stylesheet" href="mypage.css">
+    <link rel="stylesheet" href="login.css">
+    <title>멋쟁이사자처럼 at 순천향대학교</title>
 </head>
 
 <body>
@@ -19,10 +19,6 @@
                     <li><a href="#">ABOUT</a></li>
                     <li>
                         <a href="#">NOTICE</a>
-                        <ul class="dropbox-nav">
-                            <li><a href="#">calendar</a></li>
-                            <li><a href="#">session</a></li>
-                        </ul>
                     </li>
                     <li>
                         <a href="#">ACTIVITY</a>
@@ -39,33 +35,32 @@
             </nav>
         </div>
     </header>
-    <!-- -----------Base header cut line ---------- -->
+
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            LOGIN
+        </span>
+    </div>
+
+    <!-- Login PAGE -->
     <main>
-
-        <!-- 배경 이미지 -->
-        <div class="background">
-            <img class="background-img" src="../image/mypage-background.png" alt="mypage-background.png">
+        <div class="login-wrap">
+            <form action="#">
+                <input type="email" name="email" placeholder="이메일을 입력해주세요." />
+                <input type="password" name="password" placeholder="비밀번호을 입력해주세요." />
+                <button type="button">로그인</button>
+            </form>
         </div>
 
-        <!-- 프로필 사진 -->
-        <div class="profile-photo">
-            <img src="../image/LOGO.png" alt="LOGO.png">
-        </div>
+        <hr id="login-hr" />
 
-        <!-- 주요 내용 -->
-        <div class="main-contents">
-            <p class="text-name">김멋사</p>
-            <p class="text-info role">9기 운영진</p>
-            <p class="text-info">sch0808@likelion.org</p>
-            <p class="text-info">010-1234-4321</p>
-            <div class="link-btn">
-                <a href="mypage_change.html">비밀번호 변경</a>
-                <a href="#">제출된 과제</a>
-            </div>
+        <div class="login-description">
+            <p id="description">
+                멋쟁이사자처럼 <strong>likelion.org</strong> 도메인만 입장 가능 합니다.
+            </p>
         </div>
-
     </main>
-    <!-- -----------Base footer cut line ---------- -->
+
     <footer>
         <div class="footer-box">
             <div class="contact-box">
@@ -83,11 +78,10 @@
             <img src="../image/slogan2.png" alt="slogan2.png">
         </div>
     </footer>
-
+    
+    <script src="base.js"></script>
     <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- UIUX jquery (main.js) -->
-    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="script/jquery-1.12.3.js"></script>
 </body>
 

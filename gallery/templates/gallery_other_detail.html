@@ -32,16 +32,11 @@
                     <div class="menu">
                         <div class="back-wrap">
                             <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
-                            <a href="#"><i class="far fa-arrow-alt-circle-left"></i></a>
-                        </div>
-
-                        <div class="update-delete-wrap">
-                            <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
-                            <a href="#"><span class="update-delete-btn">삭제</span></a>
-                            <a href="#"><span class="update-delete-btn">수정</span></a>
+                            <a href="{% url 'gallery_board' %}"><i class="far fa-arrow-alt-circle-left"></i></a>
                         </div>
                     </div>
                     {% for gallery in galleries %}
+                    {% if gallery.event == 'other' %}
                     <!-- 게시물 정보 -->
                     <div class="info-box">
                         <!-- 게시물 제목 -->
@@ -53,6 +48,8 @@
                             <span>날짜 : <div class="text-bold">{{gallery.created_at}}</div></span>
                             <!-- 모임 장소 -->
                             <span>장소 : <div class="text-bold">{{gallery.place}}</div></span>
+                            <span>기수 : <div class="text-bold">{{gallery.ordinal_num}}</div></span>
+                            <span>행사 : <div class="text-bold">{{gallery.event}}</div></span>
                             <br>
                             <!-- 사진 설명 -->
                             <span>
@@ -69,9 +66,20 @@
                         <!-- 사진이 들어가는 곳 -->
                         <div class="image-contents">
                                 <!-- 사진(반복) -->
-                            <img class="image" src="{{gallery.image_url}}">
+                            <div class="post_img">
+                                <div class="post_img_div">
+                                    <img src="{{gallery.image_url}}" alt="test1.png">
+                                    <div class="shadow"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="update-delete-wrap">
+                            <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
+                            <a href="{% url 'gallery_delete' gallery.gallery_id %}"><span class="update-delete-btn">삭제</span></a>
+                            <a href="{% url 'gallery_update' gallery.gallery_id %}"><span class="update-delete-btn">수정</span></a>
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>

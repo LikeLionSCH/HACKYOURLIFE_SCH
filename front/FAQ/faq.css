@@ -4,8 +4,20 @@
 #faq-content {
     width: var(--main-width);
     margin: 0 auto;
-    padding: 50px 0 100px 0;
+    padding: 20px 0 100px 0;
     overflow: hidden;
+}
+
+#faq-content h2 {
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 26px;
+    margin: 100px 0 5px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+#faq-content h2:first-of-type {
+    margin: 5px 0;
 }
 
 /* ----------------------------- */

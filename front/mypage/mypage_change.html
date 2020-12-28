@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 정보</title>
+    <title>회원정보변경</title>
     <link rel="stylesheet" href="../base/reset.css">
     <link rel="stylesheet" href="../base/base.css">
-    <link rel="stylesheet" href="mypage.css">
+    <link rel="stylesheet" href="mypage_change.css">
 </head>
 
 <body>
@@ -47,21 +47,21 @@
             <img class="background-img" src="../image/mypage-background.png" alt="mypage-background.png">
         </div>
 
-        <!-- 프로필 사진 -->
-        <div class="profile-photo">
-            <img src="../image/LOGO.png" alt="LOGO.png">
-        </div>
-
         <!-- 주요 내용 -->
         <div class="main-contents">
-            <p class="text-name">김멋사</p>
-            <p class="text-info role">9기 운영진</p>
-            <p class="text-info">sch0808@likelion.org</p>
-            <p class="text-info">010-1234-4321</p>
-            <div class="link-btn">
-                <a href="mypage_change.html">비밀번호 변경</a>
-                <a href="#">제출된 과제</a>
-            </div>
+            <p class="password-info">비밀번호를 변경하세요.</p>
+
+            <form action="../main/main.html" method="GET">
+                <p class="password-p">
+                    <span class="password-text">새 비밀번호</span>
+                        <input class="password-input1" type="password" placeholder="비밀번호를 입력하세요."></input> <br>
+                    <span class="password-text">새 비밀번호 확인</span>
+                        <input class="password-input2" type="password" placeholder="비밀번호를 다시 한 번 입력하세요."></input> <br>
+                </p>
+                <p class="button-p">
+                    <button class="submit-button"> 제출 </button>
+                </p>
+            </form>
         </div>
 
     </main>
