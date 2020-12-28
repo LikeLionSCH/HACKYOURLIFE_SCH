@@ -27,6 +27,9 @@ def SignInRequiredView(path):
                 if request.POST['uid'] != '':
                     return func(request, *args, **kwargs)
                 return HttpResponse('This page is accessible only signed in user.', status=500)
-            return render(request, 'verify.html', {'path': path})
+
+            pk = [str(value) + '/' if 'id' in key else None for key, value in kwargs.items()]
+            pk = pk[0] if pk else ''
+            return render(request, 'verify.html', {'path': path + pk})
         return decorator
     return wrapper

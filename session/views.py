@@ -113,6 +113,7 @@ firebase에 저장된 특정 세션을 불러오는 함수
 @param : request, 세션의 ID 값
 @return : session_detail.html 반환 , session 객체 전달
 """
+@SignInRequiredView('session/')
 @FirestoreControlView
 def session_detail(request, db, session_id):
     # 매개변수의 session_id를 통해 firebase의 세션 불러옴
