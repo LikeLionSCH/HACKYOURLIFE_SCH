@@ -14,15 +14,43 @@ from .models import Notice
 
 @FirestoreControlView
 def notice_detail(request, db, notice_id):
+    
     try:
         data = db.collection('Notice').document(notice_id).get()
+        notice_datas = db.collection('Notice').order_by('date',direction=firestore.Query.DESCENDING).stream()
     except google.cloud.exceptions.NotFound:
         print('Not Found')
 
     notice = Notice.from_dict(data.to_dict(), data.id)
-    print(data.to_dict())
+    # print(data.to_dict())
 
-    return render(request, "notice_detail.html", {'notice':notice})
+    notices = []
+
+    prev_notice = None
+    next_notice = None
+
+    count = 0
+    for notice_data in notice_datas:
+        new_notice = Notice.from_dict(notice_data.to_dict(),notice_data.id)
+        notices.append(new_notice)
+        count += 1
+
+    i=0
+    for _notice in notices:
+        if _notice.date == notice.date:
+            if i > 0:
+                prev_notice = notices[i-1]
+            if i < (count - 1):
+                next_notice = notices[i+1]
+        i+=1
+
+    output_datas = {
+        'notice':notice,
+        'prev_notice':prev_notice,
+        'next_notice':next_notice,
+    }    
+
+    return render(request, "notice_detail.html", output_datas)
 
 
 def faq(request):

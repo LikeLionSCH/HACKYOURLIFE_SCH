@@ -57,20 +57,29 @@
 
     <div class="board-footer">
         <ul class="footer-nav">
-            <a href='#'>
+            {% if prev_notice != None %}
+            <a href="{% url 'notice_detail' prev_notice.notice_id %}">
                 <li class="footer-nav-link">
                     <span class="footer-nav-btn"><i class="fas fa-caret-left"></i></span>
                     <!-- 여기 게시글 title 들어가야함!  -->
-                    멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표
+                    {{ prev_notice.title }}
                 </li>
             </a>
-            <a href='#'>
+
+            {% else %}
+            <div></div>
+            {% endif %}
+            {% if next_notice != None %}
+            <a href="{% url 'notice_detail' next_notice.notice_id %}">
                 <li class="footer-nav-link">
                     <!-- 여기 게시글 title 들어가야함!  -->
-                    멋쟁이사자처럼 at 순천향대학교 9기 최종 합격 발표
+                    {{ next_notice.title }}
                     <span class="footer-nav-btn"><i class="fas fa-caret-right"></i></span>
                 </li>
             </a>
+            {% else %}
+            <div></div>
+            {% endif %}
         </ul>
     </div>
 
