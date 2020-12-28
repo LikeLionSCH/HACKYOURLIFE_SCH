@@ -73,8 +73,6 @@ function onSignIn(googleUser) {
         },
         // 등록되지 않은 유저인 경우
         function() {
-            console.log(response);
-
             let result = confirm("등록되지 않은 사용자 입니다. 승인 신청?");
             if (result) {
                 // 승인 신청
@@ -105,11 +103,10 @@ if (!firebase.apps.length) {
 // 새로고침, 로그인, 로그아웃 등 상태가 변경되면 트리거
 // @see: https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
 firebase.auth().onAuthStateChanged(function (user) {
-    let loginButton = document.querySelector(".login-box");
     if (user) {
-        loginButton.innerHTML = `<img src="${user.photoURL}"> ${user.displayName} Logout`;
+        // some code...
     } else {
-        loginButton.innerHTML = `Login`;
+        // some code...
     }
 });
 
