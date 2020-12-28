@@ -5,32 +5,31 @@ from firebase_admin import credentials, auth
 from firebase_admin import firestore
 from hackyourlife_sch.firebase import FirestoreControlView
 
+
 @FirestoreControlView
-def index(request, db):
-    # if request.method == 'POST':
-    #     # firebase initialize
-    #     # user = Firebase.instance().get_current_user()
+def transaction(request, db):
+    # 계정 상태 변경: 로그인
+    if request.POST['requestCode'] == 'user_signed_in_request':
+        # TODO
+        return JsonResponse({'message': 'User signed in.'})
 
-    #     email = request.POST['userEmail']
-    #     print('email address:', email) # test code
-    #     domain = email.split('@')[-1]
-    #     print('email domain:', domain) # test code
-    #     if domain == "likelion.org":
-    #         user = auth.get_user(request.POST['uid'])
-    #         data = {'name': user.display_name, 'photo': user.photo_url}
-    #         print(data)
-    #         return render(request, 'main.html', data)
-    #     else:
-    #         return redirect('main')
+    # 계정 상태 변경: 로그아웃
+    elif request.POST['requestCode'] == 'user_signed_out_request':
+        # TODO
+        return JsonResponse({'message': 'User signed out.'})
+
+    # 등록된 유저인지 검증
+    elif request.POST['requestCode'] == 'verify_sign_in_user_request':
+        # 로그인을 시도하는 유저의 이메일과 일치하는 document가 하나 이상이면 로그인 승인
+        if db.collection('User').where('email', '==', request.POST['email']).get():
+            return JsonResponse({'message': 'Current user is verified member.'})
+        return HttpResponse('Current user is not verified member.', status=400)
+
+
+def index(request):
+    # 클라이언트 요청 처리
     if request.method == 'POST':
-        # 등록된 유저인지 검증
-        if request.POST['requestCode'] == 'verify_sign_in_user_request':
-            # 로그인을 시도하는 유저의 이메일과 일치하는 document가 하나 이상이면 로그인 승인
-            if db.collection('User').where('email', '==', request.POST['email']).get():
-                response = {'message': 'Current user is verified member.'}
-                return JsonResponse(response)
-            return HttpResponse('Current user is not verified member.', status=403)
-
+        return transaction(request)
 
     # 로그인이 되었을때 uid 값을 ajax로부터 가져와 session에 저장
     # 다른 페이지에서도 request.session['uid'] 로 뽑아내면 uid 값 사용 가능 => 예시 = assignment_list

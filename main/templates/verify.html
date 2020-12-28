@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="291486898135-14kbp96om277f1irmrlhcv867cco95j3.apps.googleusercontent.com">
+    <title>Document</title>
+</head>
+<body>
+    {% csrf_token %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- UIUX jquery (main.js) -->
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+    <!-- sign in with google -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                let cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Firebase 초기화
+        if (!firebase.apps.length) {
+            const firebaseConfig = {
+                apiKey: "AIzaSyA3NMvkdpSoKYsPPkNgDtrppzurxOMJbQQ",
+                authDomain: "likelion-sch.firebaseapp.com",
+                databaseURL: "https://likelion-sch.firebaseio.com/",
+                projectId: "likelion-sch",
+                storageBucket: "likelion-sch.appspot.com",
+                messagingSenderId: "654141769540",
+                appId: "1:654141769540:web:c744ef4d2df58003093911",
+                measurementId: "G-PXNX9ZZCEN"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            $.ajax({
+                type: "POST",
+                url: "/{{path}}",
+                headers: {"X-CSRFToken": getCookie("csrftoken")},
+                data: {uid: user ? user.uid : ''},
+                success: function (response) {
+                    $("html").html(response);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,3 +1,7 @@
+const SIGNED_IN_REQUEST = 'user_signed_in_request';
+const SIGNED_OUT_REQUEST = 'user_signed_out_request';
+const VERIFIED_USER_REQUEST = 'verify_sign_in_user_request';
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -13,47 +17,13 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// async function googleSignIn() {
-//     // 이미 로그인 되어있으면, 로그아웃
-//     let user = firebase.auth().currentUser;
-//     if (user) {
-//         return firebase.auth().signOut();
-//     }
-
-//     // 창 닫기 전까지 로그인 상태 유지
-//     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
-//         let provider = new firebase.auth.GoogleAuthProvider();
-        
-//         // 팝업창으로 구글 로그인
-//         return firebase.auth().signInWithPopup(provider).then(function (result) {
-//             // 로그인한 유저의 uid를 서버에 전송
-//             $.ajax({
-//                 type: "POST",
-//                 url: "/",
-//                 headers: {
-//                     "X-CSRFToken": getCookie('csrftoken')
-//                 },
-//                 dataType: "json",
-//                 data: {
-//                     uid: result.user.uid
-//                 }
-//             });
-//         });
-//     });
-// }
-
-function verifyUser(email, onSuccess, onFail) {
+function transaction(code, data, onSuccess, onFail) {
     $.ajax({
         type: "POST",
         url: "/",
-        headers: {
-            "X-CSRFToken": getCookie('csrftoken')
-        },
+        headers: {"X-CSRFToken": getCookie("csrftoken")},
         dataType: "json",
-        data: {
-            requestCode: 'verify_sign_in_user_request',
-            email: email
-        },
+        data: $.extend({requestCode: code}, data),
         success: onSuccess,
         error: onFail
     });
@@ -61,14 +31,17 @@ function verifyUser(email, onSuccess, onFail) {
 
 // 테스트할 때 반드시 localhost:8000으로 접속하세요
 function onSignIn(googleUser) {
-    let email = googleUser.getBasicProfile().getEmail();
-    verifyUser(email,
+    transaction(VERIFIED_USER_REQUEST,
+        // 전송할 데이터
+        {
+            email: googleUser.getBasicProfile().getEmail()
+        },
         // 등록된 유저인 경우
         function() {
             let idToken = googleUser.getAuthResponse().id_token;
             let credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-            firebase.auth().signInWithCredential(credential).then(function() {
-                console.log("signed in");
+            firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(function() {
+                return firebase.auth().signInWithCredential(credential);
             });
         },
         // 등록되지 않은 유저인 경우
@@ -76,7 +49,7 @@ function onSignIn(googleUser) {
             let result = confirm("등록되지 않은 사용자 입니다. 승인 신청?");
             if (result) {
                 // 승인 신청
-                console.log(`${email}, 7기/8기/9기, 멤버/운영진`);
+                console.log(`${googleUser.getBasicProfile().getEmail()}, 7기/8기/9기, 멤버/운영진`);
             }
 
             gapi.auth2.getAuthInstance().signOut();
@@ -104,11 +77,8 @@ if (!firebase.apps.length) {
 // @see: https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        // some code...
+        transaction(SIGNED_IN_REQUEST, {uid: user.uid});
     } else {
-        // some code...
+        transaction(SIGNED_OUT_REQUEST);
     }
 });
-
-
-
