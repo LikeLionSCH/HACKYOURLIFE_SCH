@@ -8,18 +8,8 @@ from hackyourlife_sch.firebase import FirestoreControlView
 
 @FirestoreControlView
 def transaction(request, db):
-    # 계정 상태 변경: 로그인
-    if request.POST['requestCode'] == 'user_signed_in_request':
-        # TODO
-        return JsonResponse({'message': 'User signed in.'})
-
-    # 계정 상태 변경: 로그아웃
-    elif request.POST['requestCode'] == 'user_signed_out_request':
-        # TODO
-        return JsonResponse({'message': 'User signed out.'})
-
     # 등록된 유저인지 검증
-    elif request.POST['requestCode'] == 'verify_sign_in_user_request':
+    if request.POST['requestCode'] == 'verify_sign_in_user_request':
         # 로그인을 시도하는 유저의 이메일과 일치하는 document가 하나 이상이면 로그인 승인
         if db.collection('User').where('email', '==', request.POST['email']).get():
             return JsonResponse({'message': 'Current user is verified member.'})

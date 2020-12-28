@@ -1,5 +1,3 @@
-const SIGNED_IN_REQUEST = 'user_signed_in_request';
-const SIGNED_OUT_REQUEST = 'user_signed_out_request';
 const VERIFIED_USER_REQUEST = 'verify_sign_in_user_request';
 
 function getCookie(name) {
@@ -76,9 +74,5 @@ if (!firebase.apps.length) {
 // 새로고침, 로그인, 로그아웃 등 상태가 변경되면 트리거
 // @see: https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
 firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        transaction(SIGNED_IN_REQUEST, {uid: user.uid});
-    } else {
-        transaction(SIGNED_OUT_REQUEST);
-    }
+    // do something...
 });

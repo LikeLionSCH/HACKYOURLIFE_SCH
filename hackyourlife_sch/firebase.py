@@ -19,8 +19,11 @@ def FirestoreControlView(func):
 def SignInRequiredView(path):
     def wrapper(func):
         @wraps(func)
+        def is_verify_request(request):
+            return request.method == 'POST' and 'requestCode' in request.POST and request.POST['requestCode'] == 'verify_sign_in_user_request'
+
         def decorator(request, *args, **kwargs):
-            if request.method == 'POST' and request.is_ajax():
+            if is_verify_request(request):
                 if request.POST['uid'] != '':
                     return func(request, *args, **kwargs)
                 return HttpResponse('This page is accessible only signed in user.', status=500)

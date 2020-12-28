@@ -22,8 +22,6 @@ firebase에 저장된 세션 목록을 불러오는 함수
 @SignInRequiredView('session/')
 @FirestoreControlView
 def session_list(request, db):
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print(request.POST)
     # firebase에 접근해 세션 날짜별로 정렬한 목록을 가져옴
     datas = db.collection('Session').order_by('session_date', direction=firestore.Query.DESCENDING).stream()
     
@@ -41,7 +39,7 @@ def session_list(request, db):
     sessions = paginator.get_page(page)
 
     # 검색 버튼을 눌렀을 경우
-    if request.method == 'POST' and not request.is_ajax():
+    if request.method == 'POST' and 'requestCode' not in request.POST: # TODO: SignInRequired의 post와 겹치지 않게 하는 처리 예시
 
         # 입력값 불러옴
         keyword = request.POST['keyword']

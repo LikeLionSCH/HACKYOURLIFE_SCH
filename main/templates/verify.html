@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-client_id" content="291486898135-14kbp96om277f1irmrlhcv867cco95j3.apps.googleusercontent.com">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- 링크 아이콘 링크-->
+    <link rel="shortcut icon" href="{% static 'image/logo-favicon.ico' %}" type="image/x-icon">
     <title>Document</title>
 </head>
 <body>
@@ -22,6 +26,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
     <script>
+        const VERIFIED_USER_REQUEST = 'verify_sign_in_user_request';
+        
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -53,15 +59,35 @@
             firebase.initializeApp(firebaseConfig);
         }
 
+        function post(path, parameters) {
+            let form = $('<form></form>');
+            form.attr("method", "post");
+            form.attr("action", path);
+
+            let field = $('<input></input>');
+            field.attr("type", "hidden");
+            field.attr("name", 'csrfmiddlewaretoken');
+            field.attr("value", $("input").val());
+
+            form.append(field);
+
+            $.each(parameters, function(key, value) {
+                let field = $('<input></input>');
+                field.attr("type", "hidden");
+                field.attr("name", key);
+                field.attr("value", value);
+
+                form.append(field);
+            });
+
+            $(document.body).append(form);
+            form.submit();
+        }
+
         firebase.auth().onAuthStateChanged(function (user) {
-            $.ajax({
-                type: "POST",
-                url: "/{{path}}",
-                headers: {"X-CSRFToken": getCookie("csrftoken")},
-                data: {uid: user ? user.uid : ''},
-                success: function (response) {
-                    $("html").html(response);
-                }
+            post("/{{path}}", {
+                requestCode: VERIFIED_USER_REQUEST,
+                uid: user ? user.uid : ''
             });
         });
     </script>
