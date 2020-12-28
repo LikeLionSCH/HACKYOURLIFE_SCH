@@ -104,7 +104,11 @@ def read_Report_list_view(request, db, assignment_id):
     for user_data in user_datas:
         count = 0
 
-        for report in submitted_report_list:
+        for report in not_scored_report_list:
+            if user_data.to_dict()['email'] == report.author:
+                count+=1
+
+        for report in scoring_complete_report_list:
             if user_data.to_dict()['email'] == report.author:
                 count+=1
 
