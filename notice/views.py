@@ -1,15 +1,28 @@
 from django.shortcuts import render,redirect
+
 import firebase_admin
 import google
 from firebase_admin import credentials
 from firebase_admin import firestore
 from hackyourlife_sch.firebase import FirestoreControlView
+
+from django.core.paginator import Paginator
+
 from .models import Notice
+
 # Create your views here.
 
+@FirestoreControlView
+def notice_detail(request, db, notice_id):
+    try:
+        data = db.collection('Notice').document(notice_id).get()
+    except google.cloud.exceptions.NotFound:
+        print('Not Found')
 
-def notice_detail(request):
-    return render(request, "notice_detail.html")
+    notice = Notice.from_dict(data.to_dict(), data.id)
+    print(data.to_dict())
+
+    return render(request, "notice_detail.html", {'notice':notice})
 
 
 def faq(request):
@@ -37,13 +50,18 @@ def notice_create(request,db):
 
 @FirestoreControlView
 def notice_list(request, db):
-    notices = []
+    notice_list = []
 
-    notice_datas = db.collection('Notice').stream()
+    notice_datas = db.collection('Notice').order_by('date', direction=firestore.Query.DESCENDING).stream()
 
     for notice_data in notice_datas:
         notice = Notice.from_dict(notice_data.to_dict(),notice_data.id)
-        notices.append(notice)
+        notice_list.append(notice)
+
+    # 페이지 네이터
+    paginator = Paginator(notice_list,5)
+    page = int(request.GET.get('page',1))
+    notices = paginator.get_page(page)
 
     return render(request,'notice.html',{'notices':notices})
 

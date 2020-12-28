@@ -53,9 +53,9 @@ def create_Assignment_view(request, db):
 def read_Assignment_list_view(request, db):
 
     # session 에 저장된 uid 값 가져오기
-    uid = request.session['uid']
-    print('assignment list')
-    print(uid)
+    # uid = request.session['uid']
+    # print('assignment list')
+    # print(uid)
     # 과제 객체 목록
 
     # 과제 객체 목록

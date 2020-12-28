@@ -4,6 +4,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/notice.css' %}">
+<link rel="stylesheet" href="{% static 'css/pagination.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -29,8 +30,8 @@
 <!-- NOTICE PAGE -->
 <main>
     <!-- 내용 -->
+    {% for notice in notices %}
     <div class='content-wrap'>
-        {% for notice in notices %}
         <!-- 이미지 박스 -->
         <div class='img-box'>
             <img src="{% static 'image/LOGO.png' %}" alt="SN" />
@@ -38,7 +39,7 @@
         <!-- 내용 박스 -->
         <div class='content-box'>
             <!-- 제목 -->
-            <a href="{% url 'notice_detail' %}">
+            <a href="{% url 'notice_detail' notice.notice_id %}">
                 <h3 class='sub-title'>{{ notice.title }}</h3>
                 <p class='content'>
                     {{ notice.contents }}
@@ -53,7 +54,7 @@
     {% endfor %}
 
 
-    <div class="content-footer">
+    <!-- <div class="content-footer">
         <ul class="content-footer-nav">
             <a href="#">
                 <li class="content-footer-link"><span><i class="fas fa-caret-left"></i></span></li>
@@ -71,6 +72,26 @@
                 <li class="content-footer-link"><span><i class="fas fa-caret-right"></i></span></li>
             </a>
         </ul>
+    </div> -->
+
+    <div class="pagination-wrap">
+        <div class="pagination">
+            {% if notices.has_previous %}
+            <div><a href="?page={{ notices.previous_page_number }}"><i class="fas fa-long-arrow-alt-left"></i>
+                    prev</a></div>
+            {% else %}
+            <div> </div>
+            {% endif %}
+
+            <div><span>{{ notices.number }} / {{ notices.paginator.num_pages }}</span></div>
+
+            {% if notices.has_next %}
+            <div><a href="?page={{ notices.next_page_number }}">next <i class="fas fa-long-arrow-alt-right"></i></a>
+            </div>
+            {% else %}
+            <div> </div>
+            {% endif %}
+        </div>
     </div>
 
 </main>

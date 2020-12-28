@@ -23,10 +23,11 @@
         <div class="detail-box">
             <!-- detail 요소가 보여지는 내용 -->
             <div class="update-delete-wrap">
-                <a href="#">목록으로 가기</a>
+                <a href="{% url 'report_list' assignment_id %}">목록으로 가기</a>
                 <div>
                     <a href="{% url 'report_update' assignment_id report.report_id %}">수정</a>
                     <a href="{% url 'report_delete' assignment_id report.report_id %}">삭제</a>
+                    <a href="{% url 'report_scoring' assignment_id report.report_id %}">채점</a>
                 </div>
             </div>
 
@@ -58,6 +59,18 @@
                     {{ report.contents }}
                 </div>
             </div>
+
+            {% if report.comment != '' %}
+            <div class="detail-box mg-top-60">
+                <div class="detail-title">
+                    <span>COMMENT</span>
+                </div>
+                <!-- detail contents 가 들어가는 부분 -->
+                <div class="detail-contents">
+                    {{ report.comment }}
+                </div>
+            </div>
+            {% endif %}
 
             <!-- ------------------------------- -->
 

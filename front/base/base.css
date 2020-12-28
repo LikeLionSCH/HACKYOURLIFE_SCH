@@ -110,7 +110,7 @@ nav ul li a {
     text-decoration: none;
     font-size: 18px;
     border: 1px solid rgba(0, 0, 0, 0%);
-    padding: 5px 10px;
+    padding: 5px 13px 5px 10px;
     border-radius: 20px;
     transition: .4s;
 }
@@ -144,6 +144,23 @@ nav ul li:hover>.dropbox-nav {
 
 .dropbox-nav>li>a:hover {
     color: var(--SCH-skyblue);
+}
+
+
+#google-logo {
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    margin: 5px 5px 7px 2px;
+
+}
+
+#google-logo:hover {
+    cursor: pointer;
+    /* border: 1px solid var(--SCH-skyblue);
+    border-radius: 70%; */
+
 }
 
 /* ----------------------------- */

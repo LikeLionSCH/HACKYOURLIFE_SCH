@@ -1,0 +1,209 @@
+main {
+    overflow-y: hidden;
+
+}
+
+/* 배경 */
+#full-page {
+    position: relative;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    background-size: cover;
+}
+
+/* 전체 컨텐츠 섹션
+.hackathon-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+} */
+
+/* 해커톤 타이틀 */
+.title {
+    border-bottom: 1px solid #F39926;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 40px;
+    color: #F39926;
+    position: relative;
+    display: inline-block;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+/* 해커톤 설명부분 div */
+.hackathon-info1 {
+    padding: 2vh;
+    position: relative;
+    width: 650px;
+    margin: 0 auto;
+    /* background-color: rgb(255, 255, 255, 0.2); */
+    border-radius: 5px;
+}
+
+/* 해커톤 설명부분 text */
+.hackathon-info1 p {
+    position: relative;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 18px;
+    color: white;
+    display: inline-block;
+}
+
+/* 해커톤 설명 두 번째 거  */
+.hackathon-info2 {
+    margin: 0 auto;
+    display: block;
+    width: 600px;
+    height: 10vh;
+}
+
+.hackathon-info2 p {
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 17px;
+    color: #BDDA72;
+    position: relative;
+    margin-top: 2vh;
+    display: inline-block;
+}
+
+/* 이미지 설정 */
+.hackathon-image-group {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 6vh;
+    /* border-bottom: solid 1px rgba(255, 255, 255, 0.2); */
+}
+
+.hackathon-image {
+    padding: 4vh 2vh 0.3vh 2vh;
+    height: 180px;
+    width: 280px;
+    position: relative;
+}
+
+.hackathon-image-box {
+    text-align: center;
+}
+
+.img-info {
+    position: relative;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 16px;
+    color: rgb(255, 255, 255, 0.8);
+}
+
+/* --------------------- */
+
+/* 기수별 해커톤 활동  속성*/
+#hackathon-activity {
+    margin: 3vh 0 0 0;
+    position: relative;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(253, 153, 38, 0);
+}
+
+/* 기수별 구분선 설정 */
+/* #hackathon-activity:nth-child(2n){
+    padding-bottom: 10vh;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+} */
+
+
+/* 기수 속성 -7th*/
+.mem-num-7th {
+    padding: 0 2vh 5vh 0;
+    height: 30px;
+    min-width: 3vh;
+    /* border-radius: 4px; */
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 40px;
+    color: white;
+    border-right: solid 10px rgba(27, 188, 240, 0.8);
+}
+
+/* 기수 속성 -7th*/
+.mem-num-8th {
+    padding: 0 2vh 5vh 0;
+    height: 30px;
+    min-width: 3vh;
+    /* border-radius: 4px; */
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 40px;
+    color: white;
+    border-right: solid 10px #BDDA72;
+}
+
+/* 각 해커톤 이미지  */
+.hackathon-detail-image {
+    width: 300px;
+    height: 200px;
+    margin: 0 3vh 3vh 3vh;
+}
+
+/* 각 해커톤 타이틀 */
+.hackathon-detail-name {
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 35px;
+    color: white;
+}
+
+/* 각 해커톤 날짜 7th */
+.hackathon-detail-date-7th {
+    font-size: 20px;
+    display: block;
+    color: rgba(27, 188, 240, 0.8);
+    border-top: 2px solid rgba(27, 188, 240, 0.8);
+}
+
+/* 각 해커톤 날짜 8th */
+.hackathon-detail-date-8th {
+    font-size: 20px;
+    display: block;
+    color: #BDDA72;
+    border-top: 2px solid #BDDA72;
+}
+
+.hackathon-detail-box {
+    margin: 0 0 0 18vh;
+}
+
+.hackathon-detail-info {
+    margin-top: 2vh;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.6);
+    width: 400px;
+}
+
+/* 갤러리 연결 7th*/
+.to-gallery-7th {
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 40px;
+    color: white;
+}
+
+.to-gallery-7th:hover {
+    transition: .3s;
+    display: inline-block;
+    color: rgba(27, 188, 240, 0.8);
+}
+
+/* 갤러리 연결 8th*/
+.to-gallery-8th {
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 40px;
+    color: white;
+}
+
+.to-gallery-8th:hover {
+    transition: .3s;
+    display: inline-block;
+    color: #BDDA72;
+}
