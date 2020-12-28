@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="291486898135-14kbp96om277f1irmrlhcv867cco95j3.apps.googleusercontent.com">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block head %}{% endblock %}
@@ -32,7 +33,8 @@
                     <li><a href="{% url 'assignment_list' %}">ASSIGNMENT</a></li>
                     <li><a href="{% url 'faq' %}">FAQ</a></li>
                     {% csrf_token %}
-                    <button class="login-box" onclick="googleSignIn()">Login</button>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    <!-- <button class="login-box" onclick="googleSignIn()">Login</button> -->
                 </ul>
             </nav>
         </div>
@@ -64,9 +66,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- UIUX jquery (main.js) -->
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
-    <!-- <script src="script/jquery-1.12.3.js"></script> -->
+    <!-- sign in with google -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
     <!-- base -->
