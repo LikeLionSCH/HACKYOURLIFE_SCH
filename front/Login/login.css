@@ -31,16 +31,16 @@ main {
     width: 100%;
     height: 50px;
     margin-bottom: 1vh;
-    background-color: #F39926;
+    border: 1px solid var(--SCH-skyblue);
+    background-color: none;
 
     border-radius: 50px;
-    color: white;
     border: 0;
 }
 
 .login-wrap form button:hover {
     background: var(--SCH-skyblue);
-    border: 1px solid #e4e4e4;
+    /* border: 1px solid #e4e4e4; */
     transition: 0.5s;
 }
 
