@@ -38,13 +38,15 @@
                 </div>
 
                 <div>
-                    첨부파일 : <input type="file" name="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
+                    첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
+                            <input name="file" id="file" style="display:none">
                             <a href="#" class="js-fileSelect">Select some files</a><br>
                             <sub>파일을 여러개 선택하려면 드래그하세요.</sub><br>
                 </div>
                 <br>
                 <div>
-                    첨부이미지 : <input type="file" name="image" class="js-imageElem" multiple accept="notice/*" style="display:none">
+                    첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
+                             <input name="image" id="image" style="display:none">
                             <a href="#" class="js-imageSelect">Select some images</a><br>
                             <sub>이미지 파일 여러개 선택하려면 드래그하세요.</sub><br>
                 </div>
@@ -76,6 +78,7 @@
 
             firebase.initializeApp(firebaseConfig);
         }
+
         const storage = firebase.storage();
 
         const storageRef = storage.ref();
@@ -99,13 +102,16 @@
             console.log(e.target.files);
 
             const fileUploads = Array.from(e.target.files).map((currFile) => {
-                const fileRef = imagesRef.child(currFile.name);
-                fileRef.put(currFile);
-                fileRef.snapshot.ref.getDownloadURL().then(function(url){
-                    document.getElementsByName("file").value=url;
-                });
-                return fileRef.put(currFile);
+                fileRef = imagesRef.child(currFile.name);
+
+                var uploadfile = fileRef.put(currFile);
+                uploadfile.snapshot.ref.getDownloadURL().then(function(url){
+                document.getElementById('file').value=url;
             });
+
+            });
+
+
 
             Promise.all(fileUploads).then((items) => {
                 console.log(items);
@@ -130,7 +136,10 @@
 
             const imageUploads = Array.from(e.target.files).map((currFile) => {
                 const imageRef = imagesRef.child(currFile.name);
-                return imageRef.put(currFile);
+                var uploadimg = imageRef.put(currFile);
+                uploadimg.snapshot.ref.getDownloadURL().then(function(url){
+                document.getElementById('image').value=url;
+            });
             });
 
             Promise.all(imageUploads).then((items) => {
