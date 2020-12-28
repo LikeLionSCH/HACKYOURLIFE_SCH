@@ -1,0 +1,14 @@
+#main-content h2 {
+    color: #F39926;
+}
+
+#main-content button {
+    border: 1px solid #F39926;
+    background: white;
+    color: #F39926;
+}
+
+#main-content button:hover {
+    background: #F39926;
+    color: white;
+}
