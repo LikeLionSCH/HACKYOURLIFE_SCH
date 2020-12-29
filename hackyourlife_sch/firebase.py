@@ -2,6 +2,7 @@ import json
 from functools import wraps
 
 from django.shortcuts import render, HttpResponse
+from django.core.exceptions import PermissionDenied
 
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -73,8 +74,10 @@ def SignInRequiredView(func):
                 return func(request, *args, **kwargs)
 
             # 유저 인증페이지(verify.html)를 거쳤고, 유저가 로그아웃 되어있으면 403 Forbidden 에러페이지로 이동
-            return HttpResponse('This page is accessible only signed in user.', status=403)
+            #return HttpResponse('This page is accessible only signed in user.', status=403)
+            raise PermissionDenied
             
         # 첫 접속인 경우, 유저 로그인 인증 페이지로 이동
         return render(request, 'verify.html', {'path': request.path})
+        #raise PermissionDenied
     return wrapper

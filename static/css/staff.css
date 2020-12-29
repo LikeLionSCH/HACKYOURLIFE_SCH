@@ -52,22 +52,22 @@
 /* 대표 000 부분 div */
 .staff-profile div:nth-last-of-type(2) {
     font-size: 22px;
-    margin-bottom: 13px;
+    margin-bottom: 25px;
 }
 
 /* 대표 000 글씨 밑에 줄 */
-.staff-profile div:nth-last-of-type(2):after {
+.staff-profile div:nth-last-of-type(2)::after {
     content: "";
     display: block;
-    margin-top: 4px;
-    margin-left: 145px;
-    width: 80px;
+    margin-top: 8px;
+    margin-left: 170px;
+    width: 25px;
     border-bottom: #8C8C8C 1px solid;
 }
 
 /* 연락 파비콘 부분 div */
 .staff-contacts {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .staff-contacts i {
@@ -114,12 +114,14 @@
 }
 
 .staff-img .staff-description p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80%;
     max-width: 80%;
+    margin: 0 auto;
     font-family: 'IBMPlexSansKR-Text';
     color: white;
-    display: block;
-    margin: 0 auto;
-    padding: 30% 0 0 0;
 }
 
 .staff-img .staff-description p {

@@ -27,16 +27,16 @@
             {% csrf_token %}
             <div class="title-box">
                 <p>제목</p>
-                <input type="text" name="title" value="{{ assignment.title }}">
+                <input type="text" name="title" value="{{ assignment.title }}" required>
             </div>
             <div class="dueto-box">
                 <p>마감기한</p>
-                <input type="date" name="deadline" value="{{ assignment.deadline }}">
+                <input type="date" name="deadline" value="{{ assignment.deadline }}" required>
                 <input type="time" name="">
             </div>
             <div class="ckeditor-box">
                 <p>예시 출력 & 부가 설명</p>
-                <textarea name="contents" cols="30" rows="10">{{ assignment.contents }}</textarea>
+                <textarea name="contents" cols="30" rows="10" required>{{ assignment.contents }}</textarea>
             </div>
             <input type="submit" value="SUBMIT">
         </form>
