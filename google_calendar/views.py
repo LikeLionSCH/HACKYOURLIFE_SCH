@@ -30,7 +30,7 @@ def calendar(request):
 
         print(start_of_month, end_of_month)
 
-        events_result = service.events().list(calendarId=CALENDAR_ID, timeMin=start_of_month, timeMax=end_of_month, singleEvents=True, orderBy='startTime').execute()
+        events_result = service.events().list(calendarId=CALENDAR_ID, timeMin=start_of_month, timeMax=None, singleEvents=True, orderBy='startTime').execute()
         events = events_result.get('items', [])
 
         data = []

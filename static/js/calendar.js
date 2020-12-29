@@ -38,7 +38,5 @@ $(function() {
       },
       events: events
     });
-
-    console.log($('#calendar').fullCalendar("getDate"));
   });
 });
