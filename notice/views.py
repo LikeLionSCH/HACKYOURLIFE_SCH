@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 from .models import Notice
 
 # Create your views here.
-#@SignInRequiredView(readable = True)
+@SignInRequiredView(readable = True)
 @FirestoreControlView
 def notice_detail(request, db, notice_id):
     
@@ -98,7 +98,6 @@ def notice_create(request, db):
             file = request.POST['file']
             image = request.POST['image']
 
-
             new_notice = Notice(contents, date, title, file, image, author)
 
             db.collection('Notice').document().set(new_notice.to_dict())
@@ -107,7 +106,7 @@ def notice_create(request, db):
 
     return render(request, 'notice_create.html')
 
-
+@SignInRequiredView(readable = True)
 @FirestoreControlView
 def notice_list(request, db):
     notice_list = []
@@ -179,7 +178,7 @@ def notice_update(request, db, notice_id):
                 'image': image,
             })
 
-        return redirect('notice_list')
+        return redirect('notice_detail', notice_id)
 
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request, 'notice_update.html', {'notice': notice})
