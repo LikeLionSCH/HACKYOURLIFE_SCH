@@ -10,3 +10,6 @@ def history(request):
 
 def staff(request):
     return render(request, "staff.html")
+
+def developer(request):
+    return render(request, "developer.html")

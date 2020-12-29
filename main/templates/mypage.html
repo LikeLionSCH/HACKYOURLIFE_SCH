@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - My page</title>
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <!-- 배경 이미지 -->
+    <div class="background">
+        <img class="background-img" src="{% static 'image/mypage-background.png' %}" alt="mypage-background.png">
+    </div>
+
+    <!-- 프로필 사진 -->
+    <div class="profile-photo">
+        <img src="{% static 'image/LOGO.png' %}" alt="LOGO.png">
+    </div>
+
+    <!-- 주요 내용 -->
+    <div class="main-contents">
+        <p class="text-name">김멋사</p>
+        <p class="text-info role">9기 운영진</p>
+        <p class="text-info">sch0808@likelion.org</p>
+        <p class="text-info">010-1234-4321</p>
+        <div class="link-btn">
+            <a href="#">제출된 과제</a>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

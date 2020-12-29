@@ -21,6 +21,9 @@ def index(request):
 
     return render(request, 'main.html')
 
+def mypage(request):
+    return render(request, "mypage.html")
+
 
 def post_upload(request):
     return render(request, 'test.html')
