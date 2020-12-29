@@ -23,7 +23,7 @@
         <div class="detail-box">
             <!-- detail 요소가 보여지는 내용 -->
             <div class="update-delete-wrap">
-                <a href="{% url 'report_list' assignment_id %}">목록으로 가기</a>
+                <a href="{% url 'assignment_list' %}">과제 목록으로 가기</a>
                 <div>
                     {% if permission == 'member' %}
                     {% if access == True %}
@@ -44,7 +44,7 @@
                 </span><br>
                 <span class="give-margin font-size-20">제출일 : <div class="text-bold">{{ report.submit_date }}</div>
                 </span><br>
-                <span class="give-margin font-size-20">작성자 : <div class="text-bold">이름</div>
+                <span class="give-margin font-size-20">작성자 : <div class="text-bold">{{ report.author_name }}</div>
                 </span>
             </div>
 
