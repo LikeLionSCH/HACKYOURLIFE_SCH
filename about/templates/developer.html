@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/developer.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Developer</title>
+{% endblock %}
+
+{% block content %}
+
+<!-- small-header - span값에 값넣기. -->
+<div id="small-header-wrap">
+    <div id="small-header-box">
+        <a href="{% url 'about' %}"><span class="small-header-nav now-page">멋쟁이사자처럼이란?</span></a>
+        <a href="{% url 'staff' %}"><span class="small-header-nav">멋쟁이사자처럼 at 순천향대학교 운영진</span></a>
+        <a href="{% url 'history' %}"><span class="small-header-nav">주요 연혁</span></a>
+        <a href="{% url 'developer' %}"><span class="small-header-nav">개발자들</span></a>
+    </div>
+</div>
+<!--------------------------------->
+
+<main>
+
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            DEVELOPER
+        </span>
+    </div>
+
+    <!------------------------ 여기부터 creator 본문 내용 시작 입니다. -------------------->
+    <div id="main-div">
+        <a href="https://github.com/ningpop" target="_blank">
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/NamjoonLee.gif' %}" alt="img">
+                <p class="profile-name">
+                    이남준
+                </p>
+                <p class="major">컴퓨터소프트웨어공학과</p>
+                <p class="profile-detail">
+                    <button class="role role-back">Back-End</button><br>
+                    About Session Activity page, Firestore CRUD
+                </p>
+            </div>
+        </a>
+        <a href="https://github.com/minsgy" target='_blank'>
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/MinSeokChoi.gif' %}" alt="img">
+                <p class="profile-name">
+                    최민석
+                </p>
+                <p class="major">컴퓨터소프트웨어공학과</p>
+                <p class="profile-detail">
+                    <button class="role role-front">Front-End</button><br>
+                    Main Notice UI
+                </p>
+            </div>
+        </a>
+        <a href="https://github.com/white-jang" target='_blank'>
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/WhiteJang.gif' %}" alt="img">
+                <p class="profile-name">
+                    장하얀
+                </p>
+                <p class="major">컴퓨터공학과</p>
+                <p class="profile-detail">
+                    <button class="role role-front">Front-End</button>
+                    <button class="role Leader">Leader</button><br>
+                    FAQ About History Error Page Staff UI
+                </p>
+            </div>
+        </a>
+        <a href="https://github.com/yulhee741" target='_blank'>
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/YulHeeKim.gif' %}" alt="img">
+                <p class="profile-name">
+                    김율희
+                </p>
+                <p class="major">사물인터넷학과</p>
+                <p class="profile-detail">
+                    <button class="role role-back">Back-End</button>
+                    <button class="role Leader">Leader</button> <br>
+                    Firebase-Storage Upload, Notice app Create, Gallery Firestore CRUD
+                </p>
+            </div>
+        </a>
+        <a href="https://github.com/HwangSB" target='_blank'>
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/SangBeumHwang.gif' %}" alt="img">
+                <p class="profile-name">
+                    황상범
+                </p>
+                <p class="major">컴퓨터공학과</p>
+                <p class="profile-detail">
+                    <button class="role role-back">Back-End</button><br>
+                    Firebase user auth, GCP, Google Calender API, Firestore CRUD
+                </p>
+            </div>
+        </a>
+        <a href="https://github.com/qhahd78" target='_blank'>
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/YuMinHa.gif' %}" alt="img">
+                <p class="profile-name">
+                    하유민
+                </p>
+                <p class="major">의용메카트로닉스공학과</p>
+                <p class="profile-detail">
+                    <button class="role role-front">Front-End</button><br>
+                    Activity Developer Mypage_change UI
+                </p>
+            </div>
+        </a>
+        <a href="https://github.com/wwan13" target='_blank'>
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/TaeWanKim.gif' %}" alt="img">
+                <p class="profile-name">
+                    김태완
+                </p>
+                <p class="major">컴퓨터소프트웨어공학과</p>
+                <p class="profile-detail">
+                    <button class="role role-full">Full-Stack</button><br>
+                    Assignment Report Session Mypage UI, Firestore CRUD
+                </p>
+            </div>
+        </a>
+        <a href="https://github.com/mseo39" target='_blank'>
+            <div class="profile-div">
+                <img class="profile-img" src="{% static 'image/MinSeoKang.gif' %}" alt="img">
+                <p class="profile-name">
+                    강민서
+                </p>
+                <p class="major">컴퓨터공학과</p>
+                <p class="profile-detail">
+                    <button class="role role-front">Front-End</button><br>
+                    Gallary Page UI
+                </p>
+            </div>
+        </a>
+    </div>
+
+</main>
+{% endblock %}
