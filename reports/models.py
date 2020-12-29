@@ -53,3 +53,14 @@ class Report:
 
         # 생성된 객체 반환
         return report
+
+    
+class My_report_data:
+
+    def __init__(self,assignment_title,assignment_deadline,status,submit_date,report_id,assignment_id):
+        self.assignment_title = assignment_title
+        self.assignment_deadline = assignment_deadline
+        self.status = status
+        self.submit_date = submit_date    
+        self.report_id = report_id
+        self.assignment_id = assignment_id

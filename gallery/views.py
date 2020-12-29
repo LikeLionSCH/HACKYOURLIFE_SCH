@@ -28,7 +28,7 @@ def gallery_board(request, db):
             thums[1] = gallery.image_url
         elif gallery.event == 'session':
             thums[2] = gallery.image_url
-        elif galery.event == 'other':
+        elif gallery.event == 'other':
             thums[3] = gallery.image_url
 
     return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3]})
@@ -141,7 +141,7 @@ def gallery_update(request, db, gallery_id):
             'event': event,
         })
 
-        return redirect('gallery_detail')
+        return redirect('gallery_board')
 
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request, 'gallery_update.html', {'gallery': gallery})
