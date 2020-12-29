@@ -52,7 +52,7 @@
 
         <div class="pagination">
             {% if datas.has_previous %}
-            <div><a href="?page={{ reports.previous_page_number }}"><i class="fas fa-long-arrow-alt-left"></i>
+            <div><a href="?page={{ datas.previous_page_number }}"><i class="fas fa-long-arrow-alt-left"></i>
                     prev</a></div>
             {% else %}
             <div> </div>
@@ -61,7 +61,7 @@
             <div><span>{{ datas.number }} / {{ datas.paginator.num_pages }}</span></div>
 
             {% if datas.has_next %}
-            <div><a href="?page={{ reports.next_page_number }}">next <i class="fas fa-long-arrow-alt-right"></i></a>
+            <div><a href="?page={{ datas.next_page_number }}">next <i class="fas fa-long-arrow-alt-right"></i></a>
             </div>
             {% else %}
             <div> </div>
