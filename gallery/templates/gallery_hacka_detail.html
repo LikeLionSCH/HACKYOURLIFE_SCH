@@ -34,9 +34,15 @@
                             <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
                             <a href="{% url 'gallery_board' %}"><i class="far fa-arrow-alt-circle-left"></i></a>
                         </div>
+                        {% for gallery in galleries %}
+                        {% if gallery.event == 'hackathon' %}
+                        <div class="update-delete-wrap">
+                            <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
+                            <a href="{% url 'gallery_delete' gallery.gallery_id %}"><span class="update-delete-btn">삭제</span></a>
+                            <a href="{% url 'gallery_update' gallery.gallery_id %}"><span class="update-delete-btn">수정</span></a>
+                        </div>
                     </div>
-                    {% for gallery in galleries %}
-                    {% if gallery.event == 'hackathon' %}
+
                     <!-- 게시물 정보 -->
                     <div class="info-box">
                         <!-- 게시물 제목 -->
@@ -74,11 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="update-delete-wrap">
-                            <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
-                            <a href="{% url 'gallery_delete' gallery.gallery_id %}"><span class="update-delete-btn">삭제</span></a>
-                            <a href="{% url 'gallery_update' gallery.gallery_id %}"><span class="update-delete-btn">수정</span></a>
-                    </div>
+                
                     {% endif %}
                     {% endfor %}
                 </div>

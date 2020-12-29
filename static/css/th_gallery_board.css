@@ -392,6 +392,7 @@ main {
 
 /* hover 후 text */
 .post_title {
+    color: white;
     font-size: 1.5em;
     font-weight: bold;
     text-decoration: none;
@@ -405,6 +406,9 @@ main {
     opacity: 0;
     transition: opacity .5s;
     background: rgba(243, 153, 38, 0.4);
+}
+
+.postcard a{
     color: white;
 }
 
@@ -412,6 +416,7 @@ main {
 .postcard:hover .post_title {
     opacity: 1;
     transition: opacity .5s;
+    color: white;
 }
 
 /*post 제목+사진 그림자*/
