@@ -16,7 +16,7 @@
         <span class='page-sub-title'>
             REPORT
         </span><br>
-        <span class="sub-title-detail">'{{ assignment_title }}' 과제에 대한 레포트 목록 입니다.</span>
+        <span class="sub-title-detail">'{{ assignment_title }}' 에 대한 레포트 목록 입니다.</span>
     </div>
 
     <!-- 과제 목록 보여주는 부분 -->
@@ -25,17 +25,14 @@
         <div class="list-box">
 
             <div class="top-box">
-                <form class="search-box" method="POST" action="#">
+                <form class="filtering-box" action="{% url 'report_list' assignment_id %}" method="POST">
                     {% csrf_token %}
-                    <input type="text" name="" placeholder="학생의 이름으로 검색해주세요">
-                    <button><i class="fas fa-search"></i></button>
+                    <button name="filter" value="all">전체</button>
+                    <button name="filter" value="not_scored">미채점</button>
+                    <button name="filter" value="scoring_complete">채점완료</button>
+                    <button name="filter" value="not_submitted">미제출</button>
                 </form>
-                <div>
-                    <a href="?filter=all">전체</a>
-                    |<a href="?filter=not_scored">채점중</a>
-                    |<a href="?filter=scoring_complete">채점완료</a>
-                    |<a href="?filter=not_submitted">미제출</a>
-                </div>
+                <a href="{% url 'assignment_list' %}">과제 목록으로 가기</a>
             </div>
 
             <!-- list 제목이 들어가는 공강 -->
@@ -52,12 +49,16 @@
                 <p>{{ report.submit_date }}</p>
 
                 {% if report.submit_status == "미제출" %}
-                <a href="#">{{ report.author }}</a>
+                <a href="#">{{ report.author_name }}</a>
+                <p style="color: red;">{{ report.submit_status }}</p>
+                {% elif report.submit_status == "채점완료" %}
+                <a href="{% url 'report_detail' assignment_id report.report_id %}">{{ report.author_name }}</a>
+                <p style="color: green;">{{ report.submit_status }}</p>
                 {% else %}
-                <a href="{% url 'report_detail' assignment_id report.report_id %}">{{ report.author }}</a>
+                <a href="{% url 'report_detail' assignment_id report.report_id %}">{{ report.author_name }}</a>
+                <p>{{ report.submit_status }}</p>
                 {% endif %}
 
-                <p>{{ report.submit_status }}</p>
             </div>
             {% endfor %}
 

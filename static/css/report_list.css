@@ -52,10 +52,6 @@
     justify-content: space-between;
 }
 
-.top-box div {
-    color: darkgray;
-}
-
 .top-box a {
     color: var(--SCH-skyblue);
     margin-left: 5px;
@@ -113,6 +109,28 @@ p {
     overflow: hidden;
     color: black;
     cursor: pointer;
+}
+
+.filtering-box {
+    display: flex;
+    justify-content: center;
+}
+
+.filtering-box button {
+    margin-right: 5px;
+    padding: 3px 5px;
+    background-color: white;
+    color: var(--SCH-skyblue);
+    border: 1px solid var(--SCH-skyblue);
+    border-radius: 7px;
+    transition: .3s;
+    outline: none;
+}
+
+.filtering-box button:hover {
+    background-color: var(--SCH-skyblue);
+    color: white;
+    border: 1px solid var(--SCH-skyblue);
 }
 
 /* ************************************* */

@@ -7,9 +7,10 @@ class Report:
     생성자
     @param : 과제 아이디값, 쓴사람 문자열, 컨텐츠 문자열, 깃 레포 주소 문자열, 제출일, 제출 상태
     """
-    def __init__(self,assignment_id,author,contents,repository_address,submit_date,submit_status,comment):
+    def __init__(self,assignment_id,author_uid,author_name,contents,repository_address,submit_date,submit_status,comment):
         self.assignment_id = assignment_id
-        self.author = author
+        self.author_uid = author_uid
+        self.author_name = author_name
         self.contents = contents
         self.repository_address = repository_address
         self.submit_date = submit_date
@@ -27,7 +28,8 @@ class Report:
         # 딕셔너리 생성
         data = {
             'assignment_id' : self.assignment_id,
-            'author' : self.author,
+            'author_uid' : self.author_uid,
+            'author_name' : self.author_name,
             'contents' : self.contents,
             'repository_address' : self.repository_address,
             'submit_date' : self.submit_date,
@@ -46,7 +48,7 @@ class Report:
     def from_dict(data,report_id):
 
         # 객체 생성
-        report = Report(data['assignment_id'],data['author'],data['contents'],data['repository_address'],data['submit_date'],data['submit_status'],data['comment'])
+        report = Report(data['assignment_id'],data['author_uid'],data['author_name'],data['contents'],data['repository_address'],data['submit_date'],data['submit_status'],data['comment'])
         report.report_id = report_id
 
         # 생성된 객체 반환

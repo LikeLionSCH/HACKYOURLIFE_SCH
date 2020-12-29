@@ -37,28 +37,23 @@
     font-family: 'IBMPlexSansKR-Text';
 }
 
-.pagination div {
+.pagination>div {
     width: 100px;
 }
 
-.paginator span {
+.paginator>div>span {
     font-size: 22px;
     color: var(--SCH-skyblue);
     cursor: default;
 }
 
-.pagination a {
-    padding: 0px 10px;
+.pagination>div>button {
     font-size: 17px;
+    background: white;
     transition: .2s;
+    outline: none;
 }
 
-.pagination a:hover {
+.pagination>div>button:hover {
     color: var(--SCH-skyblue);
-}
-
-.nonvisible {
-    padding: 0px 10px;
-    font-size: 17px;
-    color: white;
 }

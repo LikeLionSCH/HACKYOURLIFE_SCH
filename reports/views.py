@@ -20,14 +20,16 @@ from assignments.models import Assignment
 @FirestoreControlView
 def create_Report_view(request, db, assignment_id):
 
-    if request.method=='POST' and 'requestCode' in request.POST:
-        uid = request.POST['uid']
-        print(uid)
+    # 유저 정보 불러옴
+    uid = request.POST['uid']
 
     # 파이어베이스에서 매개변수로 불러온 과제, 레포트의 데이터 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         reports = db.collection('Report').where('assignment_id','==',assignment_id).where('author','==',uid).stream()
+        user = db.collection('User').where('uid','==',uid).stream()
+        for _user in user:
+            current_user = _user.to_dict()
     except google.cloud.exeption.NotFound:
         print('report not found')
 
@@ -40,7 +42,7 @@ def create_Report_view(request, db, assignment_id):
 
     # 내가 제출한 레포트가 있다면 수정 창으로 진입
     if have_report==True:
-        
+
         # 레포트 데이터, 과제의 제목, id
         output_datas = {
             'report':my_report,
@@ -56,21 +58,24 @@ def create_Report_view(request, db, assignment_id):
     assignment_title = assignment_data.to_dict()['title']
 
     # 리퀘스트의 메소드가 POST일 경우에만
-    if request.method=='POST' and 'requestCode' not in request.POST:
+    if request.method=='POST':
 
-        # form 으로부터 값을 불러오는 코드
-        repository_address = request.POST['repository_address']
-        contents = request.POST['contents']
+        # request.POST 에 레포 주소랑 컨텐츠가 포함되어 있을 경우
+        if 'repository_address' and 'contents' in request.POST:
 
-        # 새로운 레포트 객체 생성
-        report = Report(assignment_id,uid,contents,repository_address,firestore.SERVER_TIMESTAMP,'미채점','')
+            # form 으로부터 값을 불러오는 코드
+            repository_address = request.POST['repository_address']
+            contents = request.POST['contents']
 
-        # 파이어베이스와 연결 후 레포트 데이터 생성
-        db.collection('Report').document().set(report.to_dict())
+            # 새로운 레포트 객체 생성
+            report = Report(assignment_id,uid,current_user['username'],contents,repository_address,firestore.SERVER_TIMESTAMP,'미채점','')
 
-        # 리다이렉트
-        # 유저 타입 나뉘 경우 수정 해야함
-        return redirect('report_list',assignment_id)
+            # 파이어베이스와 연결 후 레포트 데이터 생성
+            db.collection('Report').document().set(report.to_dict())
+
+            # 리다이렉트
+            # 유저 타입 나뉘 경우 수정 해야함
+            return redirect('report_list',assignment_id)
 
     output_datas = {
         'assignment_id':assignment_id,
@@ -86,8 +91,10 @@ def create_Report_view(request, db, assignment_id):
 @param : request, 해당하는 과제의 id
 @return : report_list.html 렌더링, output datas
 """
+@SignInRequiredView
 @FirestoreControlView
 def read_Report_list_view(request, db, assignment_id):
+
     # 파이어베이스에서 매개변수로 불러온 과제의 데이터 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
@@ -133,34 +140,41 @@ def read_Report_list_view(request, db, assignment_id):
         count = 0
 
         for report in not_scored_report_list:
-            if user_data.to_dict()['email'] == report.author:
+            if user_data.to_dict()['uid'] == report.author_uid:
                 count+=1
 
         for report in scoring_complete_report_list:
-            if user_data.to_dict()['email'] == report.author:
+            if user_data.to_dict()['uid'] == report.author_uid:
                 count+=1
 
         if count == 0:
-            not_submitted_report_list.append(Report(assignment_id,user_data.to_dict()['email'],None,None,None,"미제출",''))
+            not_submitted_report_list.append(Report(assignment_id,user_data.to_dict()['uid'],user_data.to_dict()['username'],None,None,None,"미제출",''))
 
-    # 필터링 타입을 get 형식으로 불러옴
-    filtering_type = request.GET.get('filter')
-    
-    # 미채점 일 경우 미채점된 리스트만 추가
-    if filtering_type == "not_scored":
-        report_list = not_scored_report_list
+    report_list = not_scored_report_list + scoring_complete_report_list + not_submitted_report_list
 
-    # 채점 완료 일 경우 채점 완료인 리스트만 추가
-    elif filtering_type == "scoring_conplete":
-        report_list = scoring_complete_report_list
+    if request.method == 'POST':
 
-    # 제출이 안됐을 경우 미제출인 아이들만 추가
-    elif filtering_type == "not_submitted":
-        report_list = not_submitted_report_list
-    
-    # 그 외에 전체 리스트를 원하면 모든 리스트를 합친다
-    else:
-        report_list = not_scored_report_list + scoring_complete_report_list + not_submitted_report_list
+        if 'filter' in request.POST:
+
+            filter_type = request.POST['filter']
+            print(filter_type)
+
+            # 미채점 일 경우 미채점된 리스트만 추가
+            if filter_type == "not_scored":
+                report_list = not_scored_report_list
+
+            # 채점 완료 일 경우 채점 완료인 리스트만 추가
+            elif filter_type == "scoring_complete":
+                report_list = scoring_complete_report_list
+
+            # 제출이 안됐을 경우 미제출인 아이들만 추가
+            elif filter_type == "not_submitted":
+                report_list = not_submitted_report_list
+            
+            # 그 외에 전체 리스트를 원하면 모든 리스트를 합친다
+            else:
+                report_list = not_scored_report_list + scoring_complete_report_list + not_submitted_report_list
+
 
     # 페이지 네이터
     paginator = Paginator(report_list,5)
@@ -186,10 +200,16 @@ def read_Report_list_view(request, db, assignment_id):
 @SignInRequiredView
 @FirestoreControlView
 def get_Report_detail_view(request, db, assignment_id, report_id):
+
+    uid = request.POST['uid']
+
     # 매개변수의 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
     try:
         report_data = db.collection('Report').document(report_id).get()
         assignment_data = db.collection('Assignment').document(assignment_id).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        for _user in user:
+            current_user = _user.to_dict()
     except google.cloud.exeption.NotFound:
         print('report not found')
 
@@ -199,11 +219,25 @@ def get_Report_detail_view(request, db, assignment_id, report_id):
     # 불러온 데이터로 레포트 객체 생성
     report = Report.from_dict(report_data.to_dict(),report_data.id)
 
+    # 내가 쓴 거 이면 수정 가능 안되면 불가
+    if uid == report.author_uid:
+        access = True
+    else:
+        access = False
+
+    # 이 글을 보는 사람이 메니저 이면 채점 페이지로 보냄
+    if current_user['permission'] == 'manager':
+        permission = 'manager'
+    else:
+        permission = 'member'
+
     # 레포트 목록, 해당하는 과제의 제목
     output_datas = {
         'report' : report,
         'assignment_title' : assignment_title,
         'assignment_id' : assignment_data.id,
+        'access' : access,
+        'permission' : permission,
     }
 
     # 레포트 데테일 페이지 렌더링, output datas
@@ -215,6 +249,7 @@ def get_Report_detail_view(request, db, assignment_id, report_id):
 @param : request, 수정할 레포트의 id
 @return : report_update.html 렌더링, 수정한 레포트의 디테일 페이지로 리다이렉트
 """
+@SignInRequiredView
 @FirestoreControlView
 def update_Report_view(request, db, assignment_id, report_id):
     # 매개변수의 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
@@ -232,22 +267,24 @@ def update_Report_view(request, db, assignment_id, report_id):
 
     if (request.method == 'POST'):
 
-        # form 으로부터 값을 불러오는 코드
-        repository_address = request.POST['repository_address']
-        contents = request.POST['contents']
+        if 'repository_address' and 'contents' in request.POST:
 
-        # 현제 시간을 불러와 지정 형식으로 포멧팅
-        now = datetime.now()
-        time = now.strftime('%Y-%m-%d %H:%M')
+            # form 으로부터 값을 불러오는 코드
+            repository_address = request.POST['repository_address']
+            contents = request.POST['contents']
 
-        # 파이어베이스에 접속하여 입력된 값으로 수정
-        db.collection('Report').document(report_id).update({
-            'repository_address' : repository_address,
-            'contents' : contents,
-        })
+            # 현제 시간을 불러와 지정 형식으로 포멧팅
+            now = datetime.now()
+            time = now.strftime('%Y-%m-%d %H:%M')
 
-        # 수정 한 레포트의 디테일 페이지로 리다이렉트
-        return redirect('report_detail',assignment_id,report_id)
+            # 파이어베이스에 접속하여 입력된 값으로 수정
+            db.collection('Report').document(report_id).update({
+                'repository_address' : repository_address,
+                'contents' : contents,
+            })
+
+            # 수정 한 레포트의 디테일 페이지로 리다이렉트
+            return redirect('report_detail',assignment_id,report_id)
 
     # 레포트 데이터, 과제의 제목
     output_datas = {
@@ -264,6 +301,7 @@ def update_Report_view(request, db, assignment_id, report_id):
 @param : request, 해당 과제 Id, 레포트의 id
 @return : render
 """
+@SignInRequiredView
 @FirestoreControlView
 def scoring_Report_view(request,db, assignment_id, report_id):
 
@@ -283,17 +321,19 @@ def scoring_Report_view(request,db, assignment_id, report_id):
     # request 의 메소드가 POST 일 경우
     if request.method == 'POST':
 
-        # 커멘트 값 불러옴
-        comment = request.POST['comment']
-        
-        # 불러온 커멘트로 레포트에 커멘트 추가, 상태를 채점 완료로 변경
-        db.collection('Report').document(report_id).update({
-            'comment' : comment,
-            'submit_status' : '채점완료',
-        })
+        if 'comment' in request.POST:
 
-        # 수정한 레포트의 디테일 페이지로 이동
-        return redirect('report_detail',assignment_id,report_id)
+            # 커멘트 값 불러옴
+            comment = request.POST['comment']
+            
+            # 불러온 커멘트로 레포트에 커멘트 추가, 상태를 채점 완료로 변경
+            db.collection('Report').document(report_id).update({
+                'comment' : comment,
+                'submit_status' : '채점완료',
+            })
+
+            # 수정한 레포트의 디테일 페이지로 이동
+            return redirect('report_detail',assignment_id,report_id)
 
     # 레포트 데이터, 과제의 제목
     output_datas = {
@@ -311,10 +351,12 @@ def scoring_Report_view(request,db, assignment_id, report_id):
 @param : request, 삭제할 레포트의 id
 @return : 리스트 페이지로 리다이렉트
 """
+@SignInRequiredView
 @FirestoreControlView
 def delete_Report(request, db, assignment_id, report_id):
     # 파이어베이스에서 삭제할 데이터를 불러와 삭제
     db.collection('Report').document(report_id).delete()
 
+    # 여기도 수정 필요 
     # 리스트 페이지로 리다이렉트
     return redirect('report_list',assignment_id)
