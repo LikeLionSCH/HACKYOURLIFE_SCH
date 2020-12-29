@@ -29,12 +29,12 @@
             <div class="update-delete-wrap">
                 <a href="{% url 'session_list' %}">목록으로 가기</a>
                 <!-- session의 host가 로그인된 사용자라면 True -->
-                {% if access == True %}
                 <div>
+                {% if access == True %}
                     <a href="{% url 'session_delete' session.session_id %}">삭제</a>
                     <a href="{% url 'session_update' session.session_id %}">수정</a>
-                </div>
                 {% endif %}
+                </div>
             </div>
 
             <div class="info-box">
