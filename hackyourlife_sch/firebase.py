@@ -41,12 +41,12 @@ def SignInRequiredView(func):
     ```python
         @SignInRequiredView
         def some_view(request, profile_id, ...):
-            if request.method == 'POST' and 'requestCode' in request.POST:
+            if request.method == 'POST':
                 # uid of signed in user
                 print(request.POST['uid'])
-            elif request.method == 'POST' and 'requestCode' not in request.POST:
-                # Use your own POST data...
-                pass
+                # use your own POST data
+                if 'name' in request.POST:
+                    print(request.POST['name'])
             return render(request, 'profile.html')
     ```
     '''
