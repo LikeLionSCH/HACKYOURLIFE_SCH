@@ -25,9 +25,14 @@
             <div class="update-delete-wrap">
                 <a href="{% url 'report_list' assignment_id %}">목록으로 가기</a>
                 <div>
+                    {% if permission == 'member' %}
+                    {% if access == True %}
                     <a href="{% url 'report_update' assignment_id report.report_id %}">수정</a>
                     <a href="{% url 'report_delete' assignment_id report.report_id %}">삭제</a>
+                    {% endif %}
+                    {% else %}
                     <a href="{% url 'report_scoring' assignment_id report.report_id %}">채점</a>
+                    {% endif %}
                 </div>
             </div>
 
