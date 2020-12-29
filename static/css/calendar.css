@@ -1,11 +1,11 @@
-.header-box {
-  margin: 0 auto;
+.header-box img {
+  height: 50px !important;
+  /* 이거 지우면 헤더에 있는 사자가 짜부됨... */
 }
 
 #calendar {
   max-width: 900px;
   margin: 40px auto;
-
   font-family: 'IBMPlexSansKR-Light';
 }
 
@@ -18,7 +18,6 @@
 #calendar .fc-left h2 {
   font-family: 'IBMPlexSansKR-Bold';
 }
-
 
 .fc-event {
   font-size: 13px;
