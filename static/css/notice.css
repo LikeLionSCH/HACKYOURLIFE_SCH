@@ -117,3 +117,25 @@ main {
     display: flex;
     justify-content: center;
 }
+
+
+/* 공지사항 생성 컨테이너 */
+.notice-create {
+    text-align: right;
+    width: var(--main-width);
+    font-size: 22px;
+    font-family: 'IBMPlexSansKR-Light';
+
+    margin: 0 auto;
+}
+
+.notice-create a {
+    padding: 5px 10px;
+    background-color: #F39926;
+    color: white;
+    border-radius: 10px;
+}
+
+.notice-create a:hover {
+    background-color: var(--SCH-skyblue);
+}
