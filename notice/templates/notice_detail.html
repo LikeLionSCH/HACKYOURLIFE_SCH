@@ -34,12 +34,12 @@
     </div>
 
     <div class='board-content-wrap'>
-        <img id="board-img" src="{% static 'image/2019_hackathon.jpg' %}" alt="테스트사진" />
+        <img id="board-img" src="{{ notice.image }}" alt="테스트사진" />
         <div class="board-content">
             <!-- 제목이랑 같음. -->
             <div class='board-header'>
                 <span id='board-sub-title'>{{ notice.title }}</span>
-                <a href='test.pdf' download><span id='download-link'>첨부 파일 다운로드</span></a>
+                <a href='{{ notice.file }}' download><span id='download-link'>첨부 파일 다운로드</span></a>
             </div>
             <p class="content">
                 {{ notice.contents }}

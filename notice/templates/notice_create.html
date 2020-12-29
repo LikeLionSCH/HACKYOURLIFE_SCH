@@ -101,16 +101,15 @@
             console.log(e.target.files);
 
             const fileUploads = Array.from(e.target.files).map((currFile) => {
-                fileRef = imagesRef.child(currFile.name);
-
-                var uploadfile = fileRef.put(currFile);
-                uploadfile.snapshot.ref.getDownloadURL().then(function(url){
-                document.getElementById('file').value=url;
+                const fileRef = imagesRef.child(currFile.name);
+                fileRef.put(currFile).then(function(snapshot) {
+                    console.log(snapshot);
+                    snapshot.ref.getDownloadURL().then(function(url){
+                        console.log(url);
+                        document.getElementById('file').value = url;
+                    });
+                });
             });
-
-            });
-
-
 
             Promise.all(fileUploads).then((items) => {
                 console.log(items);
@@ -132,13 +131,15 @@
 
         imageElem.addEventListener('change', (e) => {
             console.log(e.target.files);
-
             const imageUploads = Array.from(e.target.files).map((currFile) => {
                 const imageRef = imagesRef.child(currFile.name);
-                var uploadimg = imageRef.put(currFile);
-                uploadimg.snapshot.ref.getDownloadURL().then(function(url){
-                document.getElementById('image').value=url;
-            });
+                imageRef.put(currFile).then(function(snapshot) {
+                    console.log(snapshot);
+                    snapshot.ref.getDownloadURL().then(function(url){
+                        console.log(url);
+                        document.getElementById('image').value = url;
+                    });
+                });
             });
 
             Promise.all(imageUploads).then((items) => {
