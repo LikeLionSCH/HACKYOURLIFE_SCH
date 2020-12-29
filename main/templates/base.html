@@ -25,6 +25,7 @@
         <div class="header-box">
             <a href="{% url 'main' %}"><img src="{% static 'image/mainLogo.png' %}" alt="mainLogo.png"></a>
             <nav>
+                {% csrf_token %}
                 <ul>
                     <li><a href="{% url 'about' %}">ABOUT</a></li>
                     <li><a href="{% url 'notice_list' %}">NOTICE</a></li>
@@ -32,15 +33,7 @@
                     <li><a href="{% url 'gallery_main' %}">GALLARY</a></li>
                     <li><a href="{% url 'assignment_list' %}">ASSIGNMENT</a></li>
                     <li><a href="{% url 'faq' %}">FAQ</a></li>
-                    
-                    {% csrf_token %}
-                    <!-- 로그아웃 시 보여야함. -->
-                    <li><div class="g-signin2" data-onsuccess="onSignIn"></div></li>
-
-                    <!-- 로그인 시 보여야함. -->
-                    <li><a href="#">MYPAGE</a></li>
-                    <li><button class="login-box" onclick="onSignOut()">LOGOUT</button></li>
-                   
+                    <li><button class="login-box" onclick="signIn()">SIGNIN</button></li>
                 </ul>
             </nav>
         </div>
@@ -73,7 +66,7 @@
     <!-- UIUX jquery (main.js) -->
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <!-- sign in with google -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onGapiLoad" async defer></script>
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
@@ -81,6 +74,34 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
     <!-- base -->
     <script src="{% static 'js/base.js' %}"></script>
+    <script>
+        // 새로고침, 로그인, 로그아웃 등 상태가 변경되면 트리거
+        // @see: https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                $(".header-box > nav > ul").html(`
+                    <li><a href="{% url 'about' %}">ABOUT</a></li>
+                    <li><a href="{% url 'notice_list' %}">NOTICE</a></li>
+                    <li><a href="{% url 'study' %}">ACTIVITY</a></li>
+                    <li><a href="{% url 'gallery_main' %}">GALLARY</a></li>
+                    <li><a href="{% url 'assignment_list' %}">ASSIGNMENT</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+                    <li><a href="#">MYPAGE</a></li>
+                    <li><button class="login-box" onclick="signOut()">SIGNOUT</button></li>
+                `);
+            } else {
+                $(".header-box > nav > ul").html(`
+                    <li><a href="{% url 'about' %}">ABOUT</a></li>
+                    <li><a href="{% url 'notice_list' %}">NOTICE</a></li>
+                    <li><a href="{% url 'study' %}">ACTIVITY</a></li>
+                    <li><a href="{% url 'gallery_main' %}">GALLARY</a></li>
+                    <li><a href="{% url 'assignment_list' %}">ASSIGNMENT</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+                    <li><button class="login-box" onclick="signIn()">SIGNIN</button></li>
+                `);
+            }
+        });
+    </script>
     {% block script %}{% endblock %}
 </body>
 

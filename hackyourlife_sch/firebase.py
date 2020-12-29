@@ -35,18 +35,18 @@ def SignInRequiredView(func):
     ''' 로그인 된 사용자만 접근할 수 있도록 하는 Decorator.
 
     Descriptions:
-        반드시 request 인자를 가지는 Django View에 사용해야 합니다.
+        해당 Decorator는 항상 로그인한 사용자의 uid 값을 포함하는 post method를 받습니다.
+        반드시 request 인자를 갖는 Django View에 사용해야 합니다.
 
     Examples:
     ```python
         @SignInRequiredView
         def some_view(request, profile_id, ...):
-            if request.method == 'POST':
-                # uid of signed in user
-                print(request.POST['uid'])
-                # use your own POST data
-                if 'name' in request.POST:
-                    print(request.POST['name'])
+            # 로그인한 유저의 UID
+            print(request.POST['uid'])
+            # 커스텀 POST 데이터 사용
+            if 'name' in request.POST:
+                print(request.POST['name'])
             return render(request, 'profile.html')
     ```
     '''

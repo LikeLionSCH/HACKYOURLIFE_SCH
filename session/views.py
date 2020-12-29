@@ -44,24 +44,20 @@ def session_list(request, db):
         if 'keyword' in request.POST:
             keyword = request.POST['keyword']
 
-        # 입력값 불러옴
-        keyword = request.POST['keyword']
+            filtered_session_list = []
 
-        filtered_session_list = []
+            for session in session_list:
+                # assignment의 title이 keyword를 포함하고 있을때만
+                if keyword in session.title:
+                    filtered_session_list.append(session)
 
-        for session in session_list:
-
-            # assignment의 title이 keyword를 포함하고 있을때만
-            if keyword in session.title:
-                filtered_session_list.append(session)
-
-        # 페이지 네이터
-        paginator = Paginator(filtered_session_list,5)
-        page = int(request.GET.get('page',1))
-        filtered_sessions = paginator.get_page(page)
+            # 페이지 네이터
+            paginator = Paginator(filtered_session_list,5)
+            page = int(request.GET.get('page',1))
+            filtered_sessions = paginator.get_page(page)
         
-        # 걸러진 세션들만 전달
-        return render(request,'session_list.html',{'session_list':filtered_sessions})
+            # 걸러진 세션들만 전달
+            return render(request,'session_list.html',{'session_list':filtered_sessions})
     
     # session_list 페이지와 함께 session_list 전달
     return render(request, "session_list.html", {'session_list':sessions})
