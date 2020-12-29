@@ -59,7 +59,7 @@
             firebase.initializeApp(firebaseConfig);
         }
 
-        function post(path, parameters) {
+        function post(path, data) {
             let form = $('<form></form>');
             form.attr("method", "post");
             form.attr("action", path);
@@ -71,7 +71,7 @@
 
             form.append(field);
 
-            $.each(parameters, function(key, value) {
+            $.each(data, function(key, value) {
                 let field = $('<input></input>');
                 field.attr("type", "hidden");
                 field.attr("name", key);

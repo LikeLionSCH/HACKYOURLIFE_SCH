@@ -9,6 +9,10 @@
     margin: 0 auto;
 }
 
+#small-header-box {
+    width: 60% !important;
+}
+
 .text-box {
     width: var(--main-width);
     margin: 0 auto;

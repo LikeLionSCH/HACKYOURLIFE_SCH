@@ -1,6 +1,8 @@
 /* 베이스는 base.css 로 연결 했습니다.  */
 
-
+#small-header-box {
+    width: 60% !important;
+}
 
 /* 전체 카드 감싸는 div */
 #main-div {
