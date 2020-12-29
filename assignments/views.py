@@ -26,7 +26,7 @@ def create_Assignment_view(request, db):
     try:
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('report not found')
 
     if current_user['permission'] != 'manager':
@@ -79,7 +79,7 @@ def read_Assignment_list_view(request, db):
         assignment_datas = db.collection('Assignment').order_by('timestamp',direction=firestore.Query.DESCENDING).stream()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('Not found')
 
     if current_user['permission'] == 'manager':
@@ -151,7 +151,7 @@ def get_Assignment_detail_view(request, db, assignment_id):
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('Not Found')
 
     if current_user['permission'] == 'manager':
@@ -173,7 +173,7 @@ def get_Assignment_detail_view(request, db, assignment_id):
 """
 @SignInRequiredView
 @FirestoreControlView
-def delete_Assignment(requset, db, assignment_id):
+def delete_Assignment(request, db, assignment_id):
 
     uid = request.POST['uid']
 
@@ -209,7 +209,7 @@ def update_Assignment_view(request, db, assignment_id):
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('Not Found')
 
     if current_user['permission'] != 'manager':
