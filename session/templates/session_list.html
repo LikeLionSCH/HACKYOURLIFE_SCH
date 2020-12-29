@@ -43,7 +43,11 @@
                     <input type="text" name="keyword" placeholder="세션의 제목으로 검색해주세요">
                     <button><i class="fas fa-search"></i></button>
                 </form>
+                {% if permission == 'manager' %}
                 <a href="{% url 'session_create' %}">등록</a>
+                {% else %}
+                <div></div>
+                {% endif %}
             </div>
 
             <!-- list 제목이 들어가는 공강 -->
@@ -69,24 +73,26 @@
         </div>
 
         <!-- pagination -->
+        <div>
+            <form class="pagination" action="{% url 'session_list' %}" method="POST">
+                {% csrf_token %}
+                {% if session_list.has_previous %}
+                <div><button name="page" value="{{ session_list.previous_page_number }}"><i
+                            class="fas fa-long-arrow-alt-left"></i> prev</button></div>
+                {% else %}
+                <div> </div>
+                {% endif %}
 
-        <div class="pagination">
-            {% if session_list.has_previous %}
-            <div><a href="?page={{ session_list.previous_page_number }}"><i class="fas fa-long-arrow-alt-left"></i>
-                    prev</a></div>
-            {% else %}
-            <div> </div>
-            {% endif %}
+                <div><span>{{ session_list.number }} / {{ session_list.paginator.num_pages }}</span></div>
 
-            <div><span>{{ session_list.number }} / {{ session_list.paginator.num_pages }}</span></div>
-
-            {% if session_list.has_next %}
-            <div><a href="?page={{ session_list.next_page_number }}">next <i
-                        class="fas fa-long-arrow-alt-right"></i></a>
-            </div>
-            {% else %}
-            <div> </div>
-            {% endif %}
+                {% if session_list.has_next %}
+                <div><button name="page" value="{{ session_list.next_page_number }}">next <i
+                            class="fas fa-long-arrow-alt-right"></i>
+                    </button></div>
+                {% else %}
+                <div> </div>
+                {% endif %}
+            </form>
         </div>
 
     </div>
