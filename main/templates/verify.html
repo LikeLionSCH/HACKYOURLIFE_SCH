@@ -85,7 +85,7 @@
         }
 
         firebase.auth().onAuthStateChanged(function (user) {
-            post("/{{path}}", {
+            post("{{path}}", {
                 requestCode: VERIFIED_USER_REQUEST,
                 uid: user ? user.uid : ''
             });
