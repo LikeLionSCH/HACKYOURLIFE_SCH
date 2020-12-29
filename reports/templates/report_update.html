@@ -24,12 +24,11 @@
             {% csrf_token %}
             <div class="repository-box">
                 <p>레포지토리 주소</p>
-                <input type="text" name="repository_address"
-                    placeholder="ex. https://github.com/LikeLionSCH/HACKYOURLIFE_SCH">
+                <input type="text" name="repository_address" value="{{ report.repository_address }}">
             </div>
             <div class="ckeditor-box">
                 <p>출력화면 & 부가설명</p>
-                <textarea name="contents" cols="30" rows="10"></textarea>
+                <textarea name="contents" cols="30" rows="10">{{ report.contents }}</textarea>
             </div>
             <input type="submit" value="SUBMIT">
         </form>

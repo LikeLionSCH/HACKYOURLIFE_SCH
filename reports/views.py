@@ -16,26 +16,54 @@ from assignments.models import Assignment
 @param : request, 등록할 레포트에 해당하는 과제의 id
 @return : 래포트 등록하는 페이지 (report_create.html) 페이지 렌더링
 """
+@SignInRequiredView
 @FirestoreControlView
 def create_Report_view(request, db, assignment_id):
-    # 파이어베이스에서 매개변수로 불러온 과제의 데이터 불러옴
+
+    if request.method=='POST' and 'requestCode' in request.POST:
+        uid = request.POST['uid']
+        print(uid)
+
+    # 파이어베이스에서 매개변수로 불러온 과제, 레포트의 데이터 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
+        reports = db.collection('Report').where('assignment_id','==',assignment_id).where('author','==',uid).stream()
     except google.cloud.exeption.NotFound:
         print('report not found')
+
+    # 내가 제출한 과제가 있는지 없는지 확인
+    have_report = False
+    my_report = None
+    for _report in reports:
+        have_report = True
+        my_report = Report.from_dict(_report.to_dict(),_report.id)
+
+    # 내가 제출한 레포트가 있다면 수정 창으로 진입
+    if have_report==True:
+        
+        # 레포트 데이터, 과제의 제목, id
+        output_datas = {
+            'report':my_report,
+            'assignment_title':assignment_data.to_dict()['title'],
+            'assignment_id':assignment_data.id,
+        }
+    
+        # report_update 렌더링, output datas
+        return render(request,'report_update.html',output_datas)
+        
 
     # 해당 과제의 제목 추출
     assignment_title = assignment_data.to_dict()['title']
 
     # 리퀘스트의 메소드가 POST일 경우에만
-    if (request.method=='POST'):
+    if request.method=='POST' and 'requestCode' not in request.POST:
 
         # form 으로부터 값을 불러오는 코드
         repository_address = request.POST['repository_address']
         contents = request.POST['contents']
 
         # 새로운 레포트 객체 생성
-        report = Report(assignment_id,'wwan13@likelion.org',contents,repository_address,firestore.SERVER_TIMESTAMP,'미채점','')
+        report = Report(assignment_id,uid,contents,repository_address,firestore.SERVER_TIMESTAMP,'미채점','')
 
         # 파이어베이스와 연결 후 레포트 데이터 생성
         db.collection('Report').document().set(report.to_dict())
