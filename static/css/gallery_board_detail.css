@@ -322,7 +322,7 @@ main {
 
 .detail-box {
     width: var(--main-width);
-    height: 100%;
+    /* height: 100%; */
     margin-top: 50px;
 }
 
@@ -385,7 +385,7 @@ i:hover{
 .info-title,
 .detail-title {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     padding-bottom: 1px;
     margin-top: 40px;
     border-bottom: 1px solid rgb(228, 228, 228);
@@ -430,9 +430,8 @@ i:hover{
     /* 사진과 보더 간의 간격 */
     /* 가운데 정렬 */
     margin: 0 auto 8vh;
-    padding: 3px;
 
-    border:3px solid #e4e4e4;
+
 
     /* 사진 크기 */
     width: 65%;
@@ -468,7 +467,6 @@ i:hover{
     position: absolute;
     width: 100%;
     height: 100%;
-    box-shadow: inset 0px 0px 6px 8px rgba(255,255,255,1);
     top: 0;
     left: 0;
 }
