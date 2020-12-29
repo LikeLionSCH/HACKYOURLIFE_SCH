@@ -175,6 +175,7 @@
 /* about 배너 링크 버튼 */
 .about-btn {
     color: black;
+    font-family: 'IBMPlexSansKR-Text';
     padding: 10px 30px;
     border: 1px solid #adafb2;
     border-radius: 30px;
@@ -382,12 +383,34 @@
     -webkit-transition-duration: 0.5s;
     border-radius: 18px;
 
-    /* background-image */
+    /* background-image
     background: url('/static/image/lionlike-bg.png') center center;
-    background-size: cover;
+    background-size: cover; */
 
     cursor: pointer;
 }
+
+a:nth-child(1) .content-card{
+    background: url('/static/image/2019_hackathon2.jpg') center center;
+    background-size: cover;
+}
+
+a:nth-child(2) .content-card{
+    background: url('/static/image/activity-8th-ideathon2.jpg') center center;
+    background-size: cover;
+}
+
+a:nth-child(3) .content-card{
+    background: url('/static/image/activity-8th-pheonix.jpg') center center;
+    background-size: cover;
+}
+
+
+a:nth-child(4) .content-card{
+    background: url('/static/image/activity-7thlion.jpg') center center;
+    background-size: cover;
+}
+
 
 .content-card:hover {
     width: 265px;
@@ -480,6 +503,7 @@ ul#countdown li .number {
     font-size: 26px;
     -webkit-transition-duration: 0.5s;
     cursor: pointer;
+    font-family: 'IBMPlexSansKR-Text';
 }
 
 .recruit-btn:hover {
