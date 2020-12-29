@@ -1,17 +1,18 @@
 from django.shortcuts import render,redirect
+from django.core.exceptions import PermissionDenied
 
 import firebase_admin
 import google
 from firebase_admin import credentials
 from firebase_admin import firestore
-from hackyourlife_sch.firebase import FirestoreControlView
+from hackyourlife_sch.firebase import FirestoreControlView, SignInRequiredView
 
 from django.core.paginator import Paginator
 
 from .models import Notice
 
 # Create your views here.
-
+#@SignInRequiredView(readable = True)
 @FirestoreControlView
 def notice_detail(request, db, notice_id):
     
@@ -20,6 +21,23 @@ def notice_detail(request, db, notice_id):
         notice_datas = db.collection('Notice').order_by('date',direction=firestore.Query.DESCENDING).stream()
     except google.cloud.exceptions.NotFound:
         print('Not Found')
+
+    permission = ''
+
+    if request.method == 'POST':
+
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+            current_user = user[0].to_dict()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+
+        if current_user['permission'] == 'manager':
+            permission = 'manager'
+        else:
+            permission = 'member'
 
     notice = Notice.from_dict(data.to_dict(), data.id)
     # print(data.to_dict())
@@ -48,6 +66,7 @@ def notice_detail(request, db, notice_id):
         'notice':notice,
         'prev_notice':prev_notice,
         'next_notice':next_notice,
+        'permission': permission,
     }    
 
     return render(request, "notice_detail.html", output_datas)
@@ -56,22 +75,35 @@ def notice_detail(request, db, notice_id):
 def faq(request):
     return render(request, "faq.html")
 
-
+@SignInRequiredView
 @FirestoreControlView
-def notice_create(request,db):
+def notice_create(request, db):
+    uid = request.POST['uid']
+
+    try:
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exceptions.NotFound:
+        print('report not found')
+
+    if current_user['permission'] != 'manager':
+        raise PermissionDenied # 권한 없음
+
     if request.method == 'POST':
-        contents = request.POST['contents']
-        date = request.POST['date']
-        title = request.POST['title']
-        file = request.POST['file']
-        image = request.POST['image']
+        if 'contents' and 'date' and 'title' and 'file' and 'image' and 'author' in request.POST:
+            author = current_user['username']
+            contents = request.POST['contents']
+            date = request.POST['date']
+            title = request.POST['title']
+            file = request.POST['file']
+            image = request.POST['image']
 
 
-        new_notice = Notice(contents, date, title, file, image)
+            new_notice = Notice(contents, date, title, file, image, author)
 
-        db.collection('Notice').document().set(new_notice.to_dict())
+            db.collection('Notice').document().set(new_notice.to_dict())
 
-        return redirect('notice_list')
+            return redirect('notice_list')
 
     return render(request, 'notice_create.html')
 
@@ -94,36 +126,58 @@ def notice_list(request, db):
     return render(request,'notice.html',{'notices':notices})
 
 
+@SignInRequiredView
 @FirestoreControlView
 def notice_delete(request, db, notice_id):
+    uid = request.POST['uid']
+
+    try:
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exeption.NotFound:
+        print('report not found')
+
+    if current_user['permission'] != 'manager':
+        raise PermissionDenied # 권한 없음
+
     db.collection('Notice').document(notice_id).delete()
 
     return redirect('notice_list')
 
 
+@SignInRequiredView
 @FirestoreControlView
 def notice_update(request, db, notice_id):
+
+    uid = request.POST['uid']
+
     try:
         notice_data = db.collection('Notice').document(notice_id).get()
-    except google.cloud.exeption.NotFound:
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exceptions.NotFound:
         print('Not Found')
+
+    if current_user['permission'] != 'manager':
+        raise PermissionDenied # 권한 없음
 
     notice = Notice.from_dict(notice_data.to_dict(), notice_data.id)
 
     if request.method == 'POST':
-        contents = request.POST['contents']
-        date = request.POST['date']
-        title = request.POST['title']
-        file = request.POST['file']
-        image = request.POST['image']
+        if 'contents' and 'date' and 'title' and 'file' and 'image' in request.POST:
+            contents = request.POST['contents']
+            date = request.POST['date']
+            title = request.POST['title']
+            file = request.POST['file']
+            image = request.POST['image']
 
-        db.collection('Notice').document(notice_id).update({
-            'contents': contents,
-            'date': date,
-            'title': title,
-            'file': file,
-            'image': image,
-        })
+            db.collection('Notice').document(notice_id).update({
+                'contents': contents,
+                'date': date,
+                'title': title,
+                'file': file,
+                'image': image,
+            })
 
         return redirect('notice_list')
 
