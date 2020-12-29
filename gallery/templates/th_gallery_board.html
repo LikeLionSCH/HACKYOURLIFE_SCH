@@ -10,59 +10,81 @@
 
 {% block content %}
 
-    <!--
+<!--
 
     기수당 갤러리_디테일 페이지
     
  -->
 
-        <main>
-            <!--소제목-->
-            <div class='title-wrap'>
-                <span class='page-sub-title'>
-                    GALLERY
-                </span>
-            </div>
-            <div class="board_title">
-                <span class="mem-num-8th">8기</span>
-                <!--게시물 추가하는 버튼-->
-                <span class="circle">
-                    <a href="{% url 'gallery_create' %}"><i class="fas fa-plus-circle"></i></a>
-                </span>
-            </div>
-            <!--컨텐츠 시작-->
-            <div class="board_content">
-                <!--기수-->
-                <div>
-                    <!--detail 게시물로 이동하는..시작-->
+<main>
+    <!--소제목-->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            GALLERY
+        </span>
+    </div>
+    <div class="board_title">
+        <span class="mem-num-8th">8기</span>
+        <!--게시물 추가하는 버튼-->
+        <span class="circle">
+            <a href="{% url 'gallery_create' %}"><i class="fas fa-plus-circle"></i></a>
+        </span>
+    </div>
+    <!--컨텐츠 시작-->
+    <div class="board_content">
+        <!--기수-->
+        <div>
+            <!--detail 게시물로 이동하는..시작-->
 
-                    <div class="card-container">
-                        <div class="postcard" style="background-image:url('test1.jpg')">
-                          <a class="post_title" href="{% url 'gallery_idea_detail' %}">아이디어톤</a>
-                        </div>
+            <div class="card-container">
 
-                        <div class="postcard" style="background-image:url('test1.jpg')">
-                            <a class="post_title" href="{% url 'gallery_hacka_detail' %}">해커톤</a>
-                          </div>
-
-                          <div class="postcard" style="background-image:url('test1.jpg')">
-                            <a class="post_title" href="{% url 'gallery_session_detail' %}">세션</a>
-                          </div>
-
-                          <div class="postcard" style="background-image:url('test1.jpg')">
-                            <a class="post_title" href="{% url 'gallery_other_detail' %}">그 외 행사</a>
-                          </div>
-                        
+                <!--postcard 반복-->
+                <div class="postcard">
+                    <a class="post_title" href="{% url 'gallery_idea_detail' %}">아이디어톤</a>
+                    <div class="post_image">
+                        <a href="{% url 'gallery_idea_detail' %}">
+                            <img src="test1.jpg" alt="idea_img.jpg">
+                        </a>
                     </div>
                 </div>
-            </div>
-            <!--컨텐츠 끝-->
-        </main>
 
-        <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- <script src="script/jquery-1.12.3.js"></script> -->
-        <script src="main.js"></script>
-    </body>
+                <div class="postcard">
+                    <a class="post_title" href="{% url 'gallery_hacka_detail' %}">해커톤</a>
+                    <div class="post_image">
+                        <a href="{% url 'gallery_hacka_detail' %}">
+                            <img src="test1.jpg" alt="hacka_img.jpg">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="postcard">
+                    <a class="post_title" href="{% url 'gallery_session_detail' %}">세션</a>
+                    <div class="post_image">
+                        <a href="{% url 'gallery_session_detail' %}">
+                            <img src="test1.jpg" alt="session_img.jpg">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="postcard">
+                    <a class="post_title" href="{% url 'gallery_other_detail' %}">그 외 행사</a>
+                    <div class="post_image">
+                        <a href="{% url 'gallery_other_detail' %}">
+                            <img src="test1.jpg" alt="other_img.jpg">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--컨텐츠 끝-->
+</main>
+
+<script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="script/jquery-1.12.3.js"></script> -->
+<script src="main.js"></script>
+</body>
 
 {% endblock %}
