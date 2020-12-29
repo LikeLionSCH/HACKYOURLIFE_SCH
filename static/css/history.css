@@ -1,3 +1,7 @@
+#small-header-box {
+    width: 60% !important;
+}
+
 /* 전체 섹션 */
 #timeline {
     width: var(--main-width);
