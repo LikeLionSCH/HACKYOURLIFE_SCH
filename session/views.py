@@ -195,6 +195,9 @@ def session_update(request, db, session_id):
     # 불러온 세션을 객체로 변경
     session = Session.from_dict(data.to_dict(), data.id)
 
+    if current_user['username'] != session.host:
+        raise PermissionDenied
+
     # update 페이지 진입
     if request.method == 'POST':
 
