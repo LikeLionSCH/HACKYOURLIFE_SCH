@@ -28,6 +28,9 @@ def mypage(request):
 def post_upload(request):
     return render(request, 'test.html')
 
+def error_403(request, exception):
+    return render(request, "403.html", status=403)
+
 def error_404(request, exception):
     return render(request, "404.html", status=404)
 
