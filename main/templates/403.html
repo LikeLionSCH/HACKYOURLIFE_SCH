@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/error.css' %}">
+<link rel="stylesheet" href="{% static 'css/403.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>멋쟁이사자처럼 at 순천향대학교 - Error 403</title>
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <section id="main-content">
+        <h2>403</h2>
+        <span>Forbidden error :(</span>
+        <p>
+            죄송합니다. 권한이 없거나 로그인이 필요한 서비스입니다.<br>
+            계정을 확인하거나 로그인 이후 이용해주시길 부탁드립니다.
+        </p>
+        <!-- 링크 달아주세요우오우옹 -->
+        <a href="{% url 'main' %}"><button>홈으로 이동</button></a>
+    </section>
+</main>
+
+{% endblock %}
