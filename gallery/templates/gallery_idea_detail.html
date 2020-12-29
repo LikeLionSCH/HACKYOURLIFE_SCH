@@ -10,71 +10,77 @@
 
 {% block content %}
 
-    <!--
+<!--
 
     갤러리 게시물
     
  -->
 
-        <main>
-            <!-- 소제목 -->
-            <div class='title-wrap'>
-                <span class='page-sub-title'>
-                    GALLERY
-                </span>
-            </div>
+<main>
+    <!-- 소제목 -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            GALLERY
+        </span>
+    </div>
 
-            <!-- 게시물 디테일을 보여주는 부분 -->
-            <div class="main-wrap">
-                <div class="detail-box">
-                    <!-- detail 요소가 보여지는 내용 -->
+    <!-- 게시물 디테일을 보여주는 부분 -->
+    <div class="main-wrap">
+        <div class="detail-box">
+            <!-- detail 요소가 보여지는 내용 -->
 
-                    <div class="menu">
-                        <div class="back-wrap">
-                            <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
-                            <a href="{% url 'gallery_board' %}"><i class="far fa-arrow-alt-circle-left"></i></a>
-                        </div>
-                        {% for gallery in galleries %}
-                        {% if gallery.event == 'ideathon' %}
+            <div class="menu">
+                <div class="back-wrap">
+                    <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
+                    <a href="{% url 'gallery_board' %}"><i class="far fa-arrow-alt-circle-left"></i></a>
+                </div>
+
+                <div class="contents-wrap">
+                    {% for gallery in galleries %}
+                    {% if gallery.event == 'ideathon' %}
+                    <div class="post-content">
                         <div class="update-delete-wrap">
                             <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
-                            <a href="{% url 'gallery_delete' gallery.gallery_id %}"><span class="update-delete-btn">삭제</span></a>
-                            <a href="{% url 'gallery_update' gallery.gallery_id %}"><span class="update-delete-btn">수정</span></a>
+                            <a href="{% url 'gallery_delete' gallery.gallery_id %}"><span
+                                    class="update-delete-btn">삭제</span></a>
+                            <a href="{% url 'gallery_update' gallery.gallery_id %}"><span
+                                    class="update-delete-btn">수정</span></a>
                         </div>
-                    </div>
-                    <!-- 게시물 정보 -->
-                    <div class="info-box">
-                        <!-- 게시물 제목 -->
-                        <div class="info-title">
-                            <span>{{gallery.title}}</span>
-                        </div>
-                        <div class="info-contents">
-                            <!-- 게시물 작성 날짜 -->
-                            <span>날짜 : <div class="text-bold">{{gallery.created_at}}</div></span>
-                            <!-- 모임 장소 -->
-                            <span>장소 : <div class="text-bold">{{gallery.place}}</div></span>
-                            <span>기수 : <div class="text-bold">{{gallery.ordinal_num}}</div></span>
-                            <span>행사 : <div class="text-bold">{{gallery.event}}</div></span>
-                            <br>
-                            <!-- 사진 설명 -->
-                            <span>
-                                <div class="text-bold">{{gallery.contents}}</div>
-                            </span>
-                        </div>
-                    </div>
 
-                    <!-- 사진 -->
-                    <div class="detail-box">
-                        <div class="detail-title">
-                            <span>사진</span>
+                        <!-- 게시물 정보 -->
+                        <div class="info-box">
+                            <!-- 게시물 제목 -->
+                            <div class="info-title">
+                                <span>{{gallery.title}}</span>
+                            </div>
+                            <div class="info-contents">
+                                <!-- 게시물 작성 날짜 -->
+                                <span>날짜 : <div class="text-bold">{{gallery.created_at}}</div></span>
+                                <!-- 모임 장소 -->
+                                <span>장소 : <div class="text-bold">{{gallery.place}}</div></span>
+                                <span>기수 : <div class="text-bold">{{gallery.ordinal_num}}</div></span>
+                                <span>행사 : <div class="text-bold">{{gallery.event}}</div></span>
+                                <br>
+                                <!-- 사진 설명 -->
+                                <span>
+                                    <div class="text-bold">{{gallery.contents}}</div>
+                                </span>
+                            </div>
                         </div>
-                        <!-- 사진이 들어가는 곳 -->
-                        <div class="image-contents">
+
+                        <!-- 사진 -->
+                        <div class="detail-box">
+                            <div class="detail-title">
+                                <span>사진</span>
+                            </div>
+                            <!-- 사진이 들어가는 곳 -->
+                            <div class="image-contents">
                                 <!-- 사진(반복) -->
-                            <div class="post_img">
-                                <div class="post_img_div">
-                                    <img src="{{gallery.image_url}}" alt="post_img.jpg">
-                                    <div class="shadow"></div>
+                                <div class="post_img">
+                                    <div class="post_img_div">
+                                        <img src="{{gallery.image_url}}" alt="post_img.jpg">
+                                        <div class="shadow"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,12 +89,13 @@
                     {% endfor %}
                 </div>
             </div>
-        </main>
+        </div>
+</main>
 
 
-        <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- <script src="script/jquery-1.12.3.js"></script> -->
-        <script src="main.js"></script>
+<script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="script/jquery-1.12.3.js"></script> -->
+<script src="main.js"></script>
 
 {% endblock %}

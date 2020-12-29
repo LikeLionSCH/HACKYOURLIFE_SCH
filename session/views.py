@@ -23,10 +23,20 @@ firebase에 저장된 세션 목록을 불러오는 함수
 @SignInRequiredView
 @FirestoreControlView
 def session_list(request, db):
-    # firebase에 접근해 세션 날짜별로 정렬한 목록을 가져옴
-    datas = db.collection('Session').order_by('session_date', direction=firestore.Query.DESCENDING).stream()
-    
     session_list = [] # 세션 목록들 저장할 빈 list 생성
+    uid = request.POST['uid']
+    try:
+        # firebase에 접근해 세션 날짜별로 정렬한 목록을 가져옴
+        datas = db.collection('Session').order_by('session_date', direction=firestore.Query.DESCENDING).stream()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exceptions.NotFound:
+        print('Not found')
+
+    if current_user['permission'] == 'manager':
+        permission = 'manager'
+    else:
+        permission = 'member'
 
     # firebase 내 세션 목록을 클래스를 거쳐 list화
     for data in datas:
@@ -36,7 +46,11 @@ def session_list(request, db):
 
     # 페이지 네이터
     paginator = Paginator(session_list,5)
-    page = int(request.GET.get('page',1))
+    page = 1
+    if request.method == 'POST':
+        if 'page' in request.POST:
+            page = int(request.POST['page'])
+            print(page)
     sessions = paginator.get_page(page)
 
     # 검색 버튼을 눌렀을 경우
@@ -54,14 +68,18 @@ def session_list(request, db):
 
             # 페이지 네이터
             paginator = Paginator(filtered_session_list,5)
-            page = int(request.GET.get('page',1))
+            page = 1
+            if request.method == 'POST':
+                if 'page' in request.POST:
+                    page = int(request.POST['page'])
+                    print(page)
             filtered_sessions = paginator.get_page(page)
         
             # 걸러진 세션들만 전달
-            return render(request,'session_list.html',{'session_list':filtered_sessions})
+            return render(request,'session_list.html',{'session_list':filtered_sessions, 'permission':permission})
     
     # session_list 페이지와 함께 session_list 전달
-    return render(request, "session_list.html", {'session_list':sessions})
+    return render(request, "session_list.html", {'session_list':sessions, 'permission':permission})
 
 """ CREATE
 firebase에 세션을 등록하는 함수
@@ -129,22 +147,18 @@ firebase에 저장된 특정 세션을 불러오는 함수
 @FirestoreControlView
 def session_detail(request, db, session_id):
     uid = request.POST['uid']
-    try:
-        users = db.collection('User').where('uid', '==', uid).stream()
-        for user in users:
-            current_user = user.to_dict()
-    except google.cloud.exceptions.NotFound:
-        print('User Not Found')
 
     # 매개변수의 session_id를 통해 firebase의 세션 불러옴
     try:
         data = db.collection('Session').document(session_id).get()
+        users = db.collection('User').where('uid', '==', uid).stream()
+        for user in users:
+            current_user = user.to_dict()
     except google.cloud.exceptions.NotFound:
         print('Not Found')
-    
+
     # 불러온 세션을 객체로 변경
     session = Session.from_dict(data.to_dict(), data.id)
-    print(data.to_dict())
 
     if current_user['username'] == session.host:
         access = True
@@ -165,38 +179,33 @@ firebase에 저장된 특정 세션을 수정하는 함수
 @SignInRequiredView
 @FirestoreControlView
 def session_update(request, db, session_id):
+
     uid = request.POST['uid']
+
     try:
-        users = db.collection('User').where('uid', '==', uid).stream()
-        for user in users:
-            current_user = user.to_dict()
+        data = db.collection('Session').document(session_id).get()
+        user = db.collection('User').where('uid', '==', uid).get()
+        current_user = user[0].to_dict()
     except google.cloud.exceptions.NotFound:
-        print('User Not Found')
+        print('Not Found')
 
     if current_user['permission'] != 'manager':
         raise PermissionDenied # 권한 없음
 
+    # 불러온 세션을 객체로 변경
+    session = Session.from_dict(data.to_dict(), data.id)
+
+    if current_user['username'] != session.host:
+        raise PermissionDenied
+
     # update 페이지 진입
     if request.method == 'POST':
-        # 매개변수의 session_id를 통해 firebase의 세션 불러옴
-        try:
-            data = db.collection('Session').document(session_id).get()
-        except google.cloud.exceptions.NotFound:
-            print('Not Found')
-
-        # 불러온 세션을 객체로 변경
-        session = Session.from_dict(data.to_dict(), data.id)
-
-        if current_user['username'] != session.host:
-            raise PermissionDenied # 권한 없음
 
         # update 페이지에서 수정하고 submit일 경우
         if 'title' and 'session_day' and 'session_time' and 'google_link' and 'content' in request.POST:
             # input form의 datas를 객체에 update
-            session.title = request.POST['title']
-            session.host = current_user['username']
-            print(session.host) # current user input test code
-
+            title = request.POST['title']
+            host = current_user['username']
             session_day = request.POST['session_day']
             session_time = request.POST['session_time']
             
@@ -213,34 +222,25 @@ def session_update(request, db, session_id):
 
             # KST에 맞게 변환 후 객체에 저장
             session_date = datetime.datetime(date_year, date_month, date_day, time_hour, time_min, tzinfo=KST)
-            session.session_date = session_date
 
-            session.google_link = request.POST['google_link']
-            session.content = request.POST['content']
-
-            # test code
-            print(session.title, session.host, session.session_date, session.google_link, session.content)
+            google_link = request.POST['google_link']
+            content = request.POST['content']
 
             # firebase의 해당 id에 맞는 문서에 수정된 객체 저장
-            db.collection('Session').document(session.session_id).set(session.to_dict())
+            db.collection('Session').document(session.session_id).update({
+                'title': title,
+                'host': host,
+                'session_date': session_date,
+                'google_link': google_link,
+                'content': content,
+            })
 
             return redirect('session_detail', session_id)
-    
-        # GET 요청일 때(update 페이지 진입 시)
-        # 매개변수의 session_id를 통해 firebase의 세션 불러옴
-        try:
-            data = db.collection('Session').document(session_id).get()
-        except google.cloud.exceptions.NotFound:
-            print('Not Found')
-
-        print(data.to_dict()) # test code
-
-        # 불러온 세션을 객체로 변경
-        session = Session.from_dict(data.to_dict(), data.id)
 
         # UTC -> KST로 변경(firebase에서 가져온 값은 UTC)
         session.session_date = session.session_date + datetime.timedelta(hours=9)
         
+        # timestamp값을 두개의 문자열로 나눠서 front에 표시
         session_date = session.session_date.strftime('%Y-%m-%d %H:%M')
         session_day = str(session_date).split(" ")[0]
         session_time = str(session_date).split(" ")[1]

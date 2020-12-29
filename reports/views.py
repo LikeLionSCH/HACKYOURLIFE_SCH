@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.core.exceptions import PermissionDenied
 
 from hackyourlife_sch.firebase import FirestoreControlView, SignInRequiredView
-from .models import Report
+from .models import Report, My_report_data
 from assignments.models import Assignment
 
 """
@@ -30,7 +30,7 @@ def create_Report_view(request, db, assignment_id):
         reports = db.collection('Report').where('assignment_id','==',assignment_id).where('author_uid','==',uid).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('report not found')
 
     if current_user['permission'] == 'manager':
@@ -71,7 +71,7 @@ def create_Report_view(request, db, assignment_id):
 
             # 리다이렉트
             # 유저 타입 나뉘 경우 수정 해야함
-            return redirect('report_list',assignment_id)
+            return redirect('my_list')
 
     output_datas = {
         'assignment_id':assignment_id,
@@ -98,7 +98,7 @@ def read_Report_list_view(request, db, assignment_id):
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('report not found')
     
     if current_user['permission'] == 'member':
@@ -212,7 +212,7 @@ def get_Report_detail_view(request, db, assignment_id, report_id):
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('report not found')
 
     # 해당 과제의 제목 추출
@@ -263,7 +263,7 @@ def update_Report_view(request, db, assignment_id, report_id):
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('report not found')
 
     if report_data.to_dict()['author_uid'] != uid:
@@ -324,7 +324,7 @@ def scoring_Report_view(request,db, assignment_id, report_id):
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('report not found')
 
     if current_user['permission'] != 'manager':
@@ -376,10 +376,10 @@ def delete_Report(request, db, assignment_id, report_id):
     uid = request.POST['uid']
 
     try:
-        report = db.collection('Report').document(report).get()
+        report = db.collection('Report').document(report_id).get()
         user = db.collection('User').where('uid','==',uid).get()
         current_user = user[0].to_dict()
-    except google.cloud.exeption.NotFound:
+    except google.cloud.exception.NotFound:
         print('report not found')
 
     if report.to_dict()['author_uid'] != uid:
@@ -390,4 +390,52 @@ def delete_Report(request, db, assignment_id, report_id):
 
     # 여기도 수정 필요 
     # 리스트 페이지로 리다이렉트
-    return redirect('report_list',assignment_id)
+    return redirect('my_list')
+
+
+@SignInRequiredView
+@FirestoreControlView
+def my_report_page(request, db):
+    
+    uid = request.POST['uid']
+
+    try:
+        report_datas = db.collection('Report').where('author_uid','==',uid).stream()
+        assignment_datas = db.collection('Assignment').order_by('timestamp',direction=firestore.Query.DESCENDING).stream()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exception.NotFound:
+        print('report not found')
+
+    datas = []
+    for assignment_data in assignment_datas:
+
+        assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)
+        report_datas = db.collection('Report').where('author_uid','==',uid).stream()
+
+        is_checked = 0
+        for report_data in report_datas:
+            report = Report.from_dict(report_data.to_dict(),report_data.id)
+            print('report: '+report.assignment_id)
+            print('assignment: ' + assignment.assignment_id)
+            if report.assignment_id == assignment.assignment_id:
+                datas.append(My_report_data(assignment.title,assignment.deadline,'제출완료',report.submit_date,report.report_id,assignment.assignment_id))
+                is_checked += 1
+
+        if is_checked == 0:
+            print('asdasd')
+            datas.append(My_report_data(assignment.title,assignment.deadline,'미제출',None,None,assignment.assignment_id) )
+
+    # 페이지 네이터
+    paginator = Paginator(datas,5)
+    page = 1
+    if request.method == 'POST':
+        if 'page' in request.POST:
+            page = int(request.POST['page'])
+            print(page)
+    data_list = paginator.get_page(page)
+
+    return render(request,'my_report_list.html',{'username':current_user['username'],'datas':data_list})
+
+
+

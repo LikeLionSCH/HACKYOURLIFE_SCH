@@ -10,9 +10,28 @@ from .models import Gallery
 def gallery_main(request):
     return render(request, "gallerymain.html")
 
+@FirestoreControlView
+def gallery_board(request, db):
+    galleries = []
+    thums = [0,0,0,0]
 
-def gallery_board(request):
-    return render(request, "th_gallery_board.html")
+    gallery_datas = db.collection('Gallery').stream()
+
+    for gallery_data in gallery_datas:
+        gallery = Gallery.from_dict(gallery_data.to_dict(), gallery_data.id)
+        galleries.append(gallery)
+
+    for gallery in galleries:
+        if gallery.event == 'ideathon':
+            thums[0] = gallery.image_url
+        elif gallery.event == 'hackathon':
+            thums[1] = gallery.image_url
+        elif gallery.event == 'session':
+            thums[2] = gallery.image_url
+        elif gallery.event == 'other':
+            thums[3] = gallery.image_url
+
+    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3]})
 
 
 @FirestoreControlView
@@ -91,7 +110,7 @@ def gallery_other_detail(request, db):
 def gallery_delete(requset, db, gallery_id):
     db.collection('Gallery').document(gallery_id).delete()
 
-    return redirect('gallery_detail')
+    return redirect('gallery_board')
 
 
 @FirestoreControlView
@@ -122,7 +141,7 @@ def gallery_update(request, db, gallery_id):
             'event': event,
         })
 
-        return redirect('gallery_detail')
+        return redirect('gallery_board')
 
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request, 'gallery_update.html', {'gallery': gallery})

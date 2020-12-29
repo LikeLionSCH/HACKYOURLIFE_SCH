@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/report_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            REPORT
+        </span><br>
+        <span class="sub-title-detail">'{{ username }}' 님이 제출한 과제 목록 입니다.</span>
+    </div>
+
+    <!-- 과제 목록 보여주는 부분 -->
+
+    <div class="main-wrap">
+        <div class="list-box">
+
+            <!-- list 제목이 들어가는 공강 -->
+
+            <div class="list-title">
+                <p>DEADLINE</p>
+                <p>ASSIGNMENT</p>
+                <p>SUBMIT DATE</p>
+            </div>
+
+            <!-- 리스트 내용이 들어가는공간 -->
+            {% for data in datas %}
+            <div class="list-body">
+                {% if data.status == '제출완료' %}
+                <p>{{ data.assignment_deadline }}</p>
+                <a href="{% url 'report_detail' data.assignment_id data.report_id %}">{{ data.assignment_title }}</a>
+                <p>{{ data.submit_date }}</p>
+                {% else %}
+                <p>{{ data.assignment_deadline }}</p>
+                <a href="{% url 'report_create' data.assignment_id %}">{{ data.assignment_title }}</a>
+                <p style="color: red;">미제출</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <!-- ------------------------------- -->
+        </div>
+
+        <div>
+            <form class="pagination" action="{% url 'my_list' %}" method="POST">
+                {% csrf_token %}
+                {% if datas.has_previous %}
+                <div><button name="page" value="{{ datas.previous_page_number }}"><i
+                            class="fas fa-long-arrow-alt-left"></i> prev</button></div>
+                {% else %}
+                <div> </div>
+                {% endif %}
+
+                <div><span>{{ datas.number }} / {{ datas.paginator.num_pages }}</span></div>
+
+                {% if datas.has_next %}
+                <div><button name="page" value="{{ datas.next_page_number }}">next <i
+                            class="fas fa-long-arrow-alt-right"></i>
+                    </button></div>
+                {% else %}
+                <div> </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -22,7 +22,7 @@
         <!-- form -->
 
         <div class="main-wrap">
-            <form class="form-box" action="{% url 'notice_create' %}" method="post">
+            <form class="form-box" action="{% url 'notice_update' notice.notice_id %}" method="post">
                 {% csrf_token %}
                 <div class="title-box">
                     <p>제목</p>
@@ -41,6 +41,7 @@
                     첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                             <input name="file" id="file" style="display:none">
                             <a href="#" class="js-fileSelect">Select some files</a><br>
+                            <sub>파일을 여러개 선택하려면 드래그하세요.</sub><br>
                 </div>
                 <br>
                 <div>
