@@ -22,15 +22,18 @@ from .models import Assignment
 def create_Assignment_view(request, db):
 
     uid = request.POST['uid']
-    user = db.collection('User').where('uid','==',uid).stream()
-    for _user in user:
-        current_user = _user.to_dict()
+
+    try:
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exeption.NotFound:
+        print('report not found')
 
     if current_user['permission'] != 'manager':
         raise PermissionDenied # 권한 없음
 
     # request 메소드가 POST 일 경우만
-    if( request.method=='POST' ):
+    if request.method=='POST' :
 
         if 'contents' and 'deadline_date' and 'deadline_time' and 'title' in request.POST:
 
@@ -72,10 +75,12 @@ def read_Assignment_list_view(request, db):
     uid = request.POST['uid']
 
     # firebase 에 접근해 과제 목록들을 timestamp 기준 내림차순으로 정렬하여 불러옴
-    assignment_datas = db.collection('Assignment').order_by('timestamp',direction=firestore.Query.DESCENDING).stream()
-    user = db.collection('User').where('uid','==',uid).stream()
-    for _user in user:
-        current_user = _user.to_dict()
+    try:
+        assignment_datas = db.collection('Assignment').order_by('timestamp',direction=firestore.Query.DESCENDING).stream()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exeption.NotFound:
+        print('Not found')
 
     if current_user['permission'] == 'manager':
         permission = 'manager'
@@ -88,10 +93,6 @@ def read_Assignment_list_view(request, db):
         assignment_list.append(assignment)
 
     # 페이지 네이터
-    # paginator = Paginator(assignment_list,5)
-    # page = int(request.GET.get('page',1))
-    # assignments = paginator.get_page(page)
-
     paginator = Paginator(assignment_list,5)
     page = 1
     if request.method == 'POST':
@@ -149,8 +150,7 @@ def get_Assignment_detail_view(request, db, assignment_id):
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
-        for _user in user:
-            current_user = _user.to_dict()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('Not Found')
 
@@ -174,6 +174,18 @@ def get_Assignment_detail_view(request, db, assignment_id):
 @SignInRequiredView
 @FirestoreControlView
 def delete_Assignment(requset, db, assignment_id):
+
+    uid = request.POST['uid']
+
+    try:
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exeption.NotFound:
+        print('report not found')
+
+    if current_user['permission'] != 'manager':
+        raise PermissionDenied # 권한 없음
+
     # 매개변수의 과제 id 로 데이터를 불러와 삭제
     db.collection('Assignment').document(assignment_id).delete()
 
@@ -189,11 +201,19 @@ def delete_Assignment(requset, db, assignment_id):
 @SignInRequiredView
 @FirestoreControlView
 def update_Assignment_view(request, db, assignment_id):
+
+    uid = request.POST['uid']
+
     # 매개변수의 과제 아이디값으로 파이어베이스에서 과제 데이터 불러오는 코드
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('Not Found')
+
+    if current_user['permission'] != 'manager':
+        raise PermissionDenied # 권한 없음
     
     # 불러온 데이터로 객체 생성
     assignment = Assignment.from_dict(assignment_data.to_dict(),assignment_data.id)

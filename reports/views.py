@@ -6,6 +6,7 @@ import google
 
 from datetime import datetime
 from django.core.paginator import Paginator
+from django.core.exceptions import PermissionDenied
 
 from hackyourlife_sch.firebase import FirestoreControlView, SignInRequiredView
 from .models import Report
@@ -26,22 +27,18 @@ def create_Report_view(request, db, assignment_id):
     # 파이어베이스에서 매개변수로 불러온 과제, 레포트의 데이터 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
-        reports = db.collection('Report').where('assignment_id','==',assignment_id).where('author','==',uid).stream()
-        user = db.collection('User').where('uid','==',uid).stream()
-        for _user in user:
-            current_user = _user.to_dict()
+        reports = db.collection('Report').where('assignment_id','==',assignment_id).where('author_uid','==',uid).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('report not found')
 
-    # 내가 제출한 과제가 있는지 없는지 확인
-    have_report = False
-    my_report = None
-    for _report in reports:
-        have_report = True
-        my_report = Report.from_dict(_report.to_dict(),_report.id)
+    if current_user['permission'] == 'manager':
+        raise PermissionDenied
 
-    # 내가 제출한 레포트가 있다면 수정 창으로 진입
-    if have_report==True:
+    # 내가 제출한 과제가 있는지 없는지 확인
+    if len(reports) >= 1:
+        my_report = Report.from_dict(reports[0].to_dict(),reports[0].id)
 
         # 레포트 데이터, 과제의 제목, id
         output_datas = {
@@ -52,7 +49,6 @@ def create_Report_view(request, db, assignment_id):
     
         # report_update 렌더링, output datas
         return render(request,'report_update.html',output_datas)
-        
 
     # 해당 과제의 제목 추출
     assignment_title = assignment_data.to_dict()['title']
@@ -95,11 +91,18 @@ def create_Report_view(request, db, assignment_id):
 @FirestoreControlView
 def read_Report_list_view(request, db, assignment_id):
 
+    uid = request.POST['uid']
+
     # 파이어베이스에서 매개변수로 불러온 과제의 데이터 불러옴
     try:
         assignment_data = db.collection('Assignment').document(assignment_id).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('report not found')
+    
+    if current_user['permission'] == 'member':
+        raise PermissionDenied
 
     # 해당 과제의 제목 추출
     assignment_title = assignment_data.to_dict()['title']
@@ -147,7 +150,7 @@ def read_Report_list_view(request, db, assignment_id):
             if user_data.to_dict()['uid'] == report.author_uid:
                 count+=1
 
-        if count == 0:
+        if count == 0 and user_data.to_dict()['permission'] == 'member':
             not_submitted_report_list.append(Report(assignment_id,user_data.to_dict()['uid'],user_data.to_dict()['username'],None,None,None,"미제출",''))
 
     report_list = not_scored_report_list + scoring_complete_report_list + not_submitted_report_list
@@ -208,8 +211,7 @@ def get_Report_detail_view(request, db, assignment_id, report_id):
         report_data = db.collection('Report').document(report_id).get()
         assignment_data = db.collection('Assignment').document(assignment_id).get()
         user = db.collection('User').where('uid','==',uid).get()
-        for _user in user:
-            current_user = _user.to_dict()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('report not found')
 
@@ -252,12 +254,20 @@ def get_Report_detail_view(request, db, assignment_id, report_id):
 @SignInRequiredView
 @FirestoreControlView
 def update_Report_view(request, db, assignment_id, report_id):
+
+    uid = request.POST['uid']
+
     # 매개변수의 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
     try:
         report_data = db.collection('Report').document(report_id).get()
         assignment_data = db.collection('Assignment').document(assignment_id).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('report not found')
+
+    if report_data.to_dict()['author_uid'] != uid:
+        raise PermissionDenied
 
     # 파이어베이스에서 불러온 데이터로 객체 생성
     report = Report.from_dict(report_data.to_dict(),report_data.id)
@@ -296,6 +306,7 @@ def update_Report_view(request, db, assignment_id, report_id):
     # report_update 렌더링, output datas
     return render(request,'report_update.html',output_datas)
 
+
 """
 학생이 제출한 과제를 채점하고 커멘트를 남기는 페이지
 @param : request, 해당 과제 Id, 레포트의 id
@@ -305,12 +316,19 @@ def update_Report_view(request, db, assignment_id, report_id):
 @FirestoreControlView
 def scoring_Report_view(request,db, assignment_id, report_id):
 
+    uid = request.POST['uid']
+
     # 매개변수의 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴
     try:
         report_data = db.collection('Report').document(report_id).get()
         assignment_data = db.collection('Assignment').document(assignment_id).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('report not found')
+
+    if current_user['permission'] != 'manager':
+        raise PermissionDenied # 권한 없음
 
     # 파이어베이스에서 불러온 데이터로 객체 생성
     report = Report.from_dict(report_data.to_dict(),report_data.id)
@@ -354,6 +372,19 @@ def scoring_Report_view(request,db, assignment_id, report_id):
 @SignInRequiredView
 @FirestoreControlView
 def delete_Report(request, db, assignment_id, report_id):
+
+    uid = request.POST['uid']
+
+    try:
+        report = db.collection('Report').document(report).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exeption.NotFound:
+        print('report not found')
+
+    if report.to_dict()['author_uid'] != uid:
+        raise PermissionDenied 
+
     # 파이어베이스에서 삭제할 데이터를 불러와 삭제
     db.collection('Report').document(report_id).delete()
 
