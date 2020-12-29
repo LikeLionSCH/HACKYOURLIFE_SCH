@@ -1,4 +1,9 @@
 /* ----------------------------- */
+
+#small-header-box {
+    width: 60% !important;
+}
+
 /* 운영진 단체 이미지 */
 
 #staff-group {
