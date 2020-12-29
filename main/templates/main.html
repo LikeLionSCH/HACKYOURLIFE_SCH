@@ -36,7 +36,7 @@
 
                 <!-- 왼쪽 컨텐츠 요소 -->
                 <div id="content-about-left">
-                    <h3 id="content-about-guide-title">멋쟁이사자처럼 이란?</h3>
+                    <h3 id="content-about-guide-title">멋쟁이사자처럼이란?</h3>
                     <p id="content-about-guide-txt">
                         온라인 강의와 오프라인 활동을 통한 <br>체계적인 <strong class='point-letter'>프로그래밍 교육</strong>
                     </p>
@@ -57,7 +57,7 @@
 
                 <div id="content-about-center">
                     <!-- 클릭 시, ABOUT의 멋쟁이 사자란? 페이지로 이동하기. -->
-                    <button type="button" class="about-btn" onclick="location.href='#';">상세 활동</button>
+                    <button type="button" class="about-btn" onclick="location.href='{% url 'about' %}';">상세 활동</button>
                 </div>
             </div>
         </div>
@@ -83,8 +83,7 @@
                         </p>
 
                         <p class="curri-info-text">
-                            아이디어 설계는 아이디어 설계입니다.
-                            아이디어 있으신분은 아이디어를 내면 됩니다.
+                            자신이 직접 구현하고 싶은 서비스를 생각하는 과정입니다.  각 조별로 아이디어를 내고 구현할지 생각하는 시간을 가집니다. 
                         </p>
                     </div>
                 </div>
@@ -99,8 +98,7 @@
                         </p>
 
                         <p class="curri-info-text">
-                            프론트엔드를 구현합니다. 프론트엔드 구현하고 싶은 사람은 구현하면 됩니다.
-                        </p>
+                           HTML과 CSS의 기초 지식과 UI에 대해 배웁니다. 이 과정을 통해 웹페이지를 구성하고 디자인하는 방법을 배웁니다. </p>
                     </div>
                 </div>
                 <div class="circle-div">
@@ -114,7 +112,7 @@
                         </p>
 
                         <p class="curri-info-text">
-                            백엔드를 구현합니다. 백엔드 구현하고 싶으면 하세요. 백엔드구현하세요
+                             Python과 Django 를 배웁니다. 이 과정을 통해 웹사이트의 기능을 실제로 구현해낼 수 있습니다.
                         </p>
                     </div>
                 </div>
@@ -129,7 +127,7 @@
                         </p>
 
                         <p class="curri-info-text">
-                            프로젝트를 발표합니다. 여태 했던 걸 보여주세요. 발표하세요
+                            해커톤, 아이디어톤, 자체 해커톤, 연합행사 등 다양한 프로젝트를 진행하며 실제 개발 경험을 쌓습니다.
                         </p>
                     </div>
                 </div>
@@ -149,15 +147,15 @@
             <div class="content-headcount-box">
                 <div class="content-headcount-item">
                     <h3 class="content-headcount-item-title">누적 활동 인원</h3>
-                    <span>100</span>
+                    <span>68</span>
                 </div>
                 <div class="content-headcount-item">
                     <h3 class="content-headcount-item-title">현재 활동 인원</h3>
-                    <span>20</span>
+                    <span>18</span>
                 </div>
                 <div class="content-headcount-item">
                     <h3 class="content-headcount-item-title">2020년도 경쟁률</h3>
-                    <span>1:9</span>
+                    <span>1:7</span>
                 </div>
             </div>
         </div>
@@ -171,7 +169,7 @@
             <div class="content-card-wrap">
 
                 <!-- 카드 아이템 -->
-                <a href="#">
+                <a href="{% url 'hackathon' %}">
                     <div class="content-card">
                         <!-- 텍스트 박스 -->
                         <div class="content-card-text">
@@ -180,7 +178,7 @@
                     </div>
                 </a>
 
-                <a href="#">
+                <a href="{% url 'ideathon' %}">
                     <!-- 카드 아이템 (background url) -->
                     <div class="content-card">
                         <!-- 텍스트 박스 -->
@@ -190,7 +188,7 @@
                     </div>
                 </a>
                 <!-- 카드 아이템 (background url) -->
-                <a href="#">
+                <a href="{% url 'study' %}">
                     <div class="content-card">
                         <!-- 텍스트 박스 -->
                         <div class="content-card-text">
@@ -198,7 +196,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{% url 'etc' %}">
                     <div class="content-card">
                         <!-- 텍스트 박스 -->
                         <div class="content-card-text">
