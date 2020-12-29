@@ -374,6 +374,13 @@ i:hover{
     transition: 0.3s;
 }
 
+/* 게시물 내용 감싸는 div  */
+.contents-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /* 게시물 제목, IMAGE  */
 .info-title,
 .detail-title {
