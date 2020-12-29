@@ -28,14 +28,6 @@ $(function() {
       defaultView: 'month',
       defaultDate: '2020-12-01',
   
-      // html을 통해 가져오는 값들.
-      calendar_day : {
-        _title :  document.getElementById('input_title').value,
-        _desc :  document.getElementById('input_desc').value,
-        _start : document.getElementById('input_start').value,
-        _end :  document.getElementById('input_end').value
-      },
-  
       eventRender: function(eventObj, $el) {
         $el.popover({
           title: eventObj.title,
