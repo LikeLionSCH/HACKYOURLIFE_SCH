@@ -58,6 +58,7 @@
                         첨부이미지 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                                 <input name="image_url" id="file" style="display:none">
                                 <a href="#" class="js-fileSelect">Select some files</a><br>
+                                <label id="UpProgress"></label> <br><br>
                     </div>
 
                     <textarea name="contents" cols="40" rows="100"></textarea>
@@ -118,10 +119,9 @@
             const fileUploads = Array.from(e.target.files).map((currFile) => {
                 const fileRef = imagesRef.child(currFile.name);
                 fileRef.put(currFile).then(function(snapshot) {
-                    console.log(snapshot);
                     snapshot.ref.getDownloadURL().then(function(url){
-                        console.log(url);
                         document.getElementById('file').value = url;
+                        document.getElementById('UpProgress').innerHTML = 'Upload';
                     });
                 });
             });

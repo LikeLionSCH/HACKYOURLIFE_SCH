@@ -41,12 +41,14 @@
                     첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                             <input name="file" id="file" style="display:none">
                             <a href="#" class="js-fileSelect">Select some files</a><br>
+                            <label id="UpProgress1"></label> <br><br>
                 </div>
                 <br>
                 <div>
                     첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
                              <input name="image" id="image" style="display:none">
                             <a href="#" class="js-imageSelect">Select some images</a><br>
+                            <label id="UpProgress2"></label> <br><br>
                 </div>
 
                 <input type="submit" value="공지사항 올리기">
@@ -102,10 +104,9 @@
             const fileUploads = Array.from(e.target.files).map((currFile) => {
                 const fileRef = imagesRef.child(currFile.name);
                 fileRef.put(currFile).then(function(snapshot) {
-                    console.log(snapshot);
                     snapshot.ref.getDownloadURL().then(function(url){
-                        console.log(url);
                         document.getElementById('file').value = url;
+                        document.getElementById('UpProgress1').innerHTML = 'Upload';
                     });
                 });
             });
@@ -133,10 +134,9 @@
             const imageUploads = Array.from(e.target.files).map((currFile) => {
                 const imageRef = imagesRef.child(currFile.name);
                 imageRef.put(currFile).then(function(snapshot) {
-                    console.log(snapshot);
                     snapshot.ref.getDownloadURL().then(function(url){
-                        console.log(url);
                         document.getElementById('image').value = url;
+                        document.getElementById('UpProgress2').innerHTML = 'Upload';
                     });
                 });
             });
