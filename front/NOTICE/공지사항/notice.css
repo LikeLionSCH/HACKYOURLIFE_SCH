@@ -1,14 +1,19 @@
-
-
-
 /* ----------------------------- */
 /* 컨텐츠 */
 
-a {text-decoration: none; outline: none}
+a {
+    text-decoration: none;
+    outline: none
+}
 
-a:hover, a:active, a:visited {text-decoration: none; color: #000;}
+a:hover,
+a:active,
+a:visited {
+    text-decoration: none;
+    color: #000;
+}
 
-.page-sub-title{
+.page-sub-title {
     /* width: 100%; */
     /* margin: 0 auto; */
     font-size: 26px;
@@ -21,46 +26,46 @@ main {
 }
 
 /* ------------- 게시글 wrap -------------*/
-.content-wrap{ 
+.content-wrap {
     width: var(--main-width);
     height: 250px;
     margin: 0 auto;
     padding: 30px 0;
-    
+
     border-bottom: 1px solid #e4e4e4;
 }
 
-.content-wrap:nth-last-child(1){ 
+.content-wrap:nth-last-child(1) {
     border-bottom: 0;
 }
 
 
 /* 썸네일 사진 */
-.img-box{
+.img-box {
     width: 25%;
     height: 250px;
     margin-right: 50px;
     float: left;
 }
 
-.img-box img{
+.img-box img {
     width: 100%;
     height: 100%;
 }
 
 /* 공지사항 글 */
 
-.content-box{
+.content-box {
     width: 70%;
     height: 100%;
-    float:left;
+    float: left;
 }
 
-.content-box .sub-title:hover{
+.content-box .sub-title:hover {
     color: #F39926;
 }
 
-.content-box .sub-title{
+.content-box .sub-title {
     font-family: 'IBMPlexSansKR-Text';
     font-size: 26px;
     color: black;
@@ -68,7 +73,7 @@ main {
     height: 20%;
 }
 
-.content-box .content{
+.content-box .content {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 20px;
     height: 55%;
@@ -81,35 +86,55 @@ main {
     width: 100%;
 }
 
-.post-meta-item{
+.post-meta-item {
     font-family: 'IBMPlexSansKR-Light';
     font-size: 11px;
-    color:#999999;
+    color: #999999;
     background: #f4f4f4;
-    padding:7px 10px 7px 10px;
+    padding: 7px 10px 7px 10px;
 }
 
 
 
 /* content footer 페이지네이션 */
-.content-footer{
-    width: 350px;  
+.content-footer {
+    width: 350px;
     margin: 5vh auto;
 
 }
-.content-footer-nav{
-    width: 100%;  
+
+.content-footer-nav {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.content-footer-link{
+.content-footer-link {
     font-size: 22px;
     font-family: 'IBMPlexSansKR-Light';
 }
 
-.content-footer-link:hover{
+.content-footer-link:hover {
     color: #F39926;
 }
 
+/* 공지사항 생성 컨테이너 */
+.notice-create {
+    text-align: right;
+    width: var(--main-width);
+    font-size: 22px;
+    font-family: 'IBMPlexSansKR-Light';
 
+    margin: 0 auto;
+}
+
+.notice-create a {
+    padding: 5px 10px;
+    background-color: #F39926;
+    color: white;
+    border-radius: 10px;
+}
+
+.notice-create a:hover {
+    background-color: var(--SCH-skyblue);
+}
