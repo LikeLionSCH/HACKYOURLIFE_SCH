@@ -59,22 +59,26 @@
         </div>
 
         <!-- pagination -->
-        <div class="pagination">
-            {% if assignments.has_previous %}
-            <div><a href="?page={{ assignments.previous_page_number }}"><i class="fas fa-long-arrow-alt-left"></i>
-                    prev</a></div>
-            {% else %}
-            <div> </div>
-            {% endif %}
+        <div>
+            <form class="pagination" action="{% url 'assignment_list' %}" method="POST">
+                {% csrf_token %}
+                {% if assignments.has_previous %}
+                <div><button name="page" value="{{ assignments.previous_page_number }}"><i
+                            class="fas fa-long-arrow-alt-left"></i> prev</button></div>
+                {% else %}
+                <div> </div>
+                {% endif %}
 
-            <div><span>{{ assignments.number }} / {{ assignments.paginator.num_pages }}</span></div>
+                <div><span>{{ assignments.number }} / {{ assignments.paginator.num_pages }}</span></div>
 
-            {% if assignments.has_next %}
-            <div><a href="?page={{ assignments.next_page_number }}">next <i class="fas fa-long-arrow-alt-right"></i></a>
-            </div>
-            {% else %}
-            <div> </div>
-            {% endif %}
+                {% if assignments.has_next %}
+                <div><button name="page" value="{{ assignments.next_page_number }}">next <i
+                            class="fas fa-long-arrow-alt-right"></i>
+                    </button></div>
+                {% else %}
+                <div> </div>
+                {% endif %}
+            </form>
         </div>
 
 

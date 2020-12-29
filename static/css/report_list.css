@@ -124,6 +124,7 @@ p {
     border: 1px solid var(--SCH-skyblue);
     border-radius: 7px;
     transition: .3s;
+    outline: none;
 }
 
 .filtering-box button:hover {

@@ -88,8 +88,16 @@ def read_Assignment_list_view(request, db):
         assignment_list.append(assignment)
 
     # 페이지 네이터
+    # paginator = Paginator(assignment_list,5)
+    # page = int(request.GET.get('page',1))
+    # assignments = paginator.get_page(page)
+
     paginator = Paginator(assignment_list,5)
-    page = int(request.GET.get('page',1))
+    page = 1
+    if request.method == 'POST':
+        if 'page' in request.POST:
+            page = int(request.POST['page'])
+            print(page)
     assignments = paginator.get_page(page)
 
     # 검색 버튼을 눌렀을 경우
@@ -112,7 +120,11 @@ def read_Assignment_list_view(request, db):
 
             # 페이지 네이터
             paginator = Paginator(filtered_assignment_list,5)
-            page = int(request.GET.get('page',1))
+            page = 1
+            if request.method == 'POST':
+                if 'page' in request.POST:
+                    page = int(request.POST['page'])
+                    print(page)
             filtered_assignments = paginator.get_page(page)
             
             # 걸러진 과제들만 전달
