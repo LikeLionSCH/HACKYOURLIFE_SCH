@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime
+from calendar import monthrange
 
 # django modules
 from django.shortcuts import render
@@ -21,9 +22,15 @@ def calendar(request):
     if request.method == 'POST':
         service = build('calendar', 'v3', developerKey=API_KEY)
 
-        now = datetime.datetime.utcnow().isoformat() + 'Z'
-        first_of_month = datetime.datetime.utcnow().replace(day=1, hour=0, minute=0, second=0, microsecond=0).isoformat() + 'Z'
-        events_result = service.events().list(calendarId=CALENDAR_ID, timeMin=first_of_month, maxResults=10, singleEvents=True, orderBy='startTime').execute()
+        now = datetime.utcnow().isoformat() + 'Z'
+        last_day = monthrange(datetime.utcnow().year, datetime.utcnow().month)[1]
+
+        start_of_month = datetime.utcnow().replace(day=1, hour=0, minute=0, second=0, microsecond=0).isoformat() + 'Z'
+        end_of_month = datetime.utcnow().replace(day=last_day, hour=23, minute=59, second=59, microsecond=999).isoformat() + 'Z'
+
+        print(start_of_month, end_of_month)
+
+        events_result = service.events().list(calendarId=CALENDAR_ID, timeMin=start_of_month, timeMax=end_of_month, singleEvents=True, orderBy='startTime').execute()
         events = events_result.get('items', [])
 
         data = []
