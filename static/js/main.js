@@ -81,14 +81,27 @@ $(function() {
  * FIGURE OUT THE AMOUNT OF 
    TIME LEFT BEFORE LAUNCH
  * -------------------------- */
+
 function timeToLaunch(){
     // Get the current date
     var currentDate = new Date();
 
     // Find the difference between dates
     var diff = (currentDate - targetDate)/1000;
-    var diff = Math.abs(Math.floor(diff));  
 
+    if(diff>0){
+        days =0;
+        hrs = 0;
+        min = 0;
+        sec = 0;
+        var t = document.getElementById("recru-btn");
+          t.onclick = function(){
+            alert('현재는 모집 기간이 아닙니다. 모집 공고를 기다려주세요.');
+        };
+        return;
+    }
+
+    var diff = Math.abs(Math.floor(diff));  
     // Check number of days until target
     days = Math.floor(diff/(24*60*60));
     sec = diff - days * 24*60*60;
