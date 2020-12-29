@@ -53,7 +53,7 @@ body {
 header {
     display: flex;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .header-box {
@@ -65,14 +65,23 @@ header {
 }
 
 .header-box img {
-    width: 112px;
-    height: 40px;
+    width: 130px;
+    height: 45px;
     margin: 10px;
     padding: 5px 0 0 0;
 }
 
 nav {
     padding: 10px 0 0 0;
+    width: 60%;
+}
+
+nav ul {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
 }
 
 nav ul li {
