@@ -39,7 +39,10 @@ def session_list(request, db):
     sessions = paginator.get_page(page)
 
     # 검색 버튼을 눌렀을 경우
-    if request.method == 'POST' and 'requestCode' not in request.POST: # TODO: SignInRequired의 post와 겹치지 않게 하는 처리 예시
+    if request.method == 'POST':
+        # TODO: 예시)
+        if 'keyword' in request.POST:
+            keyword = request.POST['keyword']
 
         # 입력값 불러옴
         keyword = request.POST['keyword']
