@@ -93,3 +93,39 @@ def notice_list(request, db):
 
     return render(request,'notice.html',{'notices':notices})
 
+
+@FirestoreControlView
+def notice_delete(request, db, notice_id):
+    db.collection('Notice').document(notice_id).delete()
+
+    return redirect('notice_list')
+
+
+@FirestoreControlView
+def notice_update(request, db, notice_id):
+    try:
+        notice_data = db.collection('Notice').document(notice_id).get()
+    except google.cloud.exeption.NotFound:
+        print('Not Found')
+
+    notice = Notice.from_dict(notice_data.to_dict(), notice_data.id)
+
+    if request.method == 'POST':
+        contents = request.POST['contents']
+        date = request.POST['date']
+        title = request.POST['title']
+        file = request.POST['file']
+        image = request.POST['image']
+
+        db.collection('Notice').document(notice_id).update({
+            'contents': contents,
+            'date': date,
+            'title': title,
+            'file': file,
+            'image': image,
+        })
+
+        return redirect('notice_list')
+
+    # POST 가 아닐 경우 update 창 띄워줌
+    return render(request, 'notice_update.html', {'notice': notice})
