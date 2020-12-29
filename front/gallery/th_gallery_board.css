@@ -305,55 +305,6 @@ main {
     align-items: center;
 }
 
-/* post 제목+사진 */
-.postcard {
-    height: 300px;
-    width: 200px;
-    display: inline-block;
-    border-radius: 20px 20px 20px 20px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-
-    box-shadow: 3px 3px 2px #aaa;
-    border: 2px solid #e4e4e4;
-}
-
-/*post 제목+사진 그림자*/
-.postcard:hover {
-    box-shadow: 5px 5px 5px #aaa;
-    transition: 0.9s;
-}
-
-/* post 제목+사진 링크 */
-.postcard a {
-    text-decoration: none;
-}
-
-/* post 제목 기본 스타일, highlight */
-.post_title {
-    font-size: 20px;
-    font-family: 'IBMPlexSansKR-Text';
-    color: black;
-    border-radius: 20px 20px 20px 20px;
-}
-
-
-
-/* post 제목+사진 마진값을 줘서 그림자와 postcard의 간격을 좁힘*/
-.postdetail {
-    margin: 9px;
-}
-
-/* th 스타일 */
-.th_title {
-    font-size: 30px;
-    color: #007A85;
-    font-family: 'IBMPlexSansKR-Bold';
-    text-decoration: none;
-    margin-left: 10px;
-    position: static;
-}
-
 .board_title {
     display: flex;
     justify-content: space-between;
@@ -401,11 +352,6 @@ main {
     height: auto;
 }
 
-img {
-    width: 100%;
-    height: auto;
-}
-
 .card-container {
     display: flex;
     justify-content: space-between;
@@ -416,29 +362,38 @@ img {
 
 
 .postcard {
-
+    /* 카드 위치 */
     margin: 5vh auto;
 
     position: relative;
     line-height: 290px;
     text-align: center;
 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    filter: blur(0px);
-    transition: filter 0.3s ease-in;
     transform: scale(1.1);
-}
 
-.post_image {
-    line-height: 0;
+    /* 카드 크기, 모양 */
+    height: 300px;
+    width: 200px;
+    display: inline-block;
+    border-radius: 20px 20px 20px 20px;
+    margin-bottom: 39.5px;
+
+    box-shadow: 3px 3px 2px #aaa;
+    border: 2px solid #e4e4e4;
+
     overflow: hidden;
-
-    height: 100%;
 }
 
+/* 사진 크기, 위치_중앙 */
+.post_image img {
+    position: absolute;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* hover 후 text */
 .post_title {
     font-size: 1.5em;
     font-weight: bold;
@@ -452,14 +407,23 @@ img {
     left: 0;
     opacity: 0;
     transition: opacity .5s;
-    background: rgba(90, 0, 10, 0.4);
+    background: rgba(243, 153, 38, 0.4);
     color: white;
 }
 
+/* hover 후 post_title 보이기 */
 .postcard:hover .post_title {
     opacity: 1;
+    transition: opacity .5s;
 }
 
-.postcard:hover .post_image img {
-    filter: blur(2px);
+/*post 제목+사진 그림자*/
+.postcard:hover {
+    box-shadow: 5px 5px 5px #aaa;
+    transition: 0.9s;
+}
+
+/* postcard 링크 */
+.postcard a {
+    text-decoration: none;
 }

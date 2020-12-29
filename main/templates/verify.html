@@ -85,10 +85,17 @@
         }
 
         firebase.auth().onAuthStateChanged(function (user) {
-            post("{{path}}", {
+            {% if post %}
+            {% autoescape off %}
+            let prevData = {{post}};
+            {% endautoescape %}
+            {% else %}
+            let prevData = {};
+            {% endif %}
+            post("{{path}}", $.extend({
                 requestCode: VERIFIED_USER_REQUEST,
                 uid: user ? user.uid : ''
-            });
+            }, prevData));
         });
     </script>
 </body>

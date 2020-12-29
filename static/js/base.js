@@ -55,6 +55,11 @@ function onSignIn(googleUser) {
     );
 }
 
+function onSignOut() {
+    firebase.auth().signOut();
+    gapi.auth2.getAuthInstance().signOut();
+}
+
 // Firebase 초기화
 if (!firebase.apps.length) {
     const firebaseConfig = {
@@ -74,5 +79,9 @@ if (!firebase.apps.length) {
 // 새로고침, 로그인, 로그아웃 등 상태가 변경되면 트리거
 // @see: https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
 firebase.auth().onAuthStateChanged(function (user) {
-    // do something...
+    if (user) {
+
+    } else {
+        
+    }
 });

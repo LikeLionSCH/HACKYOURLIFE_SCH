@@ -26,21 +26,22 @@
             <a href="{% url 'main' %}"><img src="{% static 'image/mainLogo.png' %}" alt="mainLogo.png"></a>
             <nav>
                 <ul>
-                    <li></li>
                     <li><a href="{% url 'about' %}">ABOUT</a></li>
                     <li><a href="{% url 'notice_list' %}">NOTICE</a></li>
                     <li><a href="{% url 'study' %}">ACTIVITY</a></li>
                     <li><a href="{% url 'gallery_main' %}">GALLARY</a></li>
                     <li><a href="{% url 'assignment_list' %}">ASSIGNMENT</a></li>
                     <li><a href="{% url 'faq' %}">FAQ</a></li>
+                    
                     {% csrf_token %}
-                    <li><div class="g-signin2" data-onsuccess="onSignIn"></div> </li>
+                    <!-- 로그아웃 시 보여야함. -->
+                    <li><div class="g-signin2" data-onsuccess="onSignIn"></div></li>
+
                     <!-- 로그인 시 보여야함. -->
-                    <!-- 
                     <li><a href="#">MYPAGE</a></li>
-                    <li><button class="login-box">LOGOUT</button></li> 
-                    -->
-                    </ul>
+                    <li><button class="login-box" onclick="onSignOut()">LOGOUT</button></li>
+                   
+                </ul>
             </nav>
         </div>
     </header>
