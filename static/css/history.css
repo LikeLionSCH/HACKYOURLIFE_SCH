@@ -1,7 +1,3 @@
-#small-header-box {
-    width: 60% !important;
-}
-
 /* 전체 섹션 */
 #timeline {
     width: var(--main-width);
@@ -159,7 +155,7 @@
 
 p {
     font-family: 'IBMPlexSansKR-Light';
-    padding: 10px 22px;
+    padding: 10px 22px 10px 15px;
 }
 
 h2 {
