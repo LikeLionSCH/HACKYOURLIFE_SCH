@@ -44,7 +44,7 @@
                     <a class="post_title" href="{% url 'gallery_idea_detail' %}">아이디어톤</a>
                     <div class="post_image">
                         <a href="{% url 'gallery_idea_detail' %}">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/likelion-sch.appspot.com/o/Images%2F8th_likelion_at_sch.png?alt=media&token=beaae27d-689e-4136-bddd-2111c3ec1717" alt="idea_img.jpg">
+                            <img src="{{ idea }}" alt="idea_img.jpg">
                         </a>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <a class="post_title" href="{% url 'gallery_hacka_detail' %}">해커톤</a>
                     <div class="post_image">
                         <a href="{% url 'gallery_hacka_detail' %}">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/likelion-sch.appspot.com/o/Images%2F8th_likelion_at_sch.png?alt=media&token=beaae27d-689e-4136-bddd-2111c3ec1717" alt="hacka_img.jpg">
+                            <img src="{{ hacka }}" alt="hacka_img.jpg">
                         </a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <a class="post_title" href="{% url 'gallery_session_detail' %}">세션</a>
                     <div class="post_image">
                         <a href="{% url 'gallery_session_detail' %}">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/likelion-sch.appspot.com/o/Images%2F8th_likelion_at_sch.png?alt=media&token=beaae27d-689e-4136-bddd-2111c3ec1717" alt="session_img.jpg">
+                            <img src="{{ session }}" alt="session_img.jpg">
                         </a>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <a class="post_title" href="{% url 'gallery_other_detail' %}">그 외 행사</a>
                     <div class="post_image">
                         <a href="{% url 'gallery_other_detail' %}">
-                            <img src="test1.jpg" alt="other_img.jpg">
+                            <img src="{{ other }}" alt="other_img.jpg">
                         </a>
                     </div>
                 </div>
