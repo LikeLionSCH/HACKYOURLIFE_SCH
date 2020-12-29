@@ -1,11 +1,10 @@
-/* ----------------------------- */
-/* 컨텐츠 (404, 500 공통) */
+/* 404, 500, 403 공통 사용 */
 
 #main-content {
     width: var(--main-width);
     margin: 0 auto;
     text-align: center;
-    padding: 100px 0;
+    padding: 15% 0;
 }
 
 #main-content h2 {
