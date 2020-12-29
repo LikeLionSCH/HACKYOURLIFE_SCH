@@ -10,10 +10,20 @@
 {% endblock %}
 
 {% block title %}
-<title>멋쟁이사자처럼 at 순천향대학교 - Assignment</title>
+<title>멋쟁이사자처럼 at 순천향대학교 - Calendar</title>
 {% endblock %}
 
 {% block content %}
+
+<!-- small-header - span값에 값넣기. -->
+<div id="small-header-wrap">
+    <div id="small-header-box">
+        <a href="{% url 'notice_list' %}"><span class="small-header-nav">공지사항</span></a>
+        <a href="{% url 'session_list' %}"><span class="small-header-nav">세션</span></a>
+        <a href="{% url 'calendar' %}"><span class="small-header-nav now-page">캘린더</span></a>
+    </div>
+</div>
+
 <div class='title-wrap'>
     <span class='page-sub-title'>
         Calendar
