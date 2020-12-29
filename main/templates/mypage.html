@@ -21,15 +21,14 @@
 
     <!-- 프로필 사진 -->
     <div class="profile-photo">
-        <img src="{% static 'image/LOGO.png' %}" alt="LOGO.png">
+        <img src="{{photo}}" alt="LOGO.png">
     </div>
 
     <!-- 주요 내용 -->
     <div class="main-contents">
-        <p class="text-name">김멋사</p>
-        <p class="text-info role">9기 운영진</p>
-        <p class="text-info">sch0808@likelion.org</p>
-        <p class="text-info">010-1234-4321</p>
+        <p class="text-name">{{name}}</p>
+        <p class="text-info role">{{generation}} {{permission}}</p>
+        <p class="text-info">{{email}}</p>
         <div class="link-btn">
             <a href="#">제출된 과제</a>
         </div>

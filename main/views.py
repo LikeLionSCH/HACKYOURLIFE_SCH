@@ -1,7 +1,10 @@
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 
-from hackyourlife_sch.firebase import FirestoreControlView
+import firebase_admin
+from firebase_admin import auth
+
+from hackyourlife_sch.firebase import SignInRequiredView, FirestoreControlView
 
 
 @FirestoreControlView
@@ -21,15 +24,35 @@ def index(request):
 
     return render(request, 'main.html')
 
-def mypage(request):
-    return render(request, "mypage.html")
+
+@SignInRequiredView
+@FirestoreControlView
+def mypage(request, db):
+    uid = request.POST['uid']
+    user = auth.get_user(uid)
+
+    likelion_user = [doc.to_dict() for doc in db.collection('User').where('email', '==', user.email).get()][0]
+    generation = str(likelion_user['generation']) + '기'
+    permission = '운영진' if likelion_user['permission'] == 'manager' else '멤버' if likelion_user['permission'] == 'member' else ''
+
+    data = {
+        'photo': user.photo_url,
+        'name': user.display_name,
+        'generation': generation,
+        'permission': permission,
+        'email': user.email,
+    }
+
+    return render(request, "mypage.html", data)
 
 
 def post_upload(request):
     return render(request, 'test.html')
 
+
 def error_404(request, exception):
     return render(request, "404.html", status=404)
+
 
 def error_500(request):
     return render(request, "500.html", status=500)
