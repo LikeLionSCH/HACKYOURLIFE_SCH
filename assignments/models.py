@@ -10,9 +10,10 @@ class Assignment:
     생성자
     @param : self, 작성자 문자열, 컨탠츠 문자열, 마감일자 문자열, 제목 문자열
     """
-    def __init__(self,timestamp,author,contents,deadline,title):
+    def __init__(self,timestamp,author_uid,author_name,contents,deadline,title):
         self.timestamp = timestamp
-        self.author = author
+        self.author_uid = author_uid
+        self.author_name = author_name
         self.contents = contents
         self.deadline = deadline
         self.title = title
@@ -28,7 +29,8 @@ class Assignment:
         # 딕셔너리 생성
         data = {
             'timestamp':self.timestamp,
-            'author':self.author,
+            'author_uid':self.author_uid,
+            'author_name':self.author_name,
             'contents':self.contents,
             'deadline':self.deadline,
             'title':self.title,
@@ -45,7 +47,7 @@ class Assignment:
     def from_dict(data,assignment_id):
 
         # 객체 생성
-        assignment = Assignment(data['timestamp'],data['author'],data['contents'],data['deadline'],data['title'])
+        assignment = Assignment(data['timestamp'],data['author_uid'],data['author_name'],data['contents'],data['deadline'],data['title'])
         assignment.assignment_id = assignment_id
 
         # 생성된 객체 반환

@@ -33,20 +33,26 @@
                     <input type="text" name="keyword" placeholder="과제의 제목으로 검색해주세요">
                     <button><i class="fas fa-search"></i></button>
                 </form>
+
+                {% if permission == 'manager' %}
                 <a href="{% url 'assignment_create' %}">등록</a>
+                {% else %}
+                <div></div>
+                {% endif %}
+
             </div>
             <!-- list 제목이 들어가는 공강 -->
             <div class="list-title">
                 <p>DUE TO</p>
                 <p>TITLE</p>
-                <p>STATE</p>
+                <p>AUTHOR</p>
             </div>
             <!-- 리스트 내용이 들어가는공간 -->
             {% for assignment in assignments %}
             <div class="list-body">
                 <p>{{ assignment.deadline }}</p>
                 <a href="{% url 'assignment_detail' assignment.assignment_id %}">{{ assignment.title }}</a>
-                <p class="font-black">제출완료</p>
+                <p>{{ assignment.author_name }}</p>
             </div>
             {% endfor %}
             <!-- ---------------------- -->

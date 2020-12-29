@@ -28,8 +28,10 @@
             <div class="update-delete-wrap">
                 <a href="{% url 'assignment_list' %}">목록으로 가기</a>
                 <div>
+                    {% if permission == 'manager' %}
                     <a href="{% url 'assignment_delete' assignment.assignment_id %}">삭제</a>
                     <a href="{% url 'assignment_update' assignment.assignment_id %}">수정</a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -38,6 +40,8 @@
                     <span>INFO</span>
                 </div>
                 <span>제목 : <div class="text-bold">{{ assignment.title }}</div>
+                </span></br>
+                <span>작성자 : <div class="text-bold">{{ assignment.author_name }}</div>
                 </span></br>
                 <span>마감기한 : <div class="text-bold">{{ assignment.deadline }}</div>
                 </span>
@@ -54,12 +58,15 @@
             </div>
 
             <!-- 일반 -->
+            {% if permission == 'member' %}
             <a href="{% url 'report_create' assignment.assignment_id %}">
                 <div class="button">제출하러 가기</div>
             </a>
+            {% else %}
             <a href="{% url 'report_list' assignment.assignment_id %}">
                 <div class="button">채점하러 가기</div>
             </a>
+            {% endif %}
         </div>
     </div>
 </main>
