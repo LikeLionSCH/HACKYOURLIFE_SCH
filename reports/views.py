@@ -7,7 +7,7 @@ import google
 from datetime import datetime
 from django.core.paginator import Paginator
 
-from hackyourlife_sch.firebase import FirestoreControlView
+from hackyourlife_sch.firebase import FirestoreControlView, SignInRequiredView
 from .models import Report
 from assignments.models import Assignment
 
@@ -155,6 +155,7 @@ def read_Report_list_view(request, db, assignment_id):
 @param : request, 보여줄 레포트의 id
 @return : report_detail.html 렌더링, output datas
 """
+@SignInRequiredView('report/detail/')
 @FirestoreControlView
 def get_Report_detail_view(request, db, assignment_id, report_id):
     # 매개변수의 id 값으로 파이어베이스에서 해당하는 데이터를 불러옴

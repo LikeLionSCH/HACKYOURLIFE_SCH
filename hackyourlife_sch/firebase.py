@@ -23,13 +23,14 @@ def SignInRequiredView(path):
             return request.method == 'POST' and 'requestCode' in request.POST and request.POST['requestCode'] == 'verify_sign_in_user_request'
 
         def decorator(request, *args, **kwargs):
+            print(kwargs)
             if is_verify_request(request):
                 if request.POST['uid'] != '':
                     return func(request, *args, **kwargs)
                 return HttpResponse('This page is accessible only signed in user.', status=500)
 
             pk = [str(value) + '/' if 'id' in key else None for key, value in kwargs.items()]
-            pk = pk[0] if pk else ''
+            pk = ''.join(pk) if pk else ''
             return render(request, 'verify.html', {'path': path + pk})
         return decorator
     return wrapper
