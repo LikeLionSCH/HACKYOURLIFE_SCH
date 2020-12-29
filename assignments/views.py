@@ -230,7 +230,7 @@ def update_Assignment_view(request, db, assignment_id):
 
             # 파이어베이스에 접속하여 입력된 값으로 수정
             db.collection('Assignment').document(assignment_id).update({
-                'author' : "author",
+                'author' : current_user['username'],
                 'contents' : contents,
                 'deadline' : deadline,
                 'title' : title,
