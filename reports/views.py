@@ -416,14 +416,11 @@ def my_report_page(request, db):
         is_checked = 0
         for report_data in report_datas:
             report = Report.from_dict(report_data.to_dict(),report_data.id)
-            print('report: '+report.assignment_id)
-            print('assignment: ' + assignment.assignment_id)
             if report.assignment_id == assignment.assignment_id:
                 datas.append(My_report_data(assignment.title,assignment.deadline,'제출완료',report.submit_date,report.report_id,assignment.assignment_id))
                 is_checked += 1
 
         if is_checked == 0:
-            print('asdasd')
             datas.append(My_report_data(assignment.title,assignment.deadline,'미제출',None,None,assignment.assignment_id) )
 
     # 페이지 네이터
