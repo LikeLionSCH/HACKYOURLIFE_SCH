@@ -27,7 +27,9 @@
         <span class="mem-num-8th">8기</span>
         <!--게시물 추가하는 버튼-->
         <span class="circle">
+            {% if permission == 'manager' %}
             <a href="{% url 'gallery_create' %}"><i class="fas fa-plus-circle"></i></a>
+            {% endif %}
         </span>
     </div>
     <!--컨텐츠 시작-->

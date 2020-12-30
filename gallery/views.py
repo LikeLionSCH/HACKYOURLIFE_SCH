@@ -1,19 +1,41 @@
 from django.shortcuts import render,redirect
+from django.core.exceptions import PermissionDenied
 import firebase_admin
 import google
 from firebase_admin import credentials
 from firebase_admin import firestore
-from hackyourlife_sch.firebase import FirestoreControlView
+from hackyourlife_sch.firebase import FirestoreControlView,SignInRequiredView
 from .models import Gallery
 
 
 def gallery_main(request):
     return render(request, "gallerymain.html")
 
+@SignInRequiredView(readable = True)
 @FirestoreControlView
 def gallery_board(request, db):
     galleries = []
     thums = [0,0,0,0]
+
+    permission = ''
+    if request.method == 'POST':
+    
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+            
+        if len(user)>=1:
+
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
+
 
     gallery_datas = db.collection('Gallery').stream()
 
@@ -30,32 +52,69 @@ def gallery_board(request, db):
             thums[2] = gallery.image_url
         elif gallery.event == 'other':
             thums[3] = gallery.image_url
+    
 
-    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3]})
+    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3],'permission':permission})
 
-
+@SignInRequiredView()
 @FirestoreControlView
 def gallery_create(request,db):
+
+    uid = request.POST['uid']
+
+    try:
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exceptions.NotFound:
+        print('Not Found')
+
+    if current_user['permission'] == 'member':
+        raise PermissionDenied
+
     if request.method == 'POST':
-        contents = request.POST['contents']
-        created_at = request.POST['created_at']
-        title = request.POST['title']
-        image_url = request.POST['image_url']
-        place = request.POST['place']
-        ordinal_num = request.POST['ordinal_num']
-        event = request.POST['event']
 
-        new_gallery = Gallery(contents, created_at, title, image_url, place, ordinal_num, event)
+        if 'conetents' and 'created_at' and 'title' and 'image_url' and 'place' and 'ordinal_num' and 'event' in request.POST:
 
-        db.collection('Gallery').document().set(new_gallery.to_dict())
+            contents = request.POST['contents']
+            created_at = request.POST['created_at']
+            title = request.POST['title']
+            image_url = request.POST['image_url']
+            place = request.POST['place']
+            ordinal_num = request.POST['ordinal_num']
+            event = request.POST['event']
 
-        return redirect('gallery_board')
+            new_gallery = Gallery(contents, created_at, title, image_url, place, ordinal_num, event)
+
+            db.collection('Gallery').document().set(new_gallery.to_dict())
+
+            return redirect('gallery_board')
 
     return render(request, 'gallery_create.html')
 
 
+@SignInRequiredView(readable = True)
 @FirestoreControlView
 def gallery_idea_detail(request, db):
+
+    permission = ''
+    if request.method == 'POST':
+    
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+            
+        if len(user)>=1:
+
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
+
     galleries = []
 
     gallery_datas = db.collection('Gallery').stream()
@@ -64,11 +123,31 @@ def gallery_idea_detail(request, db):
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
         galleries.append(gallery)
 
-    return render(request,'gallery_idea_detail.html',{'galleries':galleries})
+    return render(request,'gallery_idea_detail.html',{'galleries':galleries,'permission':permission})
 
-
+@SignInRequiredView(readable = True)
 @FirestoreControlView
 def gallery_hacka_detail(request, db):
+
+    permission = ''
+    if request.method == 'POST':
+    
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+            
+        if len(user)>=1:
+
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
+
     galleries = []
 
     gallery_datas = db.collection('Gallery').stream()
@@ -77,11 +156,31 @@ def gallery_hacka_detail(request, db):
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
         galleries.append(gallery)
 
-    return render(request,'gallery_hacka_detail.html',{'galleries':galleries})
+    return render(request,'gallery_hacka_detail.html',{'galleries':galleries,'permission':permission})
 
-
+@SignInRequiredView(readable = True)
 @FirestoreControlView
 def gallery_session_detail(request, db):
+
+    permission = ''
+    if request.method == 'POST':
+    
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+            
+        if len(user)>=1:
+
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
+
     galleries = []
 
     gallery_datas = db.collection('Gallery').stream()
@@ -90,11 +189,31 @@ def gallery_session_detail(request, db):
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
         galleries.append(gallery)
 
-    return render(request,'gallery_session_detail.html',{'galleries':galleries})
+    return render(request,'gallery_session_detail.html',{'galleries':galleries,'permission':permission})
 
-
+@SignInRequiredView(readable=True)
 @FirestoreControlView
 def gallery_other_detail(request, db):
+
+    permission = ''
+    if request.method == 'POST':
+    
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+            
+        if len(user)>=1:
+
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
+
     galleries = []
 
     gallery_datas = db.collection('Gallery').stream()
@@ -103,22 +222,39 @@ def gallery_other_detail(request, db):
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
         galleries.append(gallery)
 
-    return render(request,'gallery_other_detail.html',{'galleries':galleries})
+    return render(request,'gallery_other_detail.html',{'galleries':galleries,'permission':permission})
 
-
+@SignInRequiredView()
 @FirestoreControlView
 def gallery_delete(requset, db, gallery_id):
+
+    uid = request.POST['uid']
+
+    try:
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
+    except google.cloud.exceptions.NotFound:
+        print('Not Found')
+
+    if current_user['permission'] == 'member':
+        raise PermissionDenied
+
     db.collection('Gallery').document(gallery_id).delete()
 
     return redirect('gallery_board')
 
-
+@SignInRequiredView()
 @FirestoreControlView
 def gallery_update(request, db, gallery_id):
     try:
         gallery_data = db.collection('Gallery').document(gallery_id).get()
+        user = db.collection('User').where('uid','==',uid).get()
+        current_user = user[0].to_dict()
     except google.cloud.exeption.NotFound:
         print('Not Found')
+
+    if current_user['permission'] == 'member':
+        raise PermissionDenied
 
     gallery = Gallery.from_dict(gallery_data.to_dict(), gallery_data.id)
 
