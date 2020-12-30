@@ -30,14 +30,16 @@ def notice_detail(request, db, notice_id):
 
         try:
             user = db.collection('User').where('uid','==',uid).get()
-            current_user = user[0].to_dict()
         except google.cloud.exceptions.NotFound:
             print('Not Found')
 
-        if current_user['permission'] == 'manager':
-            permission = 'manager'
-        else:
-            permission = 'member'
+        if len(user) >= 1:
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
 
     notice = Notice.from_dict(data.to_dict(), data.id)
     # print(data.to_dict())
@@ -70,10 +72,6 @@ def notice_detail(request, db, notice_id):
     }    
 
     return render(request, "notice_detail.html", output_datas)
-
-
-def faq(request):
-    return render(request, "faq.html")
 
 @SignInRequiredView()
 @FirestoreControlView
@@ -185,7 +183,10 @@ def notice_update(request, db, notice_id):
                 'imagename': imagename,
             })
 
-        return redirect('notice_detail', notice_id)
+            return redirect('notice_detail', notice_id)
 
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request, 'notice_update.html', {'notice': notice})
+
+def faq(request):
+    return render(request, "faq.html")

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load replace %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/notice_create.css' %}">
 {% endblock %}
@@ -26,30 +27,32 @@
             {% csrf_token %}
             <div class="title-box">
                 <p>제목</p>
-                <input type="text" id="namebox" name="title" placeholder="공지사항 제목">
+                <input type="text" id="namebox" name="title" placeholder="공지사항 제목" value="{{ notice.title }}">
             </div>
             <div class="date-box">
                 <p>공지사항 일시</p>
-                <input type="date" name="date">
+                <input type="date" name="date" value="{{ notice.date }}">
             </div>
             <div class="explanation-box">
                 <p>공지사항 상세내용</p>
-                <textarea name="contents" cols="30" rows="10"></textarea>
+                <textarea name="contents" cols="30" rows="10">{{ notice.contents }}</textarea>
             </div>
 
             <div>
                 첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                 <input name="file" id="file" style="display:none">
                 <input name="filename" id="filename" style="display:none">
-                <a href="#" class="js-fileSelect">Select some files</a><br>
+                <a href="#" class="js-fileSelect">파일선택</a><br>
+                <img src="{{ notice.file }}" alt="">
                 <label id="UpProgress1"></label> <br><br>
             </div>
             <br>
             <div>
-                첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
-                <input name="image" id="image" style="display:none">
+                <input name="image" id="image" style="display:none" value="{{ notice.image }}">
                 <input name="imagename" id="imagename" style="display:none">
-                <a href="#" class="js-imageSelect">Select some images</a><br>
+                <a href="#" class="js-imageSelect"><span class="select">이미지선택</span></a><br>
+                <img id="showImage" src="{{ notice.image }}" style="max-height: 200px;"><br>
+                <label id="changedImage"></label>
                 <label id="UpProgress2"></label> <br><br>
             </div>
 

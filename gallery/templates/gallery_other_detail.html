@@ -40,10 +40,12 @@
                     <div class="post-content">
                         <div class="update-delete-wrap">
                             <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
+                            {% if permission == 'manager' %}
                             <a href="{% url 'gallery_delete' gallery.gallery_id %}"><span
                                     class="update-delete-btn">삭제</span></a>
                             <a href="{% url 'gallery_update' gallery.gallery_id %}"><span
                                     class="update-delete-btn">수정</span></a>
+                            {% endif %}
                         </div>
 
                         <!-- 게시물 정보 -->
