@@ -52,6 +52,8 @@ def gallery_board(request, db):
             thums[2] = gallery.image_url
         elif gallery.event == 'other':
             thums[3] = gallery.image_url
+
+        print(gallery.image_url)
     
 
     return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3],'permission':permission})
@@ -73,17 +75,17 @@ def gallery_create(request,db):
 
     if request.method == 'POST':
 
-        if 'conetents' and 'created_at' and 'title' and 'image_url' and 'place' and 'ordinal_num' and 'event' in request.POST:
+        if 'conetents' and 'date' and 'title' and 'image_url' and 'place' and 'ordinal_num' and 'event' in request.POST:
 
             contents = request.POST['contents']
-            created_at = request.POST['created_at']
+            date = request.POST['date']
             title = request.POST['title']
             image_url = request.POST['image_url']
             place = request.POST['place']
             ordinal_num = request.POST['ordinal_num']
             event = request.POST['event']
 
-            new_gallery = Gallery(contents, created_at, title, image_url, place, ordinal_num, event)
+            new_gallery = Gallery(contents, firestore.SERVER_TIMESTAMP , date, title, image_url, place, ordinal_num, event)
 
             db.collection('Gallery').document().set(new_gallery.to_dict())
 
@@ -104,7 +106,7 @@ def gallery_idea_detail(request, db):
         try:
             user = db.collection('User').where('uid','==',uid).get()
         except google.cloud.exceptions.NotFound:
-            print('Not Found')
+            print('User Not Found')
             
         if len(user)>=1:
 
@@ -122,6 +124,7 @@ def gallery_idea_detail(request, db):
     for gallery_data in gallery_datas:
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
         galleries.append(gallery)
+        print(gallery.image_url)
 
     return render(request,'gallery_idea_detail.html',{'galleries':galleries,'permission':permission})
 
