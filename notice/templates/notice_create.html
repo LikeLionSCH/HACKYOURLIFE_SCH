@@ -5,59 +5,59 @@
 {% endblock %}
 
 {% block title %}
-<title>멋쟁이사자처럼 at 순천향대학교 - Gallery</title>
+<title>멋쟁이사자처럼 at 순천향대학교</title>
 {% endblock %}
 
 {% block content %}
 
-    <main>
+<main>
 
-        <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
-        <div class='title-wrap'>
-            <span class='page-sub-title'>
-                NOTICE
-            </span>
-        </div>
+    <!-- 서브 타이틀 필요 하신분은 그대로 쓰시고 아니면 지우시고 하시면 됩니다. -->
+    <div class='title-wrap'>
+        <span class='page-sub-title'>
+            NOTICE
+        </span>
+    </div>
 
-        <!-- form -->
+    <!-- form -->
 
-        <div class="main-wrap">
-            <form class="form-box" action="{% url 'notice_create' %}" method="post">
-                {% csrf_token %}
-                <div class="title-box">
-                    <p>제목</p>
-                    <input type="text" id="namebox" name="title" placeholder="공지사항 제목">
-                </div>
-                <div class="date-box">
-                    <p>공지사항 일시</p>
-                    <input type="date" name="date">
-                </div>
-                <div class="explanation-box">
-                    <p>공지사항 상세내용</p>
-                    <textarea name="contents" cols="30" rows="10"></textarea>
-                </div>
+    <div class="main-wrap">
+        <form class="form-box" action="{% url 'notice_create' %}" method="post">
+            {% csrf_token %}
+            <div class="title-box">
+                <p>제목</p>
+                <input type="text" id="namebox" name="title" placeholder="공지사항 제목">
+            </div>
+            <div class="date-box">
+                <p>공지사항 일시</p>
+                <input type="date" name="date">
+            </div>
+            <div class="explanation-box">
+                <p>공지사항 상세내용</p>
+                <textarea name="contents" cols="30" rows="10"></textarea>
+            </div>
 
-                <div>
-                    첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
-                            <input name="file" id="file" style="display:none">
-                            <a href="#" class="js-fileSelect">Select some files</a><br>
-                            <label id="UpProgress1"></label> <br><br>
-                </div>
-                <br>
-                <div>
-                    첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
-                             <input name="image" id="image" style="display:none">
-                            <a href="#" class="js-imageSelect">Select some images</a><br>
-                            <label id="UpProgress2"></label> <br><br>
-                </div>
+            <div>
+                첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
+                <input name="file" id="file" style="display:none">
+                <a href="#" class="js-fileSelect">Select some files</a><br>
+                <label id="UpProgress1"></label> <br><br>
+            </div>
+            <br>
+            <div>
+                첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
+                <input name="image" id="image" style="display:none">
+                <a href="#" class="js-imageSelect">Select some images</a><br>
+                <label id="UpProgress2"></label> <br><br>
+            </div>
 
-                <input type="submit" value="공지사항 올리기">
-            </form>
-        </div>
+            <input type="submit" value="공지사항 올리기">
+        </form>
+    </div>
 
-        <!-- ------- -->
+    <!-- ------- -->
 
-    </main>
+</main>
 
 {% endblock %}
 
@@ -103,8 +103,8 @@
 
             const fileUploads = Array.from(e.target.files).map((currFile) => {
                 const fileRef = imagesRef.child(currFile.name);
-                fileRef.put(currFile).then(function(snapshot) {
-                    snapshot.ref.getDownloadURL().then(function(url){
+                fileRef.put(currFile).then(function (snapshot) {
+                    snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('file').value = url;
                         document.getElementById('UpProgress1').innerHTML = 'Upload';
                     });
@@ -133,8 +133,8 @@
             console.log(e.target.files);
             const imageUploads = Array.from(e.target.files).map((currFile) => {
                 const imageRef = imagesRef.child(currFile.name);
-                imageRef.put(currFile).then(function(snapshot) {
-                    snapshot.ref.getDownloadURL().then(function(url){
+                imageRef.put(currFile).then(function (snapshot) {
+                    snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('image').value = url;
                         document.getElementById('UpProgress2').innerHTML = 'Upload';
                     });
@@ -146,7 +146,6 @@
             });
         });
 
-      })();
-
+    })();
 </script>
 {% endblock %}
