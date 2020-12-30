@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load replace %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/notice_create.css' %}">
 {% endblock %}
@@ -26,29 +27,33 @@
             {% csrf_token %}
             <div class="title-box">
                 <p>제목</p>
-                <input type="text" id="namebox" name="title" placeholder="공지사항 제목">
+                <input type="text" id="namebox" name="title" placeholder="공지사항 제목" value="{{ notice.title }}">
             </div>
             <div class="date-box">
                 <p>공지사항 일시</p>
-                <input type="date" name="date">
+                <input type="date" name="date" value="{{ notice.date }}">
             </div>
             <div class="explanation-box">
                 <p>공지사항 상세내용</p>
-                <textarea name="contents" cols="30" rows="10"></textarea>
+                <textarea name="contents" cols="30" rows="10">{{ notice.contents }}</textarea>
             </div>
 
             <div>
                 첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
-                <input name="file" id="file" style="display:none">
-                <a href="#" class="js-fileSelect">Select some files</a><br>
-                <label id="UpProgress1"></label> <br><br>
+                        <input name="file" id="file" style="display:none" value="{{ notice.file }}">
+                        <a href="#" class="js-fileSelect"><span class="select">파일선택</span></a><br>
+                        <!-- 아래의 alt에 파일이름이 들어갈 것이에여 원래는 template custom filter로 할라고 했어여 -->
+                        <img src="{{ notice.file }}" alt="">
+                        <label id="UpProgress1"></label> <br><br>
             </div>
             <br>
             <div>
                 첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
-                <input name="image" id="image" style="display:none">
-                <a href="#" class="js-imageSelect">Select some images</a><br>
-                <label id="UpProgress2"></label> <br><br>
+                         <input name="image" id="image" style="display:none" value="{{ notice.image }}">
+                        <a href="#" class="js-imageSelect"><span class="select">이미지선택</span></a><br>
+                        <img id="showImage" src="{{ notice.image }}" style="max-height: 200px;"><br>
+                        <label id="changedImage"></label>
+                        <label id="UpProgress2"></label> <br><br>
             </div>
 
             <input type="submit" value="공지사항 올리기">
@@ -106,7 +111,7 @@
                 fileRef.put(currFile).then(function (snapshot) {
                     snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('file').value = url;
-                        document.getElementById('UpProgress1').innerHTML = 'Upload';
+                        document.getElementById('UpProgress1').innerHTML = 'Upload 완료';
                     });
                 });
             });
@@ -136,7 +141,8 @@
                 imageRef.put(currFile).then(function (snapshot) {
                     snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('image').value = url;
-                        document.getElementById('UpProgress2').innerHTML = 'Upload';
+                        document.getElementById('changedImage').innerHTML += '<img src="' + url + '" style="max-height:200px;"> ';
+                        document.getElementById('UpProgress2').innerHTML = 'Upload 완료';
                     });
                 });
             });
