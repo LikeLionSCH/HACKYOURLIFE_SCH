@@ -5,6 +5,7 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/report_list.css' %}">
 <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+<title>멋장이사자처럼 at 순천향대학교</title>
 {% endblock %}
 
 {% block content %}
@@ -41,7 +42,7 @@
                 <p>{{ data.submit_date }}</p>
                 {% else %}
                 <p>{{ data.assignment_deadline }}</p>
-                <a href="{% url 'report_create' data.assignment_id %}">{{ data.assignment_title }}</a>
+                <a href="{% url 'assignment_detail' data.assignment_id %}">{{ data.assignment_title }}</a>
                 <p style="color: red;">미제출</p>
                 {% endif %}
             </div>
