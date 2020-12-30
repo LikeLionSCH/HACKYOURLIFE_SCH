@@ -73,6 +73,10 @@ def notice_detail(request, db, notice_id):
 
     return render(request, "notice_detail.html", output_datas)
 
+def faq(request):
+    return render(request, "faq.html")
+
+
 @SignInRequiredView()
 @FirestoreControlView
 def notice_create(request, db):
