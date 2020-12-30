@@ -20,7 +20,7 @@ firebase에 저장된 세션 목록을 불러오는 함수
 @param : request
 @return : session_list 페이지 반환, 세션 목록 전달
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def session_list(request, db):
     session_list = [] # 세션 목록들 저장할 빈 list 생성
@@ -86,7 +86,7 @@ firebase에 세션을 등록하는 함수
 @param : request
 @return : session_list 페이지 반환, 세션 목록 전달
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def session_create(request, db):
     uid = request.POST['uid']
@@ -143,7 +143,7 @@ firebase에 저장된 특정 세션을 불러오는 함수
 @param : request, 세션의 ID 값
 @return : session_detail.html 반환 , session 객체 전달
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def session_detail(request, db, session_id):
     uid = request.POST['uid']
@@ -176,7 +176,7 @@ firebase에 저장된 특정 세션을 수정하는 함수
 @param : request, 세션의 ID 값
 @return : session_detail로 redirect
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def session_update(request, db, session_id):
 
@@ -257,7 +257,7 @@ firebase에 저장된 특정 세션을 삭제하는 함수
 @param : request, 세션의 ID 값
 @return : session_list로 redirect
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def session_delete(request, db, session_id):
     uid = request.POST['uid']
