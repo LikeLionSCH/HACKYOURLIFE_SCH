@@ -17,7 +17,7 @@ from assignments.models import Assignment
 @param : request, 등록할 레포트에 해당하는 과제의 id
 @return : 래포트 등록하는 페이지 (report_create.html) 페이지 렌더링
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def create_Report_view(request, db, assignment_id):
 
@@ -87,7 +87,7 @@ def create_Report_view(request, db, assignment_id):
 @param : request, 해당하는 과제의 id
 @return : report_list.html 렌더링, output datas
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def read_Report_list_view(request, db, assignment_id):
 
@@ -200,7 +200,7 @@ def read_Report_list_view(request, db, assignment_id):
 @param : request, 보여줄 레포트의 id
 @return : report_detail.html 렌더링, output datas
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def get_Report_detail_view(request, db, assignment_id, report_id):
 
@@ -251,7 +251,7 @@ def get_Report_detail_view(request, db, assignment_id, report_id):
 @param : request, 수정할 레포트의 id
 @return : report_update.html 렌더링, 수정한 레포트의 디테일 페이지로 리다이렉트
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def update_Report_view(request, db, assignment_id, report_id):
 
@@ -312,7 +312,7 @@ def update_Report_view(request, db, assignment_id, report_id):
 @param : request, 해당 과제 Id, 레포트의 id
 @return : render
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def scoring_Report_view(request,db, assignment_id, report_id):
 
@@ -369,7 +369,7 @@ def scoring_Report_view(request,db, assignment_id, report_id):
 @param : request, 삭제할 레포트의 id
 @return : 리스트 페이지로 리다이렉트
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def delete_Report(request, db, assignment_id, report_id):
 
@@ -393,7 +393,7 @@ def delete_Report(request, db, assignment_id, report_id):
     return redirect('my_list')
 
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def my_report_page(request, db):
     
@@ -416,14 +416,11 @@ def my_report_page(request, db):
         is_checked = 0
         for report_data in report_datas:
             report = Report.from_dict(report_data.to_dict(),report_data.id)
-            print('report: '+report.assignment_id)
-            print('assignment: ' + assignment.assignment_id)
             if report.assignment_id == assignment.assignment_id:
                 datas.append(My_report_data(assignment.title,assignment.deadline,'제출완료',report.submit_date,report.report_id,assignment.assignment_id))
                 is_checked += 1
 
         if is_checked == 0:
-            print('asdasd')
             datas.append(My_report_data(assignment.title,assignment.deadline,'미제출',None,None,assignment.assignment_id) )
 
     # 페이지 네이터

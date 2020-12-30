@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title %}
-<title>멋쟁이사자처럼 at 순천향대학교 - Session</title>
+<title>멋쟁이사자처럼 at 순천향대학교</title>
 {% endblock %}
 
 {% block content %}
@@ -30,10 +30,10 @@
                 <a href="{% url 'session_list' %}">목록으로 가기</a>
                 <!-- session의 host가 로그인된 사용자라면 True -->
                 <div>
-                {% if access == True %}
+                    {% if access == True %}
                     <a href="{% url 'session_delete' session.session_id %}">삭제</a>
                     <a href="{% url 'session_update' session.session_id %}">수정</a>
-                {% endif %}
+                    {% endif %}
                 </div>
             </div>
 

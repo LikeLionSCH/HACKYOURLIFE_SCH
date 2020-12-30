@@ -17,7 +17,7 @@ from .models import Assignment
 @param : request
 @return : assignment_create 페이지 반환
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def create_Assignment_view(request, db):
 
@@ -65,7 +65,7 @@ def create_Assignment_view(request, db):
 @param : request
 @return : assignment_list 페이지 반환, 과제 목록 전달
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def read_Assignment_list_view(request, db):
 
@@ -140,7 +140,7 @@ def read_Assignment_list_view(request, db):
 @param : request, 과제의 문자열 아이디값
 @return : assignment_deta.html 반환 , assignment 객체 전달
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def get_Assignment_detail_view(request, db, assignment_id):
     
@@ -171,7 +171,7 @@ def get_Assignment_detail_view(request, db, assignment_id):
 @param : request, 과제의 문자열 아이디값
 @return : assignment_list로 리다이렉트
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def delete_Assignment(request, db, assignment_id):
 
@@ -198,7 +198,7 @@ def delete_Assignment(request, db, assignment_id):
 @param : request, 등록된 과제의 아이디값
 @return : render, redirect
 """
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def update_Assignment_view(request, db, assignment_id):
 
