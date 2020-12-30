@@ -119,7 +119,7 @@ def gallery_idea_detail(request, db):
 
     galleries = []
 
-    gallery_datas = db.collection('Gallery').stream()
+    gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
 
     for gallery_data in gallery_datas:
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
@@ -138,7 +138,7 @@ def gallery_hacka_detail(request, db):
         uid = request.POST['uid']
 
         try:
-            user = db.collection('User').where('uid','==',uid).get()
+            user = db.collection('User').order_by('created_at',direction=firestore.Query.DESCENDING).where('uid','==',uid).get()
         except google.cloud.exceptions.NotFound:
             print('Not Found')
             
@@ -186,7 +186,7 @@ def gallery_session_detail(request, db):
 
     galleries = []
 
-    gallery_datas = db.collection('Gallery').stream()
+    gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
 
     for gallery_data in gallery_datas:
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
@@ -219,7 +219,7 @@ def gallery_other_detail(request, db):
 
     galleries = []
 
-    gallery_datas = db.collection('Gallery').stream()
+    gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
 
     for gallery_data in gallery_datas:
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
