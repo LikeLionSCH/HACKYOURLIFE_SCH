@@ -30,14 +30,16 @@ def notice_detail(request, db, notice_id):
 
         try:
             user = db.collection('User').where('uid','==',uid).get()
-            current_user = user[0].to_dict()
         except google.cloud.exceptions.NotFound:
             print('Not Found')
 
-        if current_user['permission'] == 'manager':
-            permission = 'manager'
-        else:
-            permission = 'member'
+        if len(user) >= 1:
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
 
     notice = Notice.from_dict(data.to_dict(), data.id)
     # print(data.to_dict())
@@ -71,9 +73,9 @@ def notice_detail(request, db, notice_id):
 
     return render(request, "notice_detail.html", output_datas)
 
-
 def faq(request):
     return render(request, "faq.html")
+
 
 @SignInRequiredView()
 @FirestoreControlView
@@ -90,15 +92,18 @@ def notice_create(request, db):
         raise PermissionDenied # 권한 없음
 
     if request.method == 'POST':
-        if 'contents' and 'date' and 'title' and 'file' and 'image' and 'author' in request.POST:
+        print(request.POST)
+        if 'contents' and 'date' and 'title' and 'file' and 'filename' and 'image' and 'imagename' in request.POST:
             author = current_user['username']
             contents = request.POST['contents']
             date = request.POST['date']
             title = request.POST['title']
             file = request.POST['file']
+            filename = request.POST['filename']
             image = request.POST['image']
+            imagename = request.POST['imagename']
 
-            new_notice = Notice(contents, date, title, file, image, author)
+            new_notice = Notice(contents, date, title, file, filename, image, imagename, author)
 
             db.collection('Notice').document().set(new_notice.to_dict())
 
@@ -125,7 +130,7 @@ def notice_list(request, db):
     return render(request,'notice.html',{'notices':notices})
 
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def notice_delete(request, db, notice_id):
     uid = request.POST['uid']
@@ -144,7 +149,7 @@ def notice_delete(request, db, notice_id):
     return redirect('notice_list')
 
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def notice_update(request, db, notice_id):
 
@@ -163,22 +168,29 @@ def notice_update(request, db, notice_id):
     notice = Notice.from_dict(notice_data.to_dict(), notice_data.id)
 
     if request.method == 'POST':
-        if 'contents' and 'date' and 'title' and 'file' and 'image' in request.POST:
+        if 'contents' and 'date' and 'title' and 'file' and 'filename' and 'image' and 'imagename' in request.POST:
             contents = request.POST['contents']
             date = request.POST['date']
             title = request.POST['title']
             file = request.POST['file']
+            filename = request.POST['filename']
             image = request.POST['image']
+            imagename = request.POST['imagename']
 
             db.collection('Notice').document(notice_id).update({
                 'contents': contents,
                 'date': date,
                 'title': title,
                 'file': file,
+                'filename': filename,
                 'image': image,
+                'imagename': imagename,
             })
 
-        return redirect('notice_detail', notice_id)
+            return redirect('notice_detail', notice_id)
 
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request, 'notice_update.html', {'notice': notice})
+
+def faq(request):
+    return render(request, "faq.html")
