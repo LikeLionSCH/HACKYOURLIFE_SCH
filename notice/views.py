@@ -75,7 +75,7 @@ def notice_detail(request, db, notice_id):
 def faq(request):
     return render(request, "faq.html")
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def notice_create(request, db):
     uid = request.POST['uid']
@@ -90,16 +90,18 @@ def notice_create(request, db):
         raise PermissionDenied # 권한 없음
 
     if request.method == 'POST':
-        if 'contents' and 'date' and 'title' and 'file' and 'image' and 'filename' and 'author' in request.POST:
+        print(request.POST)
+        if 'contents' and 'date' and 'title' and 'file' and 'filename' and 'image' and 'imagename' in request.POST:
             author = current_user['username']
             contents = request.POST['contents']
             date = request.POST['date']
             title = request.POST['title']
             file = request.POST['file']
-            image = request.POST['image']
             filename = request.POST['filename']
+            image = request.POST['image']
+            imagename = request.POST['imagename']
 
-            new_notice = Notice(contents, date, title, file, image, filename, author)
+            new_notice = Notice(contents, date, title, file, filename, image, imagename, author)
 
             db.collection('Notice').document().set(new_notice.to_dict())
 
@@ -126,7 +128,7 @@ def notice_list(request, db):
     return render(request,'notice.html',{'notices':notices})
 
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def notice_delete(request, db, notice_id):
     uid = request.POST['uid']
@@ -145,7 +147,7 @@ def notice_delete(request, db, notice_id):
     return redirect('notice_list')
 
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def notice_update(request, db, notice_id):
 
@@ -164,19 +166,23 @@ def notice_update(request, db, notice_id):
     notice = Notice.from_dict(notice_data.to_dict(), notice_data.id)
 
     if request.method == 'POST':
-        if 'contents' and 'date' and 'title' and 'file' and 'image' in request.POST:
+        if 'contents' and 'date' and 'title' and 'file' and 'filename' and 'image' and 'imagename' in request.POST:
             contents = request.POST['contents']
             date = request.POST['date']
             title = request.POST['title']
             file = request.POST['file']
+            filename = request.POST['filename']
             image = request.POST['image']
+            imagename = request.POST['imagename']
 
             db.collection('Notice').document(notice_id).update({
                 'contents': contents,
                 'date': date,
                 'title': title,
                 'file': file,
+                'filename': filename,
                 'image': image,
+                'imagename': imagename,
             })
 
         return redirect('notice_detail', notice_id)
