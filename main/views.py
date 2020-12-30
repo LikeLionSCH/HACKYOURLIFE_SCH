@@ -25,7 +25,7 @@ def index(request):
     return render(request, 'main.html')
 
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def mypage(request, db):
     uid = request.POST['uid']
