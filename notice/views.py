@@ -75,7 +75,7 @@ def notice_detail(request, db, notice_id):
 def faq(request):
     return render(request, "faq.html")
 
-@SignInRequiredView
+@SignInRequiredView()
 @FirestoreControlView
 def notice_create(request, db):
     uid = request.POST['uid']
