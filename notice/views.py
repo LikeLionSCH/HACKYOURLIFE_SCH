@@ -90,15 +90,16 @@ def notice_create(request, db):
         raise PermissionDenied # 권한 없음
 
     if request.method == 'POST':
-        if 'contents' and 'date' and 'title' and 'file' and 'image' and 'author' in request.POST:
+        if 'contents' and 'date' and 'title' and 'file' and 'image' and 'filename' and 'author' in request.POST:
             author = current_user['username']
             contents = request.POST['contents']
             date = request.POST['date']
             title = request.POST['title']
             file = request.POST['file']
             image = request.POST['image']
+            filename = request.POST['filename']
 
-            new_notice = Notice(contents, date, title, file, image, author)
+            new_notice = Notice(contents, date, title, file, image, filename, author)
 
             db.collection('Notice').document().set(new_notice.to_dict())
 
