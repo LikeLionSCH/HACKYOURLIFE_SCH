@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-<title>멋쟁이사자처럼 at 순천향대학교 - Gallery</title>
+<title>멋쟁이사자처럼 at 순천향대학교</title>
 {% endblock %}
 
 {% block content %}
@@ -17,42 +17,44 @@
     
  -->
 
-    <!-- MAIN CONTENT-->
-    <!--소제목-->
-    <div class='title-wrap'>
-        <span class='page-sub-title'>
-            GALLERY
-        </span>
-    </div>
-    <br>
-    <main>
-        <div class="main_content">
-            
-             <!-- 카드 컨테이너 -->
-             <div class="th_card">
-                <div class="img_square">
-                    <img src='https://firebasestorage.googleapis.com/v0/b/likelion-sch.appspot.com/o/Images%2F8th_likelion_at_sch.png?alt=media&token=beaae27d-689e-4136-bddd-2111c3ec1717' alt="8th_img.jpg">
-                </div>
-                <div class="th_square">8기</div>
-                <div class="more_square"><a href="{% url 'gallery_board' %}">MORE</a></div>
-            </div>  
+<!-- MAIN CONTENT-->
+<!--소제목-->
+<div class='title-wrap'>
+    <span class='page-sub-title'>
+        GALLERY
+    </span>
+</div>
+<br>
+<main>
+    <div class="main_content">
 
-            <!-- 카드 컨테이너 -->
-             <div class="th_card">
-                <div class="img_square">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/likelion-sch.appspot.com/o/Images%2F7th_likelion.jpeg?alt=media&token=bcce78e7-5bed-49dc-93bb-756560f01924" alt="7th_img.jpg">
-                </div>
-                <div class="th_square">7기</div>
-                <div class="more_square"><a href="{% url 'gallery_board' %}">MORE</a></div>
-            </div>   
-
-
+        <!-- 카드 컨테이너 -->
+        <div class="th_card">
+            <div class="img_square">
+                <img src='https://firebasestorage.googleapis.com/v0/b/likelion-sch.appspot.com/o/Images%2F8th_likelion_at_sch.png?alt=media&token=beaae27d-689e-4136-bddd-2111c3ec1717'
+                    alt="8th_img.jpg">
+            </div>
+            <div class="th_square">8기</div>
+            <div class="more_square"><a href="{% url 'gallery_board' %}">MORE</a></div>
         </div>
-    </main>
 
-    <!-- 퓨터 -->
-    <script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- 카드 컨테이너 -->
+        <div class="th_card">
+            <div class="img_square">
+                <img src="https://firebasestorage.googleapis.com/v0/b/likelion-sch.appspot.com/o/Images%2F7th_likelion.jpeg?alt=media&token=bcce78e7-5bed-49dc-93bb-756560f01924"
+                    alt="7th_img.jpg">
+            </div>
+            <div class="th_square">7기</div>
+            <div class="more_square"><a href="{% url 'gallery_board' %}">MORE</a></div>
+        </div>
+
+
+    </div>
+</main>
+
+<!-- 퓨터 -->
+<script src="https://kit.fontawesome.com/54f85ae94e.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 {% endblock %}
