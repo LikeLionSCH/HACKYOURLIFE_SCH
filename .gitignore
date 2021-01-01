@@ -405,3 +405,5 @@ secret.json
 # firebase account key
 serviceAccountKey.json
 
+# 외부 데이터베이스 사용하므로 마이그레이션을 사용하지 않음
+migrations/
