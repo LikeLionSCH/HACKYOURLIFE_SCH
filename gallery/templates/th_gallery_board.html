@@ -24,11 +24,11 @@
         </span>
     </div>
     <div class="board_title">
-        <span class="mem-num-8th">8기</span>
+        <span class="mem-num-8th">{{ generation }}</span>
         <!--게시물 추가하는 버튼-->
         <span class="circle">
             {% if permission == 'manager' %}
-            <a href="{% url 'gallery_create' %}"><i class="fas fa-plus-circle"></i></a>
+            <a href="{% url 'gallery_create' generation %}"><i class="fas fa-plus-circle"></i></a>
             {% endif %}
         </span>
     </div>
@@ -43,36 +43,36 @@
                 <!--postcard 반복-->
 
                 <div class="postcard">
-                    <a class="post_title" href="{% url 'gallery_idea_detail' %}">아이디어톤</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'ideathon' %}">아이디어톤</a>
                     <div class="post_image">
-                        <a href="{% url 'gallery_idea_detail' %}">
+                        <a href="{% url 'gallery_detail' generation 'ideathon' %}">
                             <img src="{{ idea }}" alt="idea_img.jpg">
                         </a>
                     </div>
                 </div>
 
                 <div class="postcard">
-                    <a class="post_title" href="{% url 'gallery_hacka_detail' %}">해커톤</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'hackathon' %}">해커톤</a>
                     <div class="post_image">
-                        <a href="{% url 'gallery_hacka_detail' %}">
+                        <a href="{% url 'gallery_detail' generation 'hackathon' %}">
                             <img src="{{ hacka }}" alt="hacka_img.jpg">
                         </a>
                     </div>
                 </div>
 
                 <div class="postcard">
-                    <a class="post_title" href="{% url 'gallery_session_detail' %}">세션</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'session' %}">세션</a>
                     <div class="post_image">
-                        <a href="{% url 'gallery_session_detail' %}">
+                        <a href="{% url 'gallery_detail' generation 'session' %}">
                             <img src="{{ session }}" alt="session_img.jpg">
                         </a>
                     </div>
                 </div>
 
                 <div class="postcard">
-                    <a class="post_title" href="{% url 'gallery_other_detail' %}">그 외 행사</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'other' %}">그 외 행사</a>
                     <div class="post_image">
-                        <a href="{% url 'gallery_other_detail' %}">
+                        <a href="{% url 'gallery_detail' generation 'other' %}">
                             <img src="{{ other }}" alt="other_img.jpg">
                         </a>
                     </div>
