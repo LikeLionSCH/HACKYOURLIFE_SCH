@@ -46,7 +46,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] # 에러 페이지 확인용
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # Django Admin을 사용하지 않으므로 비활성화
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -96,13 +97,9 @@ WSGI_APPLICATION = 'hackyourlife_sch.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# Firebase - NoSQL Firestore 사용
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {}
 
 
 # Password validation
