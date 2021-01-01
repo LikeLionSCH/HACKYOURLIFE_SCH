@@ -249,6 +249,9 @@ def gallery_delete(requset, db, gallery_id):
 @SignInRequiredView()
 @FirestoreControlView
 def gallery_update(request, db, gallery_id):
+
+    uid = request.POST['uid']
+
     try:
         gallery_data = db.collection('Gallery').document(gallery_id).get()
         user = db.collection('User').where('uid','==',uid).get()
@@ -262,25 +265,27 @@ def gallery_update(request, db, gallery_id):
     gallery = Gallery.from_dict(gallery_data.to_dict(), gallery_data.id)
 
     if request.method == 'POST':
-        contents = request.POST['contents']
-        created_at = request.POST['created_at']
-        title = request.POST['title']
-        image_url = request.POST['image_url']
-        place = request.POST['place']
-        ordinal_num = request.POST['ordinal_num']
-        event = request.POST['event']
 
-        db.collection('Gallery').document(gallery_id).update({
-            'contents': contents,
-            'created_at': created_at,
-            'title': title,
-            'image_url': image_url,
-            'place': place,
-            'ordinal_num': ordinal_num,
-            'event': event,
-        })
+        if 'contents' and 'date' and 'title' and 'image_url' and 'placa' and 'ordinal_num' and 'event' in request.POST:
+            contents = request.POST['contents']
+            date = request.POST['date']
+            title = request.POST['title']
+            image_url = request.POST['image_url']
+            place = request.POST['place']
+            ordinal_num = request.POST['ordinal_num']
+            event = request.POST['event']
 
-        return redirect('gallery_board')
+            db.collection('Gallery').document(gallery_id).update({
+                'contents': contents,
+                'date': date,
+                'title': title,
+                'image_url': image_url,
+                'place': place,
+                'ordinal_num': ordinal_num,
+                'event': event,
+            })
+
+            return redirect('gallery_board')
 
     # POST 가 아닐 경우 update 창 띄워줌
     return render(request, 'gallery_update.html', {'gallery': gallery})
