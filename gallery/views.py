@@ -13,7 +13,7 @@ def gallery_main(request):
 
 @SignInRequiredView(readable = True)
 @FirestoreControlView
-def gallery_board(request, db):
+def gallery_board(request, db, generation):
     galleries = []
     thums = [0,0,0,0]
 
@@ -56,11 +56,11 @@ def gallery_board(request, db):
         print(gallery.image_url)
     
 
-    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3],'permission':permission})
+    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3],'permission':permission, 'generation':generation})
 
 @SignInRequiredView()
 @FirestoreControlView
-def gallery_create(request,db):
+def gallery_create(request,db, generation):
 
     uid = request.POST['uid']
 
@@ -89,14 +89,14 @@ def gallery_create(request,db):
 
             db.collection('Gallery').document().set(new_gallery.to_dict())
 
-            return redirect('gallery_board')
+            return redirect('gallery_board', generation)
 
-    return render(request, 'gallery_create.html')
+    return render(request, 'gallery_create.html', {'generation':generation})
 
 
 @SignInRequiredView(readable = True)
 @FirestoreControlView
-def gallery_idea_detail(request, db):
+def gallery_detail(request, db, generation, keyword):
 
     permission = ''
     if request.method == 'POST':
@@ -126,106 +126,141 @@ def gallery_idea_detail(request, db):
         galleries.append(gallery)
         print(gallery.image_url)
 
-    return render(request,'gallery_idea_detail.html',{'galleries':galleries,'permission':permission})
+    return render(request,'gallery_detail.html',{'galleries':galleries,'permission':permission})
 
-@SignInRequiredView(readable = True)
-@FirestoreControlView
-def gallery_hacka_detail(request, db):
 
-    permission = ''
-    if request.method == 'POST':
+# @SignInRequiredView(readable = True)
+# @FirestoreControlView
+# def gallery_idea_detail(request, db):
+
+#     permission = ''
+#     if request.method == 'POST':
     
-        uid = request.POST['uid']
+#         uid = request.POST['uid']
 
-        try:
-            user = db.collection('User').order_by('created_at',direction=firestore.Query.DESCENDING).where('uid','==',uid).get()
-        except google.cloud.exceptions.NotFound:
-            print('Not Found')
+#         try:
+#             user = db.collection('User').where('uid','==',uid).get()
+#         except google.cloud.exceptions.NotFound:
+#             print('User Not Found')
             
-        if len(user)>=1:
+#         if len(user)>=1:
 
-            current_user = user[0].to_dict()
+#             current_user = user[0].to_dict()
 
-            if current_user['permission'] == 'manager':
-                permission = 'manager'
-            else:
-                permission = 'member'
+#             if current_user['permission'] == 'manager':
+#                 permission = 'manager'
+#             else:
+#                 permission = 'member'
 
-    galleries = []
+#     galleries = []
 
-    gallery_datas = db.collection('Gallery').stream()
+#     gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
 
-    for gallery_data in gallery_datas:
-        gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
-        galleries.append(gallery)
+#     for gallery_data in gallery_datas:
+#         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
+#         galleries.append(gallery)
+#         print(gallery.image_url)
 
-    return render(request,'gallery_hacka_detail.html',{'galleries':galleries,'permission':permission})
+#     return render(request,'gallery_idea_detail.html',{'galleries':galleries,'permission':permission})
 
-@SignInRequiredView(readable = True)
-@FirestoreControlView
-def gallery_session_detail(request, db):
+# @SignInRequiredView(readable = True)
+# @FirestoreControlView
+# def gallery_hacka_detail(request, db):
 
-    permission = ''
-    if request.method == 'POST':
+#     permission = ''
+#     if request.method == 'POST':
     
-        uid = request.POST['uid']
+#         uid = request.POST['uid']
 
-        try:
-            user = db.collection('User').where('uid','==',uid).get()
-        except google.cloud.exceptions.NotFound:
-            print('Not Found')
+#         try:
+#             user = db.collection('User').order_by('created_at',direction=firestore.Query.DESCENDING).where('uid','==',uid).get()
+#         except google.cloud.exceptions.NotFound:
+#             print('Not Found')
             
-        if len(user)>=1:
+#         if len(user)>=1:
 
-            current_user = user[0].to_dict()
+#             current_user = user[0].to_dict()
 
-            if current_user['permission'] == 'manager':
-                permission = 'manager'
-            else:
-                permission = 'member'
+#             if current_user['permission'] == 'manager':
+#                 permission = 'manager'
+#             else:
+#                 permission = 'member'
 
-    galleries = []
+#     galleries = []
 
-    gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
+#     gallery_datas = db.collection('Gallery').stream()
 
-    for gallery_data in gallery_datas:
-        gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
-        galleries.append(gallery)
+#     for gallery_data in gallery_datas:
+#         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
+#         galleries.append(gallery)
 
-    return render(request,'gallery_session_detail.html',{'galleries':galleries,'permission':permission})
+#     return render(request,'gallery_hacka_detail.html',{'galleries':galleries,'permission':permission})
 
-@SignInRequiredView(readable=True)
-@FirestoreControlView
-def gallery_other_detail(request, db):
+# @SignInRequiredView(readable = True)
+# @FirestoreControlView
+# def gallery_session_detail(request, db):
 
-    permission = ''
-    if request.method == 'POST':
+#     permission = ''
+#     if request.method == 'POST':
     
-        uid = request.POST['uid']
+#         uid = request.POST['uid']
 
-        try:
-            user = db.collection('User').where('uid','==',uid).get()
-        except google.cloud.exceptions.NotFound:
-            print('Not Found')
+#         try:
+#             user = db.collection('User').where('uid','==',uid).get()
+#         except google.cloud.exceptions.NotFound:
+#             print('Not Found')
             
-        if len(user)>=1:
+#         if len(user)>=1:
 
-            current_user = user[0].to_dict()
+#             current_user = user[0].to_dict()
 
-            if current_user['permission'] == 'manager':
-                permission = 'manager'
-            else:
-                permission = 'member'
+#             if current_user['permission'] == 'manager':
+#                 permission = 'manager'
+#             else:
+#                 permission = 'member'
 
-    galleries = []
+#     galleries = []
 
-    gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
+#     gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
 
-    for gallery_data in gallery_datas:
-        gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
-        galleries.append(gallery)
+#     for gallery_data in gallery_datas:
+#         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
+#         galleries.append(gallery)
 
-    return render(request,'gallery_other_detail.html',{'galleries':galleries,'permission':permission})
+#     return render(request,'gallery_session_detail.html',{'galleries':galleries,'permission':permission})
+
+# @SignInRequiredView(readable=True)
+# @FirestoreControlView
+# def gallery_other_detail(request, db):
+
+#     permission = ''
+#     if request.method == 'POST':
+    
+#         uid = request.POST['uid']
+
+#         try:
+#             user = db.collection('User').where('uid','==',uid).get()
+#         except google.cloud.exceptions.NotFound:
+#             print('Not Found')
+            
+#         if len(user)>=1:
+
+#             current_user = user[0].to_dict()
+
+#             if current_user['permission'] == 'manager':
+#                 permission = 'manager'
+#             else:
+#                 permission = 'member'
+
+#     galleries = []
+
+#     gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
+
+#     for gallery_data in gallery_datas:
+#         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
+#         galleries.append(gallery)
+
+#     return render(request,'gallery_other_detail.html',{'galleries':galleries,'permission':permission})
 
 @SignInRequiredView()
 @FirestoreControlView
