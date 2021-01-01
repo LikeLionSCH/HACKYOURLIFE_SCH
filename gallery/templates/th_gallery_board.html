@@ -43,36 +43,36 @@
                 <!--postcard 반복-->
 
                 <div class="postcard">
-                    <a class="post_title" href="#">아이디어톤</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'ideathon' %}">아이디어톤</a>
                     <div class="post_image">
-                        <a href="#">
+                        <a href="{% url 'gallery_detail' generation 'ideathon' %}">
                             <img src="{{ idea }}" alt="idea_img.jpg">
                         </a>
                     </div>
                 </div>
 
                 <div class="postcard">
-                    <a class="post_title" href="#">해커톤</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'hackathon' %}">해커톤</a>
                     <div class="post_image">
-                        <a href="#">
+                        <a href="{% url 'gallery_detail' generation 'hackathon' %}">
                             <img src="{{ hacka }}" alt="hacka_img.jpg">
                         </a>
                     </div>
                 </div>
 
                 <div class="postcard">
-                    <a class="post_title" href="#">세션</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'session' %}">세션</a>
                     <div class="post_image">
-                        <a href="#">
+                        <a href="{% url 'gallery_detail' generation 'session' %}">
                             <img src="{{ session }}" alt="session_img.jpg">
                         </a>
                     </div>
                 </div>
 
                 <div class="postcard">
-                    <a class="post_title" href="#">그 외 행사</a>
+                    <a class="post_title" href="{% url 'gallery_detail' generation 'other' %}">그 외 행사</a>
                     <div class="post_image">
-                        <a href="#">
+                        <a href="{% url 'gallery_detail' generation 'other' %}">
                             <img src="{{ other }}" alt="other_img.jpg">
                         </a>
                     </div>
