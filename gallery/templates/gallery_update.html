@@ -26,11 +26,11 @@
             {% csrf_token %}
             <div class="title-box">
                 <p>제목</p>
-                <input id="namebox" name="title" type="text">
+                <input id="namebox" name="title" type="text" value="{{ gallery.title }}">
             </div>
             <div class="date-box">
                 <p>날짜</p>
-                <input type="date" name="created_at">
+                <input type="date" name="created_at" value="{{ gallery.date }}">
             </div>
             <div class="link-box">
                 <p>기수</p>
@@ -48,18 +48,20 @@
             </div>
             <div class="link-box">
                 <p>장소</p>
-                <input type="text" name="place" placeholder="ex. 순천향대학교 ML304 ( 미디어랩스 304호 )">
+                <input type="text" name="place" placeholder="ex. 순천향대학교 ML304 ( 미디어랩스 304호 )" value="{{ gallery.place }}">
             </div>
             <div class="explanation-box">
                 <p>설명</p>
                 <div>
                     첨부이미지 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                     <input name="image_url" id="file" style="display:none">
-                    <a href="#" class="js-fileSelect">Select some files</a><br>
+                    <a href="#" class="js-fileSelect"><span class="select">이미지선택</span></a><br>
+                    <img id="showImage" src="{{ gallery.image_url }}" style="max-height: 200px;"><br>
+                    <label id="uploadedImage"></label>
                     <label id="UpProgress"></label> <br><br>
                 </div>
 
-                <textarea name="contents" cols="40" rows="100"></textarea>
+                <textarea name="contents" cols="40" rows="100">{{ gallery.contents }}</textarea>
             </div>
             <input type="submit" value="SUBMIT">
         </form>
@@ -96,7 +98,7 @@
 
         const storageRef = storage.ref();
 
-        const imagesRef = storageRef.child('Notice');
+        const imagesRef = storageRef.child('Gallery');
 
         const spaceRef = imagesRef.child('space.jpg');
 
@@ -119,7 +121,8 @@
                 fileRef.put(currFile).then(function (snapshot) {
                     snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('file').value = url;
-                        document.getElementById('UpProgress').innerHTML = 'Upload';
+                        document.getElementById('uploadedImage').innerHTML += '<img src="' + url + '" style="max-height: 200px;"> ';
+                        document.getElementById('UpProgress').innerHTML = 'Upload 완료';
                     });
                 });
             });

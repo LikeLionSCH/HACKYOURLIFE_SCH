@@ -54,7 +54,8 @@
                 <div>
                     첨부이미지 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                     <input name="image_url" id="file" style="display:none" required>
-                    <a href="#" class="js-fileSelect">Select some files</a><br>
+                    <a href="#" class="js-fileSelect"><span class="select">이미지선택</span></a><br>
+                    <label id="uploadedImage"></label>
                     <label id="UpProgress"></label> <br><br>
                 </div>
                 <br>
@@ -96,7 +97,7 @@
 
         const storageRef = storage.ref();
 
-        const imagesRef = storageRef.child('Notice');
+        const imagesRef = storageRef.child('Gallery');
 
         const spaceRef = imagesRef.child('space.jpg');
 
@@ -119,7 +120,8 @@
                 fileRef.put(currFile).then(function (snapshot) {
                     snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('file').value = url;
-                        document.getElementById('UpProgress').innerHTML = 'Upload';
+                        document.getElementById('uploadedImage').innerHTML += '<img src="' + url + '" style="max-height: 200px;"> ';
+                        document.getElementById('UpProgress').innerHTML = 'Upload 완료';
                     });
                 });
             });
