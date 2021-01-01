@@ -10,6 +10,6 @@ urlpatterns = [
     # path('gallery/board/detail/session', views.gallery_session_detail, name="gallery_session_detail"),
     # path('gallery/board/detail/other', views.gallery_other_detail, name="gallery_other_detail"),
     path('gallery/board/create/<str:generation>', views.gallery_create, name="gallery_create"),
-    path('gallery/delete/<str:gallery_id>/',views.gallery_delete,name='gallery_delete'),
-    path('gallery/update/<str:gallery_id>/',views.gallery_update,name='gallery_update'),
+    path('gallery/delete/<str:generation>/<str:gallery_id>/',views.gallery_delete,name='gallery_delete'),
+    path('gallery/update/<str:generation>/<str:gallery_id>/',views.gallery_update,name='gallery_update'),
 ]
