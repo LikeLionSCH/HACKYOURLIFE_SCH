@@ -41,7 +41,7 @@
                 첨부파일 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
                 <input name="file" id="file" style="display:none">
                 <input name="filename" id="filename" style="display:none">
-                <a href="#" class="js-fileSelect">Select some files</a><br>
+                <a href="#" class="js-fileSelect"><span class="select">파일선택</span></a><br>
                 <label id="UpProgress1"></label> <br><br>
             </div>
             <br>
@@ -49,7 +49,8 @@
                 첨부이미지 : <input type="file" class="js-imageElem" multiple accept="notice/*" style="display:none">
                 <input name="image" id="image" style="display:none">
                 <input name="imagename" id="imagename" style="display:none">
-                <a href="#" class="js-imageSelect">Select some images</a><br>
+                <a href="#" class="js-imageSelect"><span class="select">이미지선택</span></a><br>
+                <label id="changedImage"></label>
                 <label id="UpProgress2"></label> <br><br>
             </div>
 
@@ -109,7 +110,7 @@
                     snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('file').value = url;
                         document.getElementById('filename').value = currFile.name;
-                        document.getElementById('UpProgress1').innerHTML = 'Upload';
+                        document.getElementById('UpProgress1').innerHTML = 'Upload 완료';
                     });
                 });
             });
@@ -140,7 +141,8 @@
                     snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('image').value = url;
                         document.getElementById('imagename').value = currFile.name;
-                        document.getElementById('UpProgress2').innerHTML = 'Upload';
+                        document.getElementById('changedImage').innerHTML += '<img src="' + url + '" style="max-height: 200px;"> ';
+                        document.getElementById('UpProgress2').innerHTML = 'Upload 완료';
                     });
                 });
             });
