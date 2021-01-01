@@ -45,18 +45,18 @@ def gallery_board(request, db, generation):
 
     for gallery in galleries:
         if gallery.event == 'ideathon':
-            thums[0] = gallery.image_url
+            idea = gallery.image_url
         elif gallery.event == 'hackathon':
-            thums[1] = gallery.image_url
+            hacka = gallery.image_url
         elif gallery.event == 'session':
-            thums[2] = gallery.image_url
+            session = gallery.image_url
         elif gallery.event == 'other':
-            thums[3] = gallery.image_url
+            other = gallery.image_url
 
         print(gallery.image_url)
     
 
-    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':thums[0], 'hacka':thums[1], 'session':thums[2], 'other':thums[3],'permission':permission, 'generation':generation})
+    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':idea, 'hacka':hacka, 'session':session 'other':other,'permission':permission, 'generation':generation})
 
 @SignInRequiredView()
 @FirestoreControlView
