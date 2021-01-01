@@ -32,11 +32,10 @@
             <div class="menu">
                 <div class="back-wrap">
                     <!-- 해당 기수 페이지(전 페이지)로 이동하는 버튼 -->
-                    <a href="{% url 'gallery_board' %}"><i class="far fa-arrow-alt-circle-left"></i></a>
+                    <a href="{% url 'gallery_board' generation %}"><i class="far fa-arrow-alt-circle-left"></i></a>
                 </div>
                 <div class="contents-wrap">
                     {% for gallery in galleries %}
-                    {% if gallery.event == 'hackathon' %}
                     <div class="post-content">
                         <div class="update-delete-wrap">
                             <!-- 관리자만 볼 수 있는 삭제, 수정버튼 -->
@@ -88,7 +87,6 @@
                             </div>
                         </div>
                     </div>
-                    {% endif %}
                     {% endfor %}
                 </div>
             </div>

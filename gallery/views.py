@@ -37,11 +37,16 @@ def gallery_board(request, db, generation):
                 permission = 'member'
 
 
-    gallery_datas = db.collection('Gallery').stream()
+    gallery_datas = db.collection('Gallery').where('ordinal_num','==',generation).stream()
 
     for gallery_data in gallery_datas:
         gallery = Gallery.from_dict(gallery_data.to_dict(), gallery_data.id)
         galleries.append(gallery)
+
+    idea = 'No Images'
+    hacka = 'No Images'
+    session = 'No Images'
+    other = 'No Images'
 
     for gallery in galleries:
         if gallery.event == 'ideathon':
@@ -56,7 +61,7 @@ def gallery_board(request, db, generation):
         print(gallery.image_url)
     
 
-    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':idea, 'hacka':hacka, 'session':session 'other':other,'permission':permission, 'generation':generation})
+    return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':idea, 'hacka':hacka, 'session':session, 'other':other,'permission':permission, 'generation':generation})
 
 @SignInRequiredView()
 @FirestoreControlView
@@ -123,10 +128,11 @@ def gallery_detail(request, db, generation, keyword):
 
     for gallery_data in gallery_datas:
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
-        galleries.append(gallery)
-        print(gallery.image_url)
+        if gallery.ordinal_num == generation and gallery.event == keyword:
+            galleries.append(gallery)
+            print(gallery.image_url)
 
-    return render(request,'gallery_detail.html',{'galleries':galleries,'permission':permission})
+    return render(request,'gallery_detail.html',{'galleries':galleries,'permission':permission, 'generation':generation})
 
 
 # @SignInRequiredView(readable = True)
