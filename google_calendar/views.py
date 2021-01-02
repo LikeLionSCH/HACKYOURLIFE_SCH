@@ -35,8 +35,6 @@ def calendar(request):
         start_of_month = datetime(2020, 1, 1).isoformat() + 'Z'
         end_of_month = None
 
-        print(start_of_month, end_of_month)
-
         events_result = service.events().list(calendarId=CALENDAR_ID, timeMin=start_of_month, timeMax=end_of_month, singleEvents=True, orderBy='startTime').execute()
         events = events_result.get('items', [])
 
