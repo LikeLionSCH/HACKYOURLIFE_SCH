@@ -1,0 +1,9 @@
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT hackyourlife_sch.wsgi
+
+runtime_config:
+  python_version: 3
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 2
