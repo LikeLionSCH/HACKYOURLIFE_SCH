@@ -144,4 +144,4 @@ STATICFILES_DIRS = [
     Path(BASE_DIR, 'static')
 ]
 
-# STATIC_ROOT = Path(BASE_DIR, 'static')
+STATIC_ROOT = Path(BASE_DIR, '.static')
