@@ -98,7 +98,6 @@ def read_Assignment_list_view(request, db):
     if request.method == 'POST':
         if 'page' in request.POST:
             page = int(request.POST['page'])
-            print(page)
     assignments = paginator.get_page(page)
 
     # 검색 버튼을 눌렀을 경우
@@ -108,8 +107,6 @@ def read_Assignment_list_view(request, db):
 
             # 입력값 불러옴
             keyword = request.POST['keyword']
-
-            print(keyword)
 
             filtered_assignment_list = []
 
@@ -125,7 +122,6 @@ def read_Assignment_list_view(request, db):
             if request.method == 'POST':
                 if 'page' in request.POST:
                     page = int(request.POST['page'])
-                    print(page)
             filtered_assignments = paginator.get_page(page)
             
             # 걸러진 과제들만 전달
