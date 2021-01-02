@@ -160,7 +160,6 @@ def read_Report_list_view(request, db, assignment_id):
         if 'filter' in request.POST:
 
             filter_type = request.POST['filter']
-            print(filter_type)
 
             # 미채점 일 경우 미채점된 리스트만 추가
             if filter_type == "not_scored":
@@ -429,7 +428,6 @@ def my_report_page(request, db):
     if request.method == 'POST':
         if 'page' in request.POST:
             page = int(request.POST['page'])
-            print(page)
     data_list = paginator.get_page(page)
 
     return render(request,'my_report_list.html',{'username':current_user['username'],'datas':data_list})

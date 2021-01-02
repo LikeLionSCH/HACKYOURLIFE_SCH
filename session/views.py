@@ -53,7 +53,6 @@ def session_list(request, db):
     if request.method == 'POST':
         if 'page' in request.POST:
             page = int(request.POST['page'])
-            print(page)
     sessions = paginator.get_page(page)
 
     # 검색 버튼을 눌렀을 경우
@@ -75,7 +74,6 @@ def session_list(request, db):
             if request.method == 'POST':
                 if 'page' in request.POST:
                     page = int(request.POST['page'])
-                    print(page)
             filtered_sessions = paginator.get_page(page)
         
             # 걸러진 세션들만 전달
@@ -113,8 +111,6 @@ def session_create(request, db):
             session_time = request.POST['session_time'] # session_time : 세션 시간
             google_link = request.POST['google_link']
             content = request.POST['content']
-
-            print(title, host, session_day, session_time, google_link, content) # test code
 
             # 입력받은 세션 날짜 슬라이싱
             date = session_day.split('-')
