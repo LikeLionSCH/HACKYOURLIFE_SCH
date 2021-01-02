@@ -105,3 +105,13 @@ input::placeholder {
     background-color: var(--SCH-skyblue);
     color: white;
 }
+
+.select {
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 18px;
+    color: #999999;
+}
+
+.select:hover {
+    color: #F39926;
+}

@@ -15,6 +15,9 @@ import datetime
 # datetime의 KST 설정
 KST = datetime.timezone(datetime.timedelta(hours=9))
 
+def get_session_id():
+    pass
+
 """ LIST
 firebase에 저장된 세션 목록을 불러오는 함수
 @param : request
@@ -132,6 +135,8 @@ def session_create(request, db):
             # firebase의 Session 컬렉션 접근 후 자동으로 새 문서 생성(문서 id는 자동 id값)
             # firebase에 새 객체 저장
             db.collection('Session').document().set(new_session.to_dict())
+
+            
 
             return redirect('session_list')
 

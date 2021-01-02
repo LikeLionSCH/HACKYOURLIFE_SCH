@@ -46,7 +46,7 @@ ALLOWED_HOSTS = ['*'] # 에러 페이지 확인용
 # Application definition
 
 INSTALLED_APPS = [
-    # admin 페이지 사용하지 않음
+    # Django Admin을 사용하지 않으므로 비활성화
     # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

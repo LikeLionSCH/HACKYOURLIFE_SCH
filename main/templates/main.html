@@ -20,9 +20,9 @@
             <div class="content-main-text-wrap">
                 <h2 id="content-main-title">멋쟁이사자처럼 <span>at</span> 순천향대학교</h2>
             </div>
-            <!-- 홍보 영상 -->
-            <video controls muted id="main-video" src="{% static 'image/멋사홍보.mp4' %}" type="video/mp4" autoplay>
-            </video>
+            <!-- 유튜브 영상 -->
+            <div id="main-video">
+            </div>
         </div>
     </div>
 
@@ -216,7 +216,7 @@
                 9기 모집 마감 일자 -
                 <!-- deadline-time HTML 입력 시, JS 자동적용 -->
                 <!-- yyyy/mm/dd 00:00:00 -->
-                <span id='deadline-time'>2020/12/30 12:00:00</span>
+                <span id='deadline-time'>2021/02/20 12:00:00</span>
             </h3>
             <!-- count-down form -->
             <div class="content-recruit-countdown-wrap">
@@ -255,5 +255,35 @@
 {% endblock %}
 
 {% block script %}
+<script src="http://www.youtube.com/player_api"></script>
+<script type="text/javascript">
+    var player;
+    function onYouTubeIframeAPIReady(){
+        player = new YT.Player("main-video", {
+            width: "1100px",
+            height: "650px",
+            // Youtube 비디오 ID
+            videoId: 'HN-q6jSMoR8',
+            // 컨트롤 숨김, 자동 재생
+            playerVars: {'autoplay': 1, 'mute': 1, 'controls': 0 },
+            events: {
+                onReady:onPlayerReady
+                // onStateChange: onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(e){
+        e.target.playVideo();
+    }
+
+    // function onPlayerStateChange(e){
+    //     if(e.data === 0 ){
+    //         window.location
+    //     }
+    // }
+
+</script>
+
 <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

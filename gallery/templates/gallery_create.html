@@ -22,26 +22,24 @@
     <!-- form -->
 
     <div class="main-wrap">
-        <form class="form-box" method="post" action="{% url 'gallery_create' %}">
+        <form class="form-box" method="post" action="{% url 'gallery_create' generation %}">
             {% csrf_token %}
             <div class="title-box">
                 <p>제목</p>
-                <input id="namebox" name="title" type="text">
+                <input id="namebox" name="title" type="text" required>
             </div>
             <div class="date-box">
                 <p>날짜</p>
-                <input type="date" name="date">
+                <input type="date" name="date" required>
             </div>
             <div class="link-box">
                 <p>기수</p>
-                <select name="ordinal_num">
-                    <option value="8th" selected="selected">8th</option>
-                    <option value="9th">9th</option>
-                </select>
+                <input style="border:none; padding:0px 0px 0px 3px; font-size:17px" type="text" name="ordinal_num"
+                    value={{generation}} readonly>
             </div>
             <div class="link-box">
                 <p>행사</p>
-                <select name="event">
+                <select name="event" required>
                     <option value="ideathon" selected="selected">Ideathon</option>
                     <option value="hackathon">Hackathon</option>
                     <option value="session">Session</option>
@@ -50,18 +48,19 @@
             </div>
             <div class="link-box">
                 <p>장소</p>
-                <input type="text" name="place" placeholder="ex. 순천향대학교 ML304 ( 미디어랩스 304호 )">
+                <input type="text" name="place" placeholder="ex. 순천향대학교 ML304 ( 미디어랩스 304호 )" required>
             </div>
             <div class="explanation-box">
                 <div>
                     첨부이미지 : <input type="file" class="js-fileElem" multiple accept="notice/*" style="display:none">
-                    <input name="image_url" id="file" style="display:none">
-                    <a href="#" class="js-fileSelect">Select some files</a><br>
+                    <input name="image_url" id="file" style="display:none" required>
+                    <a href="#" class="js-fileSelect"><span class="select">이미지선택</span></a><br>
+                    <label id="uploadedImage"></label>
                     <label id="UpProgress"></label> <br><br>
                 </div>
                 <br>
                 <p>설명</p>
-                <textarea name="contents" cols="40" rows="100"></textarea>
+                <textarea name="contents" cols="40" rows="100" required></textarea>
             </div>
             <input type="submit" value="SUBMIT">
         </form>
@@ -98,7 +97,7 @@
 
         const storageRef = storage.ref();
 
-        const imagesRef = storageRef.child('Notice');
+        const imagesRef = storageRef.child('Gallery');
 
         const spaceRef = imagesRef.child('space.jpg');
 
@@ -121,7 +120,8 @@
                 fileRef.put(currFile).then(function (snapshot) {
                     snapshot.ref.getDownloadURL().then(function (url) {
                         document.getElementById('file').value = url;
-                        document.getElementById('UpProgress').innerHTML = 'Upload';
+                        document.getElementById('uploadedImage').innerHTML += '<img src="' + url + '" style="max-height: 200px;"> ';
+                        document.getElementById('UpProgress').innerHTML = 'Upload 완료';
                     });
                 });
             });
