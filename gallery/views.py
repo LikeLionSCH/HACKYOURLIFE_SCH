@@ -58,9 +58,6 @@ def gallery_board(request, db, generation):
         elif gallery.event == 'other':
             other = gallery.image_url
 
-        print(gallery.image_url)
-    
-
     return render(request, 'th_gallery_board.html', {'galleries': galleries, 'idea':idea, 'hacka':hacka, 'session':session, 'other':other,'permission':permission, 'generation':generation})
 
 @SignInRequiredView()
@@ -130,7 +127,6 @@ def gallery_detail(request, db, generation, keyword):
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)
         if gallery.ordinal_num == generation and gallery.event == keyword:
             galleries.append(gallery)
-            print(gallery.image_url)
 
     return render(request,'gallery_detail.html',{'galleries':galleries,'permission':permission, 'generation':generation})
 
