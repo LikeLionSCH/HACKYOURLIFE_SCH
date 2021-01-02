@@ -42,7 +42,6 @@ def notice_detail(request, db, notice_id):
                 permission = 'member'
 
     notice = Notice.from_dict(data.to_dict(), data.id)
-    # print(data.to_dict())
 
     notices = []
 
@@ -92,7 +91,6 @@ def notice_create(request, db):
         raise PermissionDenied # 권한 없음
 
     if request.method == 'POST':
-        print(request.POST)
         if 'contents' and 'date' and 'title' and 'file' and 'filename' and 'image' and 'imagename' in request.POST:
             author = current_user['username']
             contents = request.POST['contents']
