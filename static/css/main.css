@@ -354,7 +354,7 @@
 
 /* project */
 .content:nth-child(5) {
-    background: url('/static/image/project-bg.jpeg') center center fixed;
+    background: url('../image/project-bg.jpeg') center center fixed;
     background-size: cover;
 }
 
@@ -391,23 +391,23 @@
 }
 
 a:nth-child(1) .content-card{
-    background: url('/static/image/2019_hackathon2.jpg') center center;
+    background: url('../image/2019_hackathon2.jpg') center center;
     background-size: cover;
 }
 
 a:nth-child(2) .content-card{
-    background: url('/static/image/activity-8th-ideathon2.jpg') center center;
+    background: url('../image/activity-8th-ideathon2.jpg') center center;
     background-size: cover;
 }
 
 a:nth-child(3) .content-card{
-    background: url('/static/image/activity-8th-pheonix.jpg') center center;
+    background: url('../image/activity-8th-pheonix.jpg') center center;
     background-size: cover;
 }
 
 
 a:nth-child(4) .content-card{
-    background: url('/static/image/activity-7thlion.jpg') center center;
+    background: url('../image/activity-7thlion.jpg') center center;
     background-size: cover;
 }
 
