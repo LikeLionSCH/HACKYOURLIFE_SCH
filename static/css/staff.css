@@ -10,7 +10,7 @@
     width: 100%;
     height: 280px;
     margin: 0 auto;
-    background: url('/static/image/about_img.png') no-repeat center fixed;
+    background: url('../image/about_img.png') no-repeat center fixed;
     background-size: cover;
 }
 
