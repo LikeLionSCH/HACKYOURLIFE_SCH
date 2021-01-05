@@ -27,8 +27,10 @@
 ## ⏱Installation
 - Django==3.1.3
 - Python3
-- HTML5
 - Firebase
+- Google Calender API
+- Google Cloud Platform
+- HTML5
 - CSS3
 - JS
 - JQuery
