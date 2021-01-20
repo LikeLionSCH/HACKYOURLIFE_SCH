@@ -7,3 +7,7 @@ runtime_config:
 automatic_scaling:
   min_num_instances: 1
   max_num_instances: 2
+
+handlers:
+- url: .*
+  secure: always
