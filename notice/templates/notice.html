@@ -30,12 +30,14 @@
 
 <!-- NOTICE PAGE -->
 <main>
+    {% if permission == 'manager' %}
     <div class="notice-create">
         <a href="{% url 'notice_create' %}">
             <i class="fas fa-plus-circle"></i>
             <span> 공지사항 생성</span>
         </a>
     </div>
+    {% endif %}
 
     <!-- 내용 -->
     {% for notice in notices %}
