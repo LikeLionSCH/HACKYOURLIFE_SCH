@@ -9,5 +9,6 @@ automatic_scaling:
   max_num_instances: 2
 
 handlers:
-- url: .*
+- url: /.*
   secure: always
+  script: auto
