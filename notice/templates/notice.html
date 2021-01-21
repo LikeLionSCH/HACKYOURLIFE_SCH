@@ -44,16 +44,16 @@
     <div class='content-wrap'>
         <!-- 이미지 박스 -->
         <div class='img-box'>
+            {% if notice.image %}
             <img src="{{ notice.image }}" alt="SN" />
+            {% endif %}
         </div>
         <!-- 내용 박스 -->
         <div class='content-box'>
             <!-- 제목 -->
             <a href="{% url 'notice_detail' notice.notice_id %}">
                 <h3 class='sub-title'>{{ notice.title }}</h3>
-                <p class='content'>
-                    {{ notice.contents }}
-                </p>
+                <p class='content'>{{ notice.contents }}</p>
             </a>
             <div class='post-meta'>
                 <span class='post-meta-item'>{{ notice.date }}</span>
