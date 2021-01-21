@@ -173,7 +173,7 @@ def gallery_update(request, db, generation, gallery_id):
 
         if 'contents' and 'date' and 'title' and 'image_url' and 'placa' and 'ordinal_num' and 'event' in request.POST:
             contents = request.POST['contents']
-            date = request.POST['date']
+            created_at = request.POST['created_at']
             title = request.POST['title']
             image_url = request.POST['image_url']
             place = request.POST['place']
@@ -182,7 +182,7 @@ def gallery_update(request, db, generation, gallery_id):
 
             db.collection('Gallery').document(gallery_id).update({
                 'contents': contents,
-                'date': date,
+                'created_at': created_at,
                 'title': title,
                 'image_url': image_url,
                 'place': place,
