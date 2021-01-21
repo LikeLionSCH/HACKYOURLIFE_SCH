@@ -125,7 +125,26 @@ def notice_list(request, db):
     page = int(request.GET.get('page',1))
     notices = paginator.get_page(page)
 
-    return render(request,'notice.html',{'notices':notices})
+    permission = ''
+    if request.method == 'POST':
+    
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+        except google.cloud.exceptions.NotFound:
+            print('Not Found')
+            
+        if len(user)>=1:
+
+            current_user = user[0].to_dict()
+
+            if current_user['permission'] == 'manager':
+                permission = 'manager'
+            else:
+                permission = 'member'
+
+    return render(request,'notice.html',{'notices':notices, 'permission':permission})
 
 
 @SignInRequiredView()
