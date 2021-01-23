@@ -35,7 +35,6 @@ function onGapiLoad() {
     });
 }
 
-let isNewUser = false;
 // 테스트할 때 반드시 localhost:8000으로 접속하세요
 function onSignIn(googleUser) {
     // google OAuth2.0으로 로그인 한 정보를 firebase auth에 전달하여 로그인
@@ -58,13 +57,11 @@ function onAuthStateChanged(user) {
             // 등록되지 않은 유저인 경우
             function() {
                 // 승인 신청되지 않은 유저인 경우
-                if (isNewUser) {
-                    if (confirm("등록되지 않은 사용자 입니다. 승인 신청하시겠습니까?")) {
-                        alert("승인 신청되었습니다.");
-                    }
-                    else {
-                        transaction(DELETE_USER_REQUEST, { uid: user.uid });
-                    }
+                if (confirm("등록되지 않은 사용자 입니다. 승인 신청하시겠습니까?")) {
+                    alert("승인 신청되었습니다.");
+                }
+                else {
+                    transaction(DELETE_USER_REQUEST, { uid: user.uid });
                 }
                 
                 signOut();
