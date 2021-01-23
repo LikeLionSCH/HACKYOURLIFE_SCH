@@ -61,9 +61,7 @@
                     <span>DETAIL</span>
                 </div>
                 <!-- detail contents 가 들어가는 부분 -->
-                <div class="detail-contents">
-                    {{ report.contents }}
-                </div>
+                <div class="detail-contents" style="white-space:pre;">{{ report.contents }}</div>
             </div>
 
             {% if report.comment != '' %}
@@ -72,9 +70,7 @@
                     <span>COMMENT</span>
                 </div>
                 <!-- detail contents 가 들어가는 부분 -->
-                <div class="detail-contents">
-                    {{ report.comment }}
-                </div>
+                <div class="detail-contents" style="white-space:pre;">{{ report.comment }}</div>
             </div>
             {% endif %}
 

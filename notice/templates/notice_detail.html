@@ -36,16 +36,18 @@
     </div>
 
     <div class='board-content-wrap'>
-        <img id="board-img" src="{{ notice.image }}" alt="테스트사진" />
+        {% if notice.image %}
+        <img id="board-img" src="{{ notice.image }}" alt="사진" />
+        {% endif %}
         <div class="board-content">
             <!-- 제목이랑 같음. -->
             <div class='board-header'>
                 <span id='board-sub-title'>{{ notice.title }}</span>
+                {% if notice.file %}
                 <a href='{{ notice.file }}' download><span id='download-link'>첨부 파일 다운로드</span></a>
+                {% endif %}
             </div>
-            <p class="content">
-                {{ notice.contents }}
-            </p>
+            <pre class="content">{{ notice.contents }}</pre>
         </div>
     </div>
 

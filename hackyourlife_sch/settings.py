@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import json
+from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,9 +38,9 @@ def get_secret(setting):
 SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # 배포 시 False로 바꿔주기
+DEBUG = False # 배포 시 False로 바꿔주기
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] # 에러 페이지 확인용
+ALLOWED_HOSTS = ['*'] # 에러 페이지 확인용
 
 
 # Application definition
@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'hackyourlife_sch.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-# Firebase - NoSQL Firestore 사용
+# Firebase - FireStore NoSQL 사용
 
 DATABASES = {}
 
@@ -138,10 +138,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    Path(BASE_DIR, 'static')
-]
-
-# STATIC_ROOT = Path(BASE_DIR, 'static')
+STATIC_URL = 'https://storage.googleapis.com/hackyourlife/static/'
+STATIC_ROOT = Path(BASE_DIR, 'static')

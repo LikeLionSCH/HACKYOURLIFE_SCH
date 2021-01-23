@@ -87,7 +87,7 @@ def gallery_create(request,db, generation):
             ordinal_num = request.POST['ordinal_num']
             event = request.POST['event']
 
-            new_gallery = Gallery(contents, firestore.SERVER_TIMESTAMP , date, title, image_url, place, ordinal_num, event)
+            new_gallery = Gallery(contents, date, title, image_url, place, ordinal_num, event)
 
             db.collection('Gallery').document().set(new_gallery.to_dict())
 
@@ -121,7 +121,7 @@ def gallery_detail(request, db, generation, keyword):
 
     galleries = []
 
-    gallery_datas = db.collection('Gallery').order_by('created_at',direction=firestore.Query.DESCENDING).stream()
+    gallery_datas = db.collection('Gallery').order_by('date',direction=firestore.Query.DESCENDING).stream()
 
     for gallery_data in gallery_datas:
         gallery = Gallery.from_dict(gallery_data.to_dict(),gallery_data.id)

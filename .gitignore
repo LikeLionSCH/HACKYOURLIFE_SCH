@@ -403,5 +403,11 @@ $RECYCLE.BIN/
 secret.json
 
 # firebase account key
-serviceAccountKey.json
+firebaseAccountKey.json
 
+# 외부 데이터베이스 사용하므로 마이그레이션을 사용하지 않음
+migrations/
+
+# collectstatic 실행 후 폴더
+static/
+.static/
