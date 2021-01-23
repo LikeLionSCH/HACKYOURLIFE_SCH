@@ -65,6 +65,17 @@ def error_500(request):
 @FirestoreControlView
 def signin_admission_or_refusal(request):
     if request.method == 'POST':
+        uid = request.POST['uid']
+
+        try:
+            user = db.collection('User').where('uid','==',uid).get()
+            current_user = user[0].to_dict()
+        except google.cloud.exceptions.NotFound:
+            print('User not found')
+
+        if current_user['permission'] != 'manager':
+            raise PermissionDenied # 권한 없음
+        
         # 승인/거절 ajax 받았을 시
         if request.POST['admission'] == 'admission':
             email = request.POST['email']
@@ -83,17 +94,6 @@ def signin_admission_or_refusal(request):
 
             db.collection('User').document().set(request_user)
             return JsonResponse({'message':'Admission Complete.'})
-
-        uid = request.POST['uid']
-
-        try:
-            user = db.collection('User').where('uid','==',uid).get()
-            current_user = user[0].to_dict()
-        except google.cloud.exceptions.NotFound:
-            print('User not found')
-
-        if current_user['permission'] != 'manager':
-            raise PermissionDenied # 권한 없음
         
         # firestore User 컬렉션의 목록을 모두 불러와서 딕셔너리들의 리스트로 저장
         admission_users = db.collection('User').stream()
