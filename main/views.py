@@ -23,7 +23,29 @@ def transaction(request, db):
             return JsonResponse({'message': 'Successfully deleted user.'})
         except:
             return HttpResponse('Failed to delete user.', status=400)
+     # 승인 ajax 받았을 시
+    if request.POST['requestCode'] == 'admission_user_request':
+        email = request.POST['email']
+        generation = request.POST['generation']
+        permission = request.POST['permission']
+        request_user_uid = request.POST['request_user_uid']
+        username = request.POST['username']
 
+        request_user = {
+            'email': email,
+            'generation': generation,
+            'permission': permission,
+            'uid': request_user_uid,
+            'username': username,
+        }
+
+        db.collection('User').document().set(request_user)
+        return JsonResponse({'message':'Admission Complete.'})
+    # 거절 ajax 받았을 시
+    if request.POST['requestCode'] == 'refusal_user_reqeust':
+        request_user_uid = request.POST['request_user_uid']
+        auth.delete_user(request_user_uid)
+        return JsonResponse({'message':'Refusal Complete.'})
 
 
 def index(request):
@@ -73,7 +95,7 @@ def error_500(request):
 
 @SignInRequiredView()
 @FirestoreControlView
-def signin_admission_or_refusal(request):
+def signin_admission_or_refusal(request, db):
     if request.method == 'POST':
         uid = request.POST['uid']
 
@@ -86,43 +108,23 @@ def signin_admission_or_refusal(request):
         if current_user['permission'] != 'manager':
             raise PermissionDenied # 권한 없음
 
-        # 승인 ajax 받았을 시
-        if request.POST['admOrRefCode'] == 'admission':
-            email = request.POST['email']
-            generation = request.POST['generation']
-            permission = request.POST['permission']
-            request_user_uid = request.POST['request_user_uid']
-            username = request.POST['username']
-
-            request_user = {
-                'email':email,
-                'generation':generation,
-                'permission':permission,
-                'reqest_user_uid':reqest_user_uid,
-                'username':username,
-            }
-
-            db.collection('User').document().set(request_user)
-            return JsonResponse({'message':'Admission Complete.'})
-
-        # 거절 ajax 받았을 시
-        elif request.POST['admOrRefCode'] == 'refusal':
-            request_user_uid = request.POST['request_user_uid']
-            auth.delete_user(request_user_uid)
-            return JsonResponse({'message':'Refusal Complete.'})
-
         ''' 승인/거절 ajax가 아닌 승인/거절 목록 띄워주는 logic '''
         # firestore User 컬렉션의 목록을 모두 불러와서 딕셔너리들의 리스트로 저장
         admission_users = db.collection('User').stream()
         admission_list = []
-        for i in admission_users:
-            admission_list.append(admission_users.to_dict())
+        for user in admission_users:
+            admission_list.append(user.to_dict())
+        # admission_list는 User 컬렉션의 유저 정보 딕셔너리가 여러개 모인 list
 
         # firebase auth의 user 목록을 불러와 email을 기준으로 User 컬렉션에 없는 리스트 생성
-        fb_auth_users = auth.list_users().iterate_all()
+        fb_auth_users = auth.list_users()
+        # fb_auth_users는 auth에 등록된 user들이 모인 object
+
+        registered_user_email_list = [user['email'] for user in admission_list]
+
         wait_users = []
-        for user in fb_auth_users:
-            if user.email not in admission_list.values():
+        for user in fb_auth_users.iterate_all():
+            if user.email not in registered_user_email_list:
                 wait_users.append(user)
 
         return render(request, 'account_manager.html', {'wait_users' : wait_users})
