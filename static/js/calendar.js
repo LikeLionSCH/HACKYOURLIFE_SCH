@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
         dataType: "json"
     }).done(function (data) {
         let events = data["list"];
-        console.log(events);
 
         for (let i = 0; i < events.length; ++i) {
             calendar.addEvent(events[i]);
@@ -44,33 +43,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
     calendar.render();
 });
-
-// $(function() {
-//   $.ajax({
-//     type: "POST",
-//     url:"/calendar/",
-//     headers: {
-//       "X-CSRFToken": getCookie("csrftoken")
-//     },
-//     dataType: "json"
-//   }).done(function(data) {
-//     let events = data["list"];
-
-//     $("#calendar").fullCalendar({
-//       defaultView: "month",
-//       defaultDate: "2020-12-01",
-//       eventRender: function(eventObj, $el) {
-//         $el.popover({
-//           title: eventObj.title,
-//           content: eventObj.description,
-//           trigger: "hover",
-//           placement: "top",
-//           container: "body"
-//         });
-//       },
-//       events: events
-//     });
-
-//     console.log($("#calendar").fullCalendar("getDate"));
-//   });
-// });
