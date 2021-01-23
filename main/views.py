@@ -23,7 +23,7 @@ def transaction(request, db):
             return JsonResponse({'message': 'Successfully deleted user.'})
         except:
             return HttpResponse('Failed to delete user.', status=400)
-     # 승인 ajax 받았을 시
+    # 승인 ajax 받았을 시
     if request.POST['requestCode'] == 'admission_user_request':
         email = request.POST['email']
         generation = request.POST['generation']
