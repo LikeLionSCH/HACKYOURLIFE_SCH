@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/reset.css'%}">
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+{% endblock %}
+
+{% block title %}
+<title>가입 신청 승인/거절 페이지</title>
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <section id="main-content">
+        <h2>신청 목록</h2>
+
+        {% for user in wait_users %}
+        <div>
+            <p>{{ user.display_name }}</p>
+            <p>{{ user.email }}</p>
+            <p>{{ user.uid }}</p>
+        </div>
+        <input type="text" name="generation" placeholder="기수를 입력하세요."><br>
+        <input type="text" name="permission" placeholder="운영진이라면 manager를, 학생이라면 member를 입력하세요."><br>
+        <input type="button" value="승인"><br>
+        <input type="button" value="거절"><br><br>
+        {% endfor %}
+    </section>
+</main>
+
+{% endblock %}

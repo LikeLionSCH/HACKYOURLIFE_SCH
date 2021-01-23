@@ -73,7 +73,7 @@ def error_500(request):
 
 @SignInRequiredView()
 @FirestoreControlView
-def signin_admission_or_refusal(request):
+def signin_admission_or_refusal(request, db):
     if request.method == 'POST':
         uid = request.POST['uid']
 
@@ -87,7 +87,7 @@ def signin_admission_or_refusal(request):
             raise PermissionDenied # 권한 없음
 
         # 승인 ajax 받았을 시
-        if request.POST['admOrRefCode'] == 'admission':
+        if request.POST['requestCode'] == 'admission':
             email = request.POST['email']
             generation = request.POST['generation']
             permission = request.POST['permission']
@@ -106,7 +106,7 @@ def signin_admission_or_refusal(request):
             return JsonResponse({'message':'Admission Complete.'})
 
         # 거절 ajax 받았을 시
-        elif request.POST['admOrRefCode'] == 'refusal':
+        elif request.POST['requestCode'] == 'refusal':
             request_user_uid = request.POST['request_user_uid']
             auth.delete_user(request_user_uid)
             return JsonResponse({'message':'Refusal Complete.'})
@@ -115,14 +115,27 @@ def signin_admission_or_refusal(request):
         # firestore User 컬렉션의 목록을 모두 불러와서 딕셔너리들의 리스트로 저장
         admission_users = db.collection('User').stream()
         admission_list = []
-        for i in admission_users:
-            admission_list.append(admission_users.to_dict())
+        for user in admission_users:
+            admission_list.append(user.to_dict())
+        # admission_list는 User 컬렉션의 유저 정보 딕셔너리가 여러개 모인 list
 
+        for i in admission_list:
+            print(i) # debug용
+
+        print()
         # firebase auth의 user 목록을 불러와 email을 기준으로 User 컬렉션에 없는 리스트 생성
         fb_auth_users = auth.list_users().iterate_all()
+        for i in fb_auth_users:
+            print(i.display_name, i.email)
+        # fb_auth_users는 auth에 등록된 user들이 모인 object
+
+        """ 여기 로직 이상해요우 """
         wait_users = []
         for user in fb_auth_users:
-            if user.email not in admission_list.values():
+            for a_user in admission_list:
+                if user.email in a_user.values():
+                    continue
                 wait_users.append(user)
+        """ 이상해요우 """
 
         return render(request, 'account_manager.html', {'wait_users' : wait_users})
