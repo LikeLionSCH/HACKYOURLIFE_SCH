@@ -35,7 +35,7 @@ def FirestoreControlView(func):
     def wrap(*args, **kwargs):
         # Firebase 초기화
         if not firebase_admin._apps:
-            _credentials = credentials.Certificate('serviceAccountKey.json')
+            _credentials = credentials.Certificate('firebaseAccountKey.json')
             firebase_admin.initialize_app(_credentials)
         # 키워드 매개변수 `db`로 Firestore client 전달
         return func(*args, **kwargs, db=firestore.client())

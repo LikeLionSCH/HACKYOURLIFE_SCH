@@ -43,9 +43,7 @@ function onSignIn(googleUser) {
         let idToken = googleUser.getAuthResponse().id_token;
         let credential = firebase.auth.GoogleAuthProvider.credential(idToken);
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(function() {
-            return firebase.auth().signInWithCredential(credential).then(function() {
-                isNewUser = true;
-            });
+            return firebase.auth().signInWithCredential(credential);
         });
     }
 }
@@ -59,7 +57,6 @@ function onAuthStateChanged(user) {
             function() { },
             // 등록되지 않은 유저인 경우
             function() {
-                console.log(user);
                 // 승인 신청되지 않은 유저인 경우
                 if (isNewUser) {
                     if (confirm("등록되지 않은 사용자 입니다. 승인 신청하시겠습니까?")) {
@@ -68,12 +65,8 @@ function onAuthStateChanged(user) {
                     else {
                         transaction(DELETE_USER_REQUEST, { uid: user.uid });
                     }
-                    
-                    signOut();
-                    return;
                 }
-
-                alert("승인 신청 대기중입니다.");
+                
                 signOut();
             }
         );
