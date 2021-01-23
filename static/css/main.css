@@ -1,0 +1,514 @@
+/* ------------ BASE CUTTING ---------------- */
+
+.main {
+    width: 100%;
+}
+
+
+.content {
+    position: relative;
+    margin: 0 auto;
+    border-top: 1px solid #e4e4e4;
+}
+
+.content-title {
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 30px;
+    color: #F39926;
+    text-align: center;
+    margin: 5vh 0;
+}
+
+
+
+
+/* main - 홈페이지 소개 배너*/
+.content:nth-child(1) {
+    background-color: white;
+    height: 900px;
+}
+
+/* 홈페이지 소개 배너 */
+.content:nth-child(1) .content-main-wrap {
+    /* width, height 영역  */
+    width: 100%;
+    height: 100%;
+
+    /* 백그라운드 배경 */
+    background: url('/static/image/lionlike-bg.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position: top;
+}
+
+/* 소개 배너 텍스트 내용 Wrap */
+.content-main-text-wrap {
+    width: var(--main-width);
+    margin: 0 auto;
+    padding-top: 7vh;
+    text-align: center;
+    /* 기본 글씨 색 */
+    color: white;
+}
+
+/* 멋쟁이사자처럼 at 순천향대학교 제목 */
+#content-main-title {
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 35px;
+    padding: 10px 20px 10px 0px;
+    border-bottom: 1px solid white;
+}
+
+
+/* 멋쟁이사자 */
+#content-main-title::after {
+    position: absolute;
+    height: 50px;
+    width: 45px;
+    content: '';
+    background: url('/static/image/sch-logo.png') no-repeat center center / contain;
+}
+
+/* at 글자 부분 */
+#content-main-title span {
+    font-family: 'IBMPlexSansKR-Light';
+}
+
+/* 메인 홍보 영상 */
+#main-video {
+    display: block;
+    margin: 30px auto 0;
+    width: 1100px;
+}
+
+
+
+
+/* about */
+
+.content:nth-child(2) {
+    background-color: white;
+}
+
+.content:nth-child(2) .content-about-wrap {
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 450px;
+}
+
+
+/* ABOUT 콘텐츠의 내용 값을 감싼 WRAP (img/ */
+.content-about {
+    /* 컨텐츠 내용 가로/세로값 및 비율 설정*/
+    width: 1000px;
+    height: 80%;
+    margin: 0 auto;
+    /* background-color: #e4e4e4; */
+}
+
+/* ABOUT 콘텐츠의 왼쪽 부분 */
+
+/* 소제목 */
+#content-about-guide-title {
+    display: inline-block;
+    font-family: 'IBMPlexSansKR-Text';
+    font-size: 30px;
+    color: black;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #F39926;
+}
+
+/* 본문 왼쪽 컨테이너 */
+#content-about-left {
+    width: 60%;
+    height: 250px;
+    float: left;
+}
+
+/* 본문 내용 강조 표시 */
+.point-letter {
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+/* 본문 왼쪽 요소 - 첫 번째 글귀 */
+#content-about-guide-txt {
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+/* 본문 왼쪽 요소 - 두 번째 글귀 */
+#content-about-guide-txt2 {
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 15px;
+}
+
+/* 본문 오른쪽 컨테이너 */
+
+#content-about-right {
+    width: 40%;
+    float: left;
+}
+
+#content-about-img {
+    width: 100%;
+}
+
+/* ABOUT 사진 */
+#content-about-img img {
+    width: 100%;
+    height: 250px;
+}
+
+/* 본문 가운데 컨테이너 */
+#content-about-center {
+    /* 가로/세로, 위치 */
+    position: relative;
+    width: 100%;
+    text-align: left;
+
+    /* float 탈출 */
+    clear: both;
+
+}
+
+/* about 배너 링크 버튼 */
+.about-btn {
+    color: black;
+    font-family: 'IBMPlexSansKR-Text';
+    padding: 10px 30px;
+    border: 1px solid #adafb2;
+    border-radius: 30px;
+    background-color: white;
+    font-size: 26px;
+    -webkit-transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+/* 링크 버튼 호버시 적용 애니메이션 */
+.about-btn:hover {
+    color: white;
+    box-shadow:
+        0 80px 0 0 var(--SCH-skyblue) inset,
+        0 -80px 0 0 var(--SCH-skyblue) inset;
+}
+
+
+/* curriculum */
+/* 배경 설정 */
+.curriculum-content {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: url('/static/image/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+}
+
+/* 배경 어두운 필터  */
+.curriculum-content::before {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    content: "";
+    opacity: 0.82;
+    position: absolute;
+    background-color: black;
+}
+
+#curriculum-title-wrap {
+    margin: 0 auto;
+    width: var(--main-width);
+    text-align: center;
+}
+
+/* 커리큘럼 제목 span */
+#curriculum-title {
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 35px;
+    color: #F39926;
+    position: relative;
+    display: inline-block;
+    margin-top: 5vh;
+}
+
+/* 원 속성 */
+.circles {
+    margin-top: 5vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+}
+
+.circle-green {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 122, 133, 0.6);
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+}
+
+.circle-orange {
+    display: flex;
+    align-items: center;
+    background-color: rgba(243, 153, 38, 0.6);
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+}
+
+.circle-text {
+    margin: 0 auto;
+    font-size: 20px;
+    font-family: 'IBMPlexSansKR-Text';
+    color: white;
+}
+
+
+.circle-text:hover {
+    cursor: pointer;
+}
+
+.circle-div {
+    width: 150px;
+    margin: 15px;
+}
+
+/* 설명 텍스트  */
+
+.curri-info {
+    margin-top: 30px;
+}
+
+.curri-info-text-title {
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgba(170, 208, 71, 0.5);
+    font-size: 15px;
+    font-family: 'IBMPlexSansKR-Text';
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.curri-info-text {
+    margin-top: 10px;
+    font-family: 'IBMPlexSansKR-Light';
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    height: 18vh;
+}
+
+
+/* headcount */
+.content:nth-child(4) {
+    background-color: white;
+}
+
+.content:nth-child(4) .content-headcount {
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 350px;
+}
+
+/* 리스트 카운트 컨테이너 */
+.content-headcount-box {
+    display: flex;
+    justify-content: space-around;
+
+    height: 65%;
+}
+
+/* 리스트 카운트 아이템 속성 */
+.content-headcount-item {
+    text-align: center;
+    /* 모든 아이템 값 1:1:1 비율 */
+    flex: 1;
+    border-right: 1px solid #e4e4e4;
+}
+
+.content-headcount-item:nth-last-child(1) {
+    border-right: 0;
+}
+
+
+/* 카운트 제목 */
+.content-headcount-item-title {
+    color: grey;
+    font-size: 26px;
+    font-family: 'IBMPlexSansKR-Light';
+    margin-bottom: 4vh;
+}
+
+.content-headcount-item span {
+    color: var(--SCH-skyblue);
+    font-size: 75px;
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+
+
+
+
+/* project */
+.content:nth-child(5) {
+    background: url('../image/project-bg.jpeg') center center fixed;
+    background-size: cover;
+}
+
+.content:nth-child(5) .content-project {
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 450px;
+
+}
+
+/* card wrap */
+.content-card-wrap {
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
+    height: 300px;
+    justify-content: space-between;
+}
+
+/* card 아이템 */
+.content-card {
+    /* 크기 및 보더, 그림자*/
+    width: 250px;
+    height: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+    -webkit-transition-duration: 0.5s;
+    border-radius: 18px;
+
+    /* background-image
+    background: url('/static/image/lionlike-bg.png') center center;
+    background-size: cover; */
+
+    cursor: pointer;
+}
+
+a:nth-child(1) .content-card{
+    background: url('../image/2019_hackathon2.jpg') center center;
+    background-size: cover;
+}
+
+a:nth-child(2) .content-card{
+    background: url('../image/activity-8th-ideathon2.jpg') center center;
+    background-size: cover;
+}
+
+a:nth-child(3) .content-card{
+    background: url('../image/activity-8th-pheonix.jpg') center center;
+    background-size: cover;
+}
+
+
+a:nth-child(4) .content-card{
+    background: url('../image/activity-7thlion.jpg') center center;
+    background-size: cover;
+}
+
+
+.content-card:hover {
+    width: 265px;
+}
+
+.content-card-text {
+    position: relative;
+    width: 100%;
+    height: 25px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    background-color: white;
+    text-align: center;
+    bottom: -275px;
+
+    /* font */
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+
+
+/* recuit */
+
+.content:nth-child(6) {
+    background-color: white;
+}
+
+.content:nth-child(6) .content-recruit {
+    margin: 0 auto;
+    width: var(--main-width);
+    height: 450px;
+}
+
+.content-recruit-deadline {
+    text-align: center;
+    font-family: 'IBMPlexSansKR-Light';
+    font-size: 20px;
+    color: black;
+}
+
+#deadline-time {
+    font-family: 'IBMPlexSansKR-Light';
+}
+
+ul#countdown {
+    /* position: ; */
+    margin: 1vh auto 3vh;
+    padding: 15px 0 20px 0;
+    height: 50%;
+    width: 70%;
+    color: #fff;
+    border-top: 1px solid #adafb2;
+    border-bottom: 1px solid #adafb2;
+
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+ul#countdown li {
+    margin: 0 -3px 0 0;
+    padding: 0;
+    display: inline-block;
+    width: 25%;
+    font-size: 72px;
+    text-align: center;
+}
+
+/* 숫자 색깔 */
+ul#countdown li .number {
+    color: var(--SCH-skyblue);
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+.label {
+    color: #adafb2;
+    font-size: 20px;
+    /* 영문자 전부 대문자 변경 */
+    text-transform: uppercase;
+}
+
+.recruit-btn-wrap {
+    text-align: center;
+}
+
+.recruit-btn {
+    color: black;
+    padding: 10px 30px;
+    border: 1px solid #adafb2;
+    border-radius: 30px;
+    background-color: white;
+    font-size: 26px;
+    -webkit-transition-duration: 0.5s;
+    cursor: pointer;
+    font-family: 'IBMPlexSansKR-Text';
+}
+
+.recruit-btn:hover {
+    color: white;
+    box-shadow:
+        0 80px 0 0 var(--SCH-skyblue) inset,
+        0 -80px 0 0 var(--SCH-skyblue) inset;
+}
