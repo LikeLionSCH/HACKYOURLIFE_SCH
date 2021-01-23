@@ -409,4 +409,5 @@ firebaseAccountKey.json
 migrations/
 
 # collectstatic 실행 후 폴더
+static/
 .static/

@@ -15,6 +15,15 @@ def transaction(request, db):
         if db.collection('User').where('email', '==', request.POST['email']).get():
             return JsonResponse({'message': 'Current user is registerd member.'})
         return HttpResponse('Current user is not registerd member.', status=400)
+    # 유저 삭제 요청
+    if request.POST['requestCode'] == 'delete_authenticated_user_request':
+        try:
+            # firebase auth에서 해당 uid의 계정 삭제
+            auth.delete_user(request.POST['uid'])
+            return JsonResponse({'message': 'Successfully deleted user.'})
+        except:
+            return HttpResponse('Failed to delete user.', status=400)
+
 
 
 def index(request):
@@ -61,6 +70,7 @@ def error_404(request, exception):
 def error_500(request):
     return render(request, "500.html", status=500)
 
+
 @SignInRequiredView()
 @FirestoreControlView
 def signin_admission_or_refusal(request):
@@ -96,7 +106,7 @@ def signin_admission_or_refusal(request):
             return JsonResponse({'message':'Admission Complete.'})
 
         # 거절 ajax 받았을 시
-        else if request.POST['admOrRefCode'] == 'refusal':
+        elif request.POST['admOrRefCode'] == 'refusal':
             request_user_uid = request.POST['request_user_uid']
             auth.delete_user(request_user_uid)
             return JsonResponse({'message':'Refusal Complete.'})
