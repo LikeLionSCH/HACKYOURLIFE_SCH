@@ -75,13 +75,13 @@ def signin_admission_or_refusal(request):
 
         if current_user['permission'] != 'manager':
             raise PermissionDenied # 권한 없음
-        
-        # 승인/거절 ajax 받았을 시
-        if request.POST['admission'] == 'admission':
+
+        # 승인 ajax 받았을 시
+        if request.POST['admOrRefCode'] == 'admission':
             email = request.POST['email']
             generation = request.POST['generation']
             permission = request.POST['permission']
-            reqest_user_uid = request.POST['request_user_uid']
+            request_user_uid = request.POST['request_user_uid']
             username = request.POST['username']
 
             request_user = {
@@ -94,7 +94,14 @@ def signin_admission_or_refusal(request):
 
             db.collection('User').document().set(request_user)
             return JsonResponse({'message':'Admission Complete.'})
-        
+
+        # 거절 ajax 받았을 시
+        else if request.POST['admOrRefCode'] == 'refusal':
+            request_user_uid = request.POST['request_user_uid']
+            auth.delete_user(request_user_uid)
+            return JsonResponse({'message':'Refusal Complete.'})
+
+        ''' 승인/거절 ajax가 아닌 승인/거절 목록 띄워주는 logic '''
         # firestore User 컬렉션의 목록을 모두 불러와서 딕셔너리들의 리스트로 저장
         admission_users = db.collection('User').stream()
         admission_list = []
